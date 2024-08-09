@@ -45,4 +45,4 @@ async def index():
                     )(P(cls=fui.Text.bold + 'uk-h3')('blend_lighten'))),
     ))
 
-serve(app)
+serve()
