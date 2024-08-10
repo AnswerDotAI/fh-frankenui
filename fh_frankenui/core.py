@@ -1,6 +1,9 @@
 from fasthtml.common import *
 from fh_frankenui.foundations import *
 from enum import Enum
+
+__all__=['Theme', 'Button', 'Width', 'Text', 'Column', 'Background', 'H']
+
 class Theme(Enum):
     slate = "slate"
     stone = "stone"
@@ -21,7 +24,9 @@ class Theme(Enum):
         _url = "https://unpkg.com/franken-wc@0.0.6/dist/css/{theme}.min.css"
         return (*js, Link(rel="stylesheet", href=_url.format(theme=self.value)))
 
-class Button(ObjectEnum):
+class Button(StyleEnum):
+    base = None
+
     default = "default"
     ghost = "ghost"
     primary = "primary"
@@ -32,7 +37,25 @@ class Button(ObjectEnum):
 
     def __str__(self):
         return f"uk-button uk-button-{self.value}"
-    
+
+
+class Card(StyleEnum):
+    base = ""
+    #style
+    default = "default"
+    primary = "primary"
+    secondary = "secondary"
+    danger = "danger"
+    # sections
+    header = "header"
+    title = "title"
+    body = "body"
+    footer = "footer"
+
+
+
+
+
 class Width(StyleEnum):
     full = "1-1"
     half = "1-2"

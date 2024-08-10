@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fh-frankenui"
+version = "0.0.1"
+authors = [
+  { name="Isaac Flath", email="isaac.flath@gmail.com" },
+]
+description = "A FastHTML plugin for using franken-ui easier"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/isaac-flath/fh-frankenui"
+Issues = "https://github.com/isaac-flath/fh-frankenui/issues"
