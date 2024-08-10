@@ -2,11 +2,9 @@
 
 Wrapper for Franken UI to be used with fasthtml.  These are very early days, and they are not ready for general use. Contributors are welcome.  
 
-Eventually, this will be a library and plugin; right now, I'm just trying to make useful components to determine the direction I should take.  I'm changing abstractions and API daily, so expect a lot of breaking changes.  
-
 ## Installation
 
-Project is located here on pip here: https://pypi.org/project/fh-frankenui
+The project is located here on pip here: https://pypi.org/project/fh-frankenui
 Though installing from git may be best for now
 
 ## What is Franken UI?
