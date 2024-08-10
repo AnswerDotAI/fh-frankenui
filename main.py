@@ -19,9 +19,6 @@ async def index():
 
         get_header("Width"),
         *[Button(cls=fui.Button.default + e)(e.name) for e in fui.Width],
-        
-        get_header("Text"),
-        Div(cls=fui.Column.six)( *[P(cls=e)(e.name) for e in fui.Text],),
 
         get_header("Column"),
         Div(cls=fui.Column.two)(*[P(cls=fui.Background.muted)("two")]*2),Br(),
