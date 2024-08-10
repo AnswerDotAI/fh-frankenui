@@ -1,8 +1,8 @@
 from fasthtml.common import *
-from fh_frankenui.foundations import *
+from .foundations import *
 from enum import Enum
 
-__all__=['Theme', 'Button', 'Width', 'Text', 'Column', 'Background', 'H']
+__all__ = ["Theme", "Text", "Button", "Card", "Width", "Column", "Background", "H","C"]
 
 class Theme(Enum):
     slate = "slate"
@@ -24,9 +24,54 @@ class Theme(Enum):
         _url = "https://unpkg.com/franken-wc@0.0.6/dist/css/{theme}.min.css"
         return (*js, Link(rel="stylesheet", href=_url.format(theme=self.value)))
 
-class Button(StyleEnum):
-    base = None
+class TextSTYLE(BaseEnum):
+    lead = "lead"
+    meta = "meta"
+    italic = "italic"
 
+class TextSIZE(BaseEnum):
+    small = "small"
+    large = "large"
+
+class TextWEIGHT(BaseEnum):
+    light = "light"
+    normal = "normal"
+    bold = "bold"
+    lighter = "lighter"
+    bolder = "bolder"
+
+class TextTRANSFORM(BaseEnum):
+    capitalize = "capitalize"
+    uppercase = "uppercase"
+    lowercase = "lowercase"
+
+class TextDECORATION(BaseEnum):
+    decoration_none = "decoration-none"
+
+class TextCOLOR(BaseEnum):
+    muted = "muted"
+    primary = "primary"
+    secondary = "secondary"
+    success = "success"
+    warning = "warning"
+    danger = "danger"
+
+class TextALIGN(BaseEnum):
+    left = "left"
+    right = "right"
+    center = "center"
+    justify = "justify"
+
+class Text(CoreEnum):
+    style = TextSTYLE
+    size = TextSIZE
+    weight = TextWEIGHT
+    transform = TextTRANSFORM
+    decoration = TextDECORATION
+    color = TextCOLOR
+    align = TextALIGN
+
+class ButtonSTYLE(BaseEnum):
     default = "default"
     ghost = "ghost"
     primary = "primary"
@@ -35,28 +80,28 @@ class Button(StyleEnum):
     text = "text"
     link = "link"
 
-    def __str__(self):
-        return f"uk-button uk-button-{self.value}"
-
-
-class Card(StyleEnum):
+class Button(CoreEnum):
     base = ""
-    #style
+    style = ButtonSTYLE
+
+class CardSTYLE(BaseEnum):
     default = "default"
     primary = "primary"
     secondary = "secondary"
     danger = "danger"
-    # sections
+
+class CardSECTION(BaseEnum):
     header = "header"
     title = "title"
     body = "body"
     footer = "footer"
 
+class Card(CoreEnum):
+    base = ""
+    style = CardSTYLE
+    section = CardSECTION
 
-
-
-
-class Width(StyleEnum):
+class Width(BaseEnum):
     full = "1-1"
     half = "1-2"
     one_third = "1-3"
@@ -69,61 +114,21 @@ class Width(StyleEnum):
     four_fifths = "4-5"
     one_sixth = "1-6"
     five_sixths = "5-6"
-
-class Text(StyleEnum):
-    #style
-    lead = "lead"
-    meta = "meta"
-    italic = "italic"
-    #size
-    small = "small"
-    default = "default"
-    large = "large"
-    #weight
-    light = "light"
-    normal = "normal"
-    bold = "bold"
-    lighter = "lighter"
-    bolder = "bolder"
-    #transform
-    capitalize = "capitalize"
-    uppercase = "uppercase"
-    lowercase = "lowercase"
-    #decoration
-    decoration_none = "decoration-none"
-    #color
-    muted = "muted"
-    primary = "primary"
-    secondary = "secondary"
-    success = "success"
-    warning = "warning"
-    danger = "danger"
-    #alignment
-    left = "left"
-    right = "right"
-    center = "center"
-    justify = "justify"
-
-class Column(StyleEnum):
+    
+class Column(BaseEnum):
     two = "1-2"
     three = "1-3"
     four = "1-4"
     five = "1-5"
     six = "1-6"
 
-
-class Background(StyleEnum):
-    #background
-    default = "default"
-    muted = "muted"
-    primary = "primary"
-    secondary = "secondary"
-    #size
+class BackgroundSIZE(BaseEnum):
     cover = "cover"
     contain = "contain"
     width_1_1 = "width-1-1"
     height_1_1 = "height-1-1"
-    #position
+
+class BackgroundPOSITION(BaseEnum):
     top_left = "top-left"
     top_center = "top-center"
     top_right = "top-right"
@@ -133,16 +138,15 @@ class Background(StyleEnum):
     bottom_left = "bottom-left"
     bottom_center = "bottom-center"
     bottom_right = "bottom-right"
-    # repeat
-    norepeat = "norepeat"
-    #attachment
-    fixed = "fixed"
-    #responsive
+
+class BackgroundRESPONSIVE(BaseEnum):
     images_at_s_screen = "images@s"
     images_at_m_screen = "images@m"
     images_at_l_screen = "images@l"
     images_at_xl_screen = "images@xl"
-    #blend modes
+
+class BackgroundBLENDMODE(BaseEnum):
+    multiply = "multiply"
     blend_multiply = "blend-multiply"
     blend_screen = "blend-screen"
     blend_overlay = "blend-overlay"
@@ -159,7 +163,26 @@ class Background(StyleEnum):
     blend_color = "blend-color"
     blend_luminosity = "blend-luminosity"
 
-class H(StyleEnum):
+class BackgroundATTACHMENT(BaseEnum):
+    fixed = "fixed"
+
+class BackgroundREPEAT(BaseEnum):
+    norepeat = "norepeat"
+
+class Background(CoreEnum):
+    default = "default"
+    muted = "muted"
+    primary = "primary"
+    secondary = "secondary"
+    size = BackgroundSIZE
+    position = BackgroundPOSITION
+    responsive = BackgroundRESPONSIVE
+    blend_mode = BackgroundBLENDMODE
+    attachment = BackgroundATTACHMENT
+    repeat = BackgroundREPEAT
+
+class H(CoreEnum):
+    base = ""
     h1 = "1"
     h2 = "2"
     h3 = "3"

@@ -1,9 +1,9 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0","python-fasthtml"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fh-frankenui"
+name = "fh_frankenui"
 version = "0.0.1"
 authors = [
   { name="Isaac Flath", email="isaac.flath@gmail.com" },
@@ -19,4 +19,4 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/isaac-flath/fh-frankenui"
-Issues = "https://github.com/isaac-flath/fh-frankenui/issues"python3 -m pip install --upgrade build
+Issues = "https://github.com/isaac-flath/fh-frankenui/issues"

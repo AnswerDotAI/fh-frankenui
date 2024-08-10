@@ -1,0 +1,2 @@
+python-fasthtml
+fh_frankenui @ git+https://github.com/isaac-flath/fh-frankenui.git
