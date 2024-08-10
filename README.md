@@ -4,6 +4,11 @@ Wrapper for Franken UI to be used with fasthtml.  These are very early days, and
 
 Eventually, this will be a library and plugin; right now, I'm just trying to make useful components to determine the direction I should take.  I'm changing abstractions and API daily, so expect a lot of breaking changes.  
 
+## Installation
+
+Project is located here on pip here: https://pypi.org/project/fh-frankenui
+Though installing from git may be best for now
+
 ## What is Franken UI?
 
 At its simplest, it is a helper for building HTML class strings used in the [Franken UI](https://getfranken.com) library.  This is done through:
