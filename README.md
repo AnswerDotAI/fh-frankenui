@@ -1,14 +1,14 @@
 # fh-frankenui
 
-Wrapper for Franken UI to be used with fasthtml.  This is very early days, not ready for general use.
+Wrapper for Franken UI to be used with fasthtml.  These are very early days, and they are not ready for general use. Contributors are welcome.  
 
-Eventually this will be a library and plugin, right now I'm just trying to make useful components to figure out the direction I should go with this.  I'm changing abstractions and API daily, so expect a lot of breaking changes.  
+Eventually, this will be a library and plugin; right now, I'm just trying to make useful components to determine the direction I should take.  I'm changing abstractions and API daily, so expect a lot of breaking changes.  
 
 ## What is Franken UI?
 
-At it's simplest, it is a helper to build HTML class strings used in the [Franken UI](https://getfranken.com) library.  This is done through:
+At its simplest, it is a helper for building HTML class strings used in the [Franken UI](https://getfranken.com) library.  This is done through:
 
-+ Using enums to give autocomplete via python
++ Using enums to give autocomplete via Python
     + `style.Text.danger` = 'uk-text-danger'
     + `style.Background.primary` = 'uk-background-primary'
     + `style.Text.bold` = 'uk-text-bold'
