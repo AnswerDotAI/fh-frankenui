@@ -12,7 +12,7 @@ pip install git+https://github.com/isaac-flath/fh-frankenui.git
 
 ## Usage Examples
 
-### Selection a Theme
+### Selection of a Theme
 
 ```python
 app = fast_app(hdrs=Theme.blue.headers())
@@ -28,7 +28,7 @@ import fh_frankenui.core as franken
 assert C(Text.color.red) == 'uk-text-red'
 
 # Combine Many
-assert C(Text.color.red, Text.weight.bold text.transform.capitalize) == 'uk-text-red uk-text-small uk-text-bold'
+assert C(Text.color.red, Text.weight.bold Text.transform.capitalize) == 'uk-text-red uk-text-small uk-text-bold'
 
 # Combine with your own class Strings
 assert C(Text.color.red, 'my-own-class', Text.transform.capitalize) == 'uk-text-red my-own-class uk-text-small'
@@ -43,6 +43,6 @@ Div("My small red text", cls=C(Text.color.red, 'my-own-class', Text.transform.ca
 
 ## Why?
 
-+ Autocompletion on CSS Clases
-+ Easier to Compose CSS classes
-+ Writing text strings with different CSS classes is annoying
++ Autocompletion of CSS Classes
++ Easier to Compose CSS classes and refactor with python
++ Writing lots of text strings with different CSS classes all over the place is annoying
