@@ -29,29 +29,51 @@ async def index():
     return Div(
         # Text
         get_header("Text"),
-        get_explanation("Text styling apply to anything with text.  Example: `P(cls=C(Text.style.lead))('your text')`"),
         Div(cls=fui.Column.four)(*[P(cls=C(c))(p) for c,p in get_all_options(fui.Text)]),            
         # Themes
         get_header("Themes"),
         get_explanation("Franken UI has a variety of themes that can be used.  To get a CDN with the JS and CSS needed use the `Theme` enum.  For example `Theme.blue.headers()`"),
         # Buttons
         get_header("Button"),
-        get_explanation("Button styling is normally applied the A and Button tags.  Example: `A(cls=C(Button.base, Button.style.primary))`"),
         Strong('A: '),*[A(cls=C(fui.Button.base, c))(p) for c,p in get_all_options(fui.Button)],
         Br(),
         Strong('Button: '),*[Button(cls=C(fui.Button.base, c))(p) for c,p in get_all_options(fui.Button)],
         # Width
         get_header("Width"),
-        get_explanation("Width styling apply to anything with a width.  Example: `Div(cls=C(Width.full, Width.offset.full))`"),
         *[Div(cls=C(fui.Background.primary, c))(P(p)) for c,p in get_all_options(fui.Width)],
         # Column
         get_header("Column"),
-        get_explanation("Column styling apply to anything with a column.  Example: `Div(cls=C(Column.four, Column.offset.four))`"),
         *[Div(cls=fui.Column[label])(*[P(cls=fui.Background.secondary)(f'Column.{label}')]*n) for label, n in (('two',2),('three',3),('four',4),('five',5),('six',6))],
         # H
         get_header("H"),
-        *[Div(cls=C(c))(p) for c,p in get_all_options(fui.H)],
+        Div(cls=fui.Column.three)(
+            *[Div(cls=C(c))(p) for c,p in get_all_options(fui.H)]
+        ),
+        # Card
+        get_header("Card"),
+
+        Div(cls="uk-child-width-1-2@m uk-grid-small uk-grid-match", uk_grid=True)(
+
+        Div(cls=C(fui.Card.base, fui.Card.section.body, fui.Card.style.default))(
+            H3(cls=fui.Card.section.title)("Card.style.default"),
+            P(cls='uk-margin')("These cards are styled with margins in a grid, and have a Card.section.title and Card.section.body")),
+
+        Div(cls=C(fui.Card.base, fui.Card.section.body, fui.Card.style.secondary))(
+            H3(cls=fui.Card.section.title)("Card.style.secondary"),
+            P(cls='uk-margin')("These cards are styled with margins in a grid, and have a Card.section.title and Card.section.body")),
+
+        Div(cls=C(fui.Card.base, fui.Card.section.body, fui.Card.style.danger))(
+            H3(cls=fui.Card.section.title)("Card.style.danger"),
+            P(cls='uk-margin')("These cards are styled with margins in a grid, and have a Card.section.title and Card.section.body")),
+
+        Div(cls=C(fui.Card.base, fui.Card.section.body, fui.Card.style.primary))(
+            H3(cls=fui.Card.section.title)("Card.style.primary"),
+            P(cls='uk-margin')("These cards are styled with margins in a grid, and have a Card.section.title and Card.section.body")),
+
+
+
+
 
     )
-
+    )
 serve()

@@ -165,7 +165,6 @@ class Background(CoreEnum):
     repeat = BackgroundREPEAT
 
 class H(CoreEnum):
-    base = ""
     h1 = "1"
     h2 = "2"
     h3 = "3"
