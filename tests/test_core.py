@@ -8,7 +8,6 @@ class TestH:
     def test_string_and_enum(self):
         assert C(H.h1, 'abc', H.h2) == 'uk-h1 abc uk-h2'
 
-
 class TestButton:
     def test_base_attr(self):
         assert C(Button.base) == 'uk-button'

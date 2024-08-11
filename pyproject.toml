@@ -2,6 +2,11 @@
 requires = ["setuptools>=61.0","python-fasthtml"]
 build-backend = "setuptools.build_meta"
 
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
 [project]
 name = "fh_frankenui"
 version = "0.0.1"
@@ -11,6 +16,9 @@ authors = [
 description = "A FastHTML plugin for using franken-ui easier"
 readme = "README.md"
 requires-python = ">=3.8"
+dependencies = [
+    "python-fasthtml",
+]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache License",

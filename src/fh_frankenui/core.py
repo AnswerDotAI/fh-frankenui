@@ -84,23 +84,6 @@ class Button(CoreEnum):
     base = ""
     style = ButtonSTYLE
 
-class CardSTYLE(BaseEnum):
-    default = "default"
-    primary = "primary"
-    secondary = "secondary"
-    danger = "danger"
-
-class CardSECTION(BaseEnum):
-    header = "header"
-    title = "title"
-    body = "body"
-    footer = "footer"
-
-class Card(CoreEnum):
-    base = ""
-    style = CardSTYLE
-    section = CardSECTION
-
 class Width(BaseEnum):
     full = "1-1"
     half = "1-2"
@@ -190,5 +173,24 @@ class H(CoreEnum):
     h5 = "5"
     h6 = "6"
 
-    def __str__(self):
+    def C(self):
         return f"uk-h{self.value}"
+
+
+
+class CardSTYLE(BaseEnum):
+    default = "default"
+    primary = "primary"
+    secondary = "secondary"
+    danger = "danger"
+
+class CardSECTION(BaseEnum):
+    header = "header"
+    title = "title"
+    body = "body"
+    footer = "footer"
+
+class Card(CoreEnum):
+    base = ""
+    style = CardSTYLE
+    section = CardSECTION
