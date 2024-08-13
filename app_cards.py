@@ -1,5 +1,6 @@
 from fasthtml.common import *
-from fh_frankenui.core import *
+from fh_frankenui.components import *
+from fh_frankenui.style import *
 from fh_frankenui.foundations import *
 
 
@@ -14,10 +15,10 @@ def home():
 
 header = (Strong('Create an account'),
         P(cls='uk-text-muted')('Enter your email below to create your account'))
-footer = UkButton(typ='primary')('Create Account')
+footer = UkButton(typ=UkTyp.primary)('Create Account')
 
-body = (UkButton(typ='default')('Github'),
-        UkButton(typ='default')('Google'),
+body = (UkButton(typ=UkTyp.default)('Github'),
+        UkButton(typ=UkTyp.default)('Google'),
         P(cls='uk-text-lead uk-text-small')("Or continue with"),
         UkInput('Email','', 'email',placeholder='m@example.com'),
         UkInput('Password','', 'Password',placeholder='Password',type='Password'))
