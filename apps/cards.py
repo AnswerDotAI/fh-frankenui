@@ -2,26 +2,29 @@ from fasthtml.common import *
 from fh_frankenui.components import *
 from fh_frankenui.style import *
 from fh_frankenui.foundations import *
-
-
-app = FastHTML(hdrs=Theme.blue.headers())
+from functools import partial
+app = FastHTML(hdrs=Theme.blue.headers(), routes = (Mount('/public', StaticFiles(directory='public')),))
 
 @app.get('/')
 def home(): 
-    return Div(cls='uk-column-1-2')(
-        Card(*body, header=header, footer=footer),
-        example_card
+    return Div(cls='uk-child-width-1-3', uk_grid=True)(
+
+        Card(H2(cls='uk-h3')("Inline Field Validation"),Br(),
+        P(cls='uk-text-muted')('A form with inline field validation on individual inputs with the submit aditionally validating the whole form.'),
+             header=Img(cls='uk-img',src='public/inline_validation.gif',),
+             footer=(UkButton('App', typ=UkTyp.primary), UkButton('Info',typ=UkTyp.secondary),UkButton('Code',typ=UkTyp.secondary))
+            ),
+
+        Card(UkButton(typ=UkTyp.default)('Github'), UkButton(typ=UkTyp.default)('Google'),
+            P(cls='uk-text-lead uk-text-small')("Or continue with"),
+            UkInput('Email','', 'email',placeholder='m@example.com'), UkInput('Password','', 'Password',placeholder='Password',type='Password'), 
+            header=(Strong('Create an account'),P(cls='uk-text-muted')('Enter your email below to create your account')), 
+            footer=UkButton(typ=UkTyp.primary)('Create Account')),
+        example_card,
+
+
+
     )
-
-header = (Strong('Create an account'),
-        P(cls='uk-text-muted')('Enter your email below to create your account'))
-footer = UkButton(typ=UkTyp.primary)('Create Account')
-
-body = (UkButton(typ=UkTyp.default)('Github'),
-        UkButton(typ=UkTyp.default)('Google'),
-        P(cls='uk-text-lead uk-text-small')("Or continue with"),
-        UkInput('Email','', 'email',placeholder='m@example.com'),
-        UkInput('Password','', 'Password',placeholder='Password',type='Password'))
 
 
 example_card = Div(cls='uk-card')(
