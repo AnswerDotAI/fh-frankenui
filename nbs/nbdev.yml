@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "fh-frankenui"
+  site-url: "https://Isaac-Flath.github.io/fh-frankenui"
+  description: "Wrapper for FrankenUI in python"
+  repo-branch: main
+  repo-url: "https://github.com/Isaac-Flath/fh-frankenui"
