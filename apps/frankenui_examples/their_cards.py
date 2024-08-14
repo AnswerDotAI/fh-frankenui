@@ -1,6 +1,14 @@
 from fasthtml.common import *
 from fasthtml.components import Uk_input_tag, Rect, Uk_select
 
+# import requests
+# web_component_url = 'https://raw.githubusercontent.com/franken-ui/examples/master/public/js/franken-wc%400.0.6/wc.iife.js'
+# response = requests.get(web_component_url)
+# js_content = response.text
+# wc = Script(js_content)
+# INFO:     127.0.0.1:59334 - "GET /%7B%60https%3A//api.dicebear.com/8.x/lorelei/svg?seed=${a.name}`} HTTP/1.1" 404 Not Found
+# INFO:     127.0.0.1:59334 - "GET /%7B%60https%3A//api.dicebear.com/8.x/lorelei/svg?seed=${a.name}`} HTTP/1.1" 404 Not Found
+
 # Should match https://examples.franken-ui.dev/cards
 hdrs = (Script(src="https://cdn.tailwindcss.com"),
         Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),#Script(src="/js/uikit@3.21.6/uikit.min.js"),
@@ -10,6 +18,7 @@ hdrs = (Script(src="https://cdn.tailwindcss.com"),
         # Link(rel="preload", href="/fonts/geist-font/fonts/GeistMonoVariableVF.woff2", as_="font", type="font/woff2", crossorigin=""),
         # Link(rel="stylesheet", href="/fonts/geist-font/style.css"),
         # Link(rel="stylesheet", href="/_astro/master.CZ5-T1HD.css"),
+        # wc
 )
 app = FastHTML(default_hdrs=False, hdrs=hdrs)
 
