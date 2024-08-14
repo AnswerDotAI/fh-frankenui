@@ -1,30 +1,116 @@
 from fasthtml.common import *
 from fh_frankenui.components import *
-from fh_frankenui.style import *
-from fh_frankenui.foundations import *
-from functools import partial
-app = FastHTML(hdrs=Theme.blue.headers(), routes = (Mount('/public', StaticFiles(directory='public')),))
+
+hdrs = (Script(src="https://cdn.tailwindcss.com"),
+        Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),#Script(src="/js/uikit@3.21.6/uikit.min.js"),
+        Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),#Script(src="/js/uikit@3.21.6/icons.min.js"),
+        Link(rel="stylesheet", href="https://unpkg.com/franken-wc@0.0.6/dist/css/blue.min.css"), #Script(type="module", src="/js/franken-wc@0.0.6/wc.iife.js"),
+        # Link(rel="preload", href="/fonts/geist-font/fonts/GeistVariableVF.woff2", as_="font", type="font/woff2", crossorigin=""),
+        # Link(rel="preload", href="/fonts/geist-font/fonts/GeistMonoVariableVF.woff2", as_="font", type="font/woff2", crossorigin=""),
+        # Link(rel="stylesheet", href="/fonts/geist-font/style.css"),
+        # Link(rel="stylesheet", href="/_astro/master.CZ5-T1HD.css"),
+)
+app = FastHTML(hdrs=hdrs,default_hdrs=False, routes = (Mount('/public', StaticFiles(directory='public')),))
+
+
+GalleryCard = Card(H3(cls='uk-h3')("Inline Field Validation"),Br(),
+            P(cls='uk-text-muted')('A form with inline field validation on individual inputs with the submit aditionally validating the whole form.'),
+                header=Img(cls='uk-img',src='public/inline_validation.gif',),
+                footer=Div(cls=('uk-flex','uk-flex-between'))(
+                    UkButton('App', cls=UkButtonT.primary),
+                    UkButton('Info', cls=UkButtonT.default),
+                    UkButton('Code', cls=UkButtonT.default)),
+                footer_cls='uk-background-muted',
+             )
+from fasthtml.components import Uk_select, Optgroup
+
+FrankenExTopLeft = Card(
+            Div(cls='grid grid-cols-2 gap-6')(
+                # https://getuikit.com/docs/icon#library
+                UkButton(cls=UkButtonT.default)(Span(cls="uk-margin-small-right", uk_icon="icon: github; ratio: 1"),'Github'), 
+                UkButton(cls=UkButtonT.default)(Span(cls="uk-margin-small-right", uk_icon="icon: google; ratio: 1"),'Google')), 
+            UkHSplit("or continue with", text_cls = "text-xs uppercase uk-text-muted"),
+            UkInput('Email','', 'email',placeholder='m@example.com'),
+            UkInput('Password','', 'Password',placeholder='Password',type='Password'), 
+            header=(H3(cls='uk-h3')('Create an account'),P(cls='text-sm uk-text-muted')('Enter your email below to create your account')),
+            footer=UkButton(cls=(UkButtonT.primary,'w-full'))('Create Account'),
+            body_cls='space-y-4 py-0')
+
+FrankenExTopRight = Card(
+    
+    Div(cls="uk-drop uk-dropdown", uk_dropdown=True)(
+            Ul(cls="uk-dropdown-nav uk-nav")(
+                Li(cls="uk-active")(A(href="#")('Active')),
+                Li(A(href="#")('Item')),
+                Li(cls="uk-nav-header")('Header'),
+                Li(A(href="#")('Item')),
+                Li(A(href="#")('Item')),
+                Li(cls="uk-nav-divider"),
+                Li(A(href="#")('Item')))),
+
+    header=(H3('Report an issue'),P(cls='text-sm uk-text-muted')('What area are you having problems with')),
+    footer = (UkButton(cls=(UkButtonT.ghost))('Cancel'),UkButton(cls=(UkButtonT.primary))('Submit')),
+    footer_cls='flex justify-between'
+)
 
 @app.get('/')
 def home(): 
-    return Div(cls='uk-child-width-1-3', uk_grid=True)(
-
-        Card(H2(cls='uk-h3')("Inline Field Validation"),Br(),
-        P(cls='uk-text-muted')('A form with inline field validation on individual inputs with the submit aditionally validating the whole form.'),
-             header=Img(cls='uk-img',src='public/inline_validation.gif',),
-             footer=(UkButton('App', typ=UkTyp.primary), UkButton('Info',typ=UkTyp.secondary),UkButton('Code',typ=UkTyp.secondary))
-            ),
-
-        Card(UkButton(typ=UkTyp.default)('Github'), UkButton(typ=UkTyp.default)('Google'),
-            P(cls='uk-text-lead uk-text-small')("Or continue with"),
-            UkInput('Email','', 'email',placeholder='m@example.com'), UkInput('Password','', 'Password',placeholder='Password',type='Password'), 
-            header=(Strong('Create an account'),P(cls='uk-text-muted')('Enter your email below to create your account')), 
-            footer=UkButton(typ=UkTyp.primary)('Create Account')),
-        example_card,
-
-
-
+    return Div(cls=('uk-child-width-1-3@l','uk-child-width-1-2@m'), uk_grid=True)(
+            FrankenExTopLeft,
+            FrankenExTopRight,
+            example_card_tr
     )
+        
+from fasthtml.components import Uk_select, Uk_input_tag
+example_card_tr = Div(cls='space-y-6')(
+            Div(cls='uk-card')(
+                Div(cls='uk-card-header')(
+                    H3('Report an issue', cls='font-semibold leading-none tracking-tight'),
+                    P('What area are you having problems with?', cls='mt-1.5 text-sm text-muted-foreground')
+                ),
+                Div(cls='uk-card-body space-y-6 py-0')(
+                    Div(cls='grid grid-cols-2 gap-2')(
+                        Div(cls='space-y-2')(
+                            Label('Area', cls='uk-form-label'),
+                            Div(cls='h-9')(
+                                Uk_select(uk_cloak='')(
+                                    '{\r\n                    ["Team", "Billing", "Account", "Deployment", "Support"].map(\r\n                      (a) =>',
+                                    Option('{a}', selected='{a', **{'=':'Billing'}, **{'}':''}),
+                                    ',\r\n                    )\r\n                  }'
+                                )
+                            )
+                        ),
+                        Div(cls='space-y-2')(
+                            Label('Severity', cls='uk-form-label'),
+                            Div(cls='h-9')(
+                                Uk_select(uk_cloak='')(
+                                    '{\r\n                    [\r\n                      "Severity 1 (Highest)",\r\n                      "Severity 2",\r\n                      "Severity 3",\r\n                      "Severity 4 (Lowest)",\r\n                    ].map((a) => (',
+                                    Option('{a}', selected='{a', **{'=':'Severity 2'}, **{'}':''}),
+                                    '))\r\n                  }'
+                                )
+                            )
+                        )
+                    ),
+                    Div(cls='space-y-2')(
+                        Label('Subject', fr='subject', cls='uk-form-label'),
+                        Input(id='subject', placeholder='I need help with', type='text', cls='uk-input')
+                    ),
+                    Div(cls='space-y-2')(
+                        Label('Description', fr='description', cls='uk-form-label'),
+                        Textarea(id='description', placeholder='Please include all information relevant to your issue', cls='uk-textarea')
+                    ),
+                    Div(cls='space-y-2')(
+                        Label('Tags', cls='uk-form-label'),
+                        Div(cls='min-h-9')(
+                            Uk_input_tag(state='danger', value='Spam,Invalid')
+                        )
+                    )
+                ),
+                Div(cls='uk-card-footer flex justify-between')(
+                    Button('Cancel', uk_toggle='#demo', cls='uk-button uk-button-ghost'),
+                    Button('Submit', uk_toggle='#demo', cls='uk-button uk-button-primary')
+                )
+            ))
 
 
 example_card = Div(cls='uk-card')(
@@ -68,3 +154,5 @@ example_card = Div(cls='uk-card')(
         Button('Create account', uk_toggle='#demo', cls='uk-button uk-button-primary w-full')
     )
 )
+
+serve()
