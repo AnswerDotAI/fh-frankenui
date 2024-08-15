@@ -1,14 +1,12 @@
 from fasthtml.common import *
 from fh_frankenui.components import *
+from fasthtml.components import Uk_select
+
 
 hdrs = (Script(src="https://cdn.tailwindcss.com"),
-        Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),#Script(src="/js/uikit@3.21.6/uikit.min.js"),
-        Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),#Script(src="/js/uikit@3.21.6/icons.min.js"),
-        Link(rel="stylesheet", href="https://unpkg.com/franken-wc@0.0.6/dist/css/blue.min.css"), #Script(type="module", src="/js/franken-wc@0.0.6/wc.iife.js"),
-        # Link(rel="preload", href="/fonts/geist-font/fonts/GeistVariableVF.woff2", as_="font", type="font/woff2", crossorigin=""),
-        # Link(rel="preload", href="/fonts/geist-font/fonts/GeistMonoVariableVF.woff2", as_="font", type="font/woff2", crossorigin=""),
-        # Link(rel="stylesheet", href="/fonts/geist-font/style.css"),
-        # Link(rel="stylesheet", href="/_astro/master.CZ5-T1HD.css"),
+        Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),
+        Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),
+        Link(rel="stylesheet", href="https://unpkg.com/franken-wc@0.0.6/dist/css/blue.min.css") 
 )
 app = FastHTML(hdrs=hdrs,default_hdrs=False, routes = (Mount('/public', StaticFiles(directory='public')),))
 
@@ -22,9 +20,8 @@ GalleryCard = Card(H3(cls='uk-h3')("Inline Field Validation"),Br(),
                     UkButton('Code', cls=UkButtonT.default)),
                 footer_cls='uk-background-muted',
              )
-from fasthtml.components import Uk_select, Optgroup
 
-FrankenExTopLeft = Card(
+Left1 = Card(
             Div(cls='grid grid-cols-2 gap-6')(
                 # https://getuikit.com/docs/icon#library
                 UkButton(cls=UkButtonT.default)(Span(cls="uk-margin-small-right", uk_icon="icon: github; ratio: 1"),'Github'), 
@@ -36,8 +33,28 @@ FrankenExTopLeft = Card(
             footer=UkButton(cls=(UkButtonT.primary,'w-full'))('Create Account'),
             body_cls='space-y-4 py-0')
 
-FrankenExTopRight = Card(
+box2svg = Svg(role="img", viewBox="0 0 24 24", cls="mb-3 h-6 w-6")(Path(d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z", fill="currentColor")),
+
+import calendar
+
+Left2 = Card(
+    Div(cls='grid grid-cols-3 gap-4')(
+        UkButton(Div(cls='flex flex-col items-center justify-center')(Span(uk_icon='credit-card'),"Card"), cls='uk-button-default h-20 w-full border-2 border-primary'),
+        UkButton(box2svg,cls='uk-button-default h-20 w-full')("Card"),
+        UkButton(Span(uk_icon='apple'),"Apple",cls='uk-button-default h-20 w-full')),
     
+    Div(cls=' space-y-4')(
+    UkInput('Name','', 'name',placeholder='m@example.com'),
+    UkInput('Card Number','', 'card_number',placeholder='m@example.com'),
+    Div(cls='grid grid-cols-3 gap-4')(
+        UkDropdownButton('Month', calendar.month_name, btn_cls=UkButtonT.default),
+        UkDropdownButton('Year', range(2024,2030), btn_cls=UkButtonT.default),
+        UkInput('','', 'cvv',placeholder='CVV'),
+    )),
+    header=(H3(cls='uk-h3')('Payment Method'),P(cls='text-sm uk-text-muted')('Add a new payment method to your account.')),
+)
+
+Right1 = Card(
     Div(cls="uk-drop uk-dropdown", uk_dropdown=True)(
             Ul(cls="uk-dropdown-nav uk-nav")(
                 Li(cls="uk-active")(A(href="#")('Active')),
@@ -47,112 +64,138 @@ FrankenExTopRight = Card(
                 Li(A(href="#")('Item')),
                 Li(cls="uk-nav-divider"),
                 Li(A(href="#")('Item')))),
-
     header=(H3('Report an issue'),P(cls='text-sm uk-text-muted')('What area are you having problems with')),
     footer = (UkButton(cls=(UkButtonT.ghost))('Cancel'),UkButton(cls=(UkButtonT.primary))('Submit')),
-    footer_cls='flex justify-between'
+    footer_cls='flex justify-between')
+
+Right2 = Card(H4(cls='uk-h4')("franken/ui"),
+              P(cls='text-sm text-muted-foreground')("HTML-first, framework-agnostic, beautifully designed components that you can truly copy and paste into your site. Accessible. Customizable. Open Source."),
+              Div(cls='flex space-x-4 text-sm text-muted-foreground')(
+              Div(cls='flex items-center')("TypeScript"),
+              Div(cls='flex items-center')(Span(uk_icon='star'),"20k"),
+              "Updated April 2023"
+              )
+              )
+
+Right3 = Card(
+    UkInput(label = Div(H4(cls='uk-h5')('Strictly Necessary'),P(cls='font-normal leading-snug text-muted-foreground')('These cookies are essential in order to use the website and use its features.')),
+                inp_cls='uk-toggle-switch uk-toggle-switch-primary flex-none',
+                cls='flex items-center justify-between gap-2'),
+    UkInput(label = Div(H4(cls='uk-h5')('Functional Cookies'),P(cls='font-normal leading-snug text-muted-foreground')('These cookies allow the website to provide personalized functionality.')),
+                inp_cls='uk-toggle-switch uk-toggle-switch-primary flex-none',
+                cls='flex items-center justify-between gap-2'),
+    UkInput(label = Div(H4(cls='uk-h5')('Performance Cookies'),P(cls='font-normal leading-snug text-muted-foreground')('These cookies help to improve the performance of the website.')),
+                inp_cls='uk-toggle-switch uk-toggle-switch-primary flex-none',
+                cls='flex items-center justify-between gap-2'),
+
+        header=(H3(cls='font-semibold leading-none tracking-tight')('Cookie Settings'),P(cls='text-sm uk-text-muted')('Manage your cookie settings here.')),
+        body_cls='space-y-6 py-0',
+        footer=UkButton(cls=(UkButtonT.default,'w-full'))('Save Preferences'),
 )
+
+
+team_members = [{"name": "Sofia Davis", "email": "m@example.com", "role": "Owner"},{"name": "Jackson Lee", "email": "p@example.com", "role": "Member"},]
+
+options = ((Div('Viewer'),Div(cls='text-sm text-muted-foreground')('Can view and comment.',)),
+        (Div('Developer'),Div(cls='text-sm text-muted-foreground')('Can view, comment and edit.',)),
+        (Div('Billing'),Div(cls='text-sm text-muted-foreground')('Can view, comment and manage billing.',)),
+        (Div('Owner'),Div(cls='text-sm text-muted-foreground')('Admin-level to all resources.')),)
+
+body = [Div(cls='flex items-center space-x-4')(
+        Span(cls='relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-accent')(
+            Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed='+member['name'], cls='aspect-square h-full w-full')
+        ),
+        Div(cls='flex-1')(
+            P(member['name'], cls='text-sm font-medium leading-none'),
+            P(member['email'], cls='text-sm text-muted-foreground')
+        ),
+        UkDropdownButton(member['role'], options, btn_cls=UkButtonT.default),
+    ) for member in team_members]
+
+
+Middle1 = (Card(*body,
+    body_cls='space-y-6',
+    header = (H4('Team Members', cls='uk-h4'),Div('Invite your team members to collaborate.', cls='mt-1.5 text-sm text-muted-foreground'))
+))
+
+team_members = [
+    {"name": "Olivia Martin", "email": "m@example.com", "role": "Member"},
+    {"name": "Isabella Nguyen", "email": "b@example.com", "role": "Viewer"},
+    {"name": "Sofia Davis", "email": "p@example.com", "role": "Viewer"},
+]
+
+options = (
+    (Div('Viewer'), Div(cls='text-sm text-muted-foreground')('Can view and comment.')),
+    (Div('Developer'), Div(cls='text-sm text-muted-foreground')('Can view, comment and edit.')),
+    (Div('Billing'), Div(cls='text-sm text-muted-foreground')('Can view, comment and manage billing.')),
+    (Div('Owner'), Div(cls='text-sm text-muted-foreground')('Admin-level to all resources.')),
+)
+
+body = [Div(cls='flex items-center space-x-4')(
+    Span(cls='relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-accent')(
+        Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed='+member['name'], cls='aspect-square h-full w-full')
+    ),
+    Div(cls='flex-1')(
+        P(member['name'], cls='text-sm font-medium leading-none'),
+        P(member['email'], cls='text-sm text-muted-foreground')
+    ),
+    UkDropdownButton(member['role'], options, btn_cls=UkButtonT.default),
+) for member in team_members]
+
+Middle2 = Card(
+    Div(cls='flex gap-x-2')(
+        UkInput(value='http://example.com/link/to/document',cls='flex-1'),
+        UkButton(cls=UkButtonT.default)('Copy link')),
+    Div(cls='uk-divider-icon my-4'),
+    H4(cls='text-sm font-medium')('People with access'),
+    *body,
+    body_cls='space-y-6',
+    header = (H4('Share this document', cls='uk-h4'),Div('Anyone with the link can view this document.', cls='mt-1.5 text-sm text-muted-foreground'))
+)
+
+Middle3 = Card()
+Middle4 = Card(
+        header = (H4('Notification', cls='uk-h4'),Div('Choose what you want to be notified about.', cls='mt-1.5 text-sm text-muted-foreground'))
+
+)
+# Ul(cls='uk-nav uk-nav-secondary')(
+#     Li(cls='-mx-1')(A(href='#demo', uk_toggle='', role='button', cls='')(
+#             Div(cls='flex gap-x-4')(
+#                 Div(cls='flex-1')(P('Everything'),P('Email digest, mentions & all activity.', cls='text-sm text-muted-foreground'))))),
+#     Li(cls='uk-active -mx-1')(
+#         A(href='#demo', uk_toggle='', role='button', cls='')(
+#             Div(cls='flex gap-x-4')(
+#                 Div(cls='flex-1')(
+#                     P('Available'),
+#                     P('Only mentions and comments.', cls='text-sm text-muted-foreground')
+#                 )
+#             )
+#         )
+#     ),
+#     Li(cls='-mx-1')(
+#         A(href='#demo', uk_toggle='', role='button', cls='')(
+#             Div(cls='flex gap-x-4')(Div(cls='flex-1')(P('Ignoring'),P('Turn off all notifications.', cls='text-sm text-muted-foreground')
+#                 )
+#             )
+#         )
+#     )
+# )
+
 
 @app.get('/')
 def home(): 
+
+
+    
+
     return Div(cls=('uk-child-width-1-3@l','uk-child-width-1-2@m'), uk_grid=True)(
-            FrankenExTopLeft,
-            FrankenExTopRight,
-            example_card_tr
-    )
-        
-from fasthtml.components import Uk_select, Uk_input_tag
-example_card_tr = Div(cls='space-y-6')(
-            Div(cls='uk-card')(
-                Div(cls='uk-card-header')(
-                    H3('Report an issue', cls='font-semibold leading-none tracking-tight'),
-                    P('What area are you having problems with?', cls='mt-1.5 text-sm text-muted-foreground')
-                ),
-                Div(cls='uk-card-body space-y-6 py-0')(
-                    Div(cls='grid grid-cols-2 gap-2')(
-                        Div(cls='space-y-2')(
-                            Label('Area', cls='uk-form-label'),
-                            Div(cls='h-9')(
-                                Uk_select(uk_cloak='')(
-                                    '{\r\n                    ["Team", "Billing", "Account", "Deployment", "Support"].map(\r\n                      (a) =>',
-                                    Option('{a}', selected='{a', **{'=':'Billing'}, **{'}':''}),
-                                    ',\r\n                    )\r\n                  }'
-                                )
-                            )
-                        ),
-                        Div(cls='space-y-2')(
-                            Label('Severity', cls='uk-form-label'),
-                            Div(cls='h-9')(
-                                Uk_select(uk_cloak='')(
-                                    '{\r\n                    [\r\n                      "Severity 1 (Highest)",\r\n                      "Severity 2",\r\n                      "Severity 3",\r\n                      "Severity 4 (Lowest)",\r\n                    ].map((a) => (',
-                                    Option('{a}', selected='{a', **{'=':'Severity 2'}, **{'}':''}),
-                                    '))\r\n                  }'
-                                )
-                            )
-                        )
-                    ),
-                    Div(cls='space-y-2')(
-                        Label('Subject', fr='subject', cls='uk-form-label'),
-                        Input(id='subject', placeholder='I need help with', type='text', cls='uk-input')
-                    ),
-                    Div(cls='space-y-2')(
-                        Label('Description', fr='description', cls='uk-form-label'),
-                        Textarea(id='description', placeholder='Please include all information relevant to your issue', cls='uk-textarea')
-                    ),
-                    Div(cls='space-y-2')(
-                        Label('Tags', cls='uk-form-label'),
-                        Div(cls='min-h-9')(
-                            Uk_input_tag(state='danger', value='Spam,Invalid')
-                        )
-                    )
-                ),
-                Div(cls='uk-card-footer flex justify-between')(
-                    Button('Cancel', uk_toggle='#demo', cls='uk-button uk-button-ghost'),
-                    Button('Submit', uk_toggle='#demo', cls='uk-button uk-button-primary')
-                )
-            ))
+            Div(cls='space-y-6')(map(Div,(Left1,Left2))),
+            Div(cls='space-y-6')(map(Div,(Middle1,Middle2,Middle3,Middle4))),
+            Div(cls='space-y-6')(map(Div,(Right1,Right2, Right3))),        
 
+            GalleryCard
 
-example_card = Div(cls='uk-card')(
-    Div(cls='uk-card-header')(
-        H3('Create an account', cls='text-2xl font-semibold tracking-tight'),
-        P('Enter your email below to create your account', cls='text-sm text-muted-foreground')
-    ),
-    Div(cls='uk-card-body space-y-4 py-0')(
-        Div(cls='grid grid-cols-2 gap-6')(
-            Button(uk_toggle='#demo', cls='uk-button uk-button-default')(
-                Svg(viewbox='0 0 438.549 438.549', cls='mr-2 h-4 w-4')(
-                    Path(fill='currentColor', d='M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z')
-                ),
-                'Github'
-            ),
-            Button(uk_toggle='#demo', cls='uk-button uk-button-default')(
-                Svg(role='img', viewbox='0 0 24 24', cls='mr-2 h-4 w-4')(
-                    Path(fill='currentColor', d='M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z')
-                ),
-                'Google'
-            )
-        ),
-        Div(cls='relative')(
-            Div(cls='absolute inset-0 flex items-center')(
-                Span(cls='w-full border-t border-border')
-            ),
-            Div(cls='relative flex justify-center text-xs uppercase')(
-                Span('Or continue with', cls='bg-background px-2 text-muted-foreground')
-            )
-        ),
-        Div(cls='space-y-2')(
-            Label('Email', fr='email', cls='uk-form-label'),
-            Input(id='email', type='text', placeholder='m@example.com', cls='uk-input')
-        ),
-        Div(cls='space-y-2')(
-            Label('Password', fr='password', cls='uk-form-label'),
-            Input(id='password', type='Password', placeholder='Password', cls='uk-input')
-        )
-    ),
-    Div(cls='uk-card-footer')(
-        Button('Create account', uk_toggle='#demo', cls='uk-button uk-button-primary w-full')
+            
     )
-)
 
 serve()
