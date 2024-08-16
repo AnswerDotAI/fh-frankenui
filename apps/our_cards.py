@@ -25,8 +25,8 @@ Left1 = Card(
                 UkButton(cls=UkButtonT.default)(Span(cls="uk-margin-small-right", uk_icon="icon: github; ratio: 1"),'Github'), 
                 UkButton(cls=UkButtonT.default)(Span(cls="uk-margin-small-right", uk_icon="icon: google; ratio: 1"),'Google')), 
             UkHSplit("OR CONTINUE WITH", text_cls = (TextB.xsmall, TextB.muted)),
-            UkInput('Email','', 'email',placeholder='m@example.com'),
-            UkInput('Password','', 'Password',placeholder='Password',type='Password'), 
+            UkInput('Email', 'email',placeholder='m@example.com'),
+            UkInput('Password', 'Password',placeholder='Password',type='Password'), 
             header=(H3(cls='uk-h3')('Create an account'),P(cls=f'{TextT.muted_sm}')('Enter your email below to create your account')),
             footer=UkButton(cls=(UkButtonT.primary,'w-full'))('Create Account'),
             body_cls='space-y-4 py-0'
@@ -46,12 +46,12 @@ Left2 = Card(
         UkButton(Div(cls='flex flex-col items-center justify-center')(Card3Svg, "Apple"), cls='uk-button-default h-20 w-full')),
 
     Div(cls=' space-y-4')(
-    UkInput('Name','', 'name',placeholder='m@example.com'),
-    UkInput('Card Number','', 'card_number',placeholder='m@example.com'),
+    UkInput('Name', 'name',placeholder='m@example.com'),
+    UkInput('Card Number', 'card_number',placeholder='m@example.com'),
     Div(cls='grid grid-cols-3 gap-4')(
         UkSelect(*month_opts,label='Expires',id='expire_month'),
         UkSelect(*year_opts,label='Year',id='expire_year'),
-        UkInput('CVV','', 'cvv',placeholder='CVV'),
+        UkInput('CVV', 'cvv',placeholder='CVV'),
     )),
     header=(H3(cls='uk-h3')('Payment Method'),P(cls=f'{TextT.muted_sm}')('Add a new payment method to your account.')),
 )

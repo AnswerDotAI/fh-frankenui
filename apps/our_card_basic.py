@@ -160,7 +160,7 @@ Middle4 = Card(
 
 @app.get('/')
 def home(): 
-    return Title("Custom"),Div(cls=('uk-child-width-1-3@l','uk-child-width-1-2@m'), uk_grid=True)(
+    return Title("Basic"),Div(cls=('uk-child-width-1-3@l','uk-child-width-1-2@m'), uk_grid=True)(
             Div(cls='space-y-6')(map(Div,(Left1,Left2,GalleryCard))),
             Div(cls='space-y-6')(map(Div,(Middle1,Middle2,Middle3,Middle4))),
             Div(cls='space-y-6')(map(Div,(Right1,Right2, Right3))),     
