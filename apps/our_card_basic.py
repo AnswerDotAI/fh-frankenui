@@ -18,7 +18,8 @@ GalleryCard = Card(H3(cls='uk-h3')("Inline Field Validation"),Br(),
                     UkButton('App', cls=UkButtonT.primary),
                     UkButton('Info', cls=UkButtonT.default),
                     UkButton('Code', cls=UkButtonT.default)),
-                footer_cls='uk-background-muted')
+                # footer_cls='uk-background-muted'
+                )
 
 Left1 = Card(
             Div(cls='grid grid-cols-2 gap-6')(
@@ -66,7 +67,8 @@ Right1 = Card(
     UkFormLabel(label="Tags",state="danger", value="Spam,Invalid"),
     header=(H3('Report an issue'),P(cls=f'{TextT.muted_sm}')('What area are you having problems with')),
     footer = (UkButton(cls=(UkButtonT.ghost))('Cancel'),UkButton(cls=(UkButtonT.primary))('Submit')),
-    footer_cls='flex justify-between')
+    # footer_cls='flex justify-between'
+    )
 
 Right2 = Card(H4(cls='uk-h4')("franken/ui"),
               P(cls=f'{TextT.muted_sm}')("HTML-first, framework-agnostic, beautifully designed components that you can truly copy and paste into your site. Accessible. Customizable. Open Source."),
@@ -105,7 +107,9 @@ body = [Div(cls='flex items-center space-x-4')(
             P(member['name'], cls='text-sm font-medium leading-none'),
             P(member['email'], cls=f'{TextT.muted_sm}')
         ),
-        UkDropdownButton(member['role'], options, btn_cls=UkButtonT.default),
+        UkDropdownButton(member['role'], options, 
+        # btn_cls=UkButtonT.default
+        ),
     ) for member in team_members]
 
 
@@ -151,24 +155,15 @@ Middle4 = Card(
                                     ('user',"Available","Only mentions and comments"),
                                     ('ban',"Ignoring","Turn of all notifications"))]),
         header = (H4('Notification', cls='uk-h4'),Div('Choose what you want to be notified about.', cls=f'mt-1.5 {TextT.muted_sm}')),
-        body_cls='pt-0'
+        # body_cls='pt-0'
 )
-
-
-
-
-
 
 @app.get('/')
 def home(): 
     return Title("Custom"),Div(cls=('uk-child-width-1-3@l','uk-child-width-1-2@m'), uk_grid=True)(
             Div(cls='space-y-6')(map(Div,(Left1,Left2,GalleryCard))),
             Div(cls='space-y-6')(map(Div,(Middle1,Middle2,Middle3,Middle4))),
-            Div(cls='space-y-6')(map(Div,(Right1,Right2, Right3))),        
-
-
-
-            
+            Div(cls='space-y-6')(map(Div,(Right1,Right2, Right3))),     
     )
 
 serve()
