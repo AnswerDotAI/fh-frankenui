@@ -6,11 +6,12 @@ __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkSelect', 'UkH1
            'UkButton', 'UkGenericComponent', 'UkHSplit', 'Card']
 
 # %% ../nbs/01_components.ipynb 2
-# from fh_frankenui.foundations import *
 from fasthtml.common import *
 from fasthtml.svg import Svg
 from enum import Enum, EnumType
-from fasthtml.components import Uk_select
+from fasthtml.components import Uk_select,Uk_input_tag
+from functools import partial
+
 
 # %% ../nbs/01_components.ipynb 8
 def stringify(o):
@@ -91,9 +92,6 @@ def UkGenericInput(input_fn,
     return Div(cls=cls)(label, res)
 
 # %% ../nbs/01_components.ipynb 22
-from functools import partial
-from fasthtml.components import Uk_input_tag, Uk_select
-
 UkInput =     partial(UkGenericInput, partial(Input,        cls='uk-input'))
 UkSwitch =    partial(UkGenericInput, partial(Input,        cls='uk-toggle-switch uk-toggle-switch-primary', type='checkbox'))
 UkTextArea =  partial(UkGenericInput, partial(Textarea,     cls='uk-textarea'))
