@@ -5,20 +5,20 @@ __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', '
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkGenericInput', 'Options', 'UkSelect', 'UkButtonT', 'UkDropdownButton',
            'UkButton', 'UkGenericComponent', 'UkHSplit', 'Card']
 
-# %% ../nbs/01_components.ipynb 15
+# %% ../nbs/01_components.ipynb 4
 from fasthtml.common import *
 from fasthtml.svg import Svg
 from enum import Enum, EnumType
 from fasthtml.components import Uk_select,Uk_input_tag
 from functools import partial
 
-# %% ../nbs/01_components.ipynb 21
+# %% ../nbs/01_components.ipynb 10
 def stringify(o):
     # need a better name, stringify might be too general for what it does 
     if is_listy(o): return ' '.join(map(str,o)) if o else ""
     return o.__str__()
 
-# %% ../nbs/01_components.ipynb 23
+# %% ../nbs/01_components.ipynb 12
 class VEnum(Enum):
     def __add__(self, other):
         return stringify((self, other))
@@ -32,7 +32,7 @@ class VEnum(Enum):
             base = base.lstrip('Uk').rstrip('T')
         return f"uk-{base.lower()}-{self.value}".strip('-')
 
-# %% ../nbs/01_components.ipynb 25
+# %% ../nbs/01_components.ipynb 14
 class Theme(Enum):
     slate = "slate"
     stone = "stone"
@@ -56,7 +56,7 @@ class Theme(Enum):
         _url = "https://unpkg.com/franken-wc@0.0.6/dist/css/{theme}.min.css"
         return (*js, Link(rel="stylesheet", href=_url.format(theme=self.value)))
 
-# %% ../nbs/01_components.ipynb 26
+# %% ../nbs/01_components.ipynb 15
 class TextB(Enum):
     sz_xsmall = 'text-xs'
     sz_small = 'text-sm'
@@ -81,7 +81,7 @@ class TextB(Enum):
     def __str__(self):
         return self.value
 
-# %% ../nbs/01_components.ipynb 27
+# %% ../nbs/01_components.ipynb 16
 class TextT(Enum):
     muted_sm = TextB.sz_small, TextB.cl_muted # Text below card headings
     medium_sm = TextB.sz_small, TextB.wt_medium
@@ -90,7 +90,7 @@ class TextT(Enum):
         if is_listy(self.value): return ' '.join(map(str,self.value))
         return self.value
 
-# %% ../nbs/01_components.ipynb 30
+# %% ../nbs/01_components.ipynb 19
 def UkGenericInput(input_fn,
                     label=(), 
                     lbl_cls=(),
@@ -106,17 +106,17 @@ def UkGenericInput(input_fn,
     if id: res.id = id
     return Div(cls=cls)(label, res)
 
-# %% ../nbs/01_components.ipynb 31
+# %% ../nbs/01_components.ipynb 20
 UkInput =     partial(UkGenericInput, partial(Input,        cls='uk-input'))
 UkSwitch =    partial(UkGenericInput, partial(CheckboxX,    cls='uk-toggle-switch uk-toggle-switch-primary')) 
 UkTextArea =  partial(UkGenericInput, partial(Textarea,     cls='uk-textarea'))
 UkFormLabel = partial(UkGenericInput, partial(Uk_input_tag, cls='uk-form-label'))
 
-# %% ../nbs/01_components.ipynb 32
+# %% ../nbs/01_components.ipynb 21
 def Options(options: tuple, selected_idx=None):
     return [Option(o,selected=i==selected_idx) for i,o in enumerate(options)]
 
-# %% ../nbs/01_components.ipynb 34
+# %% ../nbs/01_components.ipynb 22
 def UkSelect(*options,
             label=(), 
             lbl_cls=(),
@@ -131,7 +131,7 @@ def UkSelect(*options,
     if id: res.id = id
     return Div(cls=cls)(label, res)
 
-# %% ../nbs/01_components.ipynb 35
+# %% ../nbs/01_components.ipynb 23
 class UkButtonT(VEnum):
     default = 'default'
     primary = 'primary'
@@ -141,7 +141,7 @@ class UkButtonT(VEnum):
     text = 'text'
     link = 'link'
 
-# %% ../nbs/01_components.ipynb 36
+# %% ../nbs/01_components.ipynb 24
 def UkDropdownButton(label, # Shown on the button
                      options, # list of tuples that contain what you want listed
                      btn_cls=UkButtonT.default, # Button class
@@ -153,13 +153,13 @@ def UkDropdownButton(label, # Shown on the button
     dd = Div(uk_drop='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop')(Ul(cls='uk-dropdown-nav')(*([Li(cls='uk-nav-divider')] + dd_opts)))
     return Div(cls=cls)(Div(cls='flex items-center space-x-4')(btn, dd))
 
-# %% ../nbs/01_components.ipynb 38
+# %% ../nbs/01_components.ipynb 26
 def UkButton(*c, 
             cls=UkButtonT.default, # Use UkButtonT or styles 
             **kwargs):    
     return Button(cls='uk-button ' + stringify(cls), **kwargs)(*c)
 
-# %% ../nbs/01_components.ipynb 39
+# %% ../nbs/01_components.ipynb 27
 def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
         res = component_fn(**kwargs)(*c)
         if cls: res.attrs['class'] += ' ' + cls
@@ -173,14 +173,14 @@ UkH5 = partial(UkGenericComponent, partial(H5,cls='uk-h5'))
 UkH6 = partial(UkGenericComponent, partial(H6,cls='uk-h6'))
 
 
-# %% ../nbs/01_components.ipynb 41
+# %% ../nbs/01_components.ipynb 29
 def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
     cls, line_cls, text_cls = map(stringify,(cls, line_cls, text_cls))
     return Div(cls='relative ' + cls)(
         Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
         Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
 
-# %% ../nbs/01_components.ipynb 43
+# %% ../nbs/01_components.ipynb 31
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
