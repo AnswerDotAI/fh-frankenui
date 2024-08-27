@@ -85,6 +85,7 @@ class TextB(Enum):
 class TextT(Enum):
     muted_sm = TextB.sz_small, TextB.cl_muted # Text below card headings
     medium_sm = TextB.sz_small, TextB.wt_medium
+    medium_xs = TextB.sz_xsmall, TextB.wt_medium
 
     def __str__(self):
         if is_listy(self.value): return ' '.join(map(str,self.value))
@@ -157,9 +158,9 @@ def UkDropdownButton(label, # Shown on the button
 def UkButton(*c, 
             cls=UkButtonT.default, # Use UkButtonT or styles 
             **kwargs):    
-    return Button(cls='uk-button ' + stringify(cls), **kwargs)(*c)
+    return Button(type='button', cls='uk-button ' + stringify(cls), **kwargs)(*c)
 
-# %% ../nbs/01_components.ipynb 27
+# %% ../nbs/01_components.ipynb 28
 def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
         res = component_fn(**kwargs)(*c)
         if cls: res.attrs['class'] += ' ' + cls
@@ -173,14 +174,14 @@ UkH5 = partial(UkGenericComponent, partial(H5,cls='uk-h5'))
 UkH6 = partial(UkGenericComponent, partial(H6,cls='uk-h6'))
 
 
-# %% ../nbs/01_components.ipynb 29
+# %% ../nbs/01_components.ipynb 30
 def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
     cls, line_cls, text_cls = map(stringify,(cls, line_cls, text_cls))
     return Div(cls='relative ' + cls)(
         Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
         Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
 
-# %% ../nbs/01_components.ipynb 31
+# %% ../nbs/01_components.ipynb 32
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
