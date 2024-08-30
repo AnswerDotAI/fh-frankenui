@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', 'UkH3', 'UkH4', 'UkH5', 'UkH6', 'stringify',
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkGenericInput', 'Options', 'UkSelect', 'UkButtonT', 'UkDropdownButton',
-           'UkButton', 'UkGenericComponent', 'UkHSplit', 'Card']
+           'UkButton', 'UkGenericComponent', 'UkHSplit', 'Card', 'UkModalTitle', 'Modal']
 
 # %% ../nbs/01_components.ipynb 4
 from fasthtml.common import *
@@ -146,11 +146,12 @@ class UkButtonT(VEnum):
 def UkDropdownButton(label, # Shown on the button
                      options, # list of tuples that contain what you want listed
                      btn_cls=UkButtonT.default, # Button class
-                     cls=() # parent div class
+                     cls=(), # parent div class
+                     dd_cls=() # items class
                      ):
-    btn_cls, cls = map(stringify,(btn_cls, cls))
+    dd_cls, btn_cls, cls = map(stringify,(dd_cls, btn_cls, cls))
     btn = Button(type='button', cls='uk-button ' + btn_cls)(label, Span(uk_icon='icon: triangle-down'))
-    dd_opts = [Li(A(href="#demo", cls='uk-drop-close',uk_toggle=True, role="button")(Div(o))) for o in options]
+    dd_opts = [Li(A(href="#demo", cls='uk-drop-close w-full ' + dd_cls,uk_toggle=True, role="button")(o)) for o in options]
     dd = Div(uk_drop='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop')(Ul(cls='uk-dropdown-nav')(*([Li(cls='uk-nav-divider')] + dd_opts)))
     return Div(cls=cls)(Div(cls='flex items-center space-x-4')(btn, dd))
 
@@ -197,3 +198,23 @@ def Card(*c, # Components that go in the body
     res += [Div(cls='uk-card-body ' + body_cls)(*c),]
     if footer: res += [Div(cls='uk-card-footer ' + footer_cls)(footer),]
     return Div(cls='uk-card '+cls, **kwargs)(*res)
+
+# %% ../nbs/01_components.ipynb 33
+def UkModalTitle(*c, cls=()): return Div(cls='uk-modal-title ' + stringify(cls))(*c)
+
+def Modal(*c,
+        header=None, # Components that go in the header
+        footer=None,  # Components that go in the footer
+        body_cls='space-y-6', # classes for the body
+        header_cls='p-6', # classes for the header
+        footer_cls=(), # classes for the footer
+        cls=(), #class for outermost component
+        **kwargs # classes that for the card itself
+        ):
+    header_cls, footer_cls, body_cls, cls = map(stringify, (header_cls, footer_cls, body_cls, cls))
+    res = []
+    if header: res += [Div(cls='uk-modal-header ' + header_cls)(header),]
+    res += [Div(cls='uk-modal-body uk-modal-dialog ' + body_cls)(*c),]
+    if footer: res += [Div(cls='uk-modal-footer ' + footer_cls)(footer),]
+    return Div(cls='uk-modal uk-modal-container' + cls, uk_modal=True, **kwargs)(*res)
+
