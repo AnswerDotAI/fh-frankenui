@@ -10,22 +10,13 @@ from fasthtml.common import *
 from fh_frankenui.components import *
 
 # %% ../ex_nbs/99_main.ipynb 3
-try:
-    from fh_frankenui_examples.tasks import tasks_homepage
-    from fh_frankenui_examples.cards import cards_homepage
-    from fh_frankenui_examples.dashboard import dashboard_homepage
-    from fh_frankenui_examples.forms import forms_homepage
-    from fh_frankenui_examples.music import music_homepage
-    from fh_frankenui_examples.auth import auth_homepage
-    from fh_frankenui_examples.playground import playground_homepage
-except ImportError:
-    from tasks import tasks_homepage
-    from cards import cards_homepage
-    from dashboard import dashboard_homepage
-    from forms import forms_homepage
-    from music import music_homepage
-    from auth import auth_homepage
-    from playground import playground_homepage
+from tasks import tasks_homepage
+from cards import cards_homepage
+from dashboard import dashboard_homepage
+from forms import forms_homepage
+from music import music_homepage
+from auth import auth_homepage
+from playground import playground_homepage
 
 # %% ../ex_nbs/99_main.ipynb 9
 hdrs = (Script(src="https://cdn.tailwindcss.com"),

@@ -3,9 +3,9 @@
 # %% auto 0
 __all__ = ['music_dd_data', 'file_dd_data', 'edit_dd_data', 'view_dd_data', 'account_dd_data', 'music_headers', 'sidebar_data',
            'cover', 'default_svg', 'tabs_data', 'music_homepage', 'SpacedPP', 'SpacedPPs', 'SpacedTxtIcon',
-           'LAlignedTxtIcon', 'UkNavbarDropdown', 'UkNavbar', 'page', 'create_sidebar_section',
-           'create_playlists_section', 'left_sidebar', 'sidebar_section', 'SidebarItem', 'SidebarSection',
-           'FrankenSidebar', 'TabItem', 'FrankenTabs', 'create_album_grid', 'music_content', 'podcast_content']
+           'LAlignedTxtIcon', 'UkNavbarDropdown', 'UkNavbar', 'create_sidebar_section', 'create_playlists_section',
+           'left_sidebar', 'sidebar_section', 'SidebarItem', 'SidebarSection', 'FrankenSidebar', 'TabItem',
+           'FrankenTabs', 'create_album_grid', 'music_content', 'podcast_content', 'page']
 
 # %% ../ex_nbs/05_music.ipynb 1
 from fasthtml.common import *
@@ -40,26 +40,26 @@ def LAlignedTxtIcon(txt, icon, ratio, icon_right=True):
 # %% ../ex_nbs/05_music.ipynb 8
 #TODO: Apply the above functions in here to finish that
 # .disabled {opacity: 0.5; pointer-events: none; cursor: default; text-decoration: none;}
-music_dd_data = SpacedPPs("About Music",("Preferences", "⌘")) + [UkHSplit()] + \
-                 SpacedPPs(("Hide Music", "⌘H"),("Hide Others", "⇧⌘H"),("Quit Music", "⌘Q"))
+music_dd_data = [*SpacedPPs("About Music",("Preferences", "⌘")), UkHSplit(),
+                 *SpacedPPs(("Hide Music", "⌘H"),("Hide Others", "⇧⌘H"),("Quit Music", "⌘Q"))]
 
 # disabled = Burn Playlist to Disc | Print
-file_dd_data = SpacedPPs("New" ,("Open Stream URL", "⌘U"),("Close Window", "⌘W")) + [UkHSplit()] + \
-               SpacedPPs("Library",("Import", "⌘O"),("Burn Playlist to Disc", )) + [UkHSplit()] + \
-               SpacedPPs(("Show in Finder", "⇧⌘R"),("Convert", )) + [UkHSplit()] + \
-               SpacedPPs(("Page Setup", ),"Print")
+file_dd_data = [*SpacedPPs("New" ,("Open Stream URL", "⌘U"),("Close Window", "⌘W")), UkHSplit(),
+                *SpacedPPs("Library",("Import", "⌘O"),("Burn Playlist to Disc", )), UkHSplit(),
+                *SpacedPPs(("Show in Finder", "⇧⌘R"),"Convert"), UkHSplit(),
+                *SpacedPPs("Page Setup","Print")]
 
 # disabled = Undo, Redo, Cut, Copy, Paste, Deselect All
-edit_dd_data = [("Undo", "⌘Z"),("Redo", "⇧⌘Z"),UkHSplit(),("Cut", "⌘X"),("Copy", "⌘C"),("Paste", "⌘V"),
-                UkHSplit(),("Select All", "⌘A"),("Deselect All", "⇧⌘A"),UkHSplit(),
+edit_dd_data = [*SpacedPPs(("Undo", "⌘Z"),("Redo", "⇧⌘Z")), UkHSplit(), *SpacedPPs(("Cut", "⌘X"),("Copy", "⌘C"),("Paste", "⌘V")),
+                UkHSplit(), *SpacedPPs(("Select All", "⌘A"),("Deselect All", "⇧⌘A")), UkHSplit(),
                 SpacedTxtIcon('Smart Dictation','microphone',0.5), SpacedTxtIcon("Emojis & Symbols",'world',0.5)]
 
 #disabled = Show Status Bar | Enter Full Screen
-view_dd_data = [("Show Playing Next", ""),("Show Lyrics", ""),("Show Status Bar", ""),("Hide Sidebar", ""),("Enter Full Screen", "")]
+view_dd_data = SpacedPPs("Show Playing Next", "Show Lyrics", "Show Status Bar", "Hide Sidebar", "Enter Full Screen")
 
 # header: Switch account
-account_dd_data = [("Switch Account", ""),UkHSplit(),("Andy", ""),SpacedTxtIcon("Benoit", 'plus-circle',0.5),("Luis", ""),UkHSplit(),
-                   ("Manage Family", ""),UkHSplit(),("Add Account", "")]
+account_dd_data = [*SpacedPPs("Switch Account"),UkHSplit(),*SpacedPPs("Andy"), SpacedTxtIcon("Benoit", 'plus-circle',0.5),*SpacedPPs("Luis"),UkHSplit(),
+                   *SpacedPPs("Manage Family"),UkHSplit(),*SpacedPPs("Add Account")]
 
 # %% ../ex_nbs/05_music.ipynb 9
 def UkNavbarDropdown(*c,label):
@@ -81,14 +81,6 @@ music_headers = UkNavbar(
       UkNavbarDropdown(*map(lambda x: A(x,href='#'),edit_dd_data),label='Edit'),
       UkNavbarDropdown(*map(lambda x: A(x,href='#'),view_dd_data),label='View'),
       UkNavbarDropdown(*map(lambda x: A(x,href='#'),account_dd_data),label='Account'))
-
-# %% ../ex_nbs/05_music.ipynb 12
-def page():
-    return Div(
-        music_headers,
-        Div(cls="grid grid-cols-5")(
-            Div(cls="hidden space-y-4 py-4 lg:block"),
-            Div(cls="col-span-5 border-l border-border lg:col-span-4")))
 
 # %% ../ex_nbs/05_music.ipynb 15
 def create_sidebar_section(title, items):
