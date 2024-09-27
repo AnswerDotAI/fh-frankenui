@@ -5,8 +5,8 @@
 # %% auto 0
 __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', 'UkH3', 'UkH4', 'UkH5', 'UkH6', 'stringify',
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'FullySpacedContainer', 'UkGenericInput', 'Options',
-           'UkSelect', 'UkButtonT', 'UkDropdownButton', 'UkButton', 'UkGenericComponent', 'UkHSplit', 'Card',
-           'UkModalTitle', 'Modal']
+           'UkSelect', 'UkButtonT', 'UkDropdownButton', 'UkButton', 'UkGenericComponent', 'UkHSplit',
+           'UkNavbarDropdown', 'UkNavbar', 'Card', 'UkModalTitle', 'Modal']
 
 # %% ../lib_nbs/01_components.ipynb 4
 from fasthtml.common import *
@@ -147,7 +147,7 @@ def Options(*c, # Content for an `Option`
             selected_idx=None # Index location of selected `Option`
            ):
     "Generates list of `Option`s with the proper `selected_idx`"
-    return [Option(o,selected=i==selected_idx) for i,o in enumerate(c)]
+    return [Option(o,selected=True if i==selected_idx else None) for i,o in enumerate(c)]
 
 # %% ../lib_nbs/01_components.ipynb 45
 def UkSelect(*c, # `Option` with content ready to be used,
@@ -191,17 +191,17 @@ def UkDropdownButton(label, # String or FT component that goes in the `Button`
     dd = Div(uk_drop='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop')(Ul(cls='uk-dropdown-nav')(*([Li(cls='uk-nav-divider')] + dd_opts)))
     return Div(cls=cls)(Div(cls='flex items-center space-x-4')(btn, dd))
 
-# %% ../lib_nbs/01_components.ipynb 53
+# %% ../lib_nbs/01_components.ipynb 52
 def UkButton(*c, 
             cls=UkButtonT.default, # Use UkButtonT or styles 
             **kwargs):    
     return Button(type='button', cls='uk-button ' + stringify(cls), **kwargs)(*c)
 
-# %% ../lib_nbs/01_components.ipynb 55
+# %% ../lib_nbs/01_components.ipynb 53
 def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
-        res = component_fn(**kwargs)(*c)
-        if cls: res.attrs['class'] += ' ' + cls
-        return res
+    res = component_fn(**kwargs)(*c)
+    if cls: res.attrs['class'] += ' ' + cls
+    return res
 
 UkH1 = partial(UkGenericComponent, partial(H1,cls='uk-h1'))
 UkH2 = partial(UkGenericComponent, partial(H2,cls='uk-h2'))
@@ -211,7 +211,7 @@ UkH5 = partial(UkGenericComponent, partial(H5,cls='uk-h5'))
 UkH6 = partial(UkGenericComponent, partial(H6,cls='uk-h6'))
 
 
-# %% ../lib_nbs/01_components.ipynb 57
+# %% ../lib_nbs/01_components.ipynb 55
 def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
     cls, line_cls, text_cls = map(stringify,(cls, line_cls, text_cls))
     return Div(cls='relative ' + cls)(
@@ -219,6 +219,22 @@ def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
         Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
 
 # %% ../lib_nbs/01_components.ipynb 59
+def UkNavbarDropdown(*c,label):
+    return Li(A(label,href='#'),
+        Div(cls='uk-navbar-dropdown')(
+            Ul(cls='uk-nav uk-navbar-dropdown-nav')(*map(Li,c))))
+
+# %% ../lib_nbs/01_components.ipynb 60
+def UkNavbar(lnav: Sequence[Union[str, FT]]=None, # Contents for left aligned part of nav
+             rnav: Sequence[Union[str, FT]]=None, # Contents for right aligned part of nav
+             cls='z-10' # Class(es) to be added to parent container
+            ) -> FT: # FT component representing a navbar
+    _NavBarSide = lambda n,s: Div(cls=f'uk-navbar-{s}')(Ul(cls='uk-navbar-nav')(*tuplify(n)))
+    return Div(cls='uk-navbar-container uk-width-1-1 '+ cls, uk_navbar=True)(
+             _NavBarSide(lnav,'left') if lnav else '',
+             _NavBarSide(rnav,'right') if rnav else '')
+
+# %% ../lib_nbs/01_components.ipynb 62
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
@@ -235,7 +251,7 @@ def Card(*c, # Components that go in the body
     if footer: res += [Div(cls='uk-card-footer ' + footer_cls)(footer),]
     return Div(cls='uk-card '+cls, **kwargs)(*res)
 
-# %% ../lib_nbs/01_components.ipynb 60
+# %% ../lib_nbs/01_components.ipynb 64
 def UkModalTitle(*c, cls=()): return Div(cls='uk-modal-title ' + stringify(cls))(*c)
 
 def Modal(*c,
