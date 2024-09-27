@@ -2,8 +2,8 @@
 
 # %% auto 0
 __all__ = ['music_dd_data', 'file_dd_data', 'edit_dd_data', 'view_dd_data', 'account_dd_data', 'music_headers', 'sidebar_data',
-           'cover', 'default_svg', 'tabs_data', 'music_homepage', 'SpacedTxtIcon', 'LAlignedTxtIcon', 'SpacedPP',
-           'SpacedPPs', 'UkIcon', 'UkNavbarDropdown', 'UkNavbar', 'page', 'create_sidebar_section',
+           'cover', 'default_svg', 'tabs_data', 'music_homepage', 'SpacedPP', 'SpacedPPs', 'SpacedTxtIcon',
+           'LAlignedTxtIcon', 'UkNavbarDropdown', 'UkNavbar', 'page', 'create_sidebar_section',
            'create_playlists_section', 'left_sidebar', 'sidebar_section', 'SidebarItem', 'SidebarSection',
            'FrankenSidebar', 'TabItem', 'FrankenTabs', 'create_album_grid', 'music_content', 'podcast_content']
 
@@ -18,13 +18,17 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pylab as plt
 
-# %% ../ex_nbs/05_music.ipynb 8
-# What to do with this?
+# %% ../ex_nbs/05_music.ipynb 7
+def SpacedPP(left, right=None):
+    return FullySpacedContainer(P(left),P(right) if right else '')
+
+def SpacedPPs(*c):
+    return [SpacedPP(*tuplify(o)) for o in c]
+
 def SpacedTxtIcon(txt, icon, ratio, icon_right=True):
-    #TODO: icon_right=False
     c = (P(txt),UkIcon(icon,ratio))
     if not icon_right: c = reversed(c)
-    return Div(cls='uk-flex uk-flex-between uk-flex-middle uk-width-1-1')(*c)
+    return FullySpacedContainer(*c)  
 
 def LAlignedTxtIcon(txt, icon, ratio, icon_right=True):
     # TODO: Test and make sure this works
@@ -33,16 +37,7 @@ def LAlignedTxtIcon(txt, icon, ratio, icon_right=True):
     if not icon_right: c = reversed(c)
     return Div(cls='space-x-6')(*c)
 
-def SpacedPP(left, right=None):
-    return Div(cls='uk-flex uk-flex-between uk-flex-middle uk-width-1-1')(P(left),P(right) if right else '')
-
-def SpacedPPs(*c):
-    return [SpacedPP(*tuplify(o)) for o in c]
-
-def UkIcon(icon, ratio=1):
-    return Span(uk_icon=f"icon: {icon}; ratio: {ratio}")
-
-# %% ../ex_nbs/05_music.ipynb 9
+# %% ../ex_nbs/05_music.ipynb 8
 #TODO: Apply the above functions in here to finish that
 # .disabled {opacity: 0.5; pointer-events: none; cursor: default; text-decoration: none;}
 music_dd_data = SpacedPPs("About Music",("Preferences", "⌘")) + [UkHSplit()] + \
@@ -66,20 +61,20 @@ view_dd_data = [("Show Playing Next", ""),("Show Lyrics", ""),("Show Status Bar"
 account_dd_data = [("Switch Account", ""),UkHSplit(),("Andy", ""),SpacedTxtIcon("Benoit", 'plus-circle',0.5),("Luis", ""),UkHSplit(),
                    ("Manage Family", ""),UkHSplit(),("Add Account", "")]
 
-# %% ../ex_nbs/05_music.ipynb 10
+# %% ../ex_nbs/05_music.ipynb 9
 def UkNavbarDropdown(*c,label):
     return Li(A(label,href='#'),
         Div(cls='uk-navbar-dropdown')(
             Ul(cls='uk-nav uk-navbar-dropdown-nav')(*map(Li,c))))
 
-# %% ../ex_nbs/05_music.ipynb 12
+# %% ../ex_nbs/05_music.ipynb 10
 def UkNavbar(*c, cls=''):
     res = Div(cls='uk-navbar container '+ cls, uk_navbar=True)(
         Div(cls='uk-navbar-left')(
             Ul(cls='uk-navbar-nav')(*c)))
     return res
 
-# %% ../ex_nbs/05_music.ipynb 13
+# %% ../ex_nbs/05_music.ipynb 11
 music_headers = UkNavbar(
       UkNavbarDropdown(*map(lambda x: A(x,href='#'),music_dd_data),label='Music'),
       UkNavbarDropdown(*map(lambda x: A(x,href='#'),file_dd_data),label='File'),
@@ -87,7 +82,7 @@ music_headers = UkNavbar(
       UkNavbarDropdown(*map(lambda x: A(x,href='#'),view_dd_data),label='View'),
       UkNavbarDropdown(*map(lambda x: A(x,href='#'),account_dd_data),label='Account'))
 
-# %% ../ex_nbs/05_music.ipynb 14
+# %% ../ex_nbs/05_music.ipynb 12
 def page():
     return Div(
         music_headers,
@@ -95,7 +90,7 @@ def page():
             Div(cls="hidden space-y-4 py-4 lg:block"),
             Div(cls="col-span-5 border-l border-border lg:col-span-4")))
 
-# %% ../ex_nbs/05_music.ipynb 17
+# %% ../ex_nbs/05_music.ipynb 15
 def create_sidebar_section(title, items):
     return Div(cls="px-3 py-2")(
         H2(title, cls="mb-2 px-3 text-lg font-semibold tracking-tight"),
@@ -151,7 +146,7 @@ def left_sidebar():
         create_playlists_section("Playlists", playlist_items)
     )
 
-# %% ../ex_nbs/05_music.ipynb 19
+# %% ../ex_nbs/05_music.ipynb 17
 def sidebar_section(title, items, max_num_pre_scroll=6):
     content = Ul(cls="uk-nav uk-nav-secondary")(
         *[Li(cls="uk-active" if i == 0 and title == "Discover" else None)(
@@ -197,7 +192,7 @@ def left_sidebar():
         sidebar_section("Playlists", playlist_items, max_num_pre_scroll=5)
     )
 
-# %% ../ex_nbs/05_music.ipynb 21
+# %% ../ex_nbs/05_music.ipynb 19
 from dataclasses import dataclass
 from typing import List, Union, Optional
 
@@ -287,7 +282,7 @@ class FrankenSidebar:
             sidebar.add_section(section['title'], section['items'], section.get('max_num_pre_scroll'))
         return sidebar.build()
 
-# %% ../ex_nbs/05_music.ipynb 22
+# %% ../ex_nbs/05_music.ipynb 20
 sidebar_data = [
     {
         'title': 'Discover',
@@ -319,7 +314,7 @@ sidebar_data = [
 ]
 
 
-# %% ../ex_nbs/05_music.ipynb 24
+# %% ../ex_nbs/05_music.ipynb 22
 from dataclasses import dataclass, field
 from typing import List, Optional, Union
 
@@ -412,7 +407,7 @@ class FrankenTabs:
             )
         return tabs.build()
 
-# %% ../ex_nbs/05_music.ipynb 26
+# %% ../ex_nbs/05_music.ipynb 24
 cover = os.path.expanduser("~/fh-frankenui-examples/images/album.svg")
 
 default_svg = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMzAwIj4KICA8cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2UwZTBlMCIvPgogIDxjaXJjbGUgY3g9IjE1MCIgY3k9IjE1MCIgcj0iMTAwIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iOCIvPgogIDxjaXJjbGUgY3g9IjE1MCIgY3k9IjE1MCIgcj0iMzUiIGZpbGw9IiMwMDAwMDAiLz4KICA8cGF0aCBkPSJNMTUwIDMwIEwxNTAgMjcwIE0zMCAxNTAgTDI3MCAxNTAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPHRleHQgeD0iMTUwIiB5PSIyOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzAwMDAwMCI+QUxCVU08L3RleHQ+Cjwvc3ZnPg=="
@@ -464,7 +459,7 @@ def music_content():
     )
 
 
-# %% ../ex_nbs/05_music.ipynb 28
+# %% ../ex_nbs/05_music.ipynb 26
 def podcast_content():
     return Div(
         Div(cls="space-y-1")(
@@ -482,14 +477,14 @@ def podcast_content():
         )
     )
 
-# %% ../ex_nbs/05_music.ipynb 29
+# %% ../ex_nbs/05_music.ipynb 27
 tabs_data = [
     {"text": "Music", "active": True, "tab_body": music_content()},
     {"text": "Podcasts", "tab_body": podcast_content()},
     {"text": "Live", "disabled": True, "tab_body": P("Live content")}
 ]
 
-# %% ../ex_nbs/05_music.ipynb 30
+# %% ../ex_nbs/05_music.ipynb 28
 def page():
     tabs, content = FrankenTabs.from_json(tabs_data)
     return Div(
@@ -517,5 +512,5 @@ def page():
         )
     )
 
-# %% ../ex_nbs/05_music.ipynb 31
+# %% ../ex_nbs/05_music.ipynb 29
 music_homepage = page()
