@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', 'UkH3', 'UkH4', 'UkH5', 'UkH6', 'stringify',
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'FullySpacedContainer', 'UkGenericInput', 'Options',
-           'UkSelect', 'UkButtonT', 'UkDropdownButton', 'UkButton', 'UkGenericComponent', 'UkHSplit',
+           'UkSelect', 'UkButtonT', 'UkDropdownButton', 'UkButton', 'UkGenericComponent', 'UkHSplit', 'UkNavDivider',
            'UkNavbarDropdown', 'UkNavbar', 'Card', 'UkModalTitle', 'Modal']
 
 # %% ../lib_nbs/01_components.ipynb 4
@@ -150,22 +150,38 @@ def Options(*c, # Content for an `Option`
     return [Option(o,selected=True if i==selected_idx else None) for i,o in enumerate(c)]
 
 # %% ../lib_nbs/01_components.ipynb 45
-def UkSelect(*c, # `Option` with content ready to be used,
-            label=(), # String or FT component that goes in `Label`
-            lbl_cls=(), # Additional classes that goes in `Label`
-            inp_cls=(), # Additional classes that go in `Uk_select`
-            cls=('space-y-2',), # Div cls
-            id="", # ID of the `Uk_select`
-            **kwargs # Passed to `Uk_select`
-            ): # FT component in structure `(Div(label,`Uk_select`))`
-    "`Div(Label,Uk_select)` component with Uk styling injected appropriately."
-    lbl_cls, inp_cls, cls = map(stringify,(lbl_cls, inp_cls, cls))
+def UkSelect(*options,
+             label=(),
+             lbl_cls=(),
+             inp_cls=(),
+             cls=('space-y-2',),
+             id="",
+             name="",
+             placeholder="",
+             searchable=False,
+             optgroup_label=None,
+             **kwargs):
+    lbl_cls, inp_cls, cls = map(stringify, (lbl_cls, inp_cls, cls))
     if label:
-        label = Label(cls='uk-form-label' + lbl_cls)(label)
-        if id: label.fr = id
-    res = Uk_select(cls=inp_cls, uk_cloak=True, **kwargs)(*c)
-    if id: res.id = id
-    return Div(cls=cls)(label, res)
+        label = Label(cls=f'uk-form-label {lbl_cls}', fr=id)(label) if id else Label(cls=f'uk-form-label {lbl_cls}')(label)
+    
+    bool_attrs = {'uk-cloak': True, 'searchable': searchable, **kwargs}
+    bool_attrs = {k: v for k, v in bool_attrs.items() if v}
+    select = Uk_select(cls=inp_cls, uk_cloak=True, id=id, name=name, placeholder=placeholder, **bool_attrs)
+    
+    # Generate JavaScript to create options dynamically
+    options_js = ','.join(f"'{o}'" for o in options)
+    js_content = f"""
+    <optgroup label="{optgroup_label or ''}">
+      {{
+        [{options_js}].map((a) => <option>{{a}}</option>)
+      }}
+    </optgroup>
+    """
+    
+    select(NotStr(js_content))
+    
+    return Div(cls=cls)(label, select) if label else Div(cls=cls)(select)
 
 # %% ../lib_nbs/01_components.ipynb 48
 class UkButtonT(VEnum):
@@ -187,7 +203,9 @@ def UkDropdownButton(label, # String or FT component that goes in the `Button`
     "`(Div(Div(Btn,dd)))` component with Uk styling injected appropiately to create a drop down effect"
     dd_cls, btn_cls, cls = map(stringify, (dd_cls, btn_cls, cls))
     btn = Button(type='button', cls='uk-button ' + btn_cls)(label, Span(uk_icon='icon: triangle-down'))
-    dd_opts = [Li(A(href="#demo", cls=f'uk-drop-close w-full ' + dd_cls, uk_toggle=True, role="button")(o) for o in options)]
+    
+    # TODO add add any dd_cls
+    dd_opts = [Li(cls='uk-nav-divider') if o is None else Li(o) for o in options]
     dd = Div(uk_drop='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop')(Ul(cls='uk-dropdown-nav')(*([Li(cls='uk-nav-divider')] + dd_opts)))
     return Div(cls=cls)(Div(cls='flex items-center space-x-4')(btn, dd))
 
@@ -218,13 +236,16 @@ def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
         Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
         Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
 
-# %% ../lib_nbs/01_components.ipynb 59
+# %% ../lib_nbs/01_components.ipynb 56
+def UkNavDivider(): return Li(cls="uk-nav-divider")
+
+# %% ../lib_nbs/01_components.ipynb 60
 def UkNavbarDropdown(*c,label):
     return Li(A(label,href='#'),
         Div(cls='uk-navbar-dropdown')(
             Ul(cls='uk-nav uk-navbar-dropdown-nav')(*map(Li,c))))
 
-# %% ../lib_nbs/01_components.ipynb 60
+# %% ../lib_nbs/01_components.ipynb 61
 def UkNavbar(lnav: Sequence[Union[str, FT]]=None, # Contents for left aligned part of nav
              rnav: Sequence[Union[str, FT]]=None, # Contents for right aligned part of nav
              cls='z-10' # Class(es) to be added to parent container
@@ -234,7 +255,7 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None, # Contents for left aligned pa
              _NavBarSide(lnav,'left') if lnav else '',
              _NavBarSide(rnav,'right') if rnav else '')
 
-# %% ../lib_nbs/01_components.ipynb 62
+# %% ../lib_nbs/01_components.ipynb 63
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
@@ -251,7 +272,7 @@ def Card(*c, # Components that go in the body
     if footer: res += [Div(cls='uk-card-footer ' + footer_cls)(footer),]
     return Div(cls='uk-card '+cls, **kwargs)(*res)
 
-# %% ../lib_nbs/01_components.ipynb 64
+# %% ../lib_nbs/01_components.ipynb 65
 def UkModalTitle(*c, cls=()): return Div(cls='uk-modal-title ' + stringify(cls))(*c)
 
 def Modal(*c,

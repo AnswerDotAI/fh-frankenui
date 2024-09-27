@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['preset_options', 'playground_homepage', 'playground_navbar', 'page']
 
-# %% ../ex_nbs/07_playground.ipynb 1
+# %% ../ex_nbs/07_playground.ipynb 2
 from fasthtml.common import *
 from fasthtml.components import Uk
 from fh_frankenui.components import *
@@ -19,32 +19,63 @@ from fasthtml.common import *
 from fh_frankenui.components import *
 
 # %% ../ex_nbs/07_playground.ipynb 9
-preset_options = ["Grammatical Standard English", "Summarize for a 2nd grader",
-        "Text to command","Q&A","English to other languages","Parse unstructured data",
-        "Classification","Natural language to Python","Explain code","Chat","More examples"]
+preset_options = ["Grammatical Standard English"]
+
+# , "Summarize for a 2nd grader",
+#         "Text to command","Q&A","English to other languages","Parse unstructured data",
+#         "Classification","Natural language to Python","Explain code","Chat","More examples"]
 
 # %% ../ex_nbs/07_playground.ipynb 10
-def playground_navbar():
-    rnav = Div(cls='space-x-6 mr-10')(
-#         preset_select,#UkSelect(*Options(*preset_options),name='preset',placeholder='Load a preset',searchable=True),
-        UkDropdownButton(P("Load a preset",cls=TextT.muted_sm),
-            btn_cls=UkButtonT.default,
-            options=(P('Content filter preferences',cls=TextT.muted_sm), UkHSplit(),
-                     P('Delete preset',cls=(TextT.muted_sm,'uk-text-danger'))
-                    )),
+# def playground_navbar():
+#     rnav = Div(cls='space-x-6 mr-10')(
+# #         preset_select,#UkSelect(*Options(*preset_options),name='preset',placeholder='Load a preset',searchable=True),
+#         UkDropdownButton(P("Load a preset",cls=TextT.muted_sm),
+#             btn_cls=UkButtonT.default,
+#             options=(P('Content filter preferences',cls=TextT.muted_sm), UkHSplit(),
+#                      P('Delete preset',cls=(TextT.muted_sm,'uk-text-danger'))
+#                     )),
         
+#         UkButton("Save", cls=UkButtonT.secondary),
+#         UkButton("View Code", cls=UkButtonT.secondary),
+#         UkButton("Share", cls=UkButtonT.secondary),
+#         UkDropdownButton(UkIcon('more',0.5), 
+#             btn_cls=UkButtonT.secondary,
+#             options=(P('Content filter preferences',cls=TextT.muted_sm), UkHSplit(),
+#                      P('Delete preset',cls=(TextT.muted_sm,'uk-text-danger'))
+#                     ))
+#     )
+#     return UkNavbar(lnav=UkH3('Playground'), 
+                    
+#                     rnav=rnav)
+
+# %% ../ex_nbs/07_playground.ipynb 12
+def playground_navbar():
+    rnav = Div(cls='flex items-center space-x-2')(
+        UkSelect(*["Grammatical Standard English", "Hi"],
+                 name='preset',
+                 optgroup_label="Examples",
+                 placeholder='Load a preset', 
+                 searchable=True, 
+                 cls='h-9 w-[200px] lg:w-[300px]'),
         UkButton("Save", cls=UkButtonT.secondary),
         UkButton("View Code", cls=UkButtonT.secondary),
         UkButton("Share", cls=UkButtonT.secondary),
-        UkDropdownButton(UkIcon('more',0.5), 
+        UkDropdownButton(UkIcon('ellipsis'), 
             btn_cls=UkButtonT.secondary,
-            options=(P('Content filter preferences',cls=TextT.muted_sm), UkHSplit(),
-                     P('Delete preset',cls=(TextT.muted_sm,'uk-text-danger'))
-                    ))
+            options=(
+                A("Content filter preferences", href="#demo"),
+                None, # divider
+                A("Delete preset", cls="text-destructive", href="#demo")
+            )
+        )
     )
-    return UkNavbar(lnav=UkH3('Playground'), 
-                    
-                    rnav=rnav)
+    return Div(cls="flex h-16 items-center justify-between border-b border-border px-8 py-4")(
+        UkH2("Playground", cls="text-lg font-semibold"),
+        Div(cls="flex w-full flex-1 items-center justify-end")(rnav)
+    )
+
+# Comment: This implementation assumes that the Modal components for "Save" and "View Code" 
+# are defined elsewhere and can be toggled using the uk-toggle attribute.
 
 # %% ../ex_nbs/07_playground.ipynb 14
 from fasthtml.common import *
