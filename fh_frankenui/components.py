@@ -147,9 +147,9 @@ def Options(*c, # Content for an `Option`
             selected_idx=None # Index location of selected `Option`
            ):
     "Generates list of `Option`s with the proper `selected_idx`"
-    return [Option(o,selected=True if i==selected_idx else None) for i,o in enumerate(c)]
+    return [Option(o,selected=i==selected_idx) for i,o in enumerate(c)]
 
-# %% ../lib_nbs/01_components.ipynb 45
+# %% ../lib_nbs/01_components.ipynb 43
 def UkSelect(*options,
              label=(),
              lbl_cls=(),
@@ -168,22 +168,10 @@ def UkSelect(*options,
     bool_attrs = {'uk-cloak': True, 'searchable': searchable, **kwargs}
     bool_attrs = {k: v for k, v in bool_attrs.items() if v}
     select = Uk_select(cls=inp_cls, uk_cloak=True, id=id, name=name, placeholder=placeholder, **bool_attrs)
-    
-    # Generate JavaScript to create options dynamically
-    options_js = ','.join(f"'{o}'" for o in options)
-    js_content = f"""
-    <optgroup label="{optgroup_label or ''}">
-      {{
-        [{options_js}].map((a) => <option>{{a}}</option>)
-      }}
-    </optgroup>
-    """
-    
-    select(NotStr(js_content))
-    
+    select = select(Optgroup(*options,label=label))    
     return Div(cls=cls)(label, select) if label else Div(cls=cls)(select)
 
-# %% ../lib_nbs/01_components.ipynb 48
+# %% ../lib_nbs/01_components.ipynb 46
 class UkButtonT(VEnum):
     default = 'default'
     primary = 'primary'
@@ -193,7 +181,7 @@ class UkButtonT(VEnum):
     text = 'text'
     link = 'link'
 
-# %% ../lib_nbs/01_components.ipynb 49
+# %% ../lib_nbs/01_components.ipynb 47
 def UkDropdownButton(label, # String or FT component that goes in the `Button`
                     options, # list of tuples that contain what you want listed (FT component/str)
                     btn_cls=UkButtonT.default, # Button class(es)
@@ -206,16 +194,16 @@ def UkDropdownButton(label, # String or FT component that goes in the `Button`
     
     # TODO add add any dd_cls
     dd_opts = [Li(cls='uk-nav-divider') if o is None else Li(o) for o in options]
-    dd = Div(uk_drop='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop')(Ul(cls='uk-dropdown-nav')(*([Li(cls='uk-nav-divider')] + dd_opts)))
+    dd = Div(uk_drop='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop '+ dd_cls)(Ul(cls='uk-dropdown-nav')(*([Li(cls='uk-nav-divider')] + dd_opts)))
     return Div(cls=cls)(Div(cls='flex items-center space-x-4')(btn, dd))
 
-# %% ../lib_nbs/01_components.ipynb 52
+# %% ../lib_nbs/01_components.ipynb 50
 def UkButton(*c, 
             cls=UkButtonT.default, # Use UkButtonT or styles 
             **kwargs):    
     return Button(type='button', cls='uk-button ' + stringify(cls), **kwargs)(*c)
 
-# %% ../lib_nbs/01_components.ipynb 53
+# %% ../lib_nbs/01_components.ipynb 51
 def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
     res = component_fn(**kwargs)(*c)
     if cls: res.attrs['class'] += ' ' + cls
@@ -229,23 +217,23 @@ UkH5 = partial(UkGenericComponent, partial(H5,cls='uk-h5'))
 UkH6 = partial(UkGenericComponent, partial(H6,cls='uk-h6'))
 
 
-# %% ../lib_nbs/01_components.ipynb 55
+# %% ../lib_nbs/01_components.ipynb 53
 def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
     cls, line_cls, text_cls = map(stringify,(cls, line_cls, text_cls))
     return Div(cls='relative ' + cls)(
         Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
         Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
 
-# %% ../lib_nbs/01_components.ipynb 56
+# %% ../lib_nbs/01_components.ipynb 54
 def UkNavDivider(): return Li(cls="uk-nav-divider")
 
-# %% ../lib_nbs/01_components.ipynb 60
+# %% ../lib_nbs/01_components.ipynb 58
 def UkNavbarDropdown(*c,label):
     return Li(A(label,href='#'),
         Div(cls='uk-navbar-dropdown')(
             Ul(cls='uk-nav uk-navbar-dropdown-nav')(*map(Li,c))))
 
-# %% ../lib_nbs/01_components.ipynb 61
+# %% ../lib_nbs/01_components.ipynb 59
 def UkNavbar(lnav: Sequence[Union[str, FT]]=None, # Contents for left aligned part of nav
              rnav: Sequence[Union[str, FT]]=None, # Contents for right aligned part of nav
              cls='z-10' # Class(es) to be added to parent container
@@ -255,7 +243,7 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None, # Contents for left aligned pa
              _NavBarSide(lnav,'left') if lnav else '',
              _NavBarSide(rnav,'right') if rnav else '')
 
-# %% ../lib_nbs/01_components.ipynb 63
+# %% ../lib_nbs/01_components.ipynb 61
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
@@ -272,7 +260,7 @@ def Card(*c, # Components that go in the body
     if footer: res += [Div(cls='uk-card-footer ' + footer_cls)(footer),]
     return Div(cls='uk-card '+cls, **kwargs)(*res)
 
-# %% ../lib_nbs/01_components.ipynb 65
+# %% ../lib_nbs/01_components.ipynb 63
 def UkModalTitle(*c, cls=()): return Div(cls='uk-modal-title ' + stringify(cls))(*c)
 
 def Modal(*c,
