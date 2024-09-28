@@ -85,13 +85,13 @@ def UkNavBar(*items):
 
 team_dropdown = UkDropdownButton("Alicia Koch", options = ("Alicia Koch","Acme Inc","Monster Inc.","Create a Team"))
 
-# %% ../ex_nbs/03_dashboard.ipynb 28
+# %% ../ex_nbs/03_dashboard.ipynb 27
 headers = UkNavbar(lnav=(
     UkNavbarDropdown(*map(lambda x: A(x,href='#'), ["Alicia Koch"]), label="header")
 ))
 show(headers)
 
-# %% ../ex_nbs/03_dashboard.ipynb 30
+# %% ../ex_nbs/03_dashboard.ipynb 28
 hotkeys = (('Profile','⇧⌘P'), ('Billing','⌘B'), ('Settings','⌘S'), ('New Team',''), ('Logout',''))
 user = (Div(cls='flex flex-col space-y-1')(P('Alicia Koch'),P('alicia@example.com',cls=TextT.muted_sm)),)
 avatar = A(href='#', cls='h-8 w-8 inline-flex rounded-full bg-accent ring-ring')(Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed=Alicia Koch'))
@@ -101,7 +101,7 @@ avatar_dropdown = UkDropdownButton(
 
 show(avatar_dropdown)
 
-# %% ../ex_nbs/03_dashboard.ipynb 31
+# %% ../ex_nbs/03_dashboard.ipynb 29
 top_nav = Div(cls="flex items-center justify-between w-full")(
     Div(cls="flex items-center gap-x-4 lg:gap-x-6")(
         team_dropdown,
@@ -112,18 +112,18 @@ top_nav = Div(cls="flex items-center justify-between w-full")(
 
 show(top_nav)
 
-# %% ../ex_nbs/03_dashboard.ipynb 33
+# %% ../ex_nbs/03_dashboard.ipynb 31
 def page():
     return Div(cls="space-y-4")(
         top_nav,
-    )
-#         UkHSplit(),
-#         UkH2('Dashboard'),
-#         db_nav, 
-#         top_info_row,
-#         Div(cls="grid gap-4 lg:grid-cols-7")(
-#             Card(generate_chart(10),cls='lg:col-span-4'),
-#             Card(recent_sales,cls='lg:col-span-3')))
+    
+        UkHSplit(),
+        UkH2('Dashboard'),
+        db_nav, 
+        top_info_row,
+        Div(cls="grid gap-4 lg:grid-cols-7")(
+            Card(generate_chart(10),cls='lg:col-span-4'),
+            Card(recent_sales,cls='lg:col-span-3')))
 
-# %% ../ex_nbs/03_dashboard.ipynb 35
+# %% ../ex_nbs/03_dashboard.ipynb 33
 dashboard_homepage = page()
