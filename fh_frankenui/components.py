@@ -6,7 +6,7 @@
 __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', 'UkH3', 'UkH4', 'UkH5', 'UkH6', 'stringify',
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'FullySpacedContainer', 'CenteredContainer', 'UkGenericInput',
            'Options', 'UkSelect', 'UkButtonT', 'UkDropdownButton', 'UkButton', 'UkGenericComponent', 'UkHSplit',
-           'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'Card', 'UkModalTitle', 'Modal']
+           'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'Card', 'UkModalTitle', 'Modal']
 
 # %% ../lib_nbs/01_components.ipynb 4
 from fasthtml.common import *
@@ -224,6 +224,8 @@ def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
         Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
         Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
 
+def UkHLine(lwidth=2, y_space=4): return Div(cls=f"my-{y_space} h-[{lwidth}px] w-full bg-secondary")
+
 # %% ../lib_nbs/01_components.ipynb 55
 def UkNavDivider(): return Li(cls="uk-nav-divider")
 
@@ -239,7 +241,7 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None, # Contents for left aligned pa
              cls='z-10' # Class(es) to be added to parent container
             ) -> FT: # FT component representing a navbar
     _NavBarSide = lambda n,s: Div(cls=f'uk-navbar-{s}')(Ul(cls='uk-navbar-nav')(*tuplify(n)))
-    return Div(cls='uk-navbar-container uk-width-1-1 '+ cls, uk_navbar=True)(
+    return Div(cls='uk-navbar-container uk-width-1-1 relative z-50 '+ cls, uk_navbar=True)(
              _NavBarSide(lnav,'left') if lnav else '',
              _NavBarSide(rnav,'right') if rnav else '')
 
