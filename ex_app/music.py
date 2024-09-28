@@ -86,7 +86,8 @@ playlist = (UkH4("Playlist"), *map(_fn, ("Recently Added", "Recently Played", "T
                                          "Logic Discography","Bedtime Beats", "I miss Y2K Pop")))
 
 # %% ../ex_nbs/05_music.ipynb 11
-def UkNav(*lis,cls='space-y-2'): return Ul(cls="uk-nav uk-nav-secondary "+cls)(*map(Li,lis))
+def UkNav(*lis,cls='space-y-2'): 
+    return Ul(cls="uk-nav uk-nav-secondary "+cls)(*map(Li,lis))
 
 # %% ../ex_nbs/05_music.ipynb 12
 def UkGrid(*c, cols, cls=''):

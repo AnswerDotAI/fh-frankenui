@@ -116,7 +116,6 @@ show(top_nav)
 def page():
     return Div(cls="space-y-4")(
         top_nav,
-    
         UkHSplit(),
         UkH2('Dashboard'),
         db_nav, 
