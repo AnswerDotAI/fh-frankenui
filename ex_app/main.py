@@ -17,6 +17,7 @@ from forms import forms_homepage
 from music import music_homepage
 from auth import auth_homepage
 from playground import playground_homepage
+from mail import mail_homepage
 
 # %% ../ex_nbs/99_main.ipynb 9
 hdrs = (Script(src="https://cdn.tailwindcss.com"),
@@ -49,6 +50,9 @@ def auth(): return auth_homepage
 
 @app.route('/playground')
 def playground(): return playground_homepage
+
+@app.route('/mail')
+def playground(): return mail_homepage
 
 # %% ../ex_nbs/99_main.ipynb 15
 def Navbar(*c, left=(), center=(), right=(), container=True, transparent=False, sticky=False, cls=(), **kwargs):
@@ -85,7 +89,7 @@ def home():
     nav_items = (('Home', '/'), ('Tasks', '/tasks'), 
                  ('Cards', '/cards'), ('Dashboard', '/dashboard'),
                 ('Forms', '/forms'), ('Music', '/music'), ('Authentication', '/auth'),
-                ('Playground', '/playground')
+                ('Playground', '/playground'),('Mail', '/mail')
                 )
     nav_items = [Li()(A(href=r)(n)) for (n,r) in nav_items]
     

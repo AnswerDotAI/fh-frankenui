@@ -126,7 +126,7 @@ def UkGenericInput(input_fn: FT, # FT Components that generates a user input (e.
                     lbl_cls:str|Enum=(), # Additional classes that goes in `Label`
                     inp_cls:str|Enum=(), # Additional classes that go in user input (e.g. `TextArea`)
                     cls:str|Enum=('space-y-2',), # Div cls
-                    id: str="", # ID of the user input (e.g. `TextArea`)
+#                     id: str="", # ID of the user input (e.g. `TextArea`)
                    **kwargs # Passed to `input_fn` (e.g. ` TextArea`)
                   ) -> FT: # FT component in structure `(Div(label,input))`
     "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UKTextArea` which is created for you in this library"
@@ -136,7 +136,7 @@ def UkGenericInput(input_fn: FT, # FT Components that generates a user input (e.
         if id: label.attrs['for'] = id
     res = input_fn(**kwargs)
     if inp_cls: res.attrs['class'] += inp_cls
-    if id: res.id = id
+#     if id: res.id = id
     return Div(cls=cls)(label, res)
 
 # %% ../lib_nbs/01_components.ipynb 38
