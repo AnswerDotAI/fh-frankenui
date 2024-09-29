@@ -4,8 +4,8 @@
 
 # %% auto 0
 __all__ = ['rev', 'sub', 'sal', 'act', 'top_info_row', 'recent_sales', 'db_nav', 'team_dropdown', 'headers', 'hotkeys', 'user',
-           'avatar', 'avatar_dropdown', 'top_nav', 'dashboard_homepage', 'InfoCard', 'DiceBearAvatar', 'AvatarItem',
-           'generate_chart', 'NavTab', 'UkTab', 'UkNavBar', 'page']
+           'avatar', 'avatar_dropdown', 'top_nav', 'dashboard_homepage', 'InfoCard', 'AvatarItem', 'generate_chart',
+           'NavTab', 'UkTab', 'UkNavBar', 'page']
 
 # %% ../ex_nbs/03_dashboard.ipynb 2
 from fasthtml.common import *
@@ -32,14 +32,6 @@ act = InfoCard("Active Now", "+573", "+201 since last hour")
 top_info_row = Grid(rev,sub,sal,act,cols=2, gap=4, cls='lg:grid-cols-4')
 
 # %% ../ex_nbs/03_dashboard.ipynb 15
-def DiceBearAvatar(seed_name, h, w):
-    # Number that work can be found here (not all numbers work): https://tailwindcss.com/docs/height
-    return Span(cls=f"relative flex h-{h} w-{w} shrink-0 overflow-hidden rounded-full bg-accent")(
-            Img(cls="aspect-square h-full w-full", alt="Avatar", src=f"https://api.dicebear.com/8.x/lorelei/svg?seed={seed_name}"))
-    
-show(DiceBearAvatar('Isaac Flath', 12,12))
-
-# %% ../ex_nbs/03_dashboard.ipynb 16
 def AvatarItem(name, email, amount):
     return Div(cls="flex items-center")(
         DiceBearAvatar(name, 9,9),
@@ -60,13 +52,13 @@ recent_sales = Card(
         UkH3("Recent Sales"),
         P("You made 265 sales this month.", cls=TextT.muted_sm)))
 
-# %% ../ex_nbs/03_dashboard.ipynb 18
+# %% ../ex_nbs/03_dashboard.ipynb 16
 @matplotlib2fasthtml
 def generate_chart(num_points):
     plotdata = [np.random.exponential(1) for _ in range(num_points)]
     plt.plot(range(len(plotdata)), plotdata)
 
-# %% ../ex_nbs/03_dashboard.ipynb 21
+# %% ../ex_nbs/03_dashboard.ipynb 19
 def NavTab(text, active=False):
     return Li(cls="uk-active" if active else " ")(
         A(text, href="#demo", uk_toggle=True))
@@ -78,30 +70,30 @@ def UkTab(*items):
 db_nav = UkTab("Overview", "Analytics", "Reports", "Notifications")
 show(db_nav)
 
-# %% ../ex_nbs/03_dashboard.ipynb 23
+# %% ../ex_nbs/03_dashboard.ipynb 21
 def UkNavBar(*items):
     return Ul(cls="uk-navbar-nav gap-x-4 lg:gap-x-6")(
         *[NavTab(item) for i, item in enumerate(items)])
 
 team_dropdown = UkDropdownButton("Alicia Koch", options = ("Alicia Koch","Acme Inc","Monster Inc.","Create a Team"))
 
-# %% ../ex_nbs/03_dashboard.ipynb 27
+# %% ../ex_nbs/03_dashboard.ipynb 25
 headers = UkNavbar(lnav=(
     UkNavbarDropdown(*map(lambda x: A(x,href='#'), ["Alicia Koch"]), label="header")
 ))
 show(headers)
 
-# %% ../ex_nbs/03_dashboard.ipynb 28
+# %% ../ex_nbs/03_dashboard.ipynb 26
 hotkeys = (('Profile','⇧⌘P'), ('Billing','⌘B'), ('Settings','⌘S'), ('New Team',''), ('Logout',''))
 user = (Div(cls='flex flex-col space-y-1')(P('Alicia Koch'),P('alicia@example.com',cls=TextT.muted_sm)),)
-avatar = A(href='#', cls='h-8 w-8 inline-flex rounded-full bg-accent ring-ring')(Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed=Alicia Koch'))
+avatar = DiceBearAvatar('Alicia Koch',8,8)
 avatar_dropdown = UkDropdownButton(
     avatar,
     user+hotkeys)
 
 show(avatar_dropdown)
 
-# %% ../ex_nbs/03_dashboard.ipynb 29
+# %% ../ex_nbs/03_dashboard.ipynb 27
 top_nav = Div(cls="flex items-center justify-between w-full")(
     Div(cls="flex items-center gap-x-4 lg:gap-x-6")(
         team_dropdown,
@@ -112,7 +104,7 @@ top_nav = Div(cls="flex items-center justify-between w-full")(
 
 show(top_nav)
 
-# %% ../ex_nbs/03_dashboard.ipynb 31
+# %% ../ex_nbs/03_dashboard.ipynb 29
 def page():
     return Div(cls="space-y-4")(
         top_nav,
@@ -124,5 +116,5 @@ def page():
             Card(recent_sales,cls='lg:col-span-3'),
             gap=4,cls='lg:grid-cols-7'))
 
-# %% ../ex_nbs/03_dashboard.ipynb 33
+# %% ../ex_nbs/03_dashboard.ipynb 31
 dashboard_homepage = page()

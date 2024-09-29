@@ -87,9 +87,7 @@ options = ((Div('Viewer'),Div(cls=TextT.muted_sm)('Can view and comment.',)),
            (Div('Owner'),Div(cls=TextT.muted_sm)('Admin-level to all resources.')),)
 
 body = [Div(cls='flex items-center space-x-4')(
-        Span(cls='relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-accent')(
-            Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed='+member['name'], cls='aspect-square h-full w-full')
-        ),
+        DiceBearAvatar(member['name'], 10,10),
         Div(cls='flex-1')(
             P(member['name'], cls='text-sm font-medium leading-none'),
             P(member['email'], cls=TextT.muted_sm)
@@ -114,8 +112,7 @@ Middle2 = Card(
     Div(cls='uk-divider-icon my-4'),
     H4(cls='text-sm font-medium')('People with access'),
     *[Div(cls='flex items-center space-x-4')(
-        Span(cls='relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-accent')(
-        Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed='+member['name'], cls='aspect-square h-full w-full')),
+        DiceBearAvatar(member['name'], 10,10),
         Div(cls='flex-1')(
             P(member['name'], cls='text-sm font-medium leading-none'),
             P(member['email'], cls=TextT.muted_sm)),
