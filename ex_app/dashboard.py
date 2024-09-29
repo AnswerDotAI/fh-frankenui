@@ -29,7 +29,7 @@ sal = InfoCard("Sales", "+12,234", "+19% from last month")
 act = InfoCard("Active Now", "+573", "+201 since last hour")
 
 # %% ../ex_nbs/03_dashboard.ipynb 12
-top_info_row = Div(cls='grid grid-cols-2 gap-4 lg:grid-cols-4')(rev,sub,sal,act)
+top_info_row = Grid(rev,sub,sal,act,cols=2, gap=4, cls='lg:grid-cols-4')
 
 # %% ../ex_nbs/03_dashboard.ipynb 15
 def DiceBearAvatar(seed_name, h, w):
@@ -120,9 +120,9 @@ def page():
         UkH2('Dashboard'),
         db_nav, 
         top_info_row,
-        Div(cls="grid gap-4 lg:grid-cols-7")(
-            Card(generate_chart(10),cls='lg:col-span-4'),
-            Card(recent_sales,cls='lg:col-span-3')))
+        Grid(Card(generate_chart(10),cls='lg:col-span-4'),
+            Card(recent_sales,cls='lg:col-span-3'),
+            gap=4,cls='lg:grid-cols-7'))
 
 # %% ../ex_nbs/03_dashboard.ipynb 33
 dashboard_homepage = page()

@@ -39,7 +39,7 @@ def page():
                 A(cls="underline underline-offset-4 hover:text-primary", href="#demo", uk_toggle=True)("Terms of Service")," and ",
                 A(cls="underline underline-offset-4 hover:text-primary", href="#demo", uk_toggle=True)("Privacy Policy"),"."))))
     
-    return Div(cls="grid h-screen grid-cols-2")(left,right)
+    return Grid(left,right,cols=2, gap=0,cls='h-screen')
 
 # %% ../ex_nbs/06_auth.ipynb 9
 auth_homepage = page()

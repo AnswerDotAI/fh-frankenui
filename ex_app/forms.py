@@ -105,8 +105,7 @@ def appearance_form():
         Div(cls="space-y-2")(
             Span("Theme", cls="uk-form-label"),
             HelpText("Select the theme for the dashboard."),
-            Div(cls="grid max-w-md grid-cols-2 gap-8")(
-                A(id="theme-toggle-light", cls="block cursor-pointer items-center rounded-md border-2 border-muted p-1 ring-ring")(
+            Grid(A(id="theme-toggle-light", cls="block cursor-pointer items-center rounded-md border-2 border-muted p-1 ring-ring")(
                     Div(cls="space-y-2 rounded-sm bg-[#ecedef] p-2")(
                         Div(cls="space-y-2 rounded-md bg-white p-2 shadow-sm")(
                             Div(cls="h-2 w-[80px] rounded-lg bg-[#ecedef]"),
@@ -127,7 +126,8 @@ def appearance_form():
                             Div(cls="h-2 w-[100px] rounded-lg bg-slate-400")),
                         Div(cls="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm")(
                             Div(cls="h-4 w-4 rounded-full bg-slate-400"),
-                            Div(cls="h-2 w-[100px] rounded-lg bg-slate-400")))))),
+                            Div(cls="h-2 w-[100px] rounded-lg bg-slate-400")))),
+            cols=2,gap=8,cls='max-w-md')),
         Div(UkButton("Update preferences", cls=UkButtonT.primary)))
 
 # %% ../ex_nbs/04_forms.ipynb 22

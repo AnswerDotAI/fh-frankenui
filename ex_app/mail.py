@@ -129,9 +129,11 @@ def MailDetailView(mail):
 def mail_homepage():
     return Div(cls='flex divide-x divide-border')(
         Sidebar(),
-        Div(cls='grid flex-1 grid-cols-2 divide-x divide-border')(
-            MailContent(),
-            MailDetailView(mail_data[0])))
+        Grid(MailContent(),
+             MailDetailView(mail_data[0]),
+             cols=2, gap=0, cls='flex-1 divide-x divide-border'))
+
+
 
 # %% ../ex_nbs/08_mail.ipynb 17
 mail_homepage = mail_homepage()

@@ -45,10 +45,9 @@ def CreateTaskModal():
         Div(cls='p-6')(
             UkModalTitle('Create Task'),P(cls=TextT.muted_sm)('Fill out the information below to create a new task'),Br(),
             Form(cls='space-y-6')(
-                Div(cls='grid grid-cols-3 gap-2')(
-                    UkSelect(*Options('Documentation', 'Bug', 'Feature'), label='Task Type', id='task_type'),
-                    UkSelect(*Options('In Progress', 'Backlog', 'Todo', 'Cancelled', 'Done'), label='Status', id='task_status'),
-                    UkSelect(*Options('Low', 'Medium', 'High'), label='Priority', id='task_priority')),
+                Grid(UkSelect(*Options('Documentation', 'Bug', 'Feature'), label='Task Type', id='task_type'),
+                     UkSelect(*Options('In Progress', 'Backlog', 'Todo', 'Cancelled', 'Done'), label='Status', id='task_status'),
+                     UkSelect(*Options('Low', 'Medium', 'High'), label='Priority', id='task_priority')),
                 UkTextArea(label='Title', placeholder='Please describe the task that needs to be completed'),
                 Div(cls='flex justify-end space-x-2')(
                     UkButton(cls=UkButtonT.ghost + ' uk-modal-close')('Cancel'),

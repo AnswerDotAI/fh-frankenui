@@ -3,8 +3,8 @@
 # %% auto 0
 __all__ = ['music_dd_data', 'file_dd_data', 'edit_dd_data', 'view_dd_data', 'account_dd_data', 'music_headers', 'discover',
            'library', 'playlist', 'listen_now_albums', 'made_for_you_albums', 'music_content', 'tabs', 'music_homepage',
-           'NavP', 'SpacedPP', 'SpacedPPs', 'SpacedTxtIcon', 'LAlignedTxtIcon', 'wrap_in_a', 'UkNav', 'UkGrid',
-           'AlbumImg', 'AlbumFooter', 'Album', 'create_album_grid', 'podcast_tab', 'page']
+           'NavP', 'SpacedPP', 'SpacedPPs', 'SpacedTxtIcon', 'LAlignedTxtIcon', 'wrap_in_a', 'UkNav', 'AlbumImg',
+           'AlbumFooter', 'Album', 'create_album_grid', 'podcast_tab', 'page']
 
 # %% ../ex_nbs/05_music.ipynb 1
 from fasthtml.common import *
@@ -72,7 +72,7 @@ music_headers = UkNavbar(
         UkNavbarDropdown(*wrap_in_a(file_dd_data), label='File'),
         UkNavbarDropdown(*wrap_in_a(edit_dd_data), label='Edit'),
         UkNavbarDropdown(*wrap_in_a(view_dd_data), label='View'),
-        UkNavbarDropdown(*wrap_in_a(account_dd_data, has_header=True), label='Account', has_header=True)
+        UkNavbarDropdown(*wrap_in_a(account_dd_data), label='Account')
     ),
     cls='p-2'
 )
@@ -90,13 +90,6 @@ def UkNav(*lis,cls='space-y-2'):
     return Ul(cls="uk-nav uk-nav-secondary "+cls)(*map(Li,lis))
 
 # %% ../ex_nbs/05_music.ipynb 12
-def UkGrid(*c, cols, cls=''):
-    gap_class = 'gap-x-4'  # This matches the gap in correct_grid
-    grid_class = f"grid grid-cols-{cols}"
-    full_class = ' '.join(filter(None, [grid_class, gap_class, cls]))
-    return Div(cls=full_class)(*c)
-
-# %% ../ex_nbs/05_music.ipynb 13
 def AlbumImg(url):
     return Div(cls="overflow-hidden rounded-md")(Img(cls="transition-transform duration-200 hover:scale-105", src=url))
 
@@ -106,48 +99,44 @@ def AlbumFooter(title, artist):
 def Album(url,title,artist):
     return Div(AlbumImg(url),AlbumFooter(title,artist))
 
-# %% ../ex_nbs/05_music.ipynb 14
+# %% ../ex_nbs/05_music.ipynb 13
 listen_now_albums = (("Roar", "Catty Perry"), ("Feline on a Prayer", "Cat Jovi"),("Fur Elise", "Ludwig van Beethovpurr"),("Purrple Rain", "Prince's Cat"))
 
 made_for_you_albums = [("Like a Feline", "Catdonna"),("Livin' La Vida Purrda", "Ricky Catin"),("Meow Meow Rocket", "Elton Cat"),
         ("Rolling in the Purr", "Catdelle",),("Purrs of Silence", "Cat Garfunkel"),("Meow Me Maybe", "Carly Rae Purrsen"),]
     
 
+# %% ../ex_nbs/05_music.ipynb 14
+def create_album_grid(albums, cols=4):  
+    return Grid(*[Div(cls="space-y-3")(
+                Div(cls="overflow-hidden rounded-md")(
+                    Img(cls="transition-transform duration-200 hover:scale-105", src=img_url, alt="")),
+                Div(cls="space-y-1 text-sm")(
+                    H3(album['title'], cls="font-medium leading-none"),
+                    P(album['artist'], cls="text-xs text-muted-foreground"))) for album in albums],
+                cols,gap=4)
+
+
 # %% ../ex_nbs/05_music.ipynb 15
-def create_album_grid(albums, cols=4):    
-    return Div(cls=f"grid grid-cols-{cols} gap-x-4")(
-        *[Div(cls="space-y-3")(
-            Div(cls="overflow-hidden rounded-md")(
-                Img(cls="transition-transform duration-200 hover:scale-105", src=img_url, alt="")
-            ),
-            Div(cls="space-y-1 text-sm")(
-                H3(album['title'], cls="font-medium leading-none"),
-                P(album['artist'], cls="text-xs text-muted-foreground")
-            )
-        ) for album in albums]
-    )
-
-
-# %% ../ex_nbs/05_music.ipynb 16
 _album = lambda t,a: Album('https://ucarecdn.com/e5607eaf-2b2a-43b9-ada9-330824b6afd7/music1.webp',t,a)
 
 music_content = (Div(UkH3("Listen Now"), cls="mt-6 space-y-1"),
                     P("Top picks for you. Updated daily.",cls=TextT.muted_sm),
                     UkHLine(),
-                    UkGrid(*[_album(t,a) for t,a in listen_now_albums], cols=4),
+                    Grid(*[_album(t,a) for t,a in listen_now_albums], cols=4, gap=4),
                     Div(UkH3("Made for You"), cls="mt-6 space-y-1"),
                     P("Your personal playlists. Updated daily.", cls=TextT.muted_sm),
                     UkHLine(),
-                    UkGrid(*[_album(t,a) for t,a in made_for_you_albums], cols=6))
+                    Grid(*[_album(t,a) for t,a in made_for_you_albums], cols=6, gap=4))
 
-# %% ../ex_nbs/05_music.ipynb 17
+# %% ../ex_nbs/05_music.ipynb 16
 tabs = Ul(Li(A('Music', href='#'),cls='uk-active'),
     Li(A('Podcasts', href='#')),
     Li(A('Live', cls='opacity-50'), cls='uk-disabled'),
     uk_switcher='connect: #component-nav; animation: uk-animation-fade',
     cls='uk-tab-alt')
 
-# %% ../ex_nbs/05_music.ipynb 18
+# %% ../ex_nbs/05_music.ipynb 17
 def podcast_tab():
     return Div(
         Div(cls="space-y-3")(
@@ -161,11 +150,10 @@ def podcast_tab():
                 P("You have not added any podcasts. Add one below.", cls=TextT.muted_sm),
                 UkButton("Add Podcast", cls=UkButtonT.primary))))
 
-# %% ../ex_nbs/05_music.ipynb 19
+# %% ../ex_nbs/05_music.ipynb 18
 def page():
     return Div(music_headers,UkHSplit(),
-        Div(cls="grid grid-cols-5")(
-            Div(cls="hidden space-y-10 py-4 lg:block p-2")(
+        Grid(Div(cls="hidden space-y-10 py-4 lg:block p-2")(
                 UkNav(*discover),
                 UkNav(*library),
                 UkNav(*playlist)),
@@ -176,7 +164,8 @@ def page():
                         UkButton(cls=UkButtonT.primary)(Span(cls="mr-2 size-4")(UkIcon('plus-circle', 0.8)),"Add music")),
                     Ul(id="component-nav", cls="uk-switcher")(
                         Li(*music_content),
-                        Li(podcast_tab()))))))
+                        Li(podcast_tab())))),
+            cols=5,gap=0))
 
-# %% ../ex_nbs/05_music.ipynb 20
+# %% ../ex_nbs/05_music.ipynb 19
 music_homepage = page()
