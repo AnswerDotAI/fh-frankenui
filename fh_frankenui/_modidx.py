@@ -57,4 +57,8 @@ d = { 'settings': { 'branch': 'main',
                                                                                      'fh_frankenui/components.py'),
                                          'fh_frankenui.components.VEnum.__str__': ( 'components.html#venum.__str__',
                                                                                     'fh_frankenui/components.py'),
+                                         'fh_frankenui.components._NavBarSide': ( 'components.html#_navbarside',
+                                                                                  'fh_frankenui/components.py'),
+                                         'fh_frankenui.components.process_options': ( 'components.html#process_options',
+                                                                                      'fh_frankenui/components.py'),
                                          'fh_frankenui.components.stringify': ('components.html#stringify', 'fh_frankenui/components.py')}}}

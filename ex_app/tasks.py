@@ -35,6 +35,7 @@ def create_hotkey_li(hotkey):
 hotkeys_a = (('Profile','⇧⌘P'),('Billing','⌘B'),('Settings','⌘S'),('New Team',''))
 hotkeys_b = (('Logout',''), )
 
+# TODO convert to navbar
 avatar_opts = Ul(cls='uk-dropdown-nav uk-nav')(
     Li(cls='px-2 py-1.5 text-sm')(
         Div(cls='flex flex-col space-y-1')(
@@ -85,8 +86,8 @@ table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
                     options = [[A(FullySpacedContainer(LAlignedTxtIcon(a['priority'], icon="check", icon_right=False), a['count']),cls='capitalize') for a in priority_dd]],
                      btn_cls=(TextT.medium_xs,'uk-button-default')),
                 UkDropdownButton(label='View',
-                                 options=["Toggle Columns", [A(LAlignedTxtIcon(o, icon="check", icon_right=False)) for o in ['Title','Status','Priority']]],
-                                 has_header=True
+                                 options=[A(LAlignedTxtIcon(o, icon="check", icon_right=False)) for o in ['Title','Status','Priority']],
+                                 option_hdrs=["Toggle Columns"],
                                 ),
                 UkButton('Create Task',cls=('uk-button-primary', TextT.medium_xs), uk_toggle="target: #TaskForm"))
 
