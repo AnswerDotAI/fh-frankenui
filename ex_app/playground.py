@@ -47,7 +47,7 @@ def playground_navbar():
         save_modal,
         UkButton("View Code", cls=UkButtonT.secondary),
         UkDropdownButton(label="Share",options=(share_dd,), btn_cls=UkButtonT.secondary,dd_cls='p-6'),
-        UkDropdownButton(UkIcon('ellipsis'), btn_cls=UkButtonT.secondary,
+        UkDropdownButton(label=UkIcon('ellipsis'), btn_cls=UkButtonT.secondary,
             options=(A("Content filter preferences", href="#demo"), None, # divider
                      A("Delete preset", cls="text-destructive", href="#demo"))))
     

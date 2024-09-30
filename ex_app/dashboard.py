@@ -75,7 +75,7 @@ def UkNavBar(*items):
     return Ul(cls="uk-navbar-nav gap-x-4 lg:gap-x-6")(
         *[NavTab(item) for i, item in enumerate(items)])
 
-team_dropdown = UkDropdownButton("Alicia Koch", options = ("Alicia Koch","Acme Inc","Monster Inc.","Create a Team"))
+team_dropdown = UkDropdownButton(("Alicia Koch","Acme Inc","Monster Inc.","Create a Team"))
 
 # %% ../ex_nbs/03_dashboard.ipynb 25
 headers = UkNavbar(lnav=(
@@ -88,8 +88,8 @@ hotkeys = (('Profile','⇧⌘P'), ('Billing','⌘B'), ('Settings','⌘S'), ('New
 user = (Div(cls='flex flex-col space-y-1')(P('Alicia Koch'),P('alicia@example.com',cls=TextT.muted_sm)),)
 avatar = DiceBearAvatar('Alicia Koch',8,8)
 avatar_dropdown = UkDropdownButton(
-    avatar,
-    user+hotkeys)
+    options=user+hotkeys,
+    label=avatar)
 
 show(avatar_dropdown)
 
