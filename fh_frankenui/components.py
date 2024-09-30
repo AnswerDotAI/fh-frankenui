@@ -7,7 +7,8 @@ __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', '
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'DiceBearAvatar', 'NavP', 'SpacedPP', 'SpacedPPs',
            'SpacedTxtIcon', 'LAlignedTxtIcon', 'Grid', 'FullySpacedContainer', 'CenteredContainer', 'UkGenericInput',
            'Options', 'UkSelect', 'UkButtonT', 'process_options', 'UkDropdownButton', 'UkButton', 'UkGenericComponent',
-           'UkHSplit', 'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'Card', 'UkModalTitle', 'Modal']
+           'UkHSplit', 'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'Card',
+           'UkModalTitle', 'Modal']
 
 # %% ../lib_nbs/01_components.ipynb 4
 from fasthtml.common import *
@@ -302,6 +303,13 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None,
              _NavBarSide(rnav,'right') if rnav else '')
 
 # %% ../lib_nbs/01_components.ipynb 65
+def NavTab(text, active=False):
+    return Li(cls="uk-active" if active else " ")(A(text, href="#demo", uk_toggle=True))
+
+def UkTab(*items):
+    return Ul(cls="uk-tab-alt max-w-96")(*[NavTab(item, active=i==0) for i, item in enumerate(items)])
+
+# %% ../lib_nbs/01_components.ipynb 67
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
@@ -318,7 +326,7 @@ def Card(*c, # Components that go in the body
     if footer: res += [Div(cls='uk-card-footer ' + footer_cls)(footer),]
     return Div(cls='uk-card '+cls, **kwargs)(*res)
 
-# %% ../lib_nbs/01_components.ipynb 67
+# %% ../lib_nbs/01_components.ipynb 69
 def UkModalTitle(*c, cls=()): return Div(cls='uk-modal-title ' + stringify(cls))(*c)
 
 def Modal(*c,
