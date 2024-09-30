@@ -41,7 +41,7 @@ Left2 = Card(
     UkInput('Card Number', 'card_number',placeholder='m@example.com'),
     Grid(UkSelect(*Options(*calendar.month_name[1:],0),label='Expires',id='expire_month'),
          UkSelect(*Options(*range(2024,2030),0),       label='Year',   id='expire_year'),
-         UkInput('CVV', 'cvv',placeholder='CVV'),
+         UkInput('CVV', 'cvv',placeholder='CVV', cls=""),
          cols=3,gap=4)),
     header=(UkH3('Payment Method'),P(cls=TextT.muted_sm)('Add a new payment method to your account.')))
 
@@ -76,15 +76,17 @@ Right3 = Card(
     UkSwitch(label = Div(UkH5('Performance Cookies'),P(cls=(TextT.muted_sm,TextB.wt_normal))('These cookies help to improve the performance of the website.')),
                 cls='flex items-center justify-between gap-2'),
     header=(UkH4('Cookie Settings'),P(cls=(TextT.muted_sm, 'mt-1.5'))('Manage your cookie settings here.')),
-    footer=UkButton(cls='w-full')('Save Preferences'),)
+    footer=UkButton(cls='uk-button-primary w-full')('Save Preferences'),)
 
 # %% ../ex_nbs/02_cards.ipynb 18
 team_members = [{"name": "Sofia Davis", "email": "m@example.com", "role": "Owner"},{"name": "Jackson Lee", "email": "p@example.com", "role": "Member"},]
 
-options = ((Div('Viewer'),Div(cls=TextT.muted_sm)('Can view and comment.',)),
-           (Div('Developer'),Div(cls=TextT.muted_sm)('Can view, comment and edit.',)),
-           (Div('Billing'),Div(cls=TextT.muted_sm)('Can view, comment and manage billing.',)),
-           (Div('Owner'),Div(cls=TextT.muted_sm)('Admin-level to all resources.')),)
+options = [
+    A(Div(Div('Viewer'), Div('Can view and comment.', cls=TextT.muted_sm))),
+    A(Div(Div('Developer'), Div('Can view, comment and edit.', cls=TextT.muted_sm))),
+    A(Div(Div('Billing'), Div('Can view, comment and manage billing.', cls=TextT.muted_sm))),
+    A(Div(Div('Owner'), Div('Admin-level access to all resources.', cls=TextT.muted_sm)))
+]
 
 body = [Div(cls='flex items-center space-x-4')(
         DiceBearAvatar(member['name'], 10,10),
@@ -92,7 +94,7 @@ body = [Div(cls='flex items-center space-x-4')(
             P(member['name'], cls='text-sm font-medium leading-none'),
             P(member['email'], cls=TextT.muted_sm)
         ),
-        UkDropdownButton(member['role'], options),
+        UkDropdownButton([options], label=member['role']),
     ) for member in team_members]
 
 Middle1 = Card(*body,
@@ -130,7 +132,7 @@ section_content =(('bell','Everything',"Email digest, mentions & all activity.")
 # %% ../ex_nbs/02_cards.ipynb 26
 Middle4 = Card(
     Ul(cls="uk-nav uk-nav-secondary")
-    (*[Li(cls='-mx-1')(A(uk_toggle=True)(Div(cls="flex gap-x-4")(Div(uk_icon=icon),Div(cls='flex-1')(P(name),P(cls=TextT.muted_sm)(desc)))))
+    (*[Li(cls='-mx-1')(A(Div(cls="flex gap-x-4")(Div(uk_icon=icon),Div(cls='flex-1')(P(name),P(cls=TextT.muted_sm)(desc)))))
             for icon, name, desc in section_content]),
     header = (UkH4('Notification'),Div('Choose what you want to be notified about.', cls=('mt-1.5', TextT.muted_sm))),
     body_cls='pt-0')

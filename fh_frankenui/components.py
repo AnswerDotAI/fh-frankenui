@@ -201,7 +201,7 @@ def UkSelect(*options,
     if label:
         lbl = Label(cls=f'uk-form-label {lbl_cls}', fr=id)(label) if id else Label(cls=f'uk-form-label {lbl_cls}')(label)
     select = Uk_select(cls=inp_cls, uk_cloak=True, id=id, name=name, placeholder=placeholder, searchable=searchable, **kwargs)
-    select = select(Optgroup(*options,label=label))    
+    select = select(*options)
     return Div(cls=cls)(lbl, select) if label else Div(cls=cls)(select)
 
 # %% ../lib_nbs/01_components.ipynb 51
