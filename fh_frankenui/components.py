@@ -7,9 +7,9 @@ __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', '
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'DiceBearAvatar', 'NavP', 'SpacedPP', 'SpacedPPs',
            'SpacedTxtIcon', 'LAlignedTxtIcon', 'RAlignedTxtIcon', 'Grid', 'FullySpacedContainer', 'CenteredContainer',
            'UkGenericInput', 'Options', 'UkSelect', 'UkButtonT', 'process_options', 'UkDropdownButton', 'UkButton',
-           'UkGenericComponent', 'UkHSplit', 'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab',
-           'UkTab', 'UkSidebarItem', 'UkSidebarUl', 'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle', 'Modal',
-           'default_header', 'default_cell', 'header_row', 'data_row', 'UkTable']
+           'UkGenericComponent', 'UkHSplit', 'UkHLine', 'UkNavDivider', 'HelpText', 'UkNavbarDropdown', 'UkNavbar',
+           'NavTab', 'UkTab', 'UkSidebarItem', 'UkSidebarUl', 'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle',
+           'Modal', 'default_header', 'default_cell', 'header_row', 'data_row', 'UkTable', 'UkFormSection']
 
 # %% ../lib_nbs/01_components.ipynb 4
 from fasthtml.common import *
@@ -185,10 +185,11 @@ UkFormLabel = partial(UkGenericInput, partial(Uk_input_tag, cls='uk-form-label')
 
 # %% ../lib_nbs/01_components.ipynb 46
 def Options(*c, # Content for an `Option`
-            selected_idx=None # Index location of selected `Option`
+            selected_idx:int=None, # Index location of selected `Option`
+            disabled_idxs:set=None
            ):
     "Generates list of `Option`s with the proper `selected_idx`"
-    return [Option(o,selected=i==selected_idx) for i,o in enumerate(c)]
+    return [Option(o,selected=i==selected_idx, disabled=disabled_idxs and i in disabled_idxs) for i,o in enumerate(c)]
 
 # %% ../lib_nbs/01_components.ipynb 47
 def UkSelect(*options,
@@ -281,7 +282,10 @@ def UkHLine(lwidth=2, y_space=4): return Div(cls=f"my-{y_space} h-[{lwidth}px] w
 # %% ../lib_nbs/01_components.ipynb 58
 def UkNavDivider(): return Li(cls="uk-nav-divider")
 
-# %% ../lib_nbs/01_components.ipynb 62
+# %% ../lib_nbs/01_components.ipynb 59
+def HelpText(c):return P(c,cls=TextT.muted_sm)
+
+# %% ../lib_nbs/01_components.ipynb 63
 def UkNavbarDropdown(*c, label, has_header=False):
     flattened = []
     for i, item in enumerate(c):
@@ -291,7 +295,7 @@ def UkNavbarDropdown(*c, label, has_header=False):
     return Li(A(label, href='#'), Div(cls='uk-navbar-dropdown')(
         Ul(cls='uk-nav uk-navbar-dropdown-nav')(*flattened)))
 
-# %% ../lib_nbs/01_components.ipynb 63
+# %% ../lib_nbs/01_components.ipynb 64
 def _NavBarSide(n, s):
     def add_class(item):
         if isinstance(item, str): return Li(cls='uk-navbar-item')(item)
@@ -306,14 +310,14 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None,
              _NavBarSide(lnav,'left') if lnav else '',
              _NavBarSide(rnav,'right') if rnav else '')
 
-# %% ../lib_nbs/01_components.ipynb 65
+# %% ../lib_nbs/01_components.ipynb 66
 def NavTab(text, active=False):
     return Li(cls="uk-active" if active else " ")(A(text, href="#demo", uk_toggle=True))
 
 def UkTab(*items):
     return Ul(cls="uk-tab-alt max-w-96")(*[NavTab(item, active=i==0) for i, item in enumerate(items)])
 
-# %% ../lib_nbs/01_components.ipynb 67
+# %% ../lib_nbs/01_components.ipynb 68
 def UkSidebarItem(item, is_header=False): return UkH4(item) if is_header else A(role='button')(item)
 
 def UkSidebarUl(*lis, cls='', **kwargs): 
@@ -329,7 +333,7 @@ def UkSidebar(sections, headers=None, outer_margin=4, inner_margin=4, cls=(), **
     sidebar_content = map(lambda s_h: UkSidebarSection(*s_h, **kwargs), zip(sections, headers))
     return Div(cls=f"space-y-{inner_margin} p-{outer_margin} {cls}")(*sidebar_content)
 
-# %% ../lib_nbs/01_components.ipynb 69
+# %% ../lib_nbs/01_components.ipynb 70
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
@@ -346,7 +350,7 @@ def Card(*c, # Components that go in the body
     if footer: res += [Div(cls='uk-card-footer ' + footer_cls)(footer),]
     return Div(cls='uk-card '+cls, **kwargs)(*res)
 
-# %% ../lib_nbs/01_components.ipynb 71
+# %% ../lib_nbs/01_components.ipynb 72
 def UkModalTitle(*c, cls=()): return Div(cls='uk-modal-title ' + stringify(cls))(*c)
 
 def Modal(*c,
@@ -366,7 +370,7 @@ def Modal(*c,
     return Div(cls='uk-modal uk-modal-container' + cls, uk_modal=True, **kwargs)(*res)
 
 
-# %% ../lib_nbs/01_components.ipynb 73
+# %% ../lib_nbs/01_components.ipynb 74
 def default_header(col): return Th(cls='p-2')(col)
 def default_cell(col, row): return Td(row[col], cls='p-2')
 
@@ -386,3 +390,11 @@ def UkTable(columns, data, *args, cls=(), footer=None, cell_render=None, header_
     ]
     if footer: table_content.append(Tfoot(footer))
     return Table(cls=table_cls, *args, **kwargs)(*table_content)
+
+# %% ../lib_nbs/01_components.ipynb 76
+def UkFormSection(title, description, *c, button_txt='Update', outer_margin=6, inner_margin=6):
+    return Div(cls=f'space-y-{inner_margin} py-{outer_margin}')(
+        Div(UkH3(title), P(description, cls=TextT.medium_sm)),
+        UkHSplit(), *c,
+        Div(UkButton(button_txt, cls=UkButtonT.primary)) if button_txt else None
+    )
