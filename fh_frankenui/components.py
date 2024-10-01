@@ -5,10 +5,11 @@
 # %% auto 0
 __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', 'UkH3', 'UkH4', 'UkH5', 'UkH6', 'stringify',
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'DiceBearAvatar', 'NavP', 'SpacedPP', 'SpacedPPs',
-           'SpacedTxtIcon', 'LAlignedTxtIcon', 'Grid', 'FullySpacedContainer', 'CenteredContainer', 'UkGenericInput',
-           'Options', 'UkSelect', 'UkButtonT', 'process_options', 'UkDropdownButton', 'UkButton', 'UkGenericComponent',
-           'UkHSplit', 'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'Card',
-           'UkModalTitle', 'Modal', 'default_header', 'default_cell', 'header_row', 'data_row', 'UkTable']
+           'SpacedTxtIcon', 'LAlignedTxtIcon', 'RAlignedTxtIcon', 'Grid', 'FullySpacedContainer', 'CenteredContainer',
+           'UkGenericInput', 'Options', 'UkSelect', 'UkButtonT', 'process_options', 'UkDropdownButton', 'UkButton',
+           'UkGenericComponent', 'UkHSplit', 'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab',
+           'UkTab', 'UkSidebarItem', 'UkSidebarUl', 'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle', 'Modal',
+           'default_header', 'default_cell', 'header_row', 'data_row', 'UkTable']
 
 # %% ../lib_nbs/01_components.ipynb 4
 from fasthtml.common import *
@@ -138,6 +139,9 @@ def LAlignedTxtIcon(txt, icon='play-circle', gap=2, ratio=1, icon_right=True, tx
     c = (txt if isinstance(txt, FT) else NavP(txt,cls=ifnone(txt_cls,TextT.muted_sm)),UkIcon(icon,ratio))
     if not icon_right: c = reversed(c)
     return Div(cls=f'flex items-center space-x-{gap}')(*c)
+
+def RAlignedTxtIcon(txt, icon, gap=2, ratio=1, txt_cls=None):
+    return LAlignedTxtIcon(txt, icon, gap=gap, ratio=ratio, txt_cls=txt_cls, icon_right=False)
 
 # %% ../lib_nbs/01_components.ipynb 34
 def Grid(*c, cols=3, gap=2, cls=(), **kwargs):
@@ -310,6 +314,22 @@ def UkTab(*items):
     return Ul(cls="uk-tab-alt max-w-96")(*[NavTab(item, active=i==0) for i, item in enumerate(items)])
 
 # %% ../lib_nbs/01_components.ipynb 67
+def UkSidebarItem(item, is_header=False): return UkH4(item) if is_header else A(role='button')(item)
+
+def UkSidebarUl(*lis, cls='', **kwargs): 
+    return Ul(cls=f"uk-nav uk-nav-secondary space-y-2 {cls}", **kwargs)(*map(Li,lis))
+
+def UkSidebarSection(items, header=None, cls='', **kwargs):
+    section = [UkSidebarItem(item) for item in items]
+    if header: section.insert(0, UkSidebarItem(header, is_header=True))
+    return UkSidebarUl(*section, cls=cls, **kwargs)
+
+def UkSidebar(sections, headers=None, outer_margin=4, inner_margin=4, cls=(), **kwargs):
+    headers = headers or [None] * len(sections)
+    sidebar_content = map(lambda s_h: UkSidebarSection(*s_h, **kwargs), zip(sections, headers))
+    return Div(cls=f"space-y-{inner_margin} p-{outer_margin} {cls}")(*sidebar_content)
+
+# %% ../lib_nbs/01_components.ipynb 69
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
@@ -326,7 +346,7 @@ def Card(*c, # Components that go in the body
     if footer: res += [Div(cls='uk-card-footer ' + footer_cls)(footer),]
     return Div(cls='uk-card '+cls, **kwargs)(*res)
 
-# %% ../lib_nbs/01_components.ipynb 69
+# %% ../lib_nbs/01_components.ipynb 71
 def UkModalTitle(*c, cls=()): return Div(cls='uk-modal-title ' + stringify(cls))(*c)
 
 def Modal(*c,
@@ -346,7 +366,7 @@ def Modal(*c,
     return Div(cls='uk-modal uk-modal-container' + cls, uk_modal=True, **kwargs)(*res)
 
 
-# %% ../lib_nbs/01_components.ipynb 71
+# %% ../lib_nbs/01_components.ipynb 73
 def default_header(col): return Th(cls='p-2')(col)
 def default_cell(col, row): return Td(row[col], cls='p-2')
 

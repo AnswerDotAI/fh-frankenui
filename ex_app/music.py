@@ -2,8 +2,9 @@
 
 # %% auto 0
 __all__ = ['music_dd_data', 'file_dd_data', 'edit_dd_data', 'view_dd_data', 'account_dd_data', 'music_headers', 'discover',
-           'library', 'playlist', 'listen_now_albums', 'made_for_you_albums', 'music_content', 'tabs', 'music_homepage',
-           'wrap_in_a', 'UkNav', 'AlbumImg', 'AlbumFooter', 'Album', 'create_album_grid', 'podcast_tab', 'page']
+           'library', 'playlist', 'listen_now_albums', 'made_for_you_albums', 'music_content', 'tabs', 'sections',
+           'icons', 'sidebar_sections', 'headers', 'sidebar', 'music_homepage', 'wrap_in_a', 'AlbumImg', 'AlbumFooter',
+           'Album', 'create_album_grid', 'podcast_tab', 'page']
 
 # %% ../ex_nbs/05_music.ipynb 1
 from fasthtml.common import *
@@ -56,18 +57,13 @@ music_headers = UkNavbar(
 )
 
 # %% ../ex_nbs/05_music.ipynb 9
-_fn = lambda x: A(role='button', uk_toggle=True)(LAlignedTxtIcon(*x,icon_right=False,txt_cls=''))
+_fn = lambda x: A(role='button')(LAlignedTxtIcon(*tuplify(x),icon_right=False,txt_cls=''))
 discover = (UkH4("Discover"), *map(_fn, (("Listen Now", "play-circle"), ("Browse", 'thumbnails'), ("Radio", "rss"))))
 library = (UkH4("Library"), *map(_fn, (("Playlists", "play-circle"), ("Songs", "bell"), ("Made for You", "user"),("Artists", "users"),("Albums", "bookmark"))))
-_fn = lambda x: A(role='button', uk_toggle=True)(LAlignedTxtIcon(x,icon_right=False,txt_cls=''))
 playlist = (UkH4("Playlist"), *map(_fn, ("Recently Added", "Recently Played", "Top Songs", "Top Albums", "Top Artists", 
                                          "Logic Discography","Bedtime Beats", "I miss Y2K Pop")))
 
 # %% ../ex_nbs/05_music.ipynb 10
-def UkNav(*lis,cls='space-y-2'): 
-    return Ul(cls="uk-nav uk-nav-secondary "+cls)(*map(Li,lis))
-
-# %% ../ex_nbs/05_music.ipynb 11
 def AlbumImg(url):
     return Div(cls="overflow-hidden rounded-md")(Img(cls="transition-transform duration-200 hover:scale-105", src=url))
 
@@ -77,14 +73,14 @@ def AlbumFooter(title, artist):
 def Album(url,title,artist):
     return Div(AlbumImg(url),AlbumFooter(title,artist))
 
-# %% ../ex_nbs/05_music.ipynb 12
+# %% ../ex_nbs/05_music.ipynb 11
 listen_now_albums = (("Roar", "Catty Perry"), ("Feline on a Prayer", "Cat Jovi"),("Fur Elise", "Ludwig van Beethovpurr"),("Purrple Rain", "Prince's Cat"))
 
 made_for_you_albums = [("Like a Feline", "Catdonna"),("Livin' La Vida Purrda", "Ricky Catin"),("Meow Meow Rocket", "Elton Cat"),
         ("Rolling in the Purr", "Catdelle",),("Purrs of Silence", "Cat Garfunkel"),("Meow Me Maybe", "Carly Rae Purrsen"),]
     
 
-# %% ../ex_nbs/05_music.ipynb 13
+# %% ../ex_nbs/05_music.ipynb 12
 def create_album_grid(albums, cols=4):  
     return Grid(*[Div(cls="space-y-3")(
                 Div(cls="overflow-hidden rounded-md")(
@@ -94,8 +90,7 @@ def create_album_grid(albums, cols=4):
                     P(album['artist'], cls="text-xs text-muted-foreground"))) for album in albums],
                 cols,gap=4)
 
-
-# %% ../ex_nbs/05_music.ipynb 14
+# %% ../ex_nbs/05_music.ipynb 13
 _album = lambda t,a: Album('https://ucarecdn.com/e5607eaf-2b2a-43b9-ada9-330824b6afd7/music1.webp',t,a)
 
 music_content = (Div(UkH3("Listen Now"), cls="mt-6 space-y-1"),
@@ -107,14 +102,14 @@ music_content = (Div(UkH3("Listen Now"), cls="mt-6 space-y-1"),
                     UkHLine(),
                     Grid(*[_album(t,a) for t,a in made_for_you_albums], cols=6, gap=4))
 
-# %% ../ex_nbs/05_music.ipynb 15
+# %% ../ex_nbs/05_music.ipynb 14
 tabs = Ul(Li(A('Music', href='#'),cls='uk-active'),
     Li(A('Podcasts', href='#')),
     Li(A('Live', cls='opacity-50'), cls='uk-disabled'),
     uk_switcher='connect: #component-nav; animation: uk-animation-fade',
     cls='uk-tab-alt')
 
-# %% ../ex_nbs/05_music.ipynb 16
+# %% ../ex_nbs/05_music.ipynb 15
 def podcast_tab():
     return Div(
         Div(cls="space-y-3")(
@@ -123,18 +118,35 @@ def podcast_tab():
         Div(cls="my-4 h-[1px] w-full bg-border"),
         Div(cls="uk-placeholder flex h-[450px] items-center justify-center rounded-md",uk_placeholder=True)(
             Div(cls="text-center space-y-6")(
-                UkIcon(" microphone", 3),
+                UkIcon("microphone", 3),
                 UkH4("No episodes added"),
                 P("You have not added any podcasts. Add one below.", cls=TextT.muted_sm),
                 UkButton("Add Podcast", cls=UkButtonT.primary))))
 
+# %% ../ex_nbs/05_music.ipynb 16
+sections = [
+    ["Listen Now", "Browse", "Radio"],
+    ["Playlists", "Songs", "Made for You", "Artists", "Albums"],
+    ["Recently Added", "Recently Played"]
+]
+
+icons = [
+    ["play-circle", "thumbnails", "rss"],
+    ["play-circle", "bell", "user", "users", "bookmark"],
+    ["", ""]
+]
+
+sidebar_sections = list(map(
+    lambda section, icon_set: list(map(lambda item, icon: RAlignedTxtIcon(item, icon), section, icon_set)), sections, icons
+))
+
+headers = ["Discover", "Library", "Playlist"]
+sidebar = UkSidebar(sidebar_sections, headers)
+
 # %% ../ex_nbs/05_music.ipynb 17
 def page():
     return Div(music_headers,UkHSplit(),
-        Grid(Div(cls="hidden space-y-10 py-4 lg:block p-2")(
-                UkNav(*discover),
-                UkNav(*library),
-                UkNav(*playlist)),
+        Grid(sidebar,
             Div(cls="col-span-5 border-l border-border lg:col-span-4")(
                 Div(cls="px-8 py-6")(
                     Div(cls="flex items-center justify-between")(
