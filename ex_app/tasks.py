@@ -136,7 +136,7 @@ tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(U
 
 # %% ../ex_nbs/01_tasks.ipynb 18
 def footer():
-    Div(cls='mt-4 flex items-center justify-between px-2 py-2')(
+    return Div(cls='mt-4 flex items-center justify-between px-2 py-2')(
         Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
         Div(cls='flex flex-none items-center space-x-8')(
             Div('Page 1 of 10', cls='flex w-[100px] items-center justify-center text-sm font-medium'),
