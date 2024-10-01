@@ -4,8 +4,8 @@
 
 # %% auto 0
 __all__ = ['priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 'hotkeys_b', 'avatar_opts', 'page_heading',
-           'table_controls', 'tasks_homepage', 'create_hotkey_li', 'UkIconButton', 'CreateTaskModal', 'task_dropdown',
-           'tasks']
+           'table_controls', 'task_columns', 'tasks_table', 'tasks_ui', 'tasks_homepage', 'create_hotkey_li',
+           'UkIconButton', 'CreateTaskModal', 'checkbox', 'task_dropdown', 'cell_render', 'header_render', 'footer']
 
 # %% ../ex_nbs/01_tasks.ipynb 3
 from fasthtml.common import *
@@ -13,11 +13,11 @@ from fh_frankenui.components import *
 from fasthtml.svg import *
 import json
 
-# %% ../ex_nbs/01_tasks.ipynb 6
+# %% ../ex_nbs/01_tasks.ipynb 7
 with open('../data/status_list.json', 'r') as f: data     = json.load(f)
 with open('../data/statuses.json',    'r') as f: statuses = json.load(f)
 
-# %% ../ex_nbs/01_tasks.ipynb 7
+# %% ../ex_nbs/01_tasks.ipynb 8
 priority_dd = [{'priority': "low", 'count': 36 }, {'priority': "medium", 'count': 33 }, {'priority': "high", 'count': 31 }]
 
 rows_per_page_dd = [10,20,30,40,50]
@@ -25,7 +25,7 @@ rows_per_page_dd = [10,20,30,40,50]
 status_dd = [{'status': "backlog", 'count': 21 },{'status': "todo", 'count': 21 },{'status': "progress", 'count': 20 },{'status': "done",'count': 19 },{'status': "cancelled", 'count': 19 }]
 
 
-# %% ../ex_nbs/01_tasks.ipynb 9
+# %% ../ex_nbs/01_tasks.ipynb 10
 def create_hotkey_li(hotkey):
     return Li(A(cls='uk-drop-close justify-between')(
         hotkey[0],
@@ -49,12 +49,12 @@ avatar_opts = Ul(cls='uk-dropdown-nav uk-nav')(
     *map(create_hotkey_li, hotkeys_b)
 )
 
-# %% ../ex_nbs/01_tasks.ipynb 10
+# %% ../ex_nbs/01_tasks.ipynb 11
 def UkIconButton(*c, sz='small', cls=()):
     if sz not in ('small','medium','large'): raise ValueError(f"Invalid size '{sz}'. Must be 'small', 'medium', or 'large'.")
     return Button(cls=f'uk-icon-button uk-icon-button-{sz} ' + stringify(cls))(*c)
 
-# %% ../ex_nbs/01_tasks.ipynb 11
+# %% ../ex_nbs/01_tasks.ipynb 12
 def CreateTaskModal():
     return Modal(
         Div(cls='p-6')(
@@ -70,14 +70,14 @@ def CreateTaskModal():
                     UkButton(cls=UkButtonT.primary + ' uk-modal-close')('Submit')))),
         id='TaskForm')
 
-# %% ../ex_nbs/01_tasks.ipynb 12
+# %% ../ex_nbs/01_tasks.ipynb 13
 page_heading =Div(cls='flex items-center justify-between space-y-2')(
             Div(cls='space-y-2')(
                 UkH2('Welcome back!'),P("Here's a list of your tasks for this month!", cls=TextT.muted_sm)),
             Div(A(href='#', cls='h-8 w-8 inline-flex rounded-full bg-accent ring-ring')(Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed=sveltecult')),
                 Div(uk_dropdown='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop')(avatar_opts)))
 
-# %% ../ex_nbs/01_tasks.ipynb 13
+# %% ../ex_nbs/01_tasks.ipynb 14
 table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
                  UkDropdownButton(label = "Status", 
                      options = [list(A(FullySpacedContainer(a['status'], a['count'], wrap_tag=P),cls='capitalize') for a in status_dd)],
@@ -91,7 +91,11 @@ table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
                                 ),
                 UkButton('Create Task',cls=('uk-button-primary', TextT.medium_xs), uk_toggle="target: #TaskForm"))
 
-# %% ../ex_nbs/01_tasks.ipynb 15
+# %% ../ex_nbs/01_tasks.ipynb 16
+def checkbox(selected=False, ):
+    if selected: return Input(type='checkbox', cls='uk-checkbox', checked=True)
+    return Input(type='checkbox', cls='uk-checkbox')
+
 def task_dropdown():
     return UkDropdownButton(
         options=[[
@@ -106,40 +110,61 @@ def task_dropdown():
         icon_cls='text-gray-400',
     )
 
-def tasks():
-    return CreateTaskModal(),Div(cls='p-8')(
-        page_heading,
-        Div(cls='mt-8 flex items-center justify-between')(
-            Div(cls='flex flex-1 gap-4')(table_controls)),
-        Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(
-            Table(cls='uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small')(
-                Thead(Tr(Th(cls='uk-table-shrink p-2')(Input(type='checkbox', cls='uk-checkbox')),
-                        *[Th(cls='p-2')(o) for o in ['Task','Title','Status','Priority']],
-                        Th(cls='uk-table-shrink p-2'))),
-                Tbody(
-                    *[Tr(cls=a['selected'])(
-                        Td(cls='uk-table-shrink p-2')(CheckboxX(cls='uk-checkbox')), 
-                        Td(a['id'], cls='p-2'),
-                        Td(cls='uk-table-expand max-w-[500px] truncate p-2')(Span(a['label'], cls='uk-label capitalize'),Span(a['title'], cls='font-medium')),
-                        *map(lambda x: Td(cls='uk-text-nowrap p-2 uk-text-capitalize')(x), (a['status'],a['priority'])),
-                        Td(task_dropdown()))
-                      for a in data])),
-             # Table Footer
-             Div(cls='mt-4 flex items-center justify-between px-2 py-2')(
-                 Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
-                 Div(cls='flex flex-none items-center space-x-8')(
-                     Div('Page 1 of 10', cls='flex w-[100px] items-center justify-center text-sm font-medium'),
-                     Div(cls='flex items-center space-x-2')(
-                         # chevron navigation (dbl left, left, right, dbl right)
-                         UkIconButton(cls='hidden lg:inline-flex')(Span('Go to last page', cls='sr-only'),
-                             Span(uk_icon='chevron-double-left', cls='h-4 w-4')),
-                         UkIconButton(Span('Go to previous page', cls='sr-only'),
-                             Span(uk_icon='chevron-left', cls='h-4 w-4')),
-                         UkIconButton(Span('Go to next page', cls='sr-only'),
-                             Span(uk_icon='chevron-right', cls='h-4 w-4')),
-                         UkIconButton(cls='hidden lg:inline-flex')(
-                             Span('Go to last page', cls='sr-only'),
-                             Span(uk_icon='chevron-double-right', cls='h-4 w-4')))))))
+def cell_render(col, row):
+    if col == "Done": return Td(cls='p-2 uk-table-shrink')(checkbox(row['selected']))
+    elif col == "Task": return Td(row["id"])
+    elif col == 'Title': return Td(cls='uk-table-expand max-w-[500px] truncate p-2')(row["title"], cls='font-medium')
+    elif col in ['Status', 'Priority']: return Td(cls='uk-text-nowrap p-2 uk-text-capitalize')(Span(row[col.lower()], cls='uk-text-capitalize'))
+    elif col == 'Actions': return Td(cls='p-2 uk-table-shrink')(task_dropdown())
 
-# %% ../ex_nbs/01_tasks.ipynb 16
-tasks_homepage = tasks()
+def header_render(col):
+    if col == 'Done': return Th(checkbox, cls='p-2 uk-table-shrink')
+    if col == 'Actions': return Th("", cls='p-2 uk-table-shrink')
+    return Th(col, cls='p-2')
+
+# %% ../ex_nbs/01_tasks.ipynb 17
+task_columns = [
+    "Done", 'Task', 'Title', 'Status', 'Priority', 'Actions'
+]
+
+tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(UkTable(
+    columns=task_columns,
+    data=data,
+    cell_render=cell_render,
+    header_render=header_render,
+))
+
+# %% ../ex_nbs/01_tasks.ipynb 18
+def footer():
+    Div(cls='mt-4 flex items-center justify-between px-2 py-2')(
+        Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
+        Div(cls='flex flex-none items-center space-x-8')(
+            Div('Page 1 of 10', cls='flex w-[100px] items-center justify-center text-sm font-medium'),
+            Div(cls='flex items-center space-x-2')(
+                UkIconButton(cls='hidden lg:inline-flex')(Span('Go to last page', cls='sr-only'),
+                    Span(uk_icon='chevron-double-left', cls='h-4 w-4')),
+                UkIconButton(Span('Go to previous page', cls='sr-only'),
+                    Span(uk_icon='chevron-left', cls='h-4 w-4')),
+                UkIconButton(Span('Go to next page', cls='sr-only'),
+                    Span(uk_icon='chevron-right', cls='h-4 w-4')),
+                UkIconButton(cls='hidden lg:inline-flex')(
+                    Span('Go to last page', cls='sr-only'),
+                    Span(uk_icon='chevron-double-right', cls='h-4 w-4'))
+            )
+        )
+    )
+
+# %% ../ex_nbs/01_tasks.ipynb 19
+tasks_ui = Div(
+    Div(cls='mt-8 flex items-center justify-between')(
+        Div(cls='flex flex-1 gap-4')(table_controls)
+    ),
+    tasks_table,
+    footer(),
+)
+
+# %% ../ex_nbs/01_tasks.ipynb 20
+tasks_homepage = CreateTaskModal(), Div(cls='p-8')(
+    page_heading,
+    tasks_ui
+)

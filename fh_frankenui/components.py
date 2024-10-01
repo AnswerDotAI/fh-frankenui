@@ -8,7 +8,7 @@ __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', '
            'SpacedTxtIcon', 'LAlignedTxtIcon', 'Grid', 'FullySpacedContainer', 'CenteredContainer', 'UkGenericInput',
            'Options', 'UkSelect', 'UkButtonT', 'process_options', 'UkDropdownButton', 'UkButton', 'UkGenericComponent',
            'UkHSplit', 'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'Card',
-           'UkModalTitle', 'Modal']
+           'UkModalTitle', 'Modal', 'default_header', 'default_cell', 'header_row', 'data_row', 'UkTable']
 
 # %% ../lib_nbs/01_components.ipynb 4
 from fasthtml.common import *
@@ -345,3 +345,24 @@ def Modal(*c,
     if footer: res += [Div(cls='uk-modal-footer ' + footer_cls)(footer),]
     return Div(cls='uk-modal uk-modal-container' + cls, uk_modal=True, **kwargs)(*res)
 
+
+# %% ../lib_nbs/01_components.ipynb 71
+def default_header(col): return Th(cls='p-2')(col)
+def default_cell(col, row): return Td(row[col], cls='p-2')
+
+def header_row(columns, header_render):
+    rndr = header_render or default_header
+    return Tr(*map(rndr, columns))
+
+def data_row(row, columns, cell_render):
+    rndr = cell_render or default_cell
+    return Tr(*[rndr(col, row) for col in columns])
+
+def UkTable(columns, data, *args, cls=(), footer=None, cell_render=None, header_render=None, **kwargs):
+    table_cls = 'uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small ' + stringify(cls)
+    table_content = [
+        Thead(header_row(columns, header_render)),
+        Tbody(*map(lambda d: data_row(d, columns, cell_render), data))
+    ]
+    if footer: table_content.append(Tfoot(footer))
+    return Table(cls=table_cls, *args, **kwargs)(*table_content)
