@@ -7,17 +7,17 @@ __all__ = ['priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 'hotkeys
            'table_controls', 'task_columns', 'tasks_table', 'tasks_ui', 'tasks_homepage', 'create_hotkey_li',
            'UkIconButton', 'CreateTaskModal', 'checkbox', 'task_dropdown', 'cell_render', 'header_render', 'footer']
 
-# %% ../ex_nbs/01_tasks.ipynb 3
+# %% ../ex_nbs/01_tasks.ipynb
 from fasthtml.common import *
 from fh_frankenui import *
 from fasthtml.svg import *
 import json
 
-# %% ../ex_nbs/01_tasks.ipynb 7
+# %% ../ex_nbs/01_tasks.ipynb
 with open('../data/status_list.json', 'r') as f: data     = json.load(f)
 with open('../data/statuses.json',    'r') as f: statuses = json.load(f)
 
-# %% ../ex_nbs/01_tasks.ipynb 8
+# %% ../ex_nbs/01_tasks.ipynb
 priority_dd = [{'priority': "low", 'count': 36 }, {'priority': "medium", 'count': 33 }, {'priority': "high", 'count': 31 }]
 
 rows_per_page_dd = [10,20,30,40,50]
@@ -25,7 +25,7 @@ rows_per_page_dd = [10,20,30,40,50]
 status_dd = [{'status': "backlog", 'count': 21 },{'status': "todo", 'count': 21 },{'status': "progress", 'count': 20 },{'status': "done",'count': 19 },{'status': "cancelled", 'count': 19 }]
 
 
-# %% ../ex_nbs/01_tasks.ipynb 10
+# %% ../ex_nbs/01_tasks.ipynb
 def create_hotkey_li(hotkey):
     return Li(A(cls='uk-drop-close justify-between')(
         hotkey[0],
@@ -49,12 +49,12 @@ avatar_opts = Ul(cls='uk-dropdown-nav uk-nav')(
     *map(create_hotkey_li, hotkeys_b)
 )
 
-# %% ../ex_nbs/01_tasks.ipynb 11
+# %% ../ex_nbs/01_tasks.ipynb
 def UkIconButton(*c, sz='small', cls=()):
     if sz not in ('small','medium','large'): raise ValueError(f"Invalid size '{sz}'. Must be 'small', 'medium', or 'large'.")
     return Button(cls=f'uk-icon-button uk-icon-button-{sz} ' + stringify(cls))(*c)
 
-# %% ../ex_nbs/01_tasks.ipynb 12
+# %% ../ex_nbs/01_tasks.ipynb
 def CreateTaskModal():
     return Modal(
         Div(cls='p-6')(
@@ -70,14 +70,14 @@ def CreateTaskModal():
                     UkButton(cls=UkButtonT.primary + ' uk-modal-close')('Submit')))),
         id='TaskForm')
 
-# %% ../ex_nbs/01_tasks.ipynb 13
+# %% ../ex_nbs/01_tasks.ipynb
 page_heading =Div(cls='flex items-center justify-between space-y-2')(
             Div(cls='space-y-2')(
                 UkH2('Welcome back!'),P("Here's a list of your tasks for this month!", cls=TextT.muted_sm)),
             Div(A(href='#', cls='h-8 w-8 inline-flex rounded-full bg-accent ring-ring')(Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed=sveltecult')),
                 Div(uk_dropdown='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop')(avatar_opts)))
 
-# %% ../ex_nbs/01_tasks.ipynb 14
+# %% ../ex_nbs/01_tasks.ipynb
 table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
                  UkDropdownButton(label = "Status", 
                      options = [list(A(FullySpacedDiv(a['status'], a['count'], wrap_tag=P),cls='capitalize') for a in status_dd)],
@@ -91,7 +91,7 @@ table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
                                  btn_cls=(TextT.medium_xs,'uk-button-default')),
                 UkButton('Create Task',cls=('uk-button-primary', TextT.medium_xs), uk_toggle="target: #TaskForm"))
 
-# %% ../ex_nbs/01_tasks.ipynb 16
+# %% ../ex_nbs/01_tasks.ipynb
 def checkbox(selected=False, ):
     if selected: return Input(type='checkbox', cls='uk-checkbox', checked=True)
     return Input(type='checkbox', cls='uk-checkbox')
@@ -122,7 +122,7 @@ def header_render(col):
     if col == 'Actions': return Th("", cls='p-2 uk-table-shrink')
     return Th(col, cls='p-2')
 
-# %% ../ex_nbs/01_tasks.ipynb 17
+# %% ../ex_nbs/01_tasks.ipynb
 task_columns = [
     "Done", 'Task', 'Title', 'Status', 'Priority', 'Actions'
 ]
@@ -134,7 +134,7 @@ tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(U
     header_render=header_render,
 ))
 
-# %% ../ex_nbs/01_tasks.ipynb 18
+# %% ../ex_nbs/01_tasks.ipynb
 def footer():
     return Div(cls='mt-4 flex items-center justify-between px-2 py-2')(
         Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
@@ -154,7 +154,7 @@ def footer():
         )
     )
 
-# %% ../ex_nbs/01_tasks.ipynb 19
+# %% ../ex_nbs/01_tasks.ipynb
 tasks_ui = Div(
     Div(cls='mt-8 flex items-center justify-between')(
         Div(cls='flex flex-1 gap-4')(table_controls)
@@ -163,7 +163,7 @@ tasks_ui = Div(
     footer(),
 )
 
-# %% ../ex_nbs/01_tasks.ipynb 20
+# %% ../ex_nbs/01_tasks.ipynb
 tasks_homepage = CreateTaskModal(), Div(cls='p-8')(
     page_heading,
     tasks_ui
