@@ -4,7 +4,7 @@
 __all__ = ['sidebar_group1', 'sidebar_group2', 'mail_data', 'mail_homepage', 'NavItem', 'NavGroup', 'Sidebar', 'load_mail_data',
            'format_date', 'MailItem', 'MailList', 'MailContent', 'IconNavItem', 'IconNav', 'MailDetailView']
 
-# %% ../ex_nbs/08_mail.ipynb 1
+# %% ../ex_nbs/08_mail.ipynb
 from fasthtml.common import *
 from fasthtml.components import Uk
 from fh_frankenui import *
@@ -17,7 +17,7 @@ import matplotlib.pylab as plt
 import json
 from datetime import datetime
 
-# %% ../ex_nbs/08_mail.ipynb 5
+# %% ../ex_nbs/08_mail.ipynb
 def NavItem(icon, text, quantity=None):
     cls = 'flex items-center space-x-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground'
     content = [UkIcon(icon), Span(text)]
@@ -25,11 +25,11 @@ def NavItem(icon, text, quantity=None):
         content.append(Span(quantity, cls='ml-auto text-background bg-primary rounded-full px-2 py-0.5 text-xs'))
     return Li(A(*content, href='#', cls=cls))
 
-# %% ../ex_nbs/08_mail.ipynb 6
+# %% ../ex_nbs/08_mail.ipynb
 def NavGroup(items):
     return Ul(cls='uk-nav uk-nav-default space-y-3')(*[NavItem(i, t, q) for i, t, q in items if q or t != 'Trash'])
 
-# %% ../ex_nbs/08_mail.ipynb 7
+# %% ../ex_nbs/08_mail.ipynb
 sidebar_group1 = (('home', 'Inbox', '128'), ('file-text', 'Drafts', '9'), (' arrow-up-right', 'Sent', ''),
     ('ban', 'Junk', '23'), ('trash', 'Trash', ''), ('folder', 'Archive', ''))
 
@@ -45,18 +45,18 @@ def Sidebar():
                     UkHSplit(),
                     NavGroup(sidebar_group2)))
 
-# %% ../ex_nbs/08_mail.ipynb 8
+# %% ../ex_nbs/08_mail.ipynb
 def load_mail_data():
     with open(Path('../data/mail.json')) as f: return json.load(f)
 
 mail_data = load_mail_data()
 
-# %% ../ex_nbs/08_mail.ipynb 9
+# %% ../ex_nbs/08_mail.ipynb
 def format_date(date_str):
     date_obj = datetime.fromisoformat(date_str)
     return date_obj.strftime("%Y-%m-%d %I:%M %p")
 
-# %% ../ex_nbs/08_mail.ipynb 10
+# %% ../ex_nbs/08_mail.ipynb
 def MailItem(mail):
     cls_base = 'relative rounded-lg border border-border p-3 text-sm hover:bg-accent'
     cls = f"{cls_base} {'bg-muted' if mail == mail_data[0] else ''} {'tag-unread' if not mail['read'] else ''}"
@@ -74,10 +74,10 @@ def MailItem(mail):
                 *[A(label, cls=f"uk-label relative z-10 {'uk-label-primary' if label == 'work' else ''}", href='#')
                   for label in mail['labels']])))
 
-# %% ../ex_nbs/08_mail.ipynb 11
+# %% ../ex_nbs/08_mail.ipynb
 def MailList(mails): return Ul(cls='js-filter space-y-2 p-4 pt-0')(*[MailItem(mail) for mail in mails])
 
-# %% ../ex_nbs/08_mail.ipynb 12
+# %% ../ex_nbs/08_mail.ipynb
 def MailContent():
     return Div(cls='flex flex-col')(
         Div(cls='flex h-14 flex-none items-center border-b border-border px-4 py-2')(
@@ -92,11 +92,11 @@ def MailContent():
                     Input(cls='uk-input', type='text', placeholder='Search'))),
             Div(cls='max-h-[600px] flex-1 overflow-y-auto')(MailList(mail_data))))
 
-# %% ../ex_nbs/08_mail.ipynb 13
+# %% ../ex_nbs/08_mail.ipynb
 def IconNavItem(*d): return [Li(A(UkIcon(o[0]),uk_tooltip=o[1])) for o in d]  
 def IconNav(*c,cls=''): return Ul(cls=f'uk-iconnav {cls}')(*c)
 
-# %% ../ex_nbs/08_mail.ipynb 14
+# %% ../ex_nbs/08_mail.ipynb
 def MailDetailView(mail):
     return Div(cls='flex flex-col')(
         Div(cls='flex h-14 flex-none items-center border-b border-border p-2')(
@@ -125,7 +125,7 @@ def MailDetailView(mail):
                     UkSwitch('Mute this thread',id='mute', cls='inline-flex items-center gap-x-2 text-xs'),
                 UkButton('Send', cls=UkButtonT.primary))))
 
-# %% ../ex_nbs/08_mail.ipynb 15
+# %% ../ex_nbs/08_mail.ipynb
 def mail_homepage():
     return Div(cls='flex divide-x divide-border')(
         Sidebar(),
@@ -135,5 +135,5 @@ def mail_homepage():
 
 
 
-# %% ../ex_nbs/08_mail.ipynb 17
+# %% ../ex_nbs/08_mail.ipynb
 mail_homepage = mail_homepage()

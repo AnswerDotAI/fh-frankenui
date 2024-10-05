@@ -7,9 +7,9 @@ __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', '
            'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'DiceBearAvatar', 'Grid', 'ResponsiveGrid', 'FullySpacedDiv',
            'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'UkGenericInput', 'Options',
            'UkSelect', 'UkButtonT', 'process_options', 'UkDropdownButton', 'UkButton', 'UkGenericComponent', 'UkHSplit',
-           'UkHLine', 'UkNavDivider', 'HelpText', 'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'UkSidebarItem',
-           'UkSidebarUl', 'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle', 'Modal', 'default_header',
-           'default_cell', 'header_row', 'data_row', 'UkTable', 'UkFormSection']
+           'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'UkSidebarItem', 'UkSidebarUl',
+           'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle', 'Modal', 'default_header', 'default_cell',
+           'header_row', 'data_row', 'UkTable', 'UkFormSection']
 
 # %% ../lib_nbs/00_core.ipynb
 from fasthtml.common import *
@@ -18,6 +18,8 @@ from enum import Enum, EnumType
 from fasthtml.components import Uk_select,Uk_input_tag
 from functools import partial
 from itertools import zip_longest
+from typing import Union, Tuple, Optional
+from fastcore.all import L
 
 # %% ../lib_nbs/00_core.ipynb
 # need a better name, stringify might be too general for what it does 
@@ -110,14 +112,13 @@ class TextT(Enum):
 
 # %% ../lib_nbs/00_core.ipynb
 def UkIcon(icon, ratio=1,cls=()):
-    return Span(uk_icon=f"icon: {icon}; ratio: {ratio}",cls=cls)
+    return Span(uk_icon=f"icon: {icon}; ratio: {ratio}",cls='z-[-1] '+stringify(cls))
 
 # %% ../lib_nbs/00_core.ipynb
 def DiceBearAvatar(seed_name, h, w):
     url = 'https://api.dicebear.com/8.x/lorelei/svg?seed='
     return Span(cls=f"relative flex h-{h} w-{w} shrink-0 overflow-hidden rounded-full bg-accent")(
             Img(cls="aspect-square h-full w-full", alt="Avatar", src=f"{url}{seed_name}"))
-    
 
 # %% ../lib_nbs/00_core.ipynb
 def Grid(*c, cols=3, gap=2, cls=(), **kwargs):
@@ -130,9 +131,9 @@ def ResponsiveGrid(*c, sm=1, md=2, lg=3, xl=4, gap=2, cls='', **kwargs):
 
 # %% ../lib_nbs/00_core.ipynb
 def FullySpacedDiv(*c,wrap_tag=None, cls='', **kwargs):
-    wrag_fn = ifnone(wrap_tag, noop)
+    wrap_fn = ifnone(wrap_tag, noop)
     cls = stringify(cls)
-    return Div(cls='uk-flex uk-flex-between uk-flex-middle uk-width-1-1 '+cls, **kwargs)(*(map(wrap_tag,c)))
+    return Div(cls='uk-flex uk-flex-between uk-flex-middle uk-width-1-1 '+cls, **kwargs)(*(map(wrap_fn,c)))
 
 # %% ../lib_nbs/00_core.ipynb
 def CenteredDiv(*c,cls=(), **kwargs):
@@ -160,9 +161,6 @@ def HStackedDiv(*c, gap=2, cls='', **kwargs):
     return Div(cls=f'flex flex-row space-x-{gap} ' + stringify(cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-from typing import Union, Tuple, Optional
-from fastcore.all import L
-
 def UkGenericInput(input_fn: FT, # FT Components that generates a user input (e.g. `TextArea`)
                     label:str|FT=(), # String or FT component that goes in `Label`
                     lbl_cls:str|Enum=(), # Additional classes that goes in `Label`
@@ -242,7 +240,7 @@ def UkDropdownButton(
     icon='triangle-down',  # Icon to use for the dropdown
     icon_cls='',    # Additional classes for the icon
     icon_position='right'  # Position of the icon: 'left' or 'right'
-):
+    ):
     dd_cls, btn_cls, cls, icon_cls = map(stringify, (dd_cls, btn_cls, cls, icon_cls))
     icon_component = UkIcon(icon, cls=icon_cls) if icon else None
     btn_content = [] if label is None else [label]
@@ -286,17 +284,16 @@ def UkHLine(lwidth=2, y_space=4): return Div(cls=f"my-{y_space} h-[{lwidth}px] w
 def UkNavDivider(): return Li(cls="uk-nav-divider")
 
 # %% ../lib_nbs/00_core.ipynb
-def HelpText(c):return P(c,cls=TextT.muted_sm)
-
-# %% ../lib_nbs/00_core.ipynb
-def UkNavbarDropdown(*c, label, has_header=False):
+def UkNavbarDropdown(*c, label, href='#', cls='', has_header=False, **kwargs):
+    fn = lambda x: Li(item, cls='uk-drop-close', href='#demo', uk_toggle=True)
     flattened = []
     for i, item in enumerate(c):
         if i > 0: flattened.append(Li(cls="uk-nav-divider"))
         if isinstance(item, (list,tuple)): flattened.extend(map(Li, item))
-        else: flattened.append(Li(item, cls="uk-nav-header" if i == 0 and has_header else None))
-    return Li(A(label, href='#'), Div(cls='uk-navbar-dropdown')(
-        Ul(cls='uk-nav uk-navbar-dropdown-nav')(*flattened)))
+        else: flattened.append(Li(item, cls="uk-nav-header" if i == 0 and has_header else None, uk_toggle=True))
+    return (Li(cls=cls, **kwargs)(
+                A(label, cls='uk-drop-close', href='#', uk_toggle=True), 
+                Div(cls='uk-navbar-dropdown', uk_dropdown="mode: click; pos: bottom-left")(Ul(cls='uk-nav uk-dropdown-nav')(*flattened))))
 
 # %% ../lib_nbs/00_core.ipynb
 def _NavBarSide(n, s):
@@ -306,10 +303,11 @@ def _NavBarSide(n, s):
         return item
     return Div(cls=f'uk-navbar-{s}')(Ul(cls='uk-navbar-nav')(*map(add_class, tuplify(n))))
 
+# %% ../lib_nbs/00_core.ipynb
 def UkNavbar(lnav: Sequence[Union[str, FT]]=None, 
              rnav: Sequence[Union[str, FT]]=None, 
-             cls='z-10') -> FT:
-    return Div(cls='uk-navbar-container uk-width-1-1 relative z-50 '+ cls, uk_navbar=True)(
+             cls='') -> FT:
+    return Div(cls='uk-navbar-container uk-width-1-1 relative'+ stringify(cls), uk_navbar=True)(
              _NavBarSide(lnav,'left') if lnav else '',
              _NavBarSide(rnav,'right') if rnav else '')
 
