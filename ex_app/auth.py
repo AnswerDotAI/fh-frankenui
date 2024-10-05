@@ -6,7 +6,7 @@ __all__ = ['auth_homepage', 'page']
 # %% ../ex_nbs/06_auth.ipynb 1
 from fasthtml.common import *
 from fasthtml.components import Uk
-from fh_frankenui.components import *
+from fh_frankenui import *
 from fasthtml.components import Uk_icon
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml
@@ -24,7 +24,7 @@ def page():
 
     right = Div(cls="col-span-2 flex flex-col p-8 lg:col-span-1")(
         Div(cls="flex flex-none justify-end")(UkButton("Login", cls=UkButtonT.ghost, uk_toggle="#demo")),
-        CenteredContainer(cls='flex-1')(
+        CenteredDiv(cls='flex-1')(
             Div(cls=f"space-y-6 w-[350px]")(
                 Div(cls="flex flex-col space-y-2 text-center")(
                     UkH3("Create an account"),

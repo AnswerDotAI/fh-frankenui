@@ -9,7 +9,7 @@ __all__ = ['Left1', 'Card1Svg', 'Card2Svg', 'AppleSvg', 'Left2', 'area_opts', 's
 
 # %% ../ex_nbs/02_cards.ipynb 2
 from fasthtml.common import *
-from fh_frankenui.components import *
+from fh_frankenui import *
 from fasthtml.svg import *
 import calendar
 
@@ -32,9 +32,9 @@ AppleSvg = Svg(role="img", viewBox="0 0 24 24", cls="mb-3 h-6 w-6")(Path(d="M12.
 # %% ../ex_nbs/02_cards.ipynb 10
 Left2 = Card(
     Grid(
-        UkButton(CenteredContainer(Card1Svg,"Card"), cls='h-20 w-full border-2 border-primary'),
-        UkButton(CenteredContainer(Card2Svg, "Card"), cls='h-20 w-full'),
-        UkButton(CenteredContainer(AppleSvg, "Apple"), cls='h-20 w-full'),
+        UkButton(CenteredDiv(Card1Svg,"Card"), cls='h-20 w-full border-2 border-primary'),
+        UkButton(CenteredDiv(Card2Svg, "Card"), cls='h-20 w-full'),
+        UkButton(CenteredDiv(AppleSvg, "Apple"), cls='h-20 w-full'),
         cols=3,gap=4),
     Div(cls='space-y-4')(
     UkInput('Name', 'name',placeholder='m@example.com'),
@@ -56,7 +56,7 @@ Right1 = Card(
     UkTextArea( label='Description',placeholder='Please include all information relevant to your issue'),
     UkFormLabel(label="Tags",state="danger", value="Spam,Invalid"),
     header=(H3('Report an issue'),P(cls=TextT.muted_sm)('What area are you having problems with')),
-    footer = FullySpacedContainer(UkButton(cls=UkButtonT.ghost)('Cancel'),UkButton(cls=UkButtonT.primary)('Submit')))
+    footer = FullySpacedDiv(UkButton(cls=UkButtonT.ghost)('Cancel'),UkButton(cls=UkButtonT.primary)('Submit')))
 
 
 # %% ../ex_nbs/02_cards.ipynb 14

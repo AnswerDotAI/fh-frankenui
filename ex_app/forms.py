@@ -8,7 +8,7 @@ __all__ = ['sidebar_items', 'sidebar', 'forms_homepage', 'heading', 'profile_for
 
 # %% ../ex_nbs/04_forms.ipynb 2
 from fasthtml.common import *
-from fh_frankenui.components import *
+from fh_frankenui import *
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml
 import numpy as np

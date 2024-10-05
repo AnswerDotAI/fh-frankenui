@@ -9,7 +9,7 @@ __all__ = ['rev', 'sub', 'sal', 'act', 'top_info_row', 'recent_sales', 'teams', 
 
 # %% ../ex_nbs/03_dashboard.ipynb 2
 from fasthtml.common import *
-from fh_frankenui.components import *
+from fh_frankenui import *
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml
 import numpy as np
@@ -83,7 +83,7 @@ hotkeys = [
     ('New Team', '')
 ]
 
-def space(*c): return A(FullySpacedContainer(*c, wrap_tag=P))
+def space(*c): return A(FullySpacedDiv(*c, wrap_tag=P))
 
 hotkeys = tuple(map(lambda x: space(*x), hotkeys))
 logout = space('Logout' ,''),

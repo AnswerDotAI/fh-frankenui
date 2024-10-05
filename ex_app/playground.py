@@ -6,7 +6,7 @@ __all__ = ['preset_options', 'playground_homepage', 'playground_navbar', 'page']
 # %% ../ex_nbs/07_playground.ipynb 2
 from fasthtml.common import *
 from fasthtml.components import Uk
-from fh_frankenui.components import *
+from fh_frankenui import *
 from fasthtml.components import Uk_icon
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml

@@ -7,7 +7,7 @@ __all__ = ['sidebar_group1', 'sidebar_group2', 'mail_data', 'mail_homepage', 'Na
 # %% ../ex_nbs/08_mail.ipynb 1
 from fasthtml.common import *
 from fasthtml.components import Uk
-from fh_frankenui.components import *
+from fh_frankenui import *
 from fasthtml.components import Uk_icon
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml

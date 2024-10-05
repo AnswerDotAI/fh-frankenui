@@ -9,7 +9,7 @@ __all__ = ['priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 'hotkeys
 
 # %% ../ex_nbs/01_tasks.ipynb 3
 from fasthtml.common import *
-from fh_frankenui.components import *
+from fh_frankenui import *
 from fasthtml.svg import *
 import json
 
@@ -80,10 +80,10 @@ page_heading =Div(cls='flex items-center justify-between space-y-2')(
 # %% ../ex_nbs/01_tasks.ipynb 14
 table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
                  UkDropdownButton(label = "Status", 
-                     options = [list(A(FullySpacedContainer(a['status'], a['count'], wrap_tag=P),cls='capitalize') for a in status_dd)],
+                     options = [list(A(FullySpacedDiv(a['status'], a['count'], wrap_tag=P),cls='capitalize') for a in status_dd)],
                      btn_cls=(TextT.medium_xs, 'uk-button-default')),
                  UkDropdownButton(label = "Priority", 
-                    options = [[A(FullySpacedContainer(LAlignedTxtIcon(a['priority'], icon="check", icon_right=False), a['count']),cls='capitalize') for a in priority_dd]],
+                    options = [[A(FullySpacedDiv(LAlignedTxtIcon(a['priority'], icon="check", icon_right=False), a['count']),cls='capitalize') for a in priority_dd]],
                      btn_cls=(TextT.medium_xs,'uk-button-default')),
                 UkDropdownButton(label='View',
                                  options=[[A(LAlignedTxtIcon(o, icon="check", icon_right=False)) for o in ['Title','Status','Priority']]],
@@ -102,7 +102,7 @@ def task_dropdown():
             A('Edit', cls='uk-drop-close justify-between'),
             A('Make a copy', cls='uk-drop-close justify-between'),
             A('Favorite', cls='uk-drop-close justify-between')],
-            A(FullySpacedContainer('Delete', Span('⌘⌫', cls='ml-auto text-xs tracking-widest opacity-60'))),
+            A(FullySpacedDiv('Delete', Span('⌘⌫', cls='ml-auto text-xs tracking-widest opacity-60'))),
         ],
         btn_cls='uk-button-default',
         dd_cls='min-w-[200px]',
