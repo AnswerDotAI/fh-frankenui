@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 'hotkeys_b', 'avatar_opts', 'page_heading',
            'table_controls', 'task_columns', 'tasks_table', 'tasks_ui', 'tasks_homepage', 'create_hotkey_li',
-           'UkIconButton', 'CreateTaskModal', 'checkbox', 'task_dropdown', 'cell_render', 'header_render', 'footer']
+           'UkIconButton', 'CreateTaskModal', 'checkbox', 'task_dropdown', 'header_render', 'cell_render', 'footer']
 
 # %% ../ex_nbs/01_tasks.ipynb
 from fasthtml.common import *
@@ -94,33 +94,35 @@ table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
 # %% ../ex_nbs/01_tasks.ipynb
 def checkbox(selected=False, ):
     if selected: return Input(type='checkbox', cls='uk-checkbox', checked=True)
-    return Input(type='checkbox', cls='uk-checkbox')
+    return              Input(type='checkbox', cls='uk-checkbox')
 
+# %% ../ex_nbs/01_tasks.ipynb
 def task_dropdown():
     return UkDropdownButton(
         options=[[
-            A('Edit', cls='uk-drop-close justify-between'),
-            A('Make a copy', cls='uk-drop-close justify-between'),
-            A('Favorite', cls='uk-drop-close justify-between')],
-            A(FullySpacedDiv('Delete', Span('⌘⌫', cls='ml-auto text-xs tracking-widest opacity-60'))),
-        ],
-        btn_cls='uk-button-default',
-        dd_cls='min-w-[200px]',
-        icon='more',
-        icon_cls='text-gray-400',
-    )
+            A('Edit',                   cls='uk-drop-close'),
+            A('Make a copy',            cls='uk-drop-close'),
+            A('Favorite',               cls='uk-drop-close')],
+            A(SpacedPP('Delete', '⌘⌫'), cls='uk-drop-close')])
 
-def cell_render(col, row):
-    if col == "Done": return Td(cls='p-2 uk-table-shrink')(checkbox(row['selected']))
-    elif col == "Task": return Td(row["id"])
-    elif col == 'Title': return Td(cls='uk-table-expand max-w-[500px] truncate p-2')(row["title"], cls='font-medium')
-    elif col in ['Status', 'Priority']: return Td(cls='uk-text-nowrap p-2 uk-text-capitalize')(Span(row[col.lower()], cls='uk-text-capitalize'))
-    elif col == 'Actions': return Td(cls='p-2 uk-table-shrink')(task_dropdown())
-
+# %% ../ex_nbs/01_tasks.ipynb
 def header_render(col):
-    if col == 'Done': return Th(checkbox, cls='p-2 uk-table-shrink')
-    if col == 'Actions': return Th("", cls='p-2 uk-table-shrink')
-    return Th(col, cls='p-2')
+    cls = 'p-2 ' + 'uk-table-shrink' if col in ('Done','Actions') else ''
+    match col:
+        case "Done":    return Th(checkbox, cls=cls)
+        case 'Actions': return Th("",       cls=cls)
+        case _:         return Th(col, cls=cls)
+
+# %% ../ex_nbs/01_tasks.ipynb
+def cell_render(col, row):
+    def _Td(*args,cls='', **kwargs): return Td(*args, cls=f'p-2 {cls}',**kwargs)
+    match col:
+        case "Done":  return _Td(cls='uk-table-shrink')(checkbox(row['selected']))
+        case "Task":  return _Td(row["id"])
+        case "Title": return _Td(cls='uk-table-expand max-w-[500px] truncate')(row["title"], cls='font-medium')
+        case "Status" | "Priority": return _Td(cls='uk-text-nowrap uk-text-capitalize')(Span(row[col.lower()]))
+        case "Actions": return _Td(cls='uk-table-shrink')(task_dropdown())
+        case _: raise ValueError(f"Unknown column: {col}")
 
 # %% ../ex_nbs/01_tasks.ipynb
 task_columns = [
