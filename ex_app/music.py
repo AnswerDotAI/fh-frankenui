@@ -131,13 +131,13 @@ sidebar_sections = list(map(LAlignedIconTxts, sections, icons))
 
 # %% ../ex_nbs/05_music.ipynb
 headers = ["Discover", "Library", "Playlist"]
-sidebar = UkSidebar(sidebar_sections, headers)
+sidebar = UkSidebar(sidebar_sections, list(map(UkH3,headers)))
 
 # %% ../ex_nbs/05_music.ipynb
 def page():
     return Div(music_headers,UkHSplit(),
         Grid(sidebar,
-            Div(cls="col-span-5 border-l border-border lg:col-span-4")(
+            Div(cls="col-span-4 border-l border-border")(
                 Div(cls="px-8 py-6")(
                     Div(cls="flex items-center justify-between")(
                         Div(cls="max-w-80")(tabs),

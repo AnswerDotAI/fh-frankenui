@@ -8,8 +8,8 @@ __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', '
            'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'UkGenericInput', 'Options',
            'UkSelect', 'UkButtonT', 'process_options', 'UkDropdownButton', 'UkButton', 'UkGenericComponent', 'UkHSplit',
            'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'UkSidebarItem', 'UkSidebarUl',
-           'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle', 'Modal', 'default_header', 'default_cell',
-           'header_row', 'data_row', 'UkTable', 'UkFormSection']
+           'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle', 'Modal', 'TableHeader', 'TableRow', 'UkTable',
+           'UkFormSection']
 
 # %% ../lib_nbs/00_core.ipynb
 from fasthtml.common import *
@@ -319,20 +319,22 @@ def UkTab(*items):
     return Ul(cls="uk-tab-alt max-w-96")(*[NavTab(item, active=i==0) for i, item in enumerate(items)])
 
 # %% ../lib_nbs/00_core.ipynb
-def UkSidebarItem(item, is_header=False): return UkH4(item) if is_header else A(role='button')(item)
+def UkSidebarItem(item, is_header=False): 
+    return item if is_header else A(role='button')(item)
 
-def UkSidebarUl(*lis, cls='', **kwargs): 
-    return Ul(cls=f"uk-nav uk-nav-secondary space-y-2 {cls}", **kwargs)(*map(Li,lis))
+def UkSidebarUl(*lis, cls='space-y-2', **kwargs): 
+    return Ul(cls=f"uk-nav uk-nav-secondary " + stringify(cls), **kwargs)(*map(Li,lis))
 
 def UkSidebarSection(items, header=None, cls='', **kwargs):
-    section = [UkSidebarItem(item) for item in items]
-    if header: section.insert(0, UkSidebarItem(header, is_header=True))
-    return UkSidebarUl(*section, cls=cls, **kwargs)
+    section = []
+    if header: section.append(header)
+    section += [UkSidebarItem(item) for item in items]
+    return UkSidebarUl(*section, cls=stringify(cls), **kwargs)
 
 def UkSidebar(sections, headers=None, outer_margin=4, inner_margin=4, cls=(), **kwargs):
-    headers = headers or [None] * len(sections)
-    sidebar_content = map(lambda s_h: UkSidebarSection(*s_h, **kwargs), zip(sections, headers))
-    return Div(cls=f"space-y-{inner_margin} p-{outer_margin} {cls}")(*sidebar_content)
+    assert headers is None or len(headers)==len(sections)
+    sidebar_content = map(lambda s_h: UkSidebarSection(*s_h, **kwargs), zip(sections, tuplify(headers)))
+    return Div(cls=f"space-y-{inner_margin} p-{outer_margin} " + stringify(cls))(*sidebar_content)
 
 # %% ../lib_nbs/00_core.ipynb
 def Card(*c, # Components that go in the body
@@ -372,22 +374,24 @@ def Modal(*c,
 
 
 # %% ../lib_nbs/00_core.ipynb
-def default_header(col): return Th(cls='p-2')(col)
-def default_cell(col, row): return Td(row[col], cls='p-2')
+def _default_cell(col, row): return Td(row[col], cls='p-2')
 
-def header_row(columns, header_render):
-    rndr = header_render or default_header
+# %% ../lib_nbs/00_core.ipynb
+def TableHeader(columns, header_render=None):
+    rndr = header_render or Th(cls='p-2')
     return Tr(*map(rndr, columns))
 
-def data_row(row, columns, cell_render):
-    rndr = cell_render or default_cell
+# %% ../lib_nbs/00_core.ipynb
+def TableRow(row, columns, cell_render=None):
+    rndr = cell_render or _default_cell
     return Tr(*[rndr(col, row) for col in columns])
 
+# %% ../lib_nbs/00_core.ipynb
 def UkTable(columns, data, *args, cls=(), footer=None, cell_render=None, header_render=None, **kwargs):
     table_cls = 'uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small ' + stringify(cls)
     table_content = [
-        Thead(header_row(columns, header_render)),
-        Tbody(*map(lambda d: data_row(d, columns, cell_render), data))
+        Thead(TableHeader(columns, header_render)),
+        Tbody(*map(lambda d: TableRow(d, columns, cell_render), data))
     ]
     if footer: table_content.append(Tfoot(footer))
     return Table(cls=table_cls, *args, **kwargs)(*table_content)

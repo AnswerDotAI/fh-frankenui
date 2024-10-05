@@ -6,7 +6,7 @@
 __all__ = ['sidebar_items', 'sidebar', 'forms_homepage', 'heading', 'profile_form', 'account_form', 'appearance_form', 'UkRadio',
            'UkToggleSwitch', 'notifications_form', 'UkCheckbox', 'display_form', 'page']
 
-# %% ../ex_nbs/04_forms.ipynb 2
+# %% ../ex_nbs/04_forms.ipynb
 from fasthtml.common import *
 from fh_frankenui import *
 from fasthtml.svg import *
@@ -14,14 +14,14 @@ from fh_matplotlib import matplotlib2fasthtml
 import numpy as np
 import matplotlib.pylab as plt
 
-# %% ../ex_nbs/04_forms.ipynb 6
+# %% ../ex_nbs/04_forms.ipynb
 def heading():
     return Div(cls="space-y-5")(
             UkH2("Settings"),
             P("Manage your account settings and set e-mail preferences.", cls=TextT.muted_sm),
             UkHSplit())
 
-# %% ../ex_nbs/04_forms.ipynb 8
+# %% ../ex_nbs/04_forms.ipynb
 sidebar_items = ["Profile", "Account", "Appearance", "Notifications", "Display"]
 sidebar = UkSidebar(
     sections=[sidebar_items],
@@ -34,7 +34,7 @@ sidebar = UkSidebar(
 # To display the sidebar
 show(sidebar)
 
-# %% ../ex_nbs/04_forms.ipynb 10
+# %% ../ex_nbs/04_forms.ipynb
 def profile_form():
     content = (Div(cls="space-y-2")(
             UkInput("Username",placeholder='sveltecult', id='username'),
@@ -58,7 +58,7 @@ def profile_form():
     
     return UkFormSection('Profile', 'This is how others will see you on the site.', button_txt='Update profile', *content)
 
-# %% ../ex_nbs/04_forms.ipynb 12
+# %% ../ex_nbs/04_forms.ipynb
 def account_form():
     content = (
         Div(cls="space-y-2")(
@@ -76,7 +76,7 @@ def account_form():
     
     return UkFormSection('Account', 'Update your account settings. Set your preferred language and timezone.', button_txt='Update profile', *content)
 
-# %% ../ex_nbs/04_forms.ipynb 14
+# %% ../ex_nbs/04_forms.ipynb
 def appearance_form():
     content = (
         Div(cls="space-y-2")(
@@ -114,7 +114,7 @@ def appearance_form():
     
     return UkFormSection('Appearance', 'Customize the appearance of the app. Automatically switch between day and night themes.', button_txt='Update preferences', *content)
 
-# %% ../ex_nbs/04_forms.ipynb 15
+# %% ../ex_nbs/04_forms.ipynb
 def UkRadio(label, id, name, checked=False, **kwargs):
     return Label(cls="block text-sm")(
         Input(id=id, cls="uk-radio mr-2", name=name, type="radio", checked=checked, **kwargs), label
@@ -154,7 +154,7 @@ def notifications_form():
     return UkFormSection('Notifications', 'Configure how you receive notifications.', 
                          *content, button_txt="Update notifications")
 
-# %% ../ex_nbs/04_forms.ipynb 17
+# %% ../ex_nbs/04_forms.ipynb
 def UkCheckbox(label, id, checked=False, **kwargs):
     return Label(cls="block text-sm", for_=id)(
         Input(cls="uk-checkbox mr-2", id=id, type="checkbox", checked=checked, **kwargs),
@@ -172,7 +172,7 @@ def display_form():
     
     return UkFormSection('Display', 'Turn items on or off to control what\'s displayed in the app.', button_txt='Update display', *content)
 
-# %% ../ex_nbs/04_forms.ipynb 18
+# %% ../ex_nbs/04_forms.ipynb
 def page():
     return Div(cls="p-6 lg:p-10")(
         heading(),
@@ -187,5 +187,5 @@ def page():
                     Li()(display_form())
                     )))))
 
-# %% ../ex_nbs/04_forms.ipynb 19
+# %% ../ex_nbs/04_forms.ipynb
 forms_homepage = page()
