@@ -151,7 +151,7 @@ def Grid(*c,      # Divs/Containers that should be divided into a grid
         ):
     """Creates a grid with the given number of columns, often used for a grid of cards"""
     cls = stringify(cls)
-    return Div(cls=f'grid grid-cols-{cols}'+cls, **kwargs)(*c)
+    return Div(cls=(f'grid grid-cols-{cols}',cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
 def ResponsiveGrid(*c, sm=1, md=2, lg=3, xl=4, gap=2, cls='', **kwargs):

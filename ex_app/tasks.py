@@ -14,8 +14,8 @@ from fasthtml.svg import *
 import json
 
 # %% ../ex_nbs/01_tasks.ipynb
-with open('../data/status_list.json', 'r') as f: data     = json.load(f)
-with open('../data/statuses.json',    'r') as f: statuses = json.load(f)
+with open('data/status_list.json', 'r') as f: data     = json.load(f)
+with open('data/statuses.json',    'r') as f: statuses = json.load(f)
 
 # %% ../ex_nbs/01_tasks.ipynb
 priority_dd = [{'priority': "low", 'count': 36 }, {'priority': "medium", 'count': 33 }, {'priority': "high", 'count': 31 }]
@@ -87,11 +87,13 @@ table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
 
 # %% ../ex_nbs/01_tasks.ipynb
 def checkbox(selected=False, ):
+    # TODO: Use UkCheckbox Type
     if selected: return Input(type='checkbox', cls='uk-checkbox', checked=True)
     return              Input(type='checkbox', cls='uk-checkbox')
 
 # %% ../ex_nbs/01_tasks.ipynb
 def task_dropdown():
+    # TODO: Figure out uk-drop-close boilerplate fix
     return UkDropdownButton([
             A('Edit',                   cls='uk-drop-close'),
             A('Make a copy',            cls='uk-drop-close'),
