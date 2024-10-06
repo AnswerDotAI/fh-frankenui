@@ -6,7 +6,7 @@
 __all__ = ['stringify', 'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'DiceBearAvatar', 'FlexT', 'GridT', 'Grid',
            'ResponsiveGrid', 'FullySpacedDiv', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv',
            'HStackedDiv', 'SpaceBetweenDiv', 'UkGenericInput', 'UkInput', 'UkSwitch', 'UkCheckbox', 'UkTextArea',
-           'UkFormLabel', 'UkButtonT', 'UkIconButton', 'UkButton', 'Options', 'UkSelect', 'UkDropdownButton',
+           'UkFormLabel', 'UkButtonT', 'UkButton', 'UkIconButton', 'Options', 'UkSelect', 'UkDropdownButton',
            'UkGenericComponent', 'UkH1', 'UkH2', 'UkH3', 'UkH4', 'UkH5', 'UkH6', 'UkHSplit', 'UkHLine', 'UkNavDivider',
            'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'UkSidebarItem', 'UkSidebarUl', 'UkSidebarSection',
            'UkSidebar', 'Card', 'UkModalTitle', 'Modal', 'TableHeader', 'TableRow', 'UkTable', 'UkFormSection']
@@ -160,29 +160,37 @@ def ResponsiveGrid(*c, sm=1, md=2, lg=3, xl=4, gap=2, cls='', **kwargs):
 
 # %% ../lib_nbs/00_core.ipynb
 def FullySpacedDiv(*c,                # Components
-                   wrap_tag=None,     # Wrap components in this tag
                    cls='uk-width-1-1',# Classes for outer div
                    **kwargs           # Additional args for outer div
                   ):                  # Div with spaced components via flex classes
     "Creates a flex div with it's components having as much space between them as possible"
-    wrap_fn = ifnone(wrap_tag, noop)
     cls = stringify(cls)
-    return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*(map(wrap_fn,c)))
+    return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def CenteredDiv(*c,
-                cls=(), 
-                **kwargs):
+def CenteredDiv(*c,      # Components
+                cls=(),  # Classes for outer div
+                **kwargs # Additional args for outer div
+               ): # Div with components centered in it
+    "Creates a flex div with it's components centered in it"
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.col,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def LAlignedDiv(*c, cls='', **kwargs):
+def LAlignedDiv(*c,      # Components
+                cls=(),  # Classes for outer div
+                **kwargs # Additional args for outer div
+               ): # Div with components aligned to the left
+    "Creates a flex div with it's components aligned to the left"
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.left,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def RAlignedDiv(*c, cls='', **kwargs):
+def RAlignedDiv(*c,      # Components
+                cls=(),  # Classes for outer div
+                **kwargs # Additional args for outer div
+               ): # Div with components aligned to the right
+    "Creates a flex div with it's components aligned to the right"
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.right,FlexT.middle,cls), **kwargs)(*c)
 
@@ -219,43 +227,47 @@ def UkGenericInput(input_fn: FT, # FT Components that generates a user input (e.
 # %% ../lib_nbs/00_core.ipynb
 @delegates(UkGenericInput,but=['input_fn','inp_cls'])
 def UkInput(*args, inp_cls='', **kwargs): 
+    "Creates a text input with uk styling"
     inp_cls = ('uk-input',stringify(inp_cls))
-    return UkGenericInput(Input, inp_cls=inp_cls, **kwargs)
+    return UkGenericInput(Input, *args, inp_cls=inp_cls, **kwargs)
 
+# %% ../lib_nbs/00_core.ipynb
 @delegates(UkGenericInput,but=['input_fn','inp_cls'])
 def UkSwitch(*args, inp_cls='', **kwargs): 
+    "Creates a switch input with uk styling"
     inp_cls = ('uk-toggle-switch uk-form-switch',stringify(inp_cls))
     return UkGenericInput(CheckboxX, *args, inp_cls=inp_cls, **kwargs)
 
+# %% ../lib_nbs/00_core.ipynb
 @delegates(UkGenericInput,but=['input_fn','inp_cls'])
 def UkCheckbox(*args, inp_cls='', **kwargs): 
+    "Creates a checkbox input with uk styling"
     inp_cls = ('uk-checkbox',stringify(inp_cls))
     return UkGenericInput(CheckboxX, *args, inp_cls=inp_cls, **kwargs)
 
+# %% ../lib_nbs/00_core.ipynb
 @delegates(UkGenericInput,but=['input_fn','inp_cls'])
 def UkTextArea(*args, inp_cls='', **kwargs): 
+    "Creates a textarea with uk styling"
     inp_cls = ('uk-textarea',stringify(inp_cls))
     return UkGenericInput(Textarea, *args, inp_cls=inp_cls,  **kwargs)
 
+# %% ../lib_nbs/00_core.ipynb
 @delegates(UkGenericInput,but=['input_fn','inp_cls'])
 def UkFormLabel(*args, inp_cls='', **kwargs): 
+    "Creates a form label with uk styling"
     inp_cls = ('uk-form-label',stringify(inp_cls))
     return UkGenericInput(Uk_input_tag ,*args, inp_cls=inp_cls, **kwargs)
 
 # %% ../lib_nbs/00_core.ipynb
 class UkButtonT(VEnum):
-    default = 'default'
-    primary = 'primary'
+    default   = 'default'
+    primary   = 'primary'
     secondary = 'secondary'
-    danger = 'danger'
-    ghost = 'ghost'
-    text = 'text'
-    link = 'link'
-
-# %% ../lib_nbs/00_core.ipynb
-def UkIconButton(*c, sz='small', cls=(), **kwargs):
-    if sz not in ('small','medium','large'): raise ValueError(f"Invalid size '{sz}'. Must be 'small', 'medium', or 'large'.")
-    return Button(cls=f'uk-icon-button uk-icon-button-{sz} ' + stringify(cls), **kwargs)(*c)
+    danger    = 'danger'
+    ghost     = 'ghost'
+    text      = 'text'
+    link      = 'link'
 
 # %% ../lib_nbs/00_core.ipynb
 def UkButton(*c, 
@@ -264,24 +276,30 @@ def UkButton(*c,
     return Button(type='button', cls='uk-button ' + stringify(cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def Options(*c, # Content for an `Option`
+def UkIconButton(*c, sz='small', cls=(), **kwargs):
+    if sz not in ('small','medium','large'): raise ValueError(f"Invalid size '{sz}'. Must be 'small', 'medium', or 'large'.")
+    return Button(cls=f'uk-icon-button uk-icon-button-{sz} ' + stringify(cls), **kwargs)(*c)
+
+# %% ../lib_nbs/00_core.ipynb
+def Options(*c,                    # Content for an `Option`
             selected_idx:int=None, # Index location of selected `Option`
-            disabled_idxs:set=None
+            disabled_idxs:set=None # Idex locations of disabled `Options`
            ):
-    "Generates list of `Option`s with the proper `selected_idx`"
+    "Helper function to wrap things into `Option`s for use in `UKSelect`"
     return [Option(o,selected=i==selected_idx, disabled=disabled_idxs and i in disabled_idxs) for i,o in enumerate(c)]
 
 # %% ../lib_nbs/00_core.ipynb
-def UkSelect(*option,
-             label=(),
-             lbl_cls=(),
-             inp_cls=(),
-             cls=('space-y-2',),
-             id="",
-             name="",
-             placeholder="",
-             searchable=False,
-             **kwargs):
+def UkSelect(*option,            # Options for the select dropdown (can use `Options` helper function to create)
+             label=(),           # String or FT component for the label
+             lbl_cls=(),         # Additional classes for the label
+             inp_cls=(),         # Additional classes for the select input
+             cls=('space-y-2',), # Classes for the outer div
+             id="",              # ID for the select input
+             name="",            # Name attribute for the select input
+             placeholder="",     # Placeholder text for the select input
+             searchable=False,   # Whether the select should be searchable
+             **kwargs):          # Additional arguments passed to Uk_select
+    "Creates a select dropdown with uk styling"
     lbl_cls, inp_cls, cls = map(stringify, (lbl_cls, inp_cls, cls))
     if label:
         lbl = Label(cls=f'uk-form-label {lbl_cls}', fr=id)(label) if id else Label(cls=f'uk-form-label {lbl_cls}')(label)
