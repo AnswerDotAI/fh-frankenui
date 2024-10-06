@@ -80,28 +80,32 @@ class TextB(Enum):
     wt_medium = 'font-medium'
     wt_bold = 'font-bold'
     
-    def __str__(self):
-        return self.value
+    def __str__(self): return stringify(self.value)
 
 # %% ../lib_nbs/00_core.ipynb
 class TextT(Enum):
-    muted_xs = TextB.sz_xsmall, TextB.cl_muted 
-    muted_sm = TextB.sz_small, TextB.cl_muted # Text below card headings
+    muted_xs =  TextB.sz_xsmall, TextB.cl_muted 
+    muted_sm =  TextB.sz_small,  TextB.cl_muted # Text below card headings
     muted_med = TextB.sz_medium, TextB.cl_muted 
-    muted_lg = TextB.sz_large, TextB.cl_muted 
-    medium_sm = TextB.sz_small, TextB.wt_medium
+    muted_lg =  TextB.sz_large,  TextB.cl_muted 
+    medium_sm = TextB.sz_small,  TextB.wt_medium
     medium_xs = TextB.sz_xsmall, TextB.wt_medium
 
-    def __str__(self):
-        if is_listy(self.value): return ' '.join(map(str,self.value))
-        return self.value
+    def __str__(self): return stringify(self.value)
 
 # %% ../lib_nbs/00_core.ipynb
-def UkIcon(icon, ratio=1,cls=()):
+def UkIcon(icon,    # Icon name from https://getuikit.com/docs/icon
+           ratio=1, # Icon ratio/size 
+           cls=()   # Span classes
+          ):        # Span with Icon
+    "Creates a Span with the given icon"
     return Span(uk_icon=f"icon: {icon}; ratio: {ratio}",cls=stringify(cls))
 
 # %% ../lib_nbs/00_core.ipynb
-def DiceBearAvatar(seed_name, h, w):
+def DiceBearAvatar(seed_name, # Seed name (ie 'Isaac Flath')
+                   h,         # Height 
+                   w          # Width
+                  ):          # Span with Avatar
     url = 'https://api.dicebear.com/8.x/lorelei/svg?seed='
     return Span(cls=f"relative flex h-{h} w-{w} shrink-0 overflow-hidden rounded-full bg-accent")(
             Img(cls="aspect-square h-full w-full", alt="Avatar", src=f"{url}{seed_name}"))
@@ -127,34 +131,48 @@ class FlexT(VEnum):
     col         = 'col'
     col_reverse = 'col-reverse'
     #wrap
-    nowrap       = 'nowrap'
-    wrap         = 'wrap'
-    wrap_reverse = 'wrap-reverse'
+    nowrap      = 'nowrap'
+    wrap        = 'wrap'
+    wrap_reverse= 'wrap-reverse'
 
 # %% ../lib_nbs/00_core.ipynb
 class GridT(VEnum):
-    small = 'small'
-    medium   = 'medium'
-    large   = 'large'
-    none  = 'collapse'
+    # gap
+    small  = 'small'
+    medium = 'medium'
+    large  = 'large'
+    none   = 'collapse'
 
 # %% ../lib_nbs/00_core.ipynb
-def Grid(*c, cols=3, cls=(), **kwargs):
+def Grid(*c,      # Divs/Containers that should be divided into a grid
+         cols=3,  # Number of columns
+         cls=(),  # Additional classes for Grid Div
+         **kwargs # Additional args for Grid Div
+        ):
+    """Creates a grid with the given number of columns, often used for a grid of cards"""
     cls = stringify(cls)
-    return Div(cls=f'grid grid-cols-{cols} '+cls, **kwargs)(*c)
+    return Div(cls=f'grid grid-cols-{cols}'+cls, **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
 def ResponsiveGrid(*c, sm=1, md=2, lg=3, xl=4, gap=2, cls='', **kwargs):
+    "Creates a responsive grid with the given number of columns for different screen sizes"
     return Div(cls=f'grid grid-cols-{sm} md:grid-cols-{md} lg:grid-cols-{lg} xl:grid-cols-{xl} gap-{gap} ' + stringify(cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def FullySpacedDiv(*c,wrap_tag=None, cls='', **kwargs):
+def FullySpacedDiv(*c,                # Components
+                   wrap_tag=None,     # Wrap components in this tag
+                   cls='uk-width-1-1',# Classes for outer div
+                   **kwargs           # Additional args for outer div
+                  ):                  # Div with spaced components via flex classes
+    "Creates a flex div with it's components having as much space between them as possible"
     wrap_fn = ifnone(wrap_tag, noop)
     cls = stringify(cls)
-    return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,'uk-width-1-1',cls), **kwargs)(*(map(wrap_fn,c)))
+    return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*(map(wrap_fn,c)))
 
 # %% ../lib_nbs/00_core.ipynb
-def CenteredDiv(*c,cls=(), **kwargs):
+def CenteredDiv(*c,
+                cls=(), 
+                **kwargs):
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.col,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
 
@@ -187,7 +205,7 @@ def SpaceBetweenDiv(*c, cls='', **kwargs):
 def UkGenericInput(input_fn: FT, # FT Components that generates a user input (e.g. `TextArea`)
                     label:str|FT=(), # String or FT component that goes in `Label`
                     lbl_cls:str|Enum=(), # Additional classes that goes in `Label`
-                    inp_cls:str|Enum=(), # Additional classes that go in user input (e.g. `TextArea`)
+                    inp_cls:str|Enum='', # Additional classes that go in user input (e.g. `TextArea`)
                     cls:str|Enum=('space-y-2',), # Div cls
                     id: str="", # ID of the user input (e.g. `TextArea`)
                    **kwargs # Passed to `input_fn` (e.g. ` TextArea`)
@@ -199,26 +217,30 @@ def UkGenericInput(input_fn: FT, # FT Components that generates a user input (e.
     return Div(cls=cls)(label, res)
 
 # %% ../lib_nbs/00_core.ipynb
-@delegates(UkGenericInput)
-def UkInput(*args, inp_cls='uk-input', **kwargs): 
-    return UkGenericInput(Input, *args, inp_cls=inp_cls, **kwargs)
+@delegates(UkGenericInput,but=['input_fn','inp_cls'])
+def UkInput(*args, inp_cls='', **kwargs): 
+    inp_cls = ('uk-input',stringify(inp_cls))
+    return UkGenericInput(Input, inp_cls=inp_cls, **kwargs)
 
-@delegates(UkGenericInput)
-def UkSwitch(*args, inp_cls='uk-toggle-switch uk-toggle-switch-primary', **kwargs): 
+@delegates(UkGenericInput,but=['input_fn','inp_cls'])
+def UkSwitch(*args, inp_cls='', **kwargs): 
+    inp_cls = ('uk-toggle-switch uk-form-switch',stringify(inp_cls))
     return UkGenericInput(CheckboxX, *args, inp_cls=inp_cls, **kwargs)
 
-@delegates(UkGenericInput)
-def UkCheckbox(*args, inp_cls='uk-checkbox', **kwargs): 
+@delegates(UkGenericInput,but=['input_fn','inp_cls'])
+def UkCheckbox(*args, inp_cls='', **kwargs): 
+    inp_cls = ('uk-checkbox',stringify(inp_cls))
     return UkGenericInput(CheckboxX, *args, inp_cls=inp_cls, **kwargs)
 
-@delegates(UkGenericInput)
-def UkTextArea(*args, inp_cls='uk-textarea', **kwargs): 
+@delegates(UkGenericInput,but=['input_fn','inp_cls'])
+def UkTextArea(*args, inp_cls='', **kwargs): 
+    inp_cls = ('uk-textarea',stringify(inp_cls))
     return UkGenericInput(Textarea, *args, inp_cls=inp_cls,  **kwargs)
 
-@delegates(UkGenericInput)
-def UkFormLabel(*args, inp_cls='uk-form-label', **kwargs): 
+@delegates(UkGenericInput,but=['input_fn','inp_cls'])
+def UkFormLabel(*args, inp_cls='', **kwargs): 
+    inp_cls = ('uk-form-label',stringify(inp_cls))
     return UkGenericInput(Uk_input_tag ,*args, inp_cls=inp_cls, **kwargs)
-
 
 # %% ../lib_nbs/00_core.ipynb
 class UkButtonT(VEnum):
@@ -431,6 +453,8 @@ def TableRow(row, columns, cell_render=None):
 
 # %% ../lib_nbs/00_core.ipynb
 def UkTable(columns, data, *args, cls=(), footer=None, cell_render=None, header_render=None, **kwargs):
+    # table middle, small : Should these be parameterized?
+    # Document, especially cell and header render
     table_cls = 'uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small ' + stringify(cls)
     head = Thead(TableHeader(columns, header_render))
     body = Tbody(*[TableRow(d, columns, cell_render) for d in data])
@@ -442,5 +466,4 @@ def UkFormSection(title, description, *c, button_txt='Update', outer_margin=6, i
     return Div(cls=f'space-y-{inner_margin} py-{outer_margin}')(
         Div(UkH3(title), P(description, cls=TextT.medium_sm)),
         UkHSplit(), *c,
-        Div(UkButton(button_txt, cls=UkButtonT.primary)) if button_txt else None
-    )
+        Div(UkButton(button_txt, cls=UkButtonT.primary)) if button_txt else None)
