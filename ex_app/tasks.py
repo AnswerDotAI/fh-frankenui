@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 'hotkeys_b', 'avatar_opts', 'page_heading',
            'table_controls', 'task_columns', 'tasks_table', 'tasks_ui', 'tasks_homepage', 'create_hotkey_li',
-           'UkIconButton', 'CreateTaskModal', 'checkbox', 'task_dropdown', 'header_render', 'cell_render', 'footer']
+           'CreateTaskModal', 'checkbox', 'task_dropdown', 'header_render', 'cell_render', 'footer']
 
 # %% ../ex_nbs/01_tasks.ipynb
 from fasthtml.common import *
@@ -45,11 +45,6 @@ avatar_opts = Ul(cls='uk-dropdown-nav uk-nav')(
     Li(cls='uk-nav-divider'),
     *map(create_hotkey_li, hotkeys_b)
 )
-
-# %% ../ex_nbs/01_tasks.ipynb
-def UkIconButton(*c, sz='small', cls=()):
-    if sz not in ('small','medium','large'): raise ValueError(f"Invalid size '{sz}'. Must be 'small', 'medium', or 'large'.")
-    return Button(cls=f'uk-icon-button uk-icon-button-{sz} ' + stringify(cls))(*c)
 
 # %% ../ex_nbs/01_tasks.ipynb
 def CreateTaskModal():
