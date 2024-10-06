@@ -153,9 +153,9 @@ class GridT(VEnum):
     none  = 'collapse'
 
 # %% ../lib_nbs/00_core.ipynb
-def Grid(*c, cols=3, gap=2, cls=(), **kwargs):
+def Grid(*c, cols=3, cls=(), **kwargs):
     cls = stringify(cls)
-    return Div(cls=f'grid grid-cols-{cols} '+ cls, **kwargs)(*c)# gap-{gap} 
+    return Div(cls=f'grid grid-cols-{cols} '+cls, **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
 def ResponsiveGrid(*c, sm=1, md=2, lg=3, xl=4, gap=2, cls='', **kwargs):
@@ -173,29 +173,34 @@ def CenteredDiv(*c,cls=(), **kwargs):
     return Div(cls=(FlexT.block,FlexT.col,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def LAlignedDiv(*c, gap=2, cls='', **kwargs):
+def LAlignedDiv(*c, cls='', **kwargs):
     cls=stringify(cls)
-    return Div(cls=f'flex items-center space-x-{gap} '+stringify(cls), **kwargs)(*c)
+    return Div(cls=(FlexT.block,FlexT.left,FlexT.middle,cls), **kwargs)(*c)
+#     return Div(cls=f'flex items-center space-x-{gap} '+stringify(cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def RAlignedDiv(*c, gap=2, cls='', **kwargs):
+def RAlignedDiv(*c, cls='', **kwargs):
     cls=stringify(cls)
-    return Div(cls=f'flex items-center justify-end space-x-{gap} '+stringify(cls), **kwargs)(*c)
+    return Div(cls=(FlexT.block,FlexT.right,FlexT.middle,cls), **kwargs)(*c)
+#     return Div(cls=f'flex items-center justify-end space-x-{gap} '+stringify(cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def VStackedDiv(*c, gap=2, cls='', **kwargs):
+def VStackedDiv(*c, cls='', **kwargs):
     cls=stringify(cls)
-    return Div(cls=f'flex flex-col space-y-{gap} ' + stringify(cls), **kwargs)(*c)
+    return Div(cls=(FlexT.block,FlexT.col,FlexT.middle,cls), **kwargs)(*c)
+#     return Div(cls=f'flex flex-col space-y-{gap} ' + stringify(cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
-def HStackedDiv(*c, gap=2, cls='', **kwargs):
+def HStackedDiv(*c, cls='', **kwargs):
     cls=stringify(cls)
-    return Div(cls=f'flex flex-row space-x-{gap} ' + stringify(cls), **kwargs)(*c)
+    return Div(cls=(FlexT.block,FlexT.row,FlexT.middle,cls), **kwargs)(*c)
+#     return Div(cls=f'flex flex-row space-x-{gap} ' + stringify(cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
 def SpaceBetweenDiv(*c, cls='', **kwargs):
     cls = stringify(cls)
-    return Div(cls='flex items-center justify-between ' + cls, **kwargs)(*c)
+    return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*c)
+#     return Div(cls='flex items-center justify-between ' + cls, **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
 def UkGenericInput(input_fn: FT, # FT Components that generates a user input (e.g. `TextArea`)
@@ -343,7 +348,7 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None,
              cls='',
              **kwargs
             ) -> FT:
-    return Div(cls='uk-navbar-container uk-width-1-1 relative z-10'+ stringify(cls), uk_navbar=True, **kwargs)(
+    return Div(cls='uk-navbar-container uk-width-1-1 relative z-10 '+ stringify(cls), uk_navbar=True, **kwargs)(
              _NavBarSide(lnav,'left') if lnav else '',
              _NavBarSide(rnav,'right') if rnav else '')
 
@@ -370,7 +375,7 @@ def UkSidebarSection(items, header=None, cls='', **kwargs):
 
 def UkSidebar(sections, headers=None, outer_margin=4, inner_margin=4, cls=(), **kwargs):
     assert headers is None or len(headers)==len(sections)
-    sidebar_content = map(lambda s_h: UkSidebarSection(*s_h, **kwargs), zip(sections, tuplify(headers)))
+    sidebar_content = map(lambda s_h: UkSidebarSection(*s_h, **kwargs), zip_longest(sections, tuplify(headers)))
     return Div(cls=f"space-y-{inner_margin} p-{outer_margin} " + stringify(cls))(*sidebar_content)
 
 # %% ../lib_nbs/00_core.ipynb

@@ -31,9 +31,6 @@ sidebar = UkSidebar(
     uk_switcher="connect: #component-nav; animation: uk-animation-fade"
 )
 
-# To display the sidebar
-show(sidebar)
-
 # %% ../ex_nbs/04_forms.ipynb
 def profile_form():
     content = (Div(cls="space-y-2")(

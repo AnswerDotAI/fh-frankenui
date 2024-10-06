@@ -51,7 +51,7 @@ music_headers = UkNavbar(
     cls='p-2')
 
 # %% ../ex_nbs/05_music.ipynb
-_fn = lambda x: A(role='button')(LAlignedTxtIcon(*tuplify(x),icon_right=False,txt_cls=''))
+_fn = lambda x: A(role='button')(LAlignedTxtIcon(*tuplify(x),icon_right=False, cls='space-x-4'))
 discover = (UkH4("Discover"), *map(_fn, (("Listen Now", "play-circle"), ("Browse", 'thumbnails'), ("Radio", "rss"))))
 library = (UkH4("Library"), *map(_fn, (("Playlists", "play-circle"), ("Songs", "bell"), ("Made for You", "user"),("Artists", "users"),("Albums", "bookmark"))))
 playlist = (UkH4("Playlist"), *map(_fn, ("Recently Added", "Recently Played", "Top Songs", "Top Albums", "Top Artists", 
@@ -145,7 +145,7 @@ def page():
                     Ul(id="component-nav", cls="uk-switcher")(
                         Li(*music_content),
                         Li(podcast_tab())))),
-            cols=5,gap=0))
+            cols=5))
 
 # %% ../ex_nbs/05_music.ipynb
 music_homepage = page()

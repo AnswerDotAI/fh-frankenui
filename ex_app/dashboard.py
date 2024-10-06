@@ -20,7 +20,7 @@ def InfoCard(title, value, change):
     return Div(Card(
              Div(UkH3(value),
                 P(change, cls=TextT.muted_sm)),
-             header = UkH4(title),))
+             header = UkH4(title)))
 
 # %% ../ex_nbs/03_dashboard.ipynb
 rev = InfoCard("Total Revenue", "$45,231.89", "+20.1% from last month")

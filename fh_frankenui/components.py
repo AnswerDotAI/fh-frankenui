@@ -18,12 +18,10 @@ from .core import *
 def NavP(*c, cls=TextT.muted_sm): return P(cls=cls)(*c)
 
 # %% ../lib_nbs/01_components.ipynb
-def SpacedPP(left, right=None):
-    return FullySpacedDiv(NavP(left),NavP(right) if right else '')
+def SpacedPP(left, right=None): return FullySpacedDiv(NavP(left),NavP(right) if right else '')
 
 # %% ../lib_nbs/01_components.ipynb
-def SpacedPPs(*c):
-    return [SpacedPP(*tuplify(o)) for o in c]
+def SpacedPPs(*c): return [SpacedPP(*tuplify(o)) for o in c]
 
 # %% ../lib_nbs/01_components.ipynb
 def SpacedTxtIcon(txt, icon, ratio, icon_right=True):
@@ -32,16 +30,16 @@ def SpacedTxtIcon(txt, icon, ratio, icon_right=True):
     return FullySpacedDiv(*c)  
 
 # %% ../lib_nbs/01_components.ipynb
-def LAlignedTxtIcon(txt, icon='play-circle', gap=2, cls='', ratio=1, icon_right=True, txt_cls=None):
+def LAlignedTxtIcon(txt, icon='play-circle', cls='space-x-2', ratio=1, icon_right=True, txt_cls=None):
     # Good for navbards
     c = (txt if isinstance(txt, FT) else NavP(txt,cls=ifnone(txt_cls,TextT.muted_sm)),UkIcon(icon,ratio))
     if not icon_right: c = reversed(c)
-    return LAlignedDiv(*c, gap=gap, cls=cls)
+    return LAlignedDiv(*c, cls=cls)
 
 # %% ../lib_nbs/01_components.ipynb
-def LAlignedIconTxt(txt, icon, gap=2, ratio=1, txt_cls=None):
+def LAlignedIconTxt(txt, icon, cls='space-x-2', ratio=1, txt_cls=None):
     # Good for navbars
-    return LAlignedTxtIcon(txt, icon, gap=gap, ratio=ratio, txt_cls=txt_cls, icon_right=False)
+    return LAlignedTxtIcon(txt, icon, ratio=ratio, txt_cls=txt_cls, icon_right=False)
 
 # %% ../lib_nbs/01_components.ipynb
 def HelpText(c):
