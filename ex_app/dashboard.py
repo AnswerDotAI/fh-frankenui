@@ -17,10 +17,10 @@ import matplotlib.pylab as plt
 
 # %% ../ex_nbs/03_dashboard.ipynb
 def InfoCard(title, value, change):
-    return Card(
+    return Div(Card(
              Div(UkH3(value),
                 P(change, cls=TextT.muted_sm)),
-             header = UkH4(title),)
+             header = UkH4(title),))
 
 # %% ../ex_nbs/03_dashboard.ipynb
 rev = InfoCard("Total Revenue", "$45,231.89", "+20.1% from last month")
@@ -29,7 +29,7 @@ sal = InfoCard("Sales", "+12,234", "+19% from last month")
 act = InfoCard("Active Now", "+573", "+201 since last hour")
 
 # %% ../ex_nbs/03_dashboard.ipynb
-top_info_row = Grid(rev,sub,sal,act,cols=2, gap=4, cls='lg:grid-cols-4')
+top_info_row = Grid(rev,sub,sal,act,cols=4, cls=GridT.small)
 
 # %% ../ex_nbs/03_dashboard.ipynb
 def AvatarItem(name, email, amount):

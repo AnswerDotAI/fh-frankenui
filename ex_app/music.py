@@ -76,7 +76,7 @@ made_for_you_albums = [("Like a Feline", "Catdonna"),("Livin' La Vida Purrda", "
 
 # %% ../ex_nbs/05_music.ipynb
 def create_album_grid(albums, cols=4):  
-    return Grid(*[Div(cls="space-y-3")(
+    return Grid(*[Div(cls="uk-grid-small")(
                 Div(cls="overflow-hidden rounded-md")(
                     Img(cls="transition-transform duration-200 hover:scale-105", src=img_url, alt="")),
                 Div(cls="space-y-1 text-sm")(
@@ -90,11 +90,11 @@ _album = lambda t,a: Album('https://ucarecdn.com/e5607eaf-2b2a-43b9-ada9-330824b
 music_content = (Div(UkH3("Listen Now"), cls="mt-6 space-y-1"),
                     P("Top picks for you. Updated daily.",cls=TextT.muted_sm),
                     UkHLine(),
-                    Grid(*[_album(t,a) for t,a in listen_now_albums], cols=4, gap=4),
+                    Grid(*[_album(t,a) for t,a in listen_now_albums], cols=4, cls=GridT.medium),
                     Div(UkH3("Made for You"), cls="mt-6 space-y-1"),
                     P("Your personal playlists. Updated daily.", cls=TextT.muted_sm),
                     UkHLine(),
-                    Grid(*[_album(t,a) for t,a in made_for_you_albums], cols=6, gap=4))
+                    Grid(*[_album(t,a) for t,a in made_for_you_albums], cols=6, cls=GridT.small))
 
 # %% ../ex_nbs/05_music.ipynb
 tabs = Ul(Li(A('Music', href='#'),cls='uk-active'),
