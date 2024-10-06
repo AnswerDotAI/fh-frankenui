@@ -88,13 +88,10 @@ avatar = DiceBearAvatar('Alicia Koch',8,8)
 avatar_dropdown = UkDropdownButton(user,hotkeys,logout,
     label=avatar)
 
-show(avatar_dropdown)
-
 # %% ../ex_nbs/03_dashboard.ipynb
 top_nav = UkNavbar(
     lnav=[team_dropdown, Li(A("Overview")), Li(A("Customers")), Li(A("Products")), Li(A("Settings"))],
-    rnav=[UkInput(placeholder='Search'), avatar_dropdown],
-)
+    rnav=[UkInput(placeholder='Search'), avatar_dropdown],)
 
 # %% ../ex_nbs/03_dashboard.ipynb
 def page():

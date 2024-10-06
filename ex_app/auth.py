@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['auth_homepage', 'page']
 
-# %% ../ex_nbs/06_auth.ipynb 1
+# %% ../ex_nbs/06_auth.ipynb
 from fasthtml.common import *
 from fasthtml.components import Uk
 from fh_frankenui import *
@@ -14,7 +14,7 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pylab as plt
 
-# %% ../ex_nbs/06_auth.ipynb 8
+# %% ../ex_nbs/06_auth.ipynb
 def page():    
     left = Div(cls="col-span-1 hidden flex-col justify-between bg-zinc-900 p-8 text-white lg:flex")(
         Div(cls=(TextB.wt_bold,TextB.sz_medium))("Acme Inc"),
@@ -41,5 +41,5 @@ def page():
     
     return Grid(left,right,cols=2, gap=0,cls='h-screen')
 
-# %% ../ex_nbs/06_auth.ipynb 9
+# %% ../ex_nbs/06_auth.ipynb
 auth_homepage = page()
