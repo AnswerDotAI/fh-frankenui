@@ -5,31 +5,31 @@
 # %% auto 0
 __all__ = ['hdrs', 'app', 'tasks', 'cards', 'auth', 'playground', 'Navbar', 'NavItem', 'NavDropdown', 'UkNavBar', 'home']
 
-# %% ../ex_nbs/99_main.ipynb 2
+# %% ../ex_nbs/99_main.ipynb
 from fasthtml.common import *
 from fh_frankenui.components import *
 
-# %% ../ex_nbs/99_main.ipynb 3
+# %% ../ex_nbs/99_main.ipynb
 from tasks import tasks_homepage
 from cards import cards_homepage
 from dashboard import dashboard_homepage
-from forms import forms_homepage
-from music import music_homepage
-from auth import auth_homepage
-from playground import playground_homepage
-from mail import mail_homepage
+# from forms import forms_homepage
+# from music import music_homepage
+# from auth import auth_homepage
+# from playground import playground_homepage
+# from mail import mail_homepage
 
-# %% ../ex_nbs/99_main.ipynb 9
+# %% ../ex_nbs/99_main.ipynb
 hdrs = (Script(src="https://cdn.tailwindcss.com"),
         Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),
         Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),
         Script(type="module", src="https://unpkg.com/franken-wc@0.0.6/dist/js/wc.iife.js"),
         Link(rel="stylesheet", href="https://unpkg.com/franken-wc@0.0.6/dist/css/blue.min.css"),)
 
-# %% ../ex_nbs/99_main.ipynb 10
+# %% ../ex_nbs/99_main.ipynb
 app = FastHTML(hdrs=hdrs,debug=True,default_hdrs=False)
 
-# %% ../ex_nbs/99_main.ipynb 12
+# %% ../ex_nbs/99_main.ipynb
 @app.route('/tasks')
 def tasks(): return tasks_homepage
 
@@ -54,7 +54,7 @@ def playground(): return playground_homepage
 @app.route('/mail')
 def playground(): return mail_homepage
 
-# %% ../ex_nbs/99_main.ipynb 15
+# %% ../ex_nbs/99_main.ipynb
 def Navbar(*c, left=(), center=(), right=(), container=True, transparent=False, sticky=False, cls=(), **kwargs):
     nav_cls = f"uk-navbar-container{'uk-navbar-transparent' if transparent else ''}"
     nav = Nav(cls=nav_cls, uk_navbar=True, **kwargs)(
@@ -76,14 +76,14 @@ def NavDropdown(label, items, cls=()):
         Div(cls='uk-navbar-dropdown')(Ul(cls='uk-nav uk-navbar-dropdown-nav')(*items))
     )
 
-# %% ../ex_nbs/99_main.ipynb 16
+# %% ../ex_nbs/99_main.ipynb
 def UkNavBar(*lis):
     return Nav(cls='uk-navbar-left')(
         Ul(cls='uk-navbar-nav')(
         *lis
         ))
 
-# %% ../ex_nbs/99_main.ipynb 18
+# %% ../ex_nbs/99_main.ipynb
 @app.route('/')
 def home():
     nav_items = (('Home', '/'), ('Tasks', '/tasks'), 
@@ -101,5 +101,5 @@ def home():
     )
     return navbar, content
 
-# %% ../ex_nbs/99_main.ipynb 19
+# %% ../ex_nbs/99_main.ipynb
 serve()

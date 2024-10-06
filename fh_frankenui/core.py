@@ -4,12 +4,12 @@
 
 # %% auto 0
 __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'UkH1', 'UkH2', 'UkH3', 'UkH4', 'UkH5', 'UkH6', 'stringify',
-           'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'DiceBearAvatar', 'Grid', 'ResponsiveGrid', 'FullySpacedDiv',
-           'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'UkGenericInput', 'Options',
-           'UkSelect', 'UkButtonT', 'process_options', 'UkDropdownButton', 'UkButton', 'UkGenericComponent', 'UkHSplit',
-           'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'UkSidebarItem', 'UkSidebarUl',
-           'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle', 'Modal', 'TableHeader', 'TableRow', 'UkTable',
-           'UkFormSection']
+           'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'DiceBearAvatar', 'FlexT', 'GridT', 'Grid', 'ResponsiveGrid',
+           'FullySpacedDiv', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv',
+           'SpaceBetweenDiv', 'UkGenericInput', 'Options', 'UkSelect', 'UkButtonT', 'UkDropdownButton', 'UkButton',
+           'UkGenericComponent', 'UkHSplit', 'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'NavTab',
+           'UkTab', 'UkSidebarItem', 'UkSidebarUl', 'UkSidebarSection', 'UkSidebar', 'Card', 'UkModalTitle', 'Modal',
+           'TableHeader', 'TableRow', 'UkTable', 'UkFormSection']
 
 # %% ../lib_nbs/00_core.ipynb
 from fasthtml.common import *
@@ -37,7 +37,7 @@ class VEnum(Enum):
 
     def __radd__(self, other):
         "Add other enums, listy, or strings"
-        return stringify((other, self))
+        return stringify((other, self))    
     
     def __str__(self):
         "Stringifies with uk-{attr}-{value} format"
@@ -112,13 +112,45 @@ class TextT(Enum):
 
 # %% ../lib_nbs/00_core.ipynb
 def UkIcon(icon, ratio=1,cls=()):
-    return Span(uk_icon=f"icon: {icon}; ratio: {ratio}",cls='z-[-1] '+stringify(cls))
+    return Span(uk_icon=f"icon: {icon}; ratio: {ratio}",cls=stringify(cls))
 
 # %% ../lib_nbs/00_core.ipynb
 def DiceBearAvatar(seed_name, h, w):
     url = 'https://api.dicebear.com/8.x/lorelei/svg?seed='
     return Span(cls=f"relative flex h-{h} w-{w} shrink-0 overflow-hidden rounded-full bg-accent")(
             Img(cls="aspect-square h-full w-full", alt="Avatar", src=f"{url}{seed_name}"))
+
+# %% ../lib_nbs/00_core.ipynb
+class FlexT(VEnum):
+    block       = ''
+    inline      = 'inline'
+    #horizontal
+    left        = 'left'
+    center      = 'center'
+    right       = 'right'
+    between     = 'between'
+    around      = 'around'
+    #vertical
+    stretch     = 'stretch'
+    top         = 'top'
+    middle      = 'middle'
+    botton      = 'bottom'
+    #direction
+    row         = 'row'
+    row_reverse = 'row-reverse'
+    col         = 'col'
+    col_reverse = 'col-reverse'
+    #wrap
+    nowrap       = 'nowrap'
+    wrap         = 'wrap'
+    wrap_reverse = 'wrap-reverse'
+
+# %% ../lib_nbs/00_core.ipynb
+class GridT(VEnum):
+    small = 'small'
+    med   = 'medium'
+    lg    = 'large'
+    none  = 'collapse'
 
 # %% ../lib_nbs/00_core.ipynb
 def Grid(*c, cols=3, gap=2, cls=(), **kwargs):
@@ -159,6 +191,11 @@ def VStackedDiv(*c, gap=2, cls='', **kwargs):
 def HStackedDiv(*c, gap=2, cls='', **kwargs):
     cls=stringify(cls)
     return Div(cls=f'flex flex-row space-x-{gap} ' + stringify(cls), **kwargs)(*c)
+
+# %% ../lib_nbs/00_core.ipynb
+def SpaceBetweenDiv(*c, cls='', **kwargs):
+    cls = stringify(cls)
+    return Div(cls='flex items-center justify-between ' + cls, **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
 def UkGenericInput(input_fn: FT, # FT Components that generates a user input (e.g. `TextArea`)
@@ -221,18 +258,17 @@ class UkButtonT(VEnum):
     link = 'link'
 
 # %% ../lib_nbs/00_core.ipynb
-def process_options(opts, hdrs):
-    for i, (opt, hdr) in enumerate(zip_longest(opts, hdrs or [])):
-        if hdr and len(hdr) > 0: yield Li(cls="uk-nav-header")(hdr if isinstance(hdr, FT) else Div(hdr))
-        if isinstance(opt, (list, tuple)): yield from list(map(Li, opt))
-        else: yield Li(opt)
-        if i < len(opts) - 1:
-            next_hdr = hdrs[i+1] if hdrs and i+1 < len(hdrs) else None
-            if not next_hdr or len(next_hdr) == 0: yield Li(cls='uk-nav-divider')
+def _UkDropdownButtonOptions(opt_grps, opt_hdrs=None):
+    res = []
+    for g,h in zip_longest(opt_grps, tuplify(opt_hdrs)):
+        if h: res.append(Li(cls="uk-nav-header")(h if isinstance(h,FT) else Div(h)))
+        if isinstance(g,(list,tuple)): res += list(map(Li, g))
+        else: res.append(Li(g))
+    return res
 
 def UkDropdownButton(
-    options,        # List of options to be displayed in the dropdown
-    option_hdrs=None,  # List of headers for each option group, or None
+    *opt_grp,        # List of options to be displayed in the dropdown
+    opt_hdrs=None,  # List of headers for each option group, or None
     label=None,     # String, FT component, or None for the `Button`
     btn_cls=UkButtonT.default,  # Button class(es)
     cls=(),         # Parent div class
@@ -246,9 +282,8 @@ def UkDropdownButton(
     btn_content = [] if label is None else [label]
     if icon_component: btn_content.insert(0 if icon_position == 'left' else len(btn_content), icon_component)
     btn = Button(type='button', cls='uk-button ' + btn_cls)(*btn_content)
-    dd = Div(uk_drop='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop ' + dd_cls)(
-        Ul(cls='uk-dropdown-nav')(*process_options(options, option_hdrs))
-    )
+    dd = Div(uk_dropdown='mode: click; pos: bottom-right', cls='uk-dropdown uk-drop ' + dd_cls)(
+        Ul(cls='uk-dropdown-nav')(*_UkDropdownButtonOptions(opt_grp, opt_hdrs)))
     return Div(cls=cls)(Div(cls='flex items-center space-x-4')(btn, dd))
 
 # %% ../lib_nbs/00_core.ipynb
@@ -259,7 +294,7 @@ def UkButton(*c,
 
 # %% ../lib_nbs/00_core.ipynb
 def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
-    res = component_fn(**kwargs)(*c)
+    res = component_fn(cls=cls, **kwargs)(*c)
     if cls: res.attrs['class'] += ' ' + cls
     return res
 
@@ -306,8 +341,10 @@ def _NavBarSide(n, s):
 # %% ../lib_nbs/00_core.ipynb
 def UkNavbar(lnav: Sequence[Union[str, FT]]=None, 
              rnav: Sequence[Union[str, FT]]=None, 
-             cls='') -> FT:
-    return Div(cls='uk-navbar-container uk-width-1-1 relative'+ stringify(cls), uk_navbar=True)(
+             cls='',
+             **kwargs
+            ) -> FT:
+    return Div(cls='uk-navbar-container uk-width-1-1 relative z-10'+ stringify(cls), uk_navbar=True, **kwargs)(
              _NavBarSide(lnav,'left') if lnav else '',
              _NavBarSide(rnav,'right') if rnav else '')
 
@@ -315,8 +352,9 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None,
 def NavTab(text, active=False):
     return Li(cls="uk-active" if active else " ")(A(text, href="#demo", uk_toggle=True))
 
-def UkTab(*items):
-    return Ul(cls="uk-tab-alt max-w-96")(*[NavTab(item, active=i==0) for i, item in enumerate(items)])
+def UkTab(*items, maxw=96, cls='', **kwargs):
+    cls = stringify(cls)
+    return Ul(cls=f"uk-tab-alt max-w-{maxw} "+cls,**kwargs)(*[NavTab(item, active=i==0) for i, item in enumerate(items)])
 
 # %% ../lib_nbs/00_core.ipynb
 def UkSidebarItem(item, is_header=False): 
@@ -389,12 +427,10 @@ def TableRow(row, columns, cell_render=None):
 # %% ../lib_nbs/00_core.ipynb
 def UkTable(columns, data, *args, cls=(), footer=None, cell_render=None, header_render=None, **kwargs):
     table_cls = 'uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small ' + stringify(cls)
-    table_content = [
-        Thead(TableHeader(columns, header_render)),
-        Tbody(*map(lambda d: TableRow(d, columns, cell_render), data))
-    ]
+    head = Thead(TableHeader(columns, header_render))
+    body = Tbody(*[TableRow(d, columns, cell_render) for d in data])
     if footer: table_content.append(Tfoot(footer))
-    return Table(cls=table_cls, *args, **kwargs)(*table_content)
+    return Table(cls=table_cls, *args, **kwargs)(*[head,body])
 
 # %% ../lib_nbs/00_core.ipynb
 def UkFormSection(title, description, *c, button_txt='Update', outer_margin=6, inner_margin=6):

@@ -29,8 +29,7 @@ status_dd = [{'status': "backlog", 'count': 21 },{'status': "todo", 'count': 21 
 def create_hotkey_li(hotkey):
     return Li(A(cls='uk-drop-close justify-between')(
         hotkey[0],
-        Span(hotkey[1], cls='ml-auto text-xs tracking-widest opacity-60')
-    ))
+        Span(hotkey[1], cls='ml-auto text-xs tracking-widest opacity-60')))
 
 hotkeys_a = (('Profile','⇧⌘P'),('Billing','⌘B'),('Settings','⌘S'),('New Team',''))
 hotkeys_b = (('Logout',''), )
@@ -40,9 +39,7 @@ avatar_opts = Ul(cls='uk-dropdown-nav uk-nav')(
     Li(cls='px-2 py-1.5 text-sm')(
         Div(cls='flex flex-col space-y-1')(
             P('sveltecult', cls='text-sm font-medium leading-none'),
-            P('leader@sveltecult.com', cls='text-xs leading-none text-muted-foreground')
-        )
-    ),
+            P('leader@sveltecult.com', cls='text-xs leading-none text-muted-foreground'))),
     Li(cls='uk-nav-divider'),
     *map(create_hotkey_li, hotkeys_a),
     Li(cls='uk-nav-divider'),
@@ -71,7 +68,7 @@ def CreateTaskModal():
         id='TaskForm')
 
 # %% ../ex_nbs/01_tasks.ipynb
-page_heading =Div(cls='flex items-center justify-between space-y-2')(
+page_heading =SpaceBetweenDiv(cls='space-y-2')(
             Div(cls='space-y-2')(
                 UkH2('Welcome back!'),P("Here's a list of your tasks for this month!", cls=TextT.muted_sm)),
             Div(A(href='#', cls='h-8 w-8 inline-flex rounded-full bg-accent ring-ring')(Img(src='https://api.dicebear.com/8.x/lorelei/svg?seed=sveltecult')),
@@ -79,17 +76,19 @@ page_heading =Div(cls='flex items-center justify-between space-y-2')(
 
 # %% ../ex_nbs/01_tasks.ipynb
 table_controls =(UkInput(cls='w-[250px]',placeholder='Filter task'),
-                 UkDropdownButton(label = "Status", 
-                     options = [list(A(FullySpacedDiv(a['status'], a['count'], wrap_tag=P),cls='capitalize') for a in status_dd)],
-                     btn_cls=(TextT.medium_xs, 'uk-button-default')),
-                 UkDropdownButton(label = "Priority", 
-                    options = [[A(FullySpacedDiv(LAlignedTxtIcon(a['priority'], icon="check", icon_right=False), a['count']),cls='capitalize') for a in priority_dd]],
-                     btn_cls=(TextT.medium_xs,'uk-button-default')),
-                UkDropdownButton(label='View',
-                                 options=[[A(LAlignedTxtIcon(o, icon="check", icon_right=False)) for o in ['Title','Status','Priority']]],
-                                 option_hdrs=["Toggle Columns"],
-                                 btn_cls=(TextT.medium_xs,'uk-button-default')),
-                UkButton('Create Task',cls=('uk-button-primary', TextT.medium_xs), uk_toggle="target: #TaskForm"))
+     UkDropdownButton(
+         [A(FullySpacedDiv(a['status'], a['count'], wrap_tag=P),cls='capitalize') for a in status_dd],
+         label = "Status", 
+         btn_cls=(TextT.medium_xs, 'uk-button-default')),     
+     UkDropdownButton(
+         [A(FullySpacedDiv(LAlignedIconTxt(a['priority'], icon="check"), a['count']),cls='capitalize') for a in priority_dd],                         
+         label = "Priority", 
+         btn_cls=(TextT.medium_xs,'uk-button-default')),
+      UkDropdownButton([A(LAlignedIconTxt(o, icon="check")) for o in ['Title','Status','Priority']],
+            label='View',
+            opt_hdrs=["Toggle Columns"],
+            btn_cls=(TextT.medium_xs,'uk-button-default')),
+            UkButton('Create Task',cls=('uk-button-primary', TextT.medium_xs), uk_toggle="target: #TaskForm"))
 
 # %% ../ex_nbs/01_tasks.ipynb
 def checkbox(selected=False, ):
@@ -98,12 +97,11 @@ def checkbox(selected=False, ):
 
 # %% ../ex_nbs/01_tasks.ipynb
 def task_dropdown():
-    return UkDropdownButton(
-        options=[[
+    return UkDropdownButton([
             A('Edit',                   cls='uk-drop-close'),
             A('Make a copy',            cls='uk-drop-close'),
             A('Favorite',               cls='uk-drop-close')],
-            A(SpacedPP('Delete', '⌘⌫'), cls='uk-drop-close')])
+            [A(SpacedPP('Delete', '⌘⌫'), cls='uk-drop-close')])
 
 # %% ../ex_nbs/01_tasks.ipynb
 def header_render(col):
@@ -125,48 +123,39 @@ def cell_render(col, row):
         case _: raise ValueError(f"Unknown column: {col}")
 
 # %% ../ex_nbs/01_tasks.ipynb
-task_columns = [
-    "Done", 'Task', 'Title', 'Status', 'Priority', 'Actions'
-]
+task_columns = ["Done", 'Task', 'Title', 'Status', 'Priority', 'Actions']
 
 tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(UkTable(
     columns=task_columns,
     data=data,
     cell_render=cell_render,
-    header_render=header_render,
-))
+    header_render=header_render,))
 
 # %% ../ex_nbs/01_tasks.ipynb
 def footer():
-    return Div(cls='mt-4 flex items-center justify-between px-2 py-2')(
+    hw_cls = 'h-4 w-4'
+    return SpaceBetweenDiv(cls='mt-4 px-2 py-2')(
         Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
         Div(cls='flex flex-none items-center space-x-8')(
-            Div('Page 1 of 10', cls='flex w-[100px] items-center justify-center text-sm font-medium'),
-            Div(cls='flex items-center space-x-2')(
+            CenteredDiv('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
+            LAlignedDiv(
                 UkIconButton(cls='hidden lg:inline-flex')(Span('Go to last page', cls='sr-only'),
-                    Span(uk_icon='chevron-double-left', cls='h-4 w-4')),
+                    Span(uk_icon='chevron-double-left', cls=hw_cls)),
                 UkIconButton(Span('Go to previous page', cls='sr-only'),
-                    Span(uk_icon='chevron-left', cls='h-4 w-4')),
+                    Span(uk_icon='chevron-left', cls=hw_cls)),
                 UkIconButton(Span('Go to next page', cls='sr-only'),
-                    Span(uk_icon='chevron-right', cls='h-4 w-4')),
+                    Span(uk_icon='chevron-right', cls=hw_cls)),
                 UkIconButton(cls='hidden lg:inline-flex')(
                     Span('Go to last page', cls='sr-only'),
-                    Span(uk_icon='chevron-double-right', cls='h-4 w-4'))
-            )
-        )
-    )
+                    Span(uk_icon='chevron-double-right', cls=hw_cls)),
+            gap=2)))
 
 # %% ../ex_nbs/01_tasks.ipynb
 tasks_ui = Div(
-    Div(cls='mt-8 flex items-center justify-between')(
-        Div(cls='flex flex-1 gap-4')(table_controls)
-    ),
+    SpaceBetweenDiv(cls='mt-8')(
+        Div(cls='flex flex-1 gap-4')(table_controls)),
     tasks_table,
-    footer(),
-)
+    footer(),)
 
 # %% ../ex_nbs/01_tasks.ipynb
-tasks_homepage = CreateTaskModal(), Div(cls='p-8')(
-    page_heading,
-    tasks_ui
-)
+tasks_homepage = CreateTaskModal(), Div(cls='p-8')(page_heading, tasks_ui)

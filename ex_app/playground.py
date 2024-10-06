@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['preset_options', 'playground_homepage', 'playground_navbar', 'page']
 
-# %% ../ex_nbs/07_playground.ipynb 2
+# %% ../ex_nbs/07_playground.ipynb
 from fasthtml.common import *
 from fasthtml.components import Uk
 from fh_frankenui import *
@@ -14,16 +14,16 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pylab as plt
 
-# %% ../ex_nbs/07_playground.ipynb 8
+# %% ../ex_nbs/07_playground.ipynb
 from fasthtml.common import *
 from fh_frankenui.components import *
 
-# %% ../ex_nbs/07_playground.ipynb 9
+# %% ../ex_nbs/07_playground.ipynb
 preset_options = ["Grammatical Standard English", "Summarize for a 2nd grader",
         "Text to command","Q&A","English to other languages","Parse unstructured data",
         "Classification","Natural language to Python","Explain code","Chat","More examples"]
 
-# %% ../ex_nbs/07_playground.ipynb 10
+# %% ../ex_nbs/07_playground.ipynb
 def playground_navbar():
     save_modal = Modal(
         UkModalTitle("Save preset"),
@@ -53,7 +53,7 @@ def playground_navbar():
     
     return UkNavbar(lnav=UkH4('Playground'),rnav=rnav,cls='p-2')
 
-# %% ../ex_nbs/07_playground.ipynb 11
+# %% ../ex_nbs/07_playground.ipynb
 def page():
     navbar = playground_navbar()
     
@@ -82,5 +82,5 @@ def page():
         bottom_buttons
     )
 
-# %% ../ex_nbs/07_playground.ipynb 12
+# %% ../ex_nbs/07_playground.ipynb
 playground_homepage = page()
