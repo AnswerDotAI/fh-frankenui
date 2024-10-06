@@ -14,7 +14,7 @@ __all__ = ['UkInput', 'UkSwitch', 'UkTextArea', 'UkFormLabel', 'stringify', 'VEn
 # %% ../lib_nbs/00_core.ipynb
 from fasthtml.common import *
 from fasthtml.svg import Svg
-from enum import Enum, EnumType
+from enum import Enum
 from fasthtml.components import Uk_select,Uk_input_tag
 from functools import partial
 from itertools import zip_longest
@@ -40,10 +40,7 @@ class VEnum(Enum):
         return stringify((other, self))    
     
     def __str__(self):
-        "Stringifies with uk-{attr}-{value} format"
-        base = self.__class__.__name__       
-        if isinstance(self.__class__, EnumType):
-            base = base.lstrip('Uk').rstrip('T')
+        base = self.__class__.__name__.lstrip('Uk').rstrip('T')
         return f"uk-{base.lower()}-{self.value}".strip('-')
 
 # %% ../lib_nbs/00_core.ipynb

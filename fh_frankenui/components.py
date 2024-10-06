@@ -8,7 +8,7 @@ __all__ = ['NavP', 'SpacedPP', 'SpacedPPs', 'SpacedTxtIcon', 'LAlignedTxtIcon', 
 # %% ../lib_nbs/01_components.ipynb
 from fasthtml.common import *
 from fasthtml.svg import Svg
-from enum import Enum, EnumType
+from enum import Enum
 from fasthtml.components import Uk_select,Uk_input_tag
 from functools import partial
 from itertools import zip_longest
