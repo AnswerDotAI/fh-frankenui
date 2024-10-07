@@ -61,32 +61,27 @@ def generate_chart(num_points):
     plt.plot(range(len(plotdata)), plotdata)
 
 # %% ../ex_nbs/03_dashboard.ipynb
-teams = [
-    ["Alicia Koch"],
-    ['Acme Inc', 'Monster Inc.'],
-    ['Create a Team']
-]
+teams = [["Alicia Koch"],['Acme Inc', 'Monster Inc.'],['Create a Team']]
 
 opt_hdrs = ["Personal", "Team", ""]
 
-team_dropdown = UkDropdownButton(*map(lambda t: map(A, t), teams),
+team_dropdown = UkDropdownButton(*[list(map(A, team)) for team in teams],
     opt_hdrs=opt_hdrs,
     label=teams[0][0])
 
 # %% ../ex_nbs/03_dashboard.ipynb
 hotkeys = [('Profile','⇧⌘P'),('Billing','⌘B'),('Settings','⌘S'),('New Team', '')]
 
-def space(*c): return A(FullySpacedDiv(*c, wrap_tag=P))
+def space(*c): return A(FullySpacedDiv(*(map(P,c))))
 
 hotkeys = tuple(map(lambda x: space(*x), hotkeys))
 logout = space('Logout' ,''),
 user = Li(cls='px-2 py-1.5 text-sm')(
         Div(cls='flex flex-col space-y-1')(
-            P('sveltecult', cls='text-sm font-medium leading-none'),
-            P('leader@sveltecult.com', cls='text-xs leading-none text-muted-foreground'))),
+            P('sveltecult', cls=TextT.medium_sm),
+            P('leader@sveltecult.com', cls=TextT.muted_sm))),
 avatar = DiceBearAvatar('Alicia Koch',8,8)
-avatar_dropdown = UkDropdownButton(user,hotkeys,logout,
-    label=avatar)
+avatar_dropdown = UkDropdownButton(user,hotkeys,logout, label=avatar)
 
 # %% ../ex_nbs/03_dashboard.ipynb
 top_nav = UkNavbar(

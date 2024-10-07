@@ -2,9 +2,9 @@
 
 # %% auto 0
 __all__ = ['music_dd_data', 'file_dd_data', 'edit_dd_data', 'view_dd_data', 'account_dd_data', 'music_headers', 'discover',
-           'library', 'playlist', 'listen_now_albums', 'made_for_you_albums', 'music_content', 'tabs', 'sections',
-           'icons', 'sidebar_sections', 'headers', 'sidebar', 'music_homepage', 'wrap_in_a', 'AlbumImg', 'AlbumFooter',
-           'Album', 'create_album_grid', 'podcast_tab', 'LAlignedIconTxts', 'page']
+           'library', 'playlist', 'listen_now_albums', 'made_for_you_albums', 'music_content', 'tabs', 'sb', 'sidebar',
+           'music_homepage', 'wrap_in_a', 'AlbumImg', 'AlbumFooter', 'Album', 'create_album_grid', 'podcast_tab',
+           'LAlignedIconTxts', 'page']
 
 # %% ../ex_nbs/05_music.ipynb
 from fasthtml.common import *
@@ -118,20 +118,22 @@ def podcast_tab():
                 UkButton("Add Podcast", cls=UkButtonT.primary))))
 
 # %% ../ex_nbs/05_music.ipynb
-sections = [["Listen Now", "Browse", "Radio"],["Playlists", "Songs", "Made for You", "Artists", "Albums"],["Recently Added", "Recently Played"]]
+def LAlignedIconTxts(ns, icns): return [Li(A(LAlignedIconTxt(n,i))) for n,i in zip(ns,icns)]
 
 # %% ../ex_nbs/05_music.ipynb
-icons = [["play-circle", "thumbnails", "rss"],["play-circle", "bell", "user", "users", "bookmark"],["", ""]]
+sb = (Ul(cls='space-y-2')(
+         Li(UkH3("Discover")), 
+         *LAlignedIconTxts(["Listen Now", "Browse", "Radio"], ["play-circle", "thumbnails", "rss"])),
+      Ul(cls='space-y-2')(
+          Li(UkH3("Library")), 
+          *LAlignedIconTxts(["Playlists", "Songs", "Made for You", "Artists", "Albums"], 
+                           ["play-circle", "bell", "user", "users", "bookmark"])),
+      Ul(cls='space-y-2')(
+          Li(UkH3("Playlist")),
+          *LAlignedIconTxts(["Recently Added", "Recently Played"], ["", ""]),)) 
 
 # %% ../ex_nbs/05_music.ipynb
-def LAlignedIconTxts(ns, icns): return [LAlignedIconTxt(n,i) for n,i in zip(ns,icns)]
-
-# %% ../ex_nbs/05_music.ipynb
-sidebar_sections = list(map(LAlignedIconTxts, sections, icons))
-
-# %% ../ex_nbs/05_music.ipynb
-headers = ["Discover", "Library", "Playlist"]
-sidebar = UkSidebar(sidebar_sections, list(map(UkH3,headers)))
+sidebar = UkSidebar(*sb)
 
 # %% ../ex_nbs/05_music.ipynb
 def page():

@@ -8,8 +8,8 @@ __all__ = ['stringify', 'VEnum', 'Theme', 'TextB', 'TextT', 'UkIcon', 'DiceBearA
            'HStackedDiv', 'SpaceBetweenDiv', 'UkGenericInput', 'UkInput', 'UkSwitch', 'UkCheckbox', 'UkTextArea',
            'UkFormLabel', 'UkButtonT', 'UkButton', 'UkIconButton', 'Options', 'UkSelect', 'UkDropdownButton',
            'UkGenericComponent', 'UkH1', 'UkH2', 'UkH3', 'UkH4', 'UkH5', 'UkH6', 'UkHSplit', 'UkHLine', 'UkNavDivider',
-           'UkNavbarDropdown', 'UkNavbar', 'NavTab', 'UkTab', 'UkSidebarItem', 'UkSidebarUl', 'UkSidebarSection',
-           'UkSidebar', 'Card', 'UkModalTitle', 'Modal', 'TableHeader', 'TableRow', 'UkTable', 'UkFormSection']
+           'UkNavbarDropdown', 'UkNavbar', 'UkSidebar', 'NavTab', 'UkTab', 'Card', 'UkModalTitle', 'Modal',
+           'TableHeader', 'TableRow', 'UkTable', 'UkFormSection']
 
 # %% ../lib_nbs/00_core.ipynb
 from fasthtml.common import *
@@ -394,30 +394,31 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None,
              _NavBarSide(rnav,'right') if rnav else '')
 
 # %% ../lib_nbs/00_core.ipynb
+import copy
+
+# %% ../lib_nbs/00_core.ipynb
+def UkSidebar(*ul,cls='space-y-4 p-4', **kwargs):
+    styles = ('uk-nav-default', 'uk-nav-primary','uk-nav-secondary')
+    sidebar = []
+    for section in tuplify(ul):
+        section = copy.deepcopy(section)
+        _sattrs = section.attrs
+        if 'class' not in _sattrs: _sattrs['class'] = ''
+        if 'uk-nav' not in _sattrs: _sattrs['class'] += ' uk-nav '
+        if not any(x in styles for x in _sattrs['class'].split()): _sattrs['class'] += ' uk-nav-default '
+        sidebar.append(section)
+  
+    return Div(cls=cls, **kwargs)(*sidebar)
+        
+    
+
+# %% ../lib_nbs/00_core.ipynb
 def NavTab(text, active=False):
     return Li(cls="uk-active" if active else " ")(A(text, href="#demo", uk_toggle=True))
 
 def UkTab(*items, maxw=96, cls='', **kwargs):
     cls = stringify(cls)
     return Ul(cls=f"uk-tab-alt max-w-{maxw} "+cls,**kwargs)(*[NavTab(item, active=i==0) for i, item in enumerate(items)])
-
-# %% ../lib_nbs/00_core.ipynb
-def UkSidebarItem(item, is_header=False): 
-    return item if is_header else A(role='button')(item)
-
-def UkSidebarUl(*lis, cls='space-y-2', **kwargs): 
-    return Ul(cls=f"uk-nav uk-nav-secondary " + stringify(cls), **kwargs)(*map(Li,lis))
-
-def UkSidebarSection(items, header=None, cls='', **kwargs):
-    section = []
-    if header: section.append(header)
-    section += [UkSidebarItem(item) for item in items]
-    return UkSidebarUl(*section, cls=stringify(cls), **kwargs)
-
-def UkSidebar(sections, headers=None, outer_margin=4, inner_margin=4, cls=(), **kwargs):
-    assert headers is None or len(headers)==len(sections)
-    sidebar_content = map(lambda s_h: UkSidebarSection(*s_h, **kwargs), zip_longest(sections, tuplify(headers)))
-    return Div(cls=f"space-y-{inner_margin} p-{outer_margin} " + stringify(cls))(*sidebar_content)
 
 # %% ../lib_nbs/00_core.ipynb
 def Card(*c, # Components that go in the body

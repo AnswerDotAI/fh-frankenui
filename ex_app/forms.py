@@ -23,13 +23,11 @@ def heading():
 
 # %% ../ex_nbs/04_forms.ipynb
 sidebar_items = ["Profile", "Account", "Appearance", "Notifications", "Display"]
-sidebar = UkSidebar(
-    sections=[sidebar_items],
-    cls="w-1/5",
-    outer_margin=1,
-    inner_margin=0,
-    uk_switcher="connect: #component-nav; animation: uk-animation-fade"
-)
+
+# %% ../ex_nbs/04_forms.ipynb
+sidebar = UkSidebar(Ul(cls='uk-nav-primary', uk_switcher="connect: #component-nav; animation: uk-animation-fade")(
+                            *map(lambda x: Li(A(x)),sidebar_items)), 
+                   cls="space-y-4 p-4 w-1/5")
 
 # %% ../ex_nbs/04_forms.ipynb
 def profile_form():
