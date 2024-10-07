@@ -20,6 +20,7 @@ from functools import partial
 from itertools import zip_longest
 from typing import Union, Tuple, Optional
 from fastcore.all import L, delegates
+import copy
 
 # %% ../lib_nbs/00_core.ipynb
 # need a better name, stringify might be too general for what it does 
@@ -394,10 +395,10 @@ def UkNavbar(lnav: Sequence[Union[str, FT]]=None,
              _NavBarSide(rnav,'right') if rnav else '')
 
 # %% ../lib_nbs/00_core.ipynb
-import copy
-
-# %% ../lib_nbs/00_core.ipynb
-def UkSidebar(*ul,cls='space-y-4 p-4', **kwargs):
+def UkSidebar(*ul,                 # Each Ul can be it's own section.  Use A for links!
+              cls='space-y-4 p-4', # Classes for outer container
+              **kwargs             # Kwargs for outer container
+             ):
     styles = ('uk-nav-default', 'uk-nav-primary','uk-nav-secondary')
     sidebar = []
     for section in tuplify(ul):
@@ -406,11 +407,8 @@ def UkSidebar(*ul,cls='space-y-4 p-4', **kwargs):
         if 'class' not in _sattrs: _sattrs['class'] = ''
         if 'uk-nav' not in _sattrs: _sattrs['class'] += ' uk-nav '
         if not any(x in styles for x in _sattrs['class'].split()): _sattrs['class'] += ' uk-nav-default '
-        sidebar.append(section)
-  
+        sidebar.append(section)  
     return Div(cls=cls, **kwargs)(*sidebar)
-        
-    
 
 # %% ../lib_nbs/00_core.ipynb
 def NavTab(text, active=False):
