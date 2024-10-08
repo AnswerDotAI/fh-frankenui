@@ -271,13 +271,17 @@ class UkButtonT(VEnum):
     link      = 'link'
 
 # %% ../lib_nbs/00_core.ipynb
-def UkButton(*c, 
-            cls=UkButtonT.default, # Use UkButtonT or styles 
-            **kwargs):    
-    return Button(type='button', cls='uk-button ' + stringify(cls), **kwargs)(*c)
+def UkButton(*c, # Content for the button
+            cls=UkButtonT.default, # Classes for the button
+            **kwargs # Additional args for the button
+            ):
+    "Creates a button with uk styling"
+    cls = stringify(cls)    
+    return Button(type='button', cls=('uk-button',cls), **kwargs)(*c)
 
 # %% ../lib_nbs/00_core.ipynb
 def UkIconButton(*c, sz='small', cls=(), **kwargs):
+    "Creates an `IconButton` with uk styling"
     if sz not in ('small','medium','large'): raise ValueError(f"Invalid size '{sz}'. Must be 'small', 'medium', or 'large'.")
     return Button(cls=f'uk-icon-button uk-icon-button-{sz} ' + stringify(cls), **kwargs)(*c)
 
@@ -302,10 +306,10 @@ def UkSelect(*option,            # Options for the select dropdown (can use `Opt
              **kwargs):          # Additional arguments passed to Uk_select
     "Creates a select dropdown with uk styling"
     lbl_cls, inp_cls, cls = map(stringify, (lbl_cls, inp_cls, cls))
-    if label:
-        lbl = Label(cls=f'uk-form-label {lbl_cls}', fr=id)(label) if id else Label(cls=f'uk-form-label {lbl_cls}')(label)
-    select = Uk_select(cls=inp_cls, uk_cloak=True, id=id, name=name, placeholder=placeholder, searchable=searchable, **kwargs)
-    select = select(*option)
+    if label: 
+        lbl = Label(cls=f'uk-form-label {lbl_cls}', fr=id)(label) 
+    select = Uk_select(*option, cls=inp_cls, uk_cloak=True, id=id, 
+                       name=name, placeholder=placeholder, searchable=searchable, **kwargs)
     return Div(cls=cls)(lbl, select) if label else Div(cls=cls)(select)
 
 # %% ../lib_nbs/00_core.ipynb
@@ -344,12 +348,12 @@ def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
     return res
 
 # %% ../lib_nbs/00_core.ipynb
-def UkH1(*c, cls=(), **kwargs): return UkGenericComponent(H1, *c, cls='uk-h1 '+stringify(cls), **kwargs)
-def UkH2(*c, cls=(), **kwargs): return UkGenericComponent(H2, *c, cls='uk-h2 '+stringify(cls), **kwargs)
-def UkH3(*c, cls=(), **kwargs): return UkGenericComponent(H3, *c, cls='uk-h3 '+stringify(cls), **kwargs)
-def UkH4(*c, cls=(), **kwargs): return UkGenericComponent(H4, *c, cls='uk-h4 '+stringify(cls), **kwargs)
-def UkH5(*c, cls=(), **kwargs): return UkGenericComponent(H5, *c, cls='uk-h5 '+stringify(cls), **kwargs)
-def UkH6(*c, cls=(), **kwargs): return UkGenericComponent(H6, *c, cls='uk-h6 '+stringify(cls), **kwargs)
+def UkH1(*c, cls=(), **kwargs): return UkGenericComponent(H1, *c, cls=('uk-h1',stringify(cls)), **kwargs)
+def UkH2(*c, cls=(), **kwargs): return UkGenericComponent(H2, *c, cls=('uk-h2',stringify(cls)), **kwargs)
+def UkH3(*c, cls=(), **kwargs): return UkGenericComponent(H3, *c, cls=('uk-h3',stringify(cls)), **kwargs)
+def UkH4(*c, cls=(), **kwargs): return UkGenericComponent(H4, *c, cls=('uk-h4',stringify(cls)), **kwargs)
+def UkH5(*c, cls=(), **kwargs): return UkGenericComponent(H5, *c, cls=('uk-h5',stringify(cls)), **kwargs)
+def UkH6(*c, cls=(), **kwargs): return UkGenericComponent(H6, *c, cls=('uk-h6',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/00_core.ipynb
 def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
@@ -399,6 +403,7 @@ def UkSidebar(*ul,                 # Each Ul can be it's own section.  Use A for
               cls='space-y-4 p-4', # Classes for outer container
               **kwargs             # Kwargs for outer container
              ):
+    "Creates a styled sidebar component"
     styles = ('uk-nav-default', 'uk-nav-primary','uk-nav-secondary')
     sidebar = []
     for section in tuplify(ul):
@@ -473,8 +478,15 @@ def UkTable(columns, data, *args, cls=(), footer=None, cell_render=None, header_
     # table middle, small : Should these be parameterized?
     # Document, especially cell and header render
     table_cls = 'uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small ' + stringify(cls)
-    head = Thead(TableHeader(columns, header_render))
-    body = Tbody(*[TableRow(d, columns, cell_render) for d in data])
+    cell_render   = ifnone(cell_render,   lambda c,r: Td(cls='p-2')(r[c]))
+    header_render = ifnone(header_render, lambda c:   Th(cls='p-2')(c))
+    
+    head = Thead(Th(*map(header_render, columns)))
+    
+    table_content = []
+    for row in data: table_content.append(Tr(*[cell_render(col, row) for col in columns]))
+        
+    body = Tbody(*table_content)
     if footer: table_content.append(Tfoot(footer))
     return Table(cls=table_cls, *args, **kwargs)(*[head,body])
 
