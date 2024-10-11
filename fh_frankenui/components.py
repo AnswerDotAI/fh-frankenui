@@ -25,14 +25,14 @@ def SpacedPPs(*c): return [SpacedPP(*tuplify(o)) for o in c]
 
 # %% ../lib_nbs/01_components.ipynb
 def SpacedTxtIcon(txt, icon, ratio, icon_right=True):
-    c = (NavP(txt),UkIcon(icon,ratio))
+    c = (NavP(txt),Icon(icon,ratio))
     if not icon_right: c = reversed(c)
     return FullySpacedDiv(*c)  
 
 # %% ../lib_nbs/01_components.ipynb
 def LAlignedTxtIcon(txt, icon='play-circle', cls='space-x-2', ratio=1, icon_right=True, txt_cls=None):
     # Good for navbards
-    c = (txt if isinstance(txt, FT) else NavP(txt,cls=ifnone(txt_cls,TextT.muted_sm)),UkIcon(icon,ratio))
+    c = (txt if isinstance(txt, FT) else NavP(txt,cls=ifnone(txt_cls,TextT.muted_sm)),Icon(icon,ratio))
     if not icon_right: c = reversed(c)
     return LAlignedDiv(*c, cls=cls)
 
