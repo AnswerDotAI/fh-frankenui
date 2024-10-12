@@ -49,7 +49,7 @@ class VEnum(Enum):
     def __str__(self): return self.value
     
     def __new__(cls, value, doc=None):
-        member = str.__new__(cls)  # Use str as the base class
+        member = str.__new__(cls) 
         member._value_ = value
         if doc is not None:
             member.__doc__ = doc
@@ -76,11 +76,13 @@ def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
     return component_fn(cls=cls, **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-ButtonT = create_uk_enum('ButtonT',('default','ghost', 'text','link',
-                                    ('primary', 'Uses primary color from these'),
+ButtonT = create_uk_enum('ButtonT',('default', 
+                                    ('primary', 'primary color from theme'),
                                     ('secondary', 'Uses secondary color from theme'),
                                     ('danger', 'Red danger button'),
-                                    ),
+                                    'text',
+                                    'link',
+                                    ('ghost', 'Transparent style')),
                         enum_doc="Style Options for Button from https://franken-ui.dev/docs/button")
 
 # %% ../lib_nbs/01_core.ipynb
