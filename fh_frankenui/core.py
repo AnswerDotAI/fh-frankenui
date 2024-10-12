@@ -19,7 +19,7 @@ __all__ = ['ButtonT', 'ContainerT', 'LabelT', 'LinkT', 'PaddingT', 'PositionT', 
 
 # %% ../lib_nbs/01_core.ipynb
 import fasthtml.common as fh
-from fasthtml.common import is_listy, Div, P, Span, Script, FastHTML, FT, to_xml
+from fasthtml.common import is_listy, Div, P, Span, Script, FastHTML, FT, to_xml, show
 from fasthtml.svg import Svg
 from enum import Enum
 from fasthtml.components import Uk_select,Uk_input_tag
@@ -41,6 +41,7 @@ def stringify(o # String, Tuple, or Enum options we want stringified
 def str2ukcls(base, txt): 
     return f"uk-{base}-{txt.replace('_', '-')}".strip('-')
 
+# %% ../lib_nbs/01_core.ipynb
 class VEnum(Enum): 
     def __add__(self, other):   return stringify((self, other))
     def __radd__(self, other):  return stringify((other, self)) 
@@ -61,10 +62,10 @@ def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
 ButtonT = create_uk_enum('ButtonT',('default','primary','secondary','danger','ghost','text','link'))
 
 # %% ../lib_nbs/01_core.ipynb
-def Button(*c,                   # Components to go inside the Button
-           cls=ButtonT.default,  # cls for the Button (see ButtonT for style options)
-           **kwargs              # any other kwargs will be passed to the button 
-          ):                     # Button w/ typ='button' and `uk-button` cls
+def Button(*c:str|FT,                     # Components to go inside the Button
+           cls:str|Enum=ButtonT.default,  # cls for the Button (see ButtonT for style options)
+           **kwargs                       # any other kwargs will be passed to the button 
+          ):                              # Button w/ typ='button' and `uk-button` cls
     "A Button with Uk Styling"
     return UkGenericComponent(fh.Button,*c, cls=('uk-button',stringify(cls)), type='button', **kwargs)
 
