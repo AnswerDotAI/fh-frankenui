@@ -9,7 +9,7 @@ __all__ = ['ButtonT', 'ContainerT', 'LabelT', 'LinkT', 'PaddingT', 'PositionT', 
            'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch', 'Label', 'FormLabel', 'Link', 'List',
            'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton',
            'Modal', 'Nav', 'NavBarContainer', 'NavBarNav', 'Placeholder', 'Progress', 'Section', 'Sticky', 'Theme',
-           'TextFont', 'UkIcon', 'Img', 'DiceBearAvatar', 'Grid', 'ResponsiveGrid', 'FullySpacedDiv', 'CenteredDiv',
+           'TextFont', 'UkIcon', 'DiceBearAvatar', 'Grid', 'ResponsiveGrid', 'FullySpacedDiv', 'CenteredDiv',
            'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'SpaceBetweenDiv', 'GenericLabelInput',
            'LabelInput', 'LabelRadio', 'LabelCheckboxX', 'LabelRange', 'LabelToggle_switch', 'LabelTextArea',
            'LabelSwitch', 'LabelSelect', 'UkIconButton', 'Options', 'UkSelect', 'UkDropdownButton', 'UkHSplit',
@@ -275,8 +275,8 @@ def UkIcon(icon,    # Icon name from https://getuikit.com/docs/icon
     return Span(uk_icon=f"icon: {icon}; ratio: {ratio}",cls=stringify(cls))
 
 # %% ../lib_nbs/01_core.ipynb
-def Img(*args, data_src="", cls=(), **kwargs):
-    return UkGenericComponent(fh.Div, *args, data_src=data_src, uk_img=True, cls=stringify(cls), **kwargs)
+# def Img(*args, data_src="", cls=(), **kwargs):
+#     return UkGenericComponent(fh.Div, *args, data_src=data_src, uk_img=True, cls=stringify(cls), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def DiceBearAvatar(seed_name, # Seed name (ie 'Isaac Flath')
@@ -378,7 +378,7 @@ def GenericLabelInput(
                 ):
     "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
     if isinstance(label, str) or label.tag != 'label': 
-        label = FormLabel(lbl_cls=stringify(lbl_cls), fr=id)(label)
+        label = FormLabel(cls=stringify(lbl_cls), fr=id)(label)
     inp = input_fn(id=id, cls=stringify(input_cls), **kwargs)        
     if container: return container(label, inp, cls=stringify(container_cls))
     return label, inp
@@ -649,6 +649,6 @@ def TableFromDicts(header_data:Sequence, body_data:Sequence[dict], footer_data=N
 # %% ../lib_nbs/01_core.ipynb
 def UkFormSection(title, description, *c, button_txt='Update', outer_margin=6, inner_margin=6):
     return Div(cls=f'space-y-{inner_margin} py-{outer_margin}')(
-        Div(UkH3(title), P(description, cls=TextT.medium_sm)),
+        Div(H3(title), P(description, cls=TextFont.bold_sm)),
         UkHSplit(), *c,
-        Div(UkButton(button_txt, cls=ButtonT.primary)) if button_txt else None)
+        Div(Button(button_txt, cls=ButtonT.primary)) if button_txt else None)

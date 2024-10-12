@@ -17,24 +17,24 @@ import matplotlib.pylab as plt
 # %% ../ex_nbs/06_auth.ipynb
 def page():    
     left = Div(cls="col-span-1 hidden flex-col justify-between bg-zinc-900 p-8 text-white lg:flex")(
-        Div(cls=(TextB.wt_bold,TextB.sz_medium))("Acme Inc"),
+        Div(cls=(TextT.bold,TextT.default))("Acme Inc"),
         Blockquote(cls="space-y-2")(
-            P(cls=TextB.sz_large)('"This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."'),
-            Footer(cls=TextB.sz_small)("Sofia Davis")))
+            P(cls=TextT.large)('"This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."'),
+            Footer(cls=TextT.small)("Sofia Davis")))
 
     right = Div(cls="col-span-2 flex flex-col p-8 lg:col-span-1")(
-        Div(cls="flex flex-none justify-end")(UkButton("Login", cls=UkButtonT.ghost, uk_toggle="#demo")),
+        RAlignedDiv(Button("Login", cls=ButtonT.ghost, uk_toggle="#demo")),
         CenteredDiv(cls='flex-1')(
             Div(cls=f"space-y-6 w-[350px]")(
                 Div(cls="flex flex-col space-y-2 text-center")(
-                    UkH3("Create an account"),
-                    P(cls=TextT.muted_sm)("Enter your email below to create your account")),
+                    H3("Create an account"),
+                    P(cls=TextFont.muted_sm)("Enter your email below to create your account")),
                 Form(cls='space-y-6')(
-                        UkInput(placeholder="name@example.com"),
-                        UkButton(Span(cls="mr-2", uk_spinner="ratio: 0.54"), "Sign in with Email", cls=(UkButtonT.primary, "w-full"), disabled=True),
-                        UkHSplit("Or continue with",cls=TextT.muted_sm),
-                        UkButton(UkIcon('github',cls='mr-2'), "Github", cls=(UkButtonT.default, "w-full"), uk_toggle="#demo")),
-                P(cls=(TextT.muted_sm,"text-center"))(
+                        Input(placeholder="name@example.com"),
+                        Button(Span(cls="mr-2", uk_spinner="ratio: 0.54"), "Sign in with Email", cls=(ButtonT.primary, "w-full"), disabled=True),
+                        UkHSplit("Or continue with",cls=TextFont.muted_sm),
+                        Button(UkIcon('github',cls='mr-2'), "Github", cls=(ButtonT.default, "w-full"), uk_toggle="#demo")),
+                P(cls=(TextFont.muted_sm,"text-center"))(
                 "By clicking continue, you agree to our ",
                 A(cls="underline underline-offset-4 hover:text-primary", href="#demo", uk_toggle=True)("Terms of Service")," and ",
                 A(cls="underline underline-offset-4 hover:text-primary", href="#demo", uk_toggle=True)("Privacy Policy"),"."))))

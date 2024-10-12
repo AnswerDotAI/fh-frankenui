@@ -15,10 +15,6 @@ from pathlib import Path
 import matplotlib.pylab as plt
 
 # %% ../ex_nbs/07_playground.ipynb
-from fasthtml.common import *
-from fh_frankenui.components import *
-
-# %% ../ex_nbs/07_playground.ipynb
 preset_options = ["Grammatical Standard English", "Summarize for a 2nd grader",
         "Text to command","Q&A","English to other languages","Parse unstructured data",
         "Classification","Natural language to Python","Explain code","Chat","More examples"]
@@ -26,62 +22,49 @@ preset_options = ["Grammatical Standard English", "Summarize for a 2nd grader",
 # %% ../ex_nbs/07_playground.ipynb
 def playground_navbar():
     save_modal = Modal(
-        UkModalTitle("Save preset"),
-        P("This will save the current playground state as a preset which you can access later or share with others.",cls=("mt-1.5", TextT.muted_sm)),
-        UkInput(label="Name", id="name"), 
-        UkInput(label="Description", id="description"),
-        UkButton("Save", cls=(UkButtonT.primary, "uk-modal-close")),
+        ModalTitle("Save preset"),
+        P("This will save the current playground state as a preset which you can access later or share with others.",cls=("mt-1.5", TextFont.muted_sm)),
+        LabelInput("Name", id="name"), 
+        LabelInput("Description", id="description"),
+        ModalCloseButton("Save", cls=(ButtonT.primary)),
         id="save")
     
     share_dd = Div(cls="space-y-6")(
-        UkH3("Share preset"),
-        P("Anyone who has this link and an OpenAI account will be able to view this.", cls=TextT.muted_sm),
+        H3("Share preset"),
+        P("Anyone who has this link and an OpenAI account will be able to view this.", cls=TextFont.muted_sm),
         Div(cls='flex space-x-2')(
-            UkInput(value="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003", readonly=True, cls="flex-1"),
-            UkButton(UkIcon('copy'), cls=(UkButtonT.primary, "uk-drop-close"))))#flex items-center space-x-2 pt-4 bbmx-6 my-6
+            Input(value="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003", readonly=True, cls="flex-1"),
+            Button(UkIcon('copy'), cls=(ButtonT.primary, "uk-drop-close"))))#flex items-center space-x-2 pt-4 bbmx-6 my-6
 
     rnav = Div(cls='flex items-center space-x-2')(
-        UkSelect(*Options(*preset_options), name='preset', optgroup_label="Examples",
+        Select(*Options(*preset_options), name='preset', optgroup_label="Examples",
                  placeholder='Load a preset', searchable=True, cls='h-9 w-[200px] lg:w-[300px]'),
-        UkButton("Save", cls=UkButtonT.secondary, uk_toggle="#save"),
+        Button("Save", cls=ButtonT.secondary, uk_toggle="#save"),
         save_modal,
-        UkButton("View Code", cls=UkButtonT.secondary),
-        UkDropdownButton(share_dd,label="Share", btn_cls=UkButtonT.secondary,dd_cls='p-6'),
+        Button("View Code", cls=ButtonT.secondary),
+        UkDropdownButton(share_dd,label="Share", btn_cls=ButtonT.secondary,dd_cls='p-6'),
         UkDropdownButton(A("Content filter preferences", href="#demo"), 
                          None, # divider
                          A("Delete preset", cls="text-destructive", href="#demo"),
-            label=UkIcon('ellipsis'), btn_cls=UkButtonT.secondary,))
+            label=UkIcon('ellipsis'), btn_cls=ButtonT.secondary,))
     
-    return UkNavbar(lnav=UkH4('Playground'),rnav=rnav,cls='p-2')
+    return UkNavbar(lnav=H4('Playground'),rnav=rnav,cls='p-2')
 
 # %% ../ex_nbs/07_playground.ipynb
 def page():
     navbar = playground_navbar()
     
     main_content = Div(
-        Div(
-            Textarea(
-                cls="uk-textarea h-full p-4",
-                placeholder="Write a tagline for an ice cream shop",
-                readonly=True
-            ),
-            cls="flex-1"
-        ),
+        Div(cls="flex-1")(Textarea(cls="uk-textarea h-full p-4", placeholder="Write a tagline for an ice cream shop",readonly=True),),
         Div(cls="w-[200px] flex-none"),
-        cls="flex h-[700px] gap-x-6 px-8 py-6"
-    )
+        cls="flex h-[700px] gap-x-6 px-8 py-6")
     
     bottom_buttons = Div(
-        UkButton("Submit", cls=UkButtonT.primary, uk_toggle="#demo"),
-        UkButton(Uk_icon(icon="history"), cls=UkButtonT.secondary, uk_toggle="#demo"),
-        cls="flex gap-x-2 px-8 py-6 pt-0"
-    )
+        Button("Submit", cls=ButtonT.primary, uk_toggle="#demo"),
+        Button(UkIcon(icon="history"), cls=ButtonT.secondary, uk_toggle="#demo"),
+        cls="flex gap-x-2 px-8 py-6 pt-0")
     
-    return Div(
-        navbar,
-        main_content,
-        bottom_buttons
-    )
+    return Div(navbar, main_content, bottom_buttons)
 
 # %% ../ex_nbs/07_playground.ipynb
 playground_homepage = page()
