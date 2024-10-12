@@ -9,19 +9,22 @@ __all__ = ['Left1', 'Card1Svg', 'Card2Svg', 'AppleSvg', 'Left2', 'area_opts', 's
 
 # %% ../ex_nbs/02_cards.ipynb
 from fasthtml.common import *
-from fh_frankenui import *
+from fasthtml.components import Uk_input_tag
 from fasthtml.svg import *
+from fh_frankenui import *
+
 import calendar
 
 # %% ../ex_nbs/02_cards.ipynb
-Left1 = Card(Grid(UkButton(UkIcon('github',cls='uk-margin-small-right'),'Github'),
-                  UkButton(UkIcon('google',cls='uk-margin-small-right'),'Google'),
+Left1 = Card(Grid(Button(UkIcon('github',cls='uk-margin-small-right'),'Github'),
+                  Button(UkIcon('google',cls='uk-margin-small-right'),'Google'),
                   cols=2,cls='gap-6'),
-            UkHSplit("OR CONTINUE WITH", text_cls = (TextB.sz_xsmall, TextB.cl_muted)),
-            UkInput('Email',    'email',   placeholder='m@example.com'),
-            UkInput('Password', 'Password',placeholder='Password',     type='Password'),
-            header=(UkH3('Create an account'),P(cls=TextT.muted_sm)('Enter your email below to create your account')),
-            footer=UkButton(cls=(UkButtonT.primary,'w-full'))('Create Account'),
+            UkHSplit("OR CONTINUE WITH", text_cls = (TextT.small, TextT.muted)),
+#             Input('Email',    'email',   placeholder='m@example.com'),
+            LabelInput('Email',    id='email',   placeholder='m@example.com'),
+            LabelInput('Password', id='password',placeholder='Password', type='Password'),
+            header=(H3('Create an account'),P(cls=TextFont.muted_sm)('Enter your email below to create your account')),
+            footer=Button(cls=(ButtonT.primary,'w-full'))('Create Account'),
             body_cls='space-y-4 py-0')
 
 # %% ../ex_nbs/02_cards.ipynb
@@ -32,32 +35,34 @@ AppleSvg = Svg(role="img", viewBox="0 0 24 24", cls="h-6 w-6 mr-1")(Path(d="M12.
 # %% ../ex_nbs/02_cards.ipynb
 Left2 = Card(
     Grid(
-        UkButton(CenteredDiv(Card1Svg, "Card"),  cls='h-20 w-full border-2 border-primary'),
-        UkButton(CenteredDiv(Card2Svg, "Card"),  cls='h-20 w-full'),
-        UkButton(CenteredDiv(AppleSvg, "Apple"), cls='h-20 w-full'),
+        Button(CenteredDiv(Card1Svg, "Card"),  cls='h-20 w-full border-2 border-primary'),
+        Button(CenteredDiv(Card2Svg, "Card"),  cls='h-20 w-full'),
+        Button(CenteredDiv(AppleSvg, "Apple"), cls='h-20 w-full'),
         cols=3,cls='gap-6'),
     Div(cls='space-y-4')(
-    UkInput('Name',        'name',        placeholder='m@example.com'),
-    UkInput('Card Number', 'card_number', placeholder='m@example.com'),
-    Grid(UkSelect(*Options(*calendar.month_name[1:],0),label='Expires',id='expire_month'),
-         UkSelect(*Options(*range(2024,2030),0),       label='Year',   id='expire_year'),
-         UkInput('CVV', 'cvv',placeholder='CVV', cls=""),
-         cols=3,cls='gap-4')),
-    header=(UkH3('Payment Method'),P(cls=TextT.muted_sm)('Add a new payment method to your account.')))
+        LabelInput('Name',        id='name',        placeholder='John Doe'),
+        LabelInput('Card Number', id='card_number', placeholder='m@example.com'),
+        Grid(LabelSelect(*Options(*calendar.month_name[1:],selected_idx=0),label='Expires',id='expire_month'),
+             LabelSelect(*Options(*range(2024,2030),selected_idx=0),       label='Year',   id='expire_year'),
+             LabelInput('CVV', id='cvv',placeholder='CVV'),
+             cols=3,cls='gap-4')),
+    header=(H3('Payment Method'),P(cls=TextFont.muted_sm)('Add a new payment method to your account.')))
 
 # %% ../ex_nbs/02_cards.ipynb
 area_opts = ('Team','Billing','Account','Deployment','Support')
 severity_opts = ('Severity 1 (Highest)', 'Severity 2', 'Severity 3', 'Severity 4 (Lowest)')
 Right1 = Card(
-    Grid(UkSelect(*Options(*area_opts),    label='Area',    id='area'),
-         UkSelect(*Options(*severity_opts),label='Severity',id='area'),
-         cols=2,gap=2),
-    UkInput(    label='Subject',    placeholder='I need help with'),
-    UkTextArea( label='Description',placeholder='Please include all information relevant to your issue'),
-    UkFormLabel(label="Tags",state="danger", value="Spam,Invalid"),
-    header=(UkH3('Report an issue'),P(cls=TextT.muted_sm)('What area are you having problems with')),
-    footer = FullySpacedDiv(UkButton(cls=UkButtonT.ghost  )('Cancel'),
-                            UkButton(cls=UkButtonT.primary)('Submit')))
+    Grid(Div(LabelSelect(*Options(*area_opts),    label='Area',    id='area')),
+         Div(LabelSelect(*Options(*severity_opts),label='Severity',id='area')),
+         cls=GridT.small,
+         cols=2),
+    LabelInput(    label='Subject',    placeholder='I need help with', id='subject'),
+    LabelTextArea( label='Description',placeholder='Please include all information relevant to your issue', id='description'),
+    Div(FormLabel('Tags', fr='#tags'),
+        Uk_input_tag(name="Tags",state="danger", value="Spam,Invalid", uk_cloak=True, id='tags')),
+    header=(H3('Report an issue'),P(cls=TextFont.muted_sm)('What area are you having problems with')),
+    footer = FullySpacedDiv(Button(cls=ButtonT.ghost  )('Cancel'),
+                            Button(cls=ButtonT.primary)('Submit')))
 
 
 # %% ../ex_nbs/02_cards.ipynb
@@ -65,43 +70,49 @@ FlexBlockCentered = (FlexT.block,FlexT.center)
 
 # %% ../ex_nbs/02_cards.ipynb
 franken_desc ="HTML-first, framework-agnostic, beautifully designed components that you can truly copy and paste into your site. Accessible. Customizable. Open Source."
-Right2 = Card(UkH4("franken/ui"),
-              P(cls=TextT.muted_sm)(franken_desc),
-              Div(cls=('flex','gap-x-4',TextT.muted_sm))(
+Right2 = Card(H4("franken/ui"),
+              P(cls=TextFont.muted_sm)(franken_desc),
+              Div(cls=('flex','gap-x-4',TextFont.muted_sm))(
                 Div(cls=FlexBlockCentered)("TypeScript"),
                 Div(cls=FlexBlockCentered)(UkIcon('star'),"20k"),"Updated April 2023"))
 
 # %% ../ex_nbs/02_cards.ipynb
 Right3 = Card(
-    UkSwitch(label = Div(UkH5('Strictly Necessary'),P(cls=(TextT.muted_sm,TextB.wt_normal))('These cookies are essential in order to use the website and use its features.')),
-                cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
-    UkSwitch(label = Div(UkH5('Functional Cookies'),P(cls=(TextT.muted_sm,TextB.wt_normal))('These cookies allow the website to provide personalized functionality.')),
-                cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
-    UkSwitch(label = Div(UkH5('Performance Cookies'),P(cls=(TextT.muted_sm,TextB.wt_normal))('These cookies help to improve the performance of the website.')),
-                cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
-    header=(UkH4('Cookie Settings'),P(cls=(TextT.muted_sm, 'mt-1.5'))('Manage your cookie settings here.')),
-    footer=UkButton(cls='uk-button-primary w-full')('Save Preferences'),)
+    Div(H5('Strictly Necessary'),
+        P(cls=(TextFont.muted_sm,TextT.normal))('These cookies are essential in order to use the website and use its features.'),
+        Switch(),
+        cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
+    Div(H5('Functional Cookies'),
+        P(cls=(TextFont.muted_sm,TextT.normal))('These cookies allow the website to provide personalized functionality.'),
+        Switch(),
+        cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
+    Div(H5('Performance Cookies'),
+        P(cls=(TextFont.muted_sm,TextT.normal))('These cookies help to improve the performance of the website.'),
+        Switch(),
+        cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
+    header=(H4('Cookie Settings'),P(cls=(TextFont.muted_sm, 'mt-1.5'))('Manage your cookie settings here.')),
+    footer=Button(cls='uk-button-primary w-full')('Save Preferences'),)
 
 # %% ../ex_nbs/02_cards.ipynb
 team_members = [("Sofia Davis", "m@example.com", "Owner"),("Jackson Lee", "p@example.com", "Member"),]
 
 options = [
-    A(Div(Div('Viewer'),    Div('Can view and comment.',                 cls=TextT.muted_sm))),
-    A(Div(Div('Developer'), Div('Can view, comment and edit.',           cls=TextT.muted_sm))),
-    A(Div(Div('Billing'),   Div('Can view, comment and manage billing.', cls=TextT.muted_sm))),
-    A(Div(Div('Owner'),     Div('Admin-level access to all resources.',  cls=TextT.muted_sm)))
+    A(Div(Div('Viewer'),    Div('Can view and comment.',                 cls=TextFont.muted_sm))),
+    A(Div(Div('Developer'), Div('Can view, comment and edit.',           cls=TextFont.muted_sm))),
+    A(Div(Div('Billing'),   Div('Can view, comment and manage billing.', cls=TextFont.muted_sm))),
+    A(Div(Div('Owner'),     Div('Admin-level access to all resources.',  cls=TextFont.muted_sm)))
 ]
 
 body = [Div(cls=(*FlexBlockCentered, 'space-x-4'))(
         DiceBearAvatar(n, 10,10),
         Div(cls='flex-1')(
             P(n, cls='text-sm font-medium leading-none'),
-            P(e, cls=TextT.muted_sm)),
+            P(e, cls=TextFont.muted_sm)),
         UkDropdownButton(options, label=r),
     ) for n,e,r in team_members]
 
 Middle1 = Card(*body,
-        header = (UkH4('Team Members'),Div('Invite your team members to collaborate.', cls=('mt-1.5', TextT.muted_sm))),)
+        header = (H4('Team Members'),Div('Invite your team members to collaborate.', cls=('mt-1.5', TextFont.muted_sm))),)
 
 # %% ../ex_nbs/02_cards.ipynb
 access_roles = ("Read and write access", "Read-only access")
@@ -112,20 +123,20 @@ team_members = [("Olivia Martin", "m@example.com", "Read and write access"),
 # %% ../ex_nbs/02_cards.ipynb
 Middle2 = Card(
     Div(cls='flex gap-x-2')(
-        UkInput(value='http://example.com/link/to/document',cls='flex-1'),
-        UkButton('Copy link')),
+        Input(value='http://example.com/link/to/document',cls='flex-1'),
+        Button('Copy link')),
     Div(cls='uk-divider-icon my-4'),
-    H4(cls='text-sm font-medium')('People with access'),
+    H4(cls=TextFont.bold_sm)('People with access'),
     *[LAlignedDiv(
         DiceBearAvatar(n, 10,10),
         Div(cls='flex-1')(
             P(n, cls='text-sm font-medium leading-none'),
-            P(e, cls=TextT.muted_sm)),
-        UkSelect(*Options(*access_roles, selected_idx=access_roles.index(r)))) for n,e,r in team_members],
-    header = (UkH4('Share this document'),Div('Anyone with the link can view this document.', cls=('mt-1.5',TextT.muted_sm))))
+            P(e, cls=TextFont.muted_sm)),
+        Select(*Options(*access_roles, selected_idx=access_roles.index(r))), cls='gap-4') for n,e,r in team_members],
+    header = (H4('Share this document'),Div('Anyone with the link can view this document.', cls=('mt-1.5',TextFont.muted_sm))))
 
 # %% ../ex_nbs/02_cards.ipynb
-Middle3 = Card(UkButton('Jan 20, 2024 - Feb 09, 2024'))
+Middle3 = Card(Button('Jan 20, 2024 - Feb 09, 2024'))
 
 # %% ../ex_nbs/02_cards.ipynb
 section_content =(('bell','Everything',"Email digest, mentions & all activity."),
@@ -134,10 +145,11 @@ section_content =(('bell','Everything',"Email digest, mentions & all activity.")
 
 # %% ../ex_nbs/02_cards.ipynb
 Middle4 = Card(
-    Ul(cls="uk-nav uk-nav-secondary")
-    (*[Li(cls='-mx-1')(A(Div(cls="flex gap-x-4")(Div(uk_icon=icon),Div(cls='flex-1')(P(name),P(cls=TextT.muted_sm)(desc)))))
-            for icon, name, desc in section_content]),
-    header = (UkH4('Notification'),Div('Choose what you want to be notified about.', cls=('mt-1.5', TextT.muted_sm))),
+    Nav(
+    *[Li(cls='-mx-1')(A(Div(cls="flex gap-x-4")(Div(uk_icon=icon),Div(cls='flex-1')(P(name),P(cls=TextFont.muted_sm)(desc)))))
+            for icon, name, desc in section_content],
+        cls="uk-nav-secondary"),
+    header = (H4('Notification'),Div('Choose what you want to be notified about.', cls=('mt-1.5', TextFont.muted_sm))),
     body_cls='pt-0')
 
 # %% ../ex_nbs/02_cards.ipynb
