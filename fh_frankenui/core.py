@@ -28,6 +28,7 @@ from itertools import zip_longest
 from typing import Union, Tuple, Optional
 from fastcore.all import *
 import copy
+from aenum import Enum
 
 # %% ../lib_nbs/01_core.ipynb
 # need a better name, stringify might be too general for what it does 
@@ -315,7 +316,10 @@ TextT = create_uk_enum('TextT', (
 ))
 
 # %% ../lib_nbs/01_core.ipynb
-class TextFont(VEnum):
+class TextFont(Enum):
+    def __add__(self, other):   return stringify((self, other))
+    def __radd__(self, other):  return stringify((other, self)) 
+    def __str__(self): return self.value
     muted_sm = stringify((TextT.muted, TextT.small))
     bold_sm = stringify((TextT.bold, TextT.small))
 
