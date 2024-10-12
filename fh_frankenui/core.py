@@ -54,21 +54,51 @@ def create_uk_enum(name, options, custom={}):
 
 # %% ../lib_nbs/01_core.ipynb
 def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
-    res = component_fn(cls=cls, **kwargs)(*c)
-    return res
+    " Create a new component based on a basic HTML component for use with FrankenUI"
+    return component_fn(cls=cls, **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
 ButtonT = create_uk_enum('ButtonT',('default','primary','secondary','danger','ghost','text','link'))
 
 # %% ../lib_nbs/01_core.ipynb
-def Button(*c, cls=ButtonT.default,  **kwargs):
+def Button(*c,                   # Components to go inside the Button
+           cls=ButtonT.default,  # cls for the Button (see ButtonT for style options)
+           **kwargs              # any other kwargs will be passed to the button 
+          ):                     # Button w/ typ='button' and `uk-button` cls
+    "A Button with Uk Styling"
     return UkGenericComponent(fh.Button,*c, cls=('uk-button',stringify(cls)), type='button', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-def H1(*c, cls=(), **kwargs): return UkGenericComponent(fh.H1, *c, cls=('uk-h1',stringify(cls)), **kwargs)
-def H2(*c, cls=(), **kwargs): return UkGenericComponent(fh.H2, *c, cls=('uk-h2',stringify(cls)), **kwargs)
-def H3(*c, cls=(), **kwargs): return UkGenericComponent(fh.H3, *c, cls=('uk-h3',stringify(cls)), **kwargs)
-def H4(*c, cls=(), **kwargs): return UkGenericComponent(fh.H4, *c, cls=('uk-h4',stringify(cls)), **kwargs)
+def H1(*c,       # Components to go inside the H1
+       cls=(),   # cls for the H1
+       **kwargs  # any other kwargs will be passed to the H1
+      ): # H1 with `uk-h1` cls
+    "A H1 with Uk Styling"
+    return UkGenericComponent(fh.H1, *c, cls=('uk-h1',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def H2(*c,       # Components to go inside the H2
+       cls=(),   # cls for the H2
+       **kwargs  # any other kwargs will be passed to the H2
+      ): # H2 with `uk-h2` cls
+    "A H2 with Uk Styling"
+    return UkGenericComponent(fh.H2, *c, cls=('uk-h2',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def H3(*c,       # Components to go inside the H3
+       cls=(),   # cls for the H3
+       **kwargs  # any other kwargs will be passed to the H1
+      ): # H3 with `uk-h3` cls
+    "A H1 with Uk Styling"
+    return UkGenericComponent(fh.H1, *c, cls=('uk-h1',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def H4(*c,       # Components to go inside the H4
+       cls=(),   # cls for the H4
+       **kwargs  # any other kwargs will be passed to the H4
+      ): # H4 with `uk-h4` cls
+    "A H4 with Uk Styling"
+    return UkGenericComponent(fh.H4, *c, cls=('uk-H4',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def Alert(*c, cls=(), **kwargs): 
