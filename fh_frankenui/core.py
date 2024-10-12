@@ -46,12 +46,28 @@ class VEnum(Enum):
     def __add__(self, other):   return stringify((self, other))
     def __radd__(self, other):  return stringify((other, self)) 
     def __str__(self): return self.value
+    
+    def __new__(cls, value, doc=None):
+        member = str.__new__(cls)  # Use str as the base class
+        member._value_ = value
+        if doc is not None:
+            member.__doc__ = doc
+        return member
 
 # %% ../lib_nbs/01_core.ipynb
-def create_uk_enum(name, options, custom={}):
+def create_uk_enum(name, options, custom={}, enum_doc=None):
     def getval(a): return custom[a] if a in custom.keys() else a
-    opts = [(a,str2ukcls(name.rstrip('T').lower(),getval(a))) for a in options]
-    return VEnum(name,opts, type=str)
+    opts = {}
+    for option in options:
+        if isinstance(option, tuple): key, doc = option
+        else: key, doc = option, None
+        opts[key] = (str2ukcls(name.rstrip('T').lower(), getval(key)), doc)
+    
+    enum_class = VEnum(name, opts, type=str)
+    if enum_doc:
+        enum_class.__doc__ = enum_doc
+    return enum_class
+
 
 # %% ../lib_nbs/01_core.ipynb
 def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
@@ -59,45 +75,51 @@ def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
     return component_fn(cls=cls, **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-ButtonT = create_uk_enum('ButtonT',('default','primary','secondary','danger','ghost','text','link'))
+ButtonT = create_uk_enum('ButtonT',('default','ghost', 'text','link',
+                                    ('primary', 'Uses primary color from these'),
+                                    ('secondary', 'Uses secondary color from theme'),
+                                    ('danger', 'Red danger button'),
+                                    ),
+                        enum_doc="Style Options for Button from https://franken-ui.dev/docs/button")
 
 # %% ../lib_nbs/01_core.ipynb
-def Button(*c:str|FT,                     # Components to go inside the Button
+def Button(
+           *c:str|FT,                     # Components to go inside the Button
            cls:str|Enum=ButtonT.default,  # cls for the Button (see ButtonT for style options)
            **kwargs                       # any other kwargs will be passed to the button 
-          ):                              # Button w/ typ='button' and `uk-button` cls
+          )-> FT:                         # Button w/ `type=button` and `uk-button` cls
     "A Button with Uk Styling"
     return UkGenericComponent(fh.Button,*c, cls=('uk-button',stringify(cls)), type='button', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-def H1(*c,       # Components to go inside the H1
-       cls=(),   # cls for the H1
-       **kwargs  # any other kwargs will be passed to the H1
-      ): # H1 with `uk-h1` cls
+def H1(*c:FT|str,       # Components to go inside the Heading
+       cls:Enum|str|tuple=(),   # cls for the Heading
+       **kwargs  # any other kwargs will be passed to the Heading
+      )->FT: # Heading with `class=uk-h1` cls
     "A H1 with Uk Styling"
     return UkGenericComponent(fh.H1, *c, cls=('uk-h1',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-def H2(*c,       # Components to go inside the H2
-       cls=(),   # cls for the H2
-       **kwargs  # any other kwargs will be passed to the H2
-      ): # H2 with `uk-h2` cls
+def H2(*c:FT|str,       # Components to go inside the Heading
+       cls:Enum|str|tuple=(),   # cls for the Heading
+       **kwargs  # any other kwargs will be passed to the Heading
+      )->FT: # Heading with `class=uk-h2` cls
     "A H2 with Uk Styling"
     return UkGenericComponent(fh.H2, *c, cls=('uk-h2',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-def H3(*c,       # Components to go inside the H3
-       cls=(),   # cls for the H3
-       **kwargs  # any other kwargs will be passed to the H1
-      ): # H3 with `uk-h3` cls
+def H3(*c:FT|str,       # Components to go inside the Heading
+       cls:Enum|str|tuple=(),   # cls for the Heading
+       **kwargs  # any other kwargs will be passed to the Heading
+      )->FT: # Heading with `class=uk-h3` cls
     "A H1 with Uk Styling"
     return UkGenericComponent(fh.H1, *c, cls=('uk-h1',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-def H4(*c,       # Components to go inside the H4
-       cls=(),   # cls for the H4
-       **kwargs  # any other kwargs will be passed to the H4
-      ): # H4 with `uk-h4` cls
+def H4(*c:FT|str,       # Components to go inside the Heading
+       cls:Enum|str|tuple=(),   # cls for the Heading
+       **kwargs  # any other kwargs will be passed to the Heading
+      )->FT: # Heading with `class=uk-h4` cls
     "A H4 with Uk Styling"
     return UkGenericComponent(fh.H4, *c, cls=('uk-H4',stringify(cls)), **kwargs)
 
