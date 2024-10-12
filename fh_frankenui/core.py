@@ -141,7 +141,7 @@ def ArticleMeta(*c, cls=(), **kwargs):
     return UkGenericComponent(P, *c, cls=('uk-article-meta',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-ContainerT = create_uk_enum('ContainerT',('xsmall','small','large','xlarge','expand'))
+ContainerT = create_uk_enum('ContainerT',('xsmall','small','large','xlarge','expand'), enum_doc='Max width container sizes from https://franken-ui.dev/docs/container')
 
 # %% ../lib_nbs/01_core.ipynb
 def Container(*c, cls=(), **kwargs): 
@@ -179,17 +179,11 @@ def FormLabel(*c, cls=(), **kwargs):
     return UkGenericComponent(fh.Label, *c, cls=('uk-form-label',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-LinkT = create_uk_enum('LinkT', ('muted', 'text', 'reset'))
+LinkT = create_uk_enum('LinkT', ('muted', 'text', 'reset'), enum_doc='Link styles from https://franken-ui.dev/docs/link')
 
 # %% ../lib_nbs/01_core.ipynb
 def Link(*c, cls=(), **kwargs):  
     return UkGenericComponent(fh.A, *c, cls=('uk-link',stringify(cls)), **kwargs)
-
-# %% ../lib_nbs/01_core.ipynb
-def Link(*c, cls=(), **kwargs):
-    cls = stringify(cls)
-    if 'uk-link' not in cls: cls = (cls, 'uk-link')
-    return UkGenericComponent(fh.A, *c, cls=cls, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def List(*c, cls=(), **kwargs):
@@ -249,9 +243,9 @@ def NavBarNav(*c, cls=(), **kwargs):
 
 # %% ../lib_nbs/01_core.ipynb
 PaddingT = create_uk_enum('PaddingT', (
-    'xsmall', 'small', 'default', 'medium', 'large', 'xlarge',
-    'remove', 'remove_top', 'remove_bottom', 'remove_left', 'remove_right', 'remove_vertical', 'remove_horizontal'
-), {'default':''})
+    *map(lambda x: (x, "Size Modifier"),('xsmall', 'small', 'default', 'medium', 'large', 'xlarge')),
+    *map(lambda x: (x, "Remove Side Mofiers"),('remove', 'remove_top', 'remove_bottom', 'remove_left', 'remove_right', 'remove_vertical', 'remove_horizontal'))
+), enum_doc="Padding Modifiers from https://franken-ui.dev/docs/padding", custom={'default':''})
 
 # %% ../lib_nbs/01_core.ipynb
 PositionT = create_uk_enum('PositionT', (
