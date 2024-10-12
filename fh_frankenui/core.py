@@ -307,19 +307,22 @@ class Theme(Enum):
 
 # %% ../lib_nbs/01_core.ipynb
 TextT = create_uk_enum('TextT', (
-    'lead', 'meta', 'italic', # Style
-    'small', 'default', 'large', #Font Size
-    'light', 'normal', 'bold', 'lighter', 'bolder', # Font Weight
-    'capitalize', 'uppercase', 'lowercase', #Text transform
-    'decoration_none', # Text decoration
-    'muted', 'primary', 'secondary', 'success', 'warning', 'danger', # Color
-    'left', 'right', 'center', 'justify', # Alignment
-    'top', 'middle', 'bottom', 'baseline', # Vertical alignment
-    'truncate', 'break_', 'nowrap' # Wrapping
-))
+    *map(lambda x: (x, "Text Style"),('lead', 'meta', 'italic')),
+    *map(lambda x: (x, "Text Size"),('small', 'default', 'large')),
+    *map(lambda x: (x, "Text Weight"),('light', 'normal', 'bold', 'lighter', 'bolder')),
+    *map(lambda x: (x, "Text Transform"),('capitalize', 'uppercase', 'lowercase')),
+    *map(lambda x: (x, "Text Decoration"),('decoration_none',)), 
+    *map(lambda x: (x, "Text Color"),('muted', 'primary', 'secondary', 'success', 'warning', 'danger')), 
+    *map(lambda x: (x, "Text Alignment"),('left', 'right', 'center', 'justify')),
+    *map(lambda x: (x, "Vertical Alignment"),('top', 'middle', 'bottom', 'baseline')),
+    *map(lambda x: (x, "Text Wrapping"),('truncate', 'break_', 'nowrap'))),
+    enum_doc="Text Styles from https://franken-ui.dev/docs/text", custom={'default':''})
+                      
+                
 
 # %% ../lib_nbs/01_core.ipynb
 class TextFont(Enum):
+    "Combinations of TextT that are particularly useful"
     def __add__(self, other):   return stringify((self, other))
     def __radd__(self, other):  return stringify((other, self)) 
     def __str__(self): return self.value
