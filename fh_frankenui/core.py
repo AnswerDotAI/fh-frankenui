@@ -4,9 +4,9 @@
 
 # %% auto 0
 __all__ = ['ButtonT', 'ContainerT', 'LabelT', 'LinkT', 'ListT', 'PaddingT', 'PositionT', 'SectionT', 'TextT', 'FlexT', 'GridT',
-           'CardT', 'TableT', 'stringify', 'str2ukcls', 'VEnum', 'create_uk_enum', 'UkGenericComponent', 'Button', 'H1',
-           'H2', 'H3', 'H4', 'Alert', 'Article', 'ArticleTitle', 'ArticleMeta', 'Container', 'Input', 'Select', 'Radio',
-           'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch', 'Label', 'FormLabel', 'Link', 'List',
+           'CardT', 'TableT', 'stringify', 'str2ukcls', 'VEnum', 'create_uk_enum', 'UkGenericComponent', 'Alert',
+           'Button', 'H1', 'H2', 'H3', 'H4', 'Article', 'ArticleTitle', 'ArticleMeta', 'Container', 'Input', 'Select',
+           'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch', 'Label', 'FormLabel', 'Link', 'List',
            'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton',
            'Modal', 'Nav', 'NavBarContainer', 'NavBarNav', 'Placeholder', 'Progress', 'Section', 'Sticky', 'Theme',
            'TextFont', 'UkIcon', 'DiceBearAvatar', 'Grid', 'ResponsiveGrid', 'FullySpacedDiv', 'CenteredDiv',
@@ -76,6 +76,10 @@ def UkGenericComponent(component_fn, *c, cls=(), **kwargs):
     return component_fn(cls=cls, **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
+def Alert(*c, cls=(), **kwargs): 
+    return UkGenericComponent(Div, *c, cls=('uk-alert',stringify(cls)), uk_alert=True, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
 ButtonT = create_uk_enum('ButtonT',('default', 
                                     ('primary', 'primary color from theme'),
                                     ('secondary', 'Uses secondary color from theme'),
@@ -125,10 +129,6 @@ def H4(*c:FT|str,       # Components to go inside the Heading
       )->FT: # Heading with `class=uk-h4` cls
     "A H4 with Uk Styling"
     return UkGenericComponent(fh.H4, *c, cls=('uk-H4',stringify(cls)), **kwargs)
-
-# %% ../lib_nbs/01_core.ipynb
-def Alert(*c, cls=(), **kwargs): 
-    return UkGenericComponent(Div, *c, cls=('uk-alert',stringify(cls)), uk_alert=True, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def Article(*c, cls=(), **kwargs):
