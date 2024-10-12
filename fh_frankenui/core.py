@@ -28,7 +28,7 @@ from itertools import zip_longest
 from typing import Union, Tuple, Optional
 from fastcore.all import *
 import copy
-from aenum import Enum
+# from aenum import Enum
 
 # %% ../lib_nbs/01_core.ipynb
 # need a better name, stringify might be too general for what it does 
