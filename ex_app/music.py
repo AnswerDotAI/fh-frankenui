@@ -52,9 +52,9 @@ music_headers = UkNavbar(
 
 # %% ../ex_nbs/05_music.ipynb
 _fn = lambda x: A(role='button')(LAlignedTxtIcon(*tuplify(x),icon_right=False, cls='space-x-4'))
-discover = (UkH4("Discover"), *map(_fn, (("Listen Now", "play-circle"), ("Browse", 'thumbnails'), ("Radio", "rss"))))
-library = (UkH4("Library"), *map(_fn, (("Playlists", "play-circle"), ("Songs", "bell"), ("Made for You", "user"),("Artists", "users"),("Albums", "bookmark"))))
-playlist = (UkH4("Playlist"), *map(_fn, ("Recently Added", "Recently Played", "Top Songs", "Top Albums", "Top Artists", 
+discover = (H4("Discover"), *map(_fn, (("Listen Now", "play-circle"), ("Browse", 'thumbnails'), ("Radio", "rss"))))
+library = (H4("Library"), *map(_fn, (("Playlists", "play-circle"), ("Songs", "bell"), ("Made for You", "user"),("Artists", "users"),("Albums", "bookmark"))))
+playlist = (H4("Playlist"), *map(_fn, ("Recently Added", "Recently Played", "Top Songs", "Top Albums", "Top Artists", 
                                          "Logic Discography","Bedtime Beats", "I miss Y2K Pop")))
 
 # %% ../ex_nbs/05_music.ipynb
@@ -62,7 +62,7 @@ def AlbumImg(url):
     return Div(cls="overflow-hidden rounded-md")(Img(cls="transition-transform duration-200 hover:scale-105", src=url))
 
 def AlbumFooter(title, artist):
-    return Div(cls='space-y-1')(P(title,cls=TextB.wt_bold),P(artist,cls=TextB.cl_muted))
+    return Div(cls='space-y-1')(P(title,cls=TextT.bold),P(artist,cls=TextT.muted))
 
 def Album(url,title,artist):
     return Div(AlbumImg(url),AlbumFooter(title,artist))
@@ -87,12 +87,12 @@ def create_album_grid(albums, cols=4):
 # %% ../ex_nbs/05_music.ipynb
 _album = lambda t,a: Album('https://ucarecdn.com/e5607eaf-2b2a-43b9-ada9-330824b6afd7/music1.webp',t,a)
 
-music_content = (Div(UkH3("Listen Now"), cls="mt-6 space-y-1"),
-                    P("Top picks for you. Updated daily.",cls=TextT.muted_sm),
+music_content = (Div(H3("Listen Now"), cls="mt-6 space-y-1"),
+                    P("Top picks for you. Updated daily.",cls=TextFont.muted_sm),
                     UkHLine(),
                     Grid(*[_album(t,a) for t,a in listen_now_albums], cols=4, cls=GridT.medium),
-                    Div(UkH3("Made for You"), cls="mt-6 space-y-1"),
-                    P("Your personal playlists. Updated daily.", cls=TextT.muted_sm),
+                    Div(H3("Made for You"), cls="mt-6 space-y-1"),
+                    P("Your personal playlists. Updated daily.", cls=TextFont.muted_sm),
                     UkHLine(),
                     Grid(*[_album(t,a) for t,a in made_for_you_albums], cols=6, cls=GridT.small))
 
@@ -107,29 +107,29 @@ tabs = Ul(Li(A('Music', href='#'),cls='uk-active'),
 def podcast_tab():
     return Div(
         Div(cls="space-y-3")(
-            UkH3("New Episodes"),
-            P("Your favorite podcasts. Updated daily.", cls=TextT.muted_sm)),
+            H3("New Episodes"),
+            P("Your favorite podcasts. Updated daily.", cls=TextFont.muted_sm)),
         Div(cls="my-4 h-[1px] w-full bg-border"),
         Div(cls="uk-placeholder flex h-[450px] items-center justify-center rounded-md",uk_placeholder=True)(
             Div(cls="text-center space-y-6")(
                 UkIcon("microphone", 3),
-                UkH4("No episodes added"),
-                P("You have not added any podcasts. Add one below.", cls=TextT.muted_sm),
-                UkButton("Add Podcast", cls=UkButtonT.primary))))
+                H4("No episodes added"),
+                P("You have not added any podcasts. Add one below.", cls=TextFont.muted_sm),
+                Button("Add Podcast", cls=ButtonT.primary))))
 
 # %% ../ex_nbs/05_music.ipynb
 def LAlignedIconTxts(ns, icns): return [Li(A(LAlignedIconTxt(n,i))) for n,i in zip(ns,icns)]
 
 # %% ../ex_nbs/05_music.ipynb
 sb = (Ul(cls='space-y-2')(
-         Li(UkH3("Discover")), 
+         Li(H3("Discover")), 
          *LAlignedIconTxts(["Listen Now", "Browse", "Radio"], ["play-circle", "thumbnails", "rss"])),
       Ul(cls='space-y-2')(
-          Li(UkH3("Library")), 
+          Li(H3("Library")), 
           *LAlignedIconTxts(["Playlists", "Songs", "Made for You", "Artists", "Albums"], 
                            ["play-circle", "bell", "user", "users", "bookmark"])),
       Ul(cls='space-y-2')(
-          Li(UkH3("Playlist")),
+          Li(H3("Playlist")),
           *LAlignedIconTxts(["Recently Added", "Recently Played"], ["", ""]),)) 
 
 # %% ../ex_nbs/05_music.ipynb
@@ -143,7 +143,7 @@ def page():
                 Div(cls="px-8 py-6")(
                     Div(cls="flex items-center justify-between")(
                         Div(cls="max-w-80")(tabs),
-                        UkButton(cls=UkButtonT.primary)(Span(cls="mr-2 size-4")(UkIcon('plus-circle', 0.8)),"Add music")),
+                        Button(cls=ButtonT.primary)(Span(cls="mr-2 size-4")(UkIcon('plus-circle', 0.8)),"Add music")),
                     Ul(id="component-nav", cls="uk-switcher")(
                         Li(*music_content),
                         Li(podcast_tab())))),

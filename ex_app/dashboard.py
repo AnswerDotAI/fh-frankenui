@@ -18,9 +18,9 @@ import matplotlib.pylab as plt
 # %% ../ex_nbs/03_dashboard.ipynb
 def InfoCard(title, value, change):
     return Div(Card(
-             Div(UkH3(value),
-                P(change, cls=TextT.muted_sm)),
-             header = UkH4(title)))
+             Div(H3(value),
+                P(change, cls=TextFont.muted_sm)),
+             header = H4(title)))
 
 # %% ../ex_nbs/03_dashboard.ipynb
 rev = InfoCard("Total Revenue", "$45,231.89", "+20.1% from last month")
@@ -36,8 +36,8 @@ def AvatarItem(name, email, amount):
     return Div(cls="flex items-center")(
         DiceBearAvatar(name, 9,9),
         Div(cls="ml-4 space-y-1")(
-            P(name, cls=TextT.medium_sm),
-            P(email, cls=TextT.muted_sm)),
+            P(name, cls=TextFont.bold_sm),
+            P(email, cls=TextFont.muted_sm)),
         Div(amount, cls="ml-auto font-medium"))
 
 recent_sales = Card(
@@ -49,8 +49,8 @@ recent_sales = Card(
             ("William Kim",     "will@email.com",            "+$99.00"),
             ("Sofia Davis",     "sofia.davis@email.com",     "+$39.00"))]),
     header=Div(
-        UkH3("Recent Sales"),
-        P("You made 265 sales this month.", cls=TextT.muted_sm)),
+        H3("Recent Sales"),
+        P("You made 265 sales this month.", cls=TextFont.muted_sm)),
 
 cls='lg:col-span-3')
 
@@ -78,21 +78,21 @@ hotkeys = tuple(map(lambda x: space(*x), hotkeys))
 logout = space('Logout' ,''),
 user = Li(cls='px-2 py-1.5 text-sm')(
         Div(cls='flex flex-col space-y-1')(
-            P('sveltecult', cls=TextT.medium_sm),
-            P('leader@sveltecult.com', cls=TextT.muted_sm))),
+            P('sveltecult', cls=TextFont.bold_sm),
+            P('leader@sveltecult.com', cls=TextFont.muted_sm))),
 avatar = DiceBearAvatar('Alicia Koch',8,8)
 avatar_dropdown = UkDropdownButton(user,hotkeys,logout, label=avatar)
 
 # %% ../ex_nbs/03_dashboard.ipynb
 top_nav = UkNavbar(
     lnav=[team_dropdown, Li(A("Overview")), Li(A("Customers")), Li(A("Products")), Li(A("Settings"))],
-    rnav=[UkInput(placeholder='Search'), avatar_dropdown],)
+    rnav=[Input(placeholder='Search'), avatar_dropdown],)
 
 # %% ../ex_nbs/03_dashboard.ipynb
 def page():
     return Div(cls="space-y-4")(
         Div(cls="border-b border-border px-4")(top_nav),
-        UkH2('Dashboard'),
+        H2('Dashboard'),
         UkTab("Overview", "Analytics", "Reports", "Notifications"), 
         top_info_row,
         Grid(Card(generate_chart(10),cls='lg:col-span-4'),
