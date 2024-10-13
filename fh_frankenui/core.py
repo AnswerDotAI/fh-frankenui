@@ -119,8 +119,8 @@ def H3(*c:FT|str,       # Components to go inside the Heading
        cls:Enum|str|tuple=(),   # cls for the Heading
        **kwargs  # any other kwargs will be passed to the Heading
       )->FT: # Heading with `class=uk-h3` cls
-    "A H1 with Uk Styling"
-    return UkGenericComponent(fh.H1, *c, cls=('uk-h1',stringify(cls)), **kwargs)
+    "A H3 with Uk Styling"
+    return UkGenericComponent(fh.H3, *c, cls=('uk-h3',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def H4(*c:FT|str,       # Components to go inside the Heading
@@ -128,7 +128,7 @@ def H4(*c:FT|str,       # Components to go inside the Heading
        **kwargs  # any other kwargs will be passed to the Heading
       )->FT: # Heading with `class=uk-h4` cls
     "A H4 with Uk Styling"
-    return UkGenericComponent(fh.H4, *c, cls=('uk-H4',stringify(cls)), **kwargs)
+    return UkGenericComponent(fh.H4, *c, cls=('uk-h4',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def Article(*c, cls=(), **kwargs):
@@ -297,13 +297,13 @@ class Theme(Enum):
     zinc = "zinc"
 
     def headers(self):
-        js = (Script(src="https://cdn.tailwindcss.com"),
-              Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),
-              Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),
-              Script(type="module", src="https://unpkg.com/franken-wc@0.0.6/dist/js/wc.iife.js")
+        js = (fh.Script(src="https://cdn.tailwindcss.com"),
+              fh.Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),
+              fh.Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),
+              fh.Script(type="module", src="https://unpkg.com/franken-wc@0.0.6/dist/js/wc.iife.js")
               )
         _url = f"https://unpkg.com/franken-wc@0.0.6/dist/css/{self.value}.min.css"
-        return (*js, Link(rel="stylesheet", href=_url))
+        return (*js, fh.Link(rel="stylesheet", href=_url))
 
 # %% ../lib_nbs/01_core.ipynb
 TextT = create_uk_enum('TextT', (
@@ -355,7 +355,7 @@ FlexT = create_uk_enum('FlexT', (
     'block', 'inline',
     'left', 'center', 'right', 'between', 'around', # horizontal
     'stretch', 'top', 'middle', 'botton', # Vertical
-    'row', 'row_reverse', 'col', 'col_reverse', # Direction
+    'row', 'row_reverse', 'column', 'column_reverse', # Direction
     'nowrap', 'wrap', 'wrap_reverse' # Wrap
 ), {'block':''})
 
@@ -393,7 +393,7 @@ def CenteredDiv(*c,      # Components
                ): # Div with components centered in it
     "Creates a flex div with it's components centered in it"
     cls=stringify(cls)
-    return Div(cls=(FlexT.block,FlexT.col,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
+    return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
 def LAlignedDiv(*c,      # Components
