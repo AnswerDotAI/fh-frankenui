@@ -5,17 +5,17 @@
 # %% auto 0
 __all__ = ['ButtonT', 'ContainerT', 'LabelT', 'LinkT', 'ListT', 'PaddingT', 'PositionT', 'SectionT', 'TextT', 'FlexT', 'GridT',
            'CardT', 'TableT', 'stringify', 'str2ukcls', 'VEnum', 'create_uk_enum', 'UkGenericComponent', 'Alert',
-           'Button', 'H1', 'H2', 'H3', 'H4', 'Article', 'ArticleTitle', 'ArticleMeta', 'Container', 'Input', 'Select',
-           'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch', 'Label', 'FormLabel', 'Link', 'List',
-           'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton',
-           'Modal', 'Nav', 'NavBarContainer', 'NavBarNav', 'Placeholder', 'Progress', 'Section', 'Sticky', 'Theme',
-           'TextFont', 'UkIcon', 'DiceBearAvatar', 'Grid', 'ResponsiveGrid', 'FullySpacedDiv', 'CenteredDiv',
-           'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'SpaceBetweenDiv', 'GenericLabelInput',
-           'LabelInput', 'LabelRadio', 'LabelCheckboxX', 'LabelRange', 'LabelToggle_switch', 'LabelTextArea',
-           'LabelSwitch', 'LabelSelect', 'UkIconButton', 'Options', 'UkSelect', 'UkDropdownButton', 'UkHSplit',
-           'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'UkSidebar', 'NavTab', 'UkTab', 'CardTitle',
-           'CardHeader', 'CardBody', 'CardFooter', 'CardContainer', 'Card', 'Table', 'Td', 'Th', 'Tr', 'Thead', 'Tbody',
-           'TableFromLists', 'TableFromDicts', 'UkFormSection']
+           'Button', 'H1', 'H2', 'H3', 'H4', 'Article', 'ArticleTitle', 'ArticleMeta', 'Container', 'Fieldset',
+           'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch', 'Label',
+           'FormLabel', 'Link', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter',
+           'ModalTitle', 'ModalCloseButton', 'Modal', 'Nav', 'NavBarContainer', 'NavBarNav', 'Placeholder', 'Progress',
+           'Section', 'Sticky', 'Theme', 'TextFont', 'UkIcon', 'DiceBearAvatar', 'Grid', 'ResponsiveGrid',
+           'FullySpacedDiv', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv',
+           'SpaceBetweenDiv', 'GenericLabelInput', 'LabelInput', 'LabelRadio', 'LabelCheckboxX', 'LabelRange',
+           'LabelToggle_switch', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'UkIconButton', 'Options', 'UkSelect',
+           'UkDropdownButton', 'UkHSplit', 'UkHLine', 'UkNavDivider', 'UkNavbarDropdown', 'UkNavbar', 'UkSidebar',
+           'NavTab', 'UkTab', 'CardTitle', 'CardHeader', 'CardBody', 'CardFooter', 'CardContainer', 'Card', 'Table',
+           'Td', 'Th', 'Tr', 'Thead', 'Tbody', 'TableFromLists', 'TableFromDicts', 'UkFormSection']
 
 # %% ../lib_nbs/01_core.ipynb
 import fasthtml.common as fh
@@ -146,6 +146,13 @@ ContainerT = create_uk_enum('ContainerT',('xsmall','small','large','xlarge','exp
 # %% ../lib_nbs/01_core.ipynb
 def Container(*c, cls=(), **kwargs): 
     return UkGenericComponent(Div, *c, cls=('uk-container',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def Fieldset(*c, cls=(), **kwargs): 
+    return UkGenericComponent(fh.Fieldset, *c, cls=('uk-fieldset',stringify(cls)), **kwargs)
+
+def Legend(*c, cls=(), **kwargs): 
+    return UkGenericComponent(fh.Legend, *c, cls=('uk-legend',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def Input(*c, cls=(), **kwargs): 
@@ -431,12 +438,12 @@ def SpaceBetweenDiv(*c, cls='', **kwargs):
 # %% ../lib_nbs/01_core.ipynb
 def GenericLabelInput(
                label:str|FT,
-               input_fn, 
                lbl_cls='',
                input_cls='',
                container=Div, 
                container_cls='',
                id='',
+               input_fn=noop, 
                 **kwargs
                 ):
     "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
@@ -451,8 +458,20 @@ def GenericLabelInput(
 def LabelInput(*args, **kwargs): return GenericLabelInput(*args, input_fn=Input, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-@delegates(GenericLabelInput, but=['input_fn'])
-def LabelRadio(*args, **kwargs): return GenericLabelInput(*args, input_fn=Radio, **kwargs)
+def LabelRadio(label:str|FT,
+               lbl_cls='',
+               input_cls='',
+               container=Div, 
+               container_cls='',
+               id='',
+                **kwargs
+                ):
+    "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
+    if isinstance(label, str) or label.tag != 'label': 
+        label = FormLabel(cls=stringify(lbl_cls), fr=id)(label)
+    inp = Radio(id=id, cls=stringify(input_cls), **kwargs)        
+    if container: return container(inp, label, cls=stringify(container_cls))
+    return inp, label
 
 # %% ../lib_nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn'])
@@ -628,7 +647,7 @@ CardT = create_uk_enum('CardT',('default', 'primary', 'secondary', 'danger'))
 
 # %% ../lib_nbs/01_core.ipynb
 def CardTitle(*c, cls=(), **kwargs):
-    return UKGenericComponent(fh.Div, *c, cls=('uk-card-title',stringify(cls)), **kwargs)
+    return UkGenericComponent(fh.Div, *c, cls=('uk-card-title',stringify(cls)), **kwargs)
 
 def CardHeader(*c, cls=(), **kwargs):
     return UkGenericComponent(fh.Div, *c, cls=('uk-card-header',stringify(cls)), **kwargs)
