@@ -7,8 +7,8 @@
 >
 > This library is still in active development, however there are many
 > great things you can do with it already. We’d really like you try to
-> it and hear how it works for you - but please be aware there will
-> improvements to the API over time.
+> it and tell us how it works for you - but please be aware there will
+> improvements to the API over time
 
 ## Installation
 
