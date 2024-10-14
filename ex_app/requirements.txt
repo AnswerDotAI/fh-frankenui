@@ -1,3 +1,0 @@
-python-fasthtml
-fh_frankenui @ git+https://github.com/answerDotAI/fh-frankenui
-
