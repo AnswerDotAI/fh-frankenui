@@ -12,7 +12,7 @@ from fh_frankenui.core import *
 from fh_frankenui.components import *
 
 from fasthtml.svg import *
-
+import pathlib
 import json
 from datetime import datetime
 
@@ -48,7 +48,7 @@ sidebar = Container(NavContainer(
 
 
 # %% ../08_mail.ipynb
-mail_data = json.load(open(Path('data/mail.json')))
+mail_data = json.load(open(pathlib.Path('data/mail.json')))
 
 # %% ../08_mail.ipynb
 def format_date(date_str):
