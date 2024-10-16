@@ -47,10 +47,16 @@ class Theme(Enum):
     zinc = "zinc"
 
     def headers(self):
-        js = (fh.Script(src="https://cdn.tailwindcss.com"),
+        js = (fh.Link(rel="stylesheet", href="https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css"),
+              fh.Script(type="module", src="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js" ),
+              fh.Script(type="module", src="https://unpkg.com/franken-ui@1.1.0/dist/js/icon.iife.js"),
+              
+              fh.Script(src="https://cdn.tailwindcss.com"),
               fh.Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),
               fh.Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),
-              fh.Script(type="module", src="https://unpkg.com/franken-wc@0.0.6/dist/js/wc.iife.js")
+              fh.Script(type="module", src="https://unpkg.com/franken-wc@0.0.6/dist/js/wc.iife.js"),
+              
+              
               )
         _url = f"https://unpkg.com/franken-wc@0.0.6/dist/css/{self.value}.min.css"
         return (*js, fh.Link(rel="stylesheet", href=_url))
