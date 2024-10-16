@@ -15,7 +15,7 @@ from fasthtml.svg import *
 from fh_frankenui import *
 from fh_frankenui.core import *
 from fh_frankenui.components import *
-import calendar# show(tasks_table)# show(tasks_table)
+import calendar
 
 # %% ../02_cards.ipynb
 Left1 = Card(Grid(Button(UkIcon('github',cls='uk-margin-small-right'),'Github'),

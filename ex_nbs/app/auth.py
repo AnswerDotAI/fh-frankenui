@@ -10,12 +10,8 @@ from fh_frankenui import *
 from fh_frankenui.core import *
 from fh_frankenui.components import *
 
-from fasthtml.components import Uk, Uk_icon
 from fasthtml.svg import *
-from fh_matplotlib import matplotlib2fasthtml
-import numpy as np
-from pathlib import Path
-import matplotlib.pylab as plt
+
 
 # %% ../06_auth.ipynb
 def page():    
