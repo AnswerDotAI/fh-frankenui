@@ -622,7 +622,7 @@ def NavBarNavContainer(*li,
                          parent=True, 
                          uk_nav=False, #True for default collapsible behavior, see https://franken-ui.dev/docs/nav#component-options for more advanced options
                          **kwargs):
-    return Div(cls="uk-navbar-dropdown")(NavContainer(*li, cls=('uk-navbar-dropdown-nav z-2147483647',stringify(cls)), uk_nav=uk_nav, parent=parent, **kwargs))
+    return Div(cls="uk-navbar-dropdown")(NavContainer(*li, cls=('uk-navbar-dropdown-nav',stringify(cls)), uk_nav=uk_nav, parent=parent, **kwargs))
 
 # %% ../lib_nbs/01_core.ipynb
 def NavBarParentIcon(): return Span(uk_navbar_parent_icon=True)
