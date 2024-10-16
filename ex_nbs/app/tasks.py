@@ -9,6 +9,7 @@ __all__ = ['priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 'hotkeys
 
 # %% ../01_tasks.ipynb
 from fasthtml.common import *
+import fasthtml.common as fh
 from fh_frankenui.core import *
 from fh_frankenui.components import *
 from fasthtml.svg import *
@@ -110,7 +111,9 @@ tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(T
     header_data=task_columns,
     body_data=data,
     body_cell_render=cell_render,
-    header_cell_render=header_render))
+    header_cell_render=header_render,
+    sortable=True
+))
 
 
 # %% ../01_tasks.ipynb

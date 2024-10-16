@@ -724,16 +724,17 @@ def Th(*args,**kwargs): return _TableCell(fh.Th, *args, **kwargs)
 
 def Tr(*cells, cls=(), **kwargs):  return fh.Tr(*cells, cls=stringify(cls), **kwargs)
 def Thead(*rows, cls=(), **kwargs): return fh.Thead(*rows, cls=stringify(cls), **kwargs)
-def Tbody(*rows, cls=(), **kwargs): return fh.Tbody(*rows, cls=stringify(cls), **kwargs)
+def Tbody(*rows, cls=(), sortable=False, **kwargs): return fh.Tbody(*rows, cls=stringify(cls), uk_sortable=sortable, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def TableFromLists(header_data, body_data, footer_data=None, 
                    header_cell_render=Th,body_cell_render=Td, footer_cell_render=Td,
-                   cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), **kwargs):
+                   cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), 
+                   sortable=False, **kwargs):
     
     return Table(
                 Thead(Tr(*map(header_cell_render, header_data))),
-                Tbody(*[Tr(*map(body_cell_render, r)) for r in body_data]),
+                Tbody(*[Tr(*map(body_cell_render, r)) for r in body_data], sortable=sortable),
                 Tfoot(Tr(*map(footer_cell_render, footer_data))) if footer_data else '',
                 cls=stringify(cls),    
                 **kwargs)
@@ -741,11 +742,13 @@ def TableFromLists(header_data, body_data, footer_data=None,
 # %% ../lib_nbs/01_core.ipynb
 def TableFromDicts(header_data:Sequence, body_data:Sequence[dict], footer_data=None, 
                    header_cell_render=Th, body_cell_render=lambda k,v : Td(v), footer_cell_render=lambda k,v : Td(v),
-                   cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), **kwargs):
+                   cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small),
+                   sortable=False,
+                   **kwargs):
     
     return Table(
         Thead(Tr(*[header_cell_render(h) for h in header_data])),
-        Tbody(*[Tr(*[body_cell_render(k, r) for k in header_data]) for r in body_data]),
+        Tbody(*[Tr(*[body_cell_render(k, r) for k in header_data]) for r in body_data], sortable=sortable),
         Tfoot(Tr(*[footer_cell_render(k, footer_data.get(k.lower(), '')) for k in header_data])) if footer_data else '',
         cls=stringify(cls),    
         **kwargs
