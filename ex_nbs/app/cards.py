@@ -9,7 +9,7 @@ __all__ = ['Left1', 'Card1Svg', 'Card2Svg', 'AppleSvg', 'Left2', 'area_opts', 's
 
 # %% ../02_cards.ipynb
 from fasthtml.common import *
-
+import fasthtml.common as fh
 from fasthtml.components import Uk_input_tag
 from fasthtml.svg import *
 from fh_frankenui import *
@@ -158,7 +158,6 @@ def page():
             *map(Div,(Left1,Left2,Middle1,Middle2,Middle3,Middle4,Right1,Right2, Right3)),
             cols=1, cls=(GridT.small,'md:grid-cols-3', 'sm:grid-cols-2'), 
         uk_grid="masonry: next")
-
 
 # %% ../02_cards.ipynb
 cards_homepage = page()

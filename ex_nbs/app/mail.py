@@ -41,12 +41,15 @@ def MailSbLi(icon, title, cnt):
     return Li(A(
             Div(UkIcon(icon),Span(title),cls='space-x-2 flex items-center'),
             P(cnt,cls=TextFont.muted_sm),
-            cls='flex justify-between items-center w-full')),
+            cls='flex justify-between items-center w-full'))
+
 sidebar = Container(NavContainer(
     NavHeaderLi(H3("Email")),
+    Li(Select(map(Option, ('alicia@example.com','alicia@gmail.com', 'alicia@yahoo.com')),cls='my-4')),
     *[MailSbLi(i, t, c) for i, t, c in sidebar_group1],
     NavDividerLi(),
-    *[MailSbLi(i, t, c) for i, t, c in sidebar_group2],))
+    *[MailSbLi(i, t, c) for i, t, c in sidebar_group2],
+    cls='space-y-6'))
 
 
 # %% ../08_mail.ipynb
