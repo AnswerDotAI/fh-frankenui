@@ -9,25 +9,25 @@ __all__ = ['sidebar_items', 'sidebar', 'forms_homepage', 'heading', 'profile_for
 # %% ../04_forms.ipynb
 from fasthtml.common import *
 from fh_frankenui import *
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+
 from fasthtml.svg import *
-from fh_matplotlib import matplotlib2fasthtml
-import numpy as np
-import matplotlib.pylab as plt
 
 # %% ../04_forms.ipynb
 def heading():
     return Div(cls="space-y-5")(
             H2("Settings"),
-            P("Manage your account settings and set e-mail preferences.", cls=TextFont.muted_sm),
+            P("Manage your account settings and set e-mail preferences.", cls=TextFont.muted_lg),
             UkHSplit())
 
 # %% ../04_forms.ipynb
 sidebar_items = ["Profile", "Account", "Appearance", "Notifications", "Display"]
 
 # %% ../04_forms.ipynb
-sidebar = UkSidebar(Ul(cls='uk-nav-primary', uk_switcher="connect: #component-nav; animation: uk-animation-fade")(
-                            *map(lambda x: Li(A(x)),sidebar_items)), 
-                   cls="space-y-4 p-4 w-1/5")
+sidebar = NavContainer(*map(lambda x: Li(A(x)),sidebar_items),
+                uk_switcher="connect: #component-nav; animation: uk-animation-fade",
+                cls=(NavT.secondary,"space-y-4 p-4 w-1/5"))
 
 # %% ../04_forms.ipynb
 def profile_form():

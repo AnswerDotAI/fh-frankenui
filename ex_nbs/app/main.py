@@ -8,7 +8,9 @@ __all__ = ['hdrs', 'app', 'tasks', 'cards', 'dashboard', 'forms', 'music', 'auth
 
 # %% ../99_main.ipynb
 from fasthtml.common import *
+import fasthtml.common as fh
 from fh_frankenui.components import *
+from fh_frankenui.core import *
 
 # %% ../99_main.ipynb
 from tasks import tasks_homepage
@@ -21,11 +23,11 @@ from playground import playground_homepage
 from mail import mail_homepage
 
 # %% ../99_main.ipynb
-hdrs = (Script(src="https://cdn.tailwindcss.com"),
-        Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),
-        Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),
-        Script(type="module", src="https://unpkg.com/franken-wc@0.0.6/dist/js/wc.iife.js"),
-        Link(rel="stylesheet", href="https://unpkg.com/franken-wc@0.0.6/dist/css/blue.min.css"),)
+hdrs = (fh.Script(src="https://cdn.tailwindcss.com"),
+        fh.Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"),
+        fh.Script(src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"),
+        fh.Script(type="module", src="https://unpkg.com/franken-wc@0.0.6/dist/js/wc.iife.js"),
+        fh.Link(rel="stylesheet", href="https://unpkg.com/franken-wc@0.0.6/dist/css/blue.min.css"),)
 
 # %% ../99_main.ipynb
 app = FastHTML(hdrs=hdrs,debug=True,default_hdrs=False)
@@ -74,8 +76,7 @@ def NavItem(label, href='#', active=False, parent=False, cls=()):
 def NavDropdown(label, items, cls=()):
     return Li(cls=f"uk-parent {stringify(cls)}".strip())(
         A(href='#')(label),
-        Div(cls='uk-navbar-dropdown')(Ul(cls='uk-nav uk-navbar-dropdown-nav')(*items))
-    )
+        Div(cls='uk-navbar-dropdown')(Ul(cls='uk-nav uk-navbar-dropdown-nav')(*items)))
 
 # %% ../99_main.ipynb
 def UkNavBar(*lis):
@@ -87,20 +88,27 @@ def UkNavBar(*lis):
 # %% ../99_main.ipynb
 @app.route('/')
 def home():
-    nav_items = (('Home', '/'), ('Tasks', '/tasks'), 
-                 ('Cards', '/cards'), ('Dashboard', '/dashboard'),
-                ('Forms', '/forms'), ('Music', '/music'), ('Authentication', '/auth'),
-                ('Playground', '/playground'),('Mail', '/mail')
-                )
-    nav_items = [Li()(A(href=r)(n)) for (n,r) in nav_items]
-    
-    navbar = UkNavBar(*nav_items)
-    content = Div(cls='uk-container uk-margin-top')(
-        H1('FrankenUI Examples in FastHTML'),
-        P('This site showcases the FrankenUI components rebuilt using FastHTML, demonstrating the power and flexibility of our Python wrapper.'),
-        P('Explore the Tasks and Cards pages to see examples of FrankenUI components implemented with FastHTML.')
-    )
-    return navbar, content
+    sidebar_items = ["Tasks", "Cards", "Dashboard", "Form", "Music", "Auth", "Playground", "Mail"]
+
+    sidebar = NavContainer(map(lambda x: Li(A(x)),sidebar_items),
+                uk_switcher="connect: #main-nav; animation: uk-animation-fade",
+                cls=(NavT.secondary,"space-y-4 p-4 w-1/10"))
+
+    content = Div(cls="flex-1")(
+        Ul(id="main-nav", cls="uk-switcher w-full")(
+            Li(tasks_homepage),
+            Li(cards_homepage),
+            Li(dashboard_homepage),
+            Li(forms_homepage),
+            Li(music_homepage),
+            Li(auth_homepage),
+            Li(playground_homepage),
+            Li(mail_homepage),
+
+        ))
+
+    return Div(cls="flex w-full")(sidebar,content)           
+
 
 # %% ../99_main.ipynb
 serve()
