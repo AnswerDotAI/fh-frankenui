@@ -85,7 +85,7 @@ def home():
             Li(auth_homepage),
             Li(playground_homepage),
             Li(mail_homepage),   
-            Li(Uk_theme_switcher())
+            Li(Div(Uk_theme_switcher(),cls="p-12"))
         ))
     return Body(cls="bg-background text-foreground")(Div(cls="flex w-full")(sidebar,content))          
 

@@ -249,7 +249,7 @@ def Range(*c, cls=(), **kwargs):               return fh.Input(*c, cls=('uk-rang
 def Toggle_switch(*c, cls=(), **kwargs):       return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
 def TextArea(*c, cls=(), **kwargs):            return fh.Textarea(*c, cls=('uk-textarea',stringify(cls)), **kwargs)
 def Button(*c, cls=ButtonT.default,  **kwargs):return fh.Button(*c, cls=('uk-button',stringify(cls)), type='button', **kwargs)
-def Switch(*c, cls=(), **kwargs):              return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
+def Switch(*c, cls='min-w-9', **kwargs):              return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def FormLabel(*c, cls=(), **kwargs): return fh.Label(*c, cls=('uk-form-label',stringify(cls)), **kwargs)
@@ -625,7 +625,7 @@ def NavBarContainer(*c,
                     container_cls=ContainerT.expand,
                     uk_navbar=True,
                     **kwargs): 
-    return fh.Div(Container(Div(*c, uk_navbar=uk_navbar),cls=stringify(container_cls)), cls=('uk-navbar-container',stringify(cls)), **kwargs)
+    return fh.Div(Container(Div(*c, uk_navbar=uk_navbar),cls=stringify(container_cls)), cls=('',stringify(cls)), **kwargs) #uk-navbar-container
 def NavBarLSide(*c,  cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-left',  stringify(cls)), **kwargs)
 def NavBarRSide(*c,  cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-right', stringify(cls)), **kwargs)
 def NavBarCenter(*c, cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-center',stringify(cls)), **kwargs)

@@ -35,7 +35,7 @@ def profile_form():
             LabelInput("Username", placeholder='sveltecult', id='username'),
             HelpText("This is your public display name. It can be your real name or a pseudonym. You can only change this once every 30 days.")),
         Div(cls="space-y-2")(
-            LabelSelect(Option("Select a verified email to display", value="", selected=True, disabled=True),
+            LabelUkSelect(Option("Select a verified email to display", value="", selected=True, disabled=True),
                      *map(Option,('m@example.com', 'm@yahoo.com', 'm@cloud.com')),  
                      label="Email", id="email"),
             HelpText("You can manage verified email addresses in your email settings.")),
@@ -62,7 +62,7 @@ def account_form():
             LabelInput("Date of Birth", type="date", placeholder="Pick a date", id="date_of_birth"),
             HelpText("Your date of birth is used to calculate your age.")),
         Div(cls="space-y-2")(
-            LabelSelect(*Options("Select a language", "English", "French", "German", "Spanish", "Portuguese", selected_idx=1, disabled_idxs={0}),
+            LabelUkSelect(*Options("Select a language", "English", "French", "German", "Spanish", "Portuguese", selected_idx=1, disabled_idxs={0}),
                      label='Language',
                      id="language"),
             HelpText("This is the language that will be used in the dashboard.")))
@@ -73,7 +73,7 @@ def account_form():
 def appearance_form():
     content = (
         Div(cls="space-y-2")(
-            LabelSelect(*Options('Select a font family', 'Inter', 'Geist', 'Open Sans', selected_idx=2, disabled_idxs={0}),
+            LabelUkSelect(*Options('Select a font family', 'Inter', 'Geist', 'Open Sans', selected_idx=2, disabled_idxs={0}),
             label='Font Family',
             id='font_family'), 
         HelpText("Set the font you want to use in the dashboard.")),

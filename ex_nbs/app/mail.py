@@ -43,7 +43,7 @@ def MailSbLi(icon, title, cnt):
 
 sidebar = Container(NavContainer(
     NavHeaderLi(H3("Email")),
-    Li(Select(map(Option, ('alicia@example.com','alicia@gmail.com', 'alicia@yahoo.com')),cls='my-4')),
+    Li(UkSelect(map(Option, ('alicia@example.com','alicia@gmail.com', 'alicia@yahoo.com')),cls='my-4')),
     *[MailSbLi(i, t, c) for i, t, c in sidebar_group1],
     NavDividerLi(),
     *[MailSbLi(i, t, c) for i, t, c in sidebar_group2],
@@ -107,13 +107,14 @@ def MailDetailView(mail):
                     IconNav(*IconNavItem(('folder','Archive'),('ban','Move to junk'),('trash','Move to trash'))),
                     IconNav(Li(A(UkIcon('clock'), uk_tooltip='Snooze')), cls='pl-2')),
                 Div(cls='flex')(# divide-x divide-border gap-x-2
-                    IconNav(*IconNavItem(('reply','Reply'),('reply','Reply all'),('forward','Forward'))),
-                        UkIcon('more-vertical',button=True),
+                    IconNav(
+                        *IconNavItem(('reply','Reply'),('reply','Reply all'),('forward','Forward')),
+                        Li(A(UkIcon('ellipsis-vertical',button=True))),
                         DropDownNavContainer(
                             Li(A("Mark as unread")),
                             Li(A("Star read")),
                             Li(A("Add Label")),
-                            Li(A("Mute Thread")))))),
+                            Li(A("Mute Thread"))))))),
         Div(cls='flex-1')(
             Div(cls='flex items-start p-4')(
                 Div(cls='flex items-start gap-4 text-sm')(

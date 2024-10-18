@@ -36,7 +36,7 @@ def playground_navbar():
             Button(UkIcon('copy'), cls=(ButtonT.primary, "uk-drop-close",'mt-4'))))
 
     rnav = NavBarNav(
-        Li(Select(*Options(*preset_options), name='preset', optgroup_label="Examples",
+        Li(UkSelect(*Options(*preset_options), name='preset', optgroup_label="Examples",
                  placeholder='Load a preset', searchable=True, cls='h-9 w-[200px] lg:w-[300px]')),
         Li(Button("Save",         cls=ButtonT.secondary, uk_toggle="#save"),save_modal),
         Li(Button("View Code",    cls=ButtonT.secondary)),

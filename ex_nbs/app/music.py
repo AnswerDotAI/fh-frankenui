@@ -40,8 +40,8 @@ music_headers =NavBarContainer(
             Li(A("Edit")),
                 NavBarNavContainer(
                     *map(lambda x: MusicLi(*x), edit_actions),
-                    Li(A(P("Smart Dictation"))),
-                    Li(A(P("Emojis & Symbols")))),
+                    Li(A(FullySpacedDiv("Smart Dictation",UkIcon("mic")))),
+                    Li(A(FullySpacedDiv("Emojis & Symbols",UkIcon("globe"))))),
             Li(A("View"),
                NavBarNavContainer(map(lambda x: MusicLi(x), view_dd_data))),
             Li(A("Account"),
@@ -119,9 +119,9 @@ def podcast_tab():
 def LAlignedIconTxts(ns, icns): return [Li(A(LAlignedIconTxt(n,i))) for n,i in zip(ns,icns)]
 
 # %% ../05_music.ipynb
-discoved_data = [("play-circle","Listen Now"), ("thumbnails", "Browse"), ("rss","Radio")]
-library_data = [("play-circle", "Playlists"), ("bell", "Songs"), ("user", "Made for You"), ("users", "Artists"), ("bookmark", "Albums")]
-playlists_data = [("","Recently Added"), ("music","Recently Played")]
+discoved_data = [("play-circle","Listen Now"), ("binoculars", "Browse"), ("rss","Radio")]
+library_data = [("play-circle", "Playlists"), ("music", "Songs"), ("user", "Made for You"), ("users", "Artists"), ("bookmark", "Albums")]
+playlists_data = [("library","Recently Added"), ("library","Recently Played")]
 
 # %% ../05_music.ipynb
 def MusicSidebarLi(icon, text): return Li(A(LAlignedDiv(UkIcon(icon), P(text),cls='space-x-2')))
@@ -140,7 +140,7 @@ def page():
                 Div(cls="px-8 py-6")(
                     Div(cls="flex items-center justify-between")(
                         Div(cls="max-w-80")(tabs),
-                        Button(cls=ButtonT.primary)(Span(cls="mr-2 size-4")(UkIcon('plus-circle', 0.8)),"Add music")),
+                        Button(cls=ButtonT.primary)(Span(cls="mr-2 size-4")(UkIcon('circle-plus')),"Add music")),
                     Ul(id="component-nav", cls="uk-switcher")(
                         Li(*music_content),
                         Li(podcast_tab())))),

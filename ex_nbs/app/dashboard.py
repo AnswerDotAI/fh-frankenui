@@ -67,7 +67,7 @@ teams = [["Alicia Koch"],['Acme Inc', 'Monster Inc.'],['Create a Team']]
 
 opt_hdrs = ["Personal", "Team", ""]
 
-team_dropdown = Select(
+team_dropdown = UkSelect(
     Optgroup(label="Personal Account")(
         Option(A("Alicia Koch"))),
     Optgroup(label="Teams")(
