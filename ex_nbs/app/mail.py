@@ -34,14 +34,13 @@ def NavGroup(items):
 sidebar_group1 = (('home', 'Inbox', '128'), ('file-text', 'Drafts', '9'), (' arrow-up-right', 'Sent', ''),
     ('ban', 'Junk', '23'), ('trash', 'Trash', ''), ('folder', 'Archive', ''))
 
-sidebar_group2 = (('world','Social','972'),('info','Updates','342'),('comments','Forums','128'),
-    ('cart','Shopping','8'),('bag','Promotions','21'),)
+sidebar_group2 = (('globe','Social','972'),('info','Updates','342'),('messages-square','Forums','128'),
+    ('shopping-cart','Shopping','8'),('shopping-bag','Promotions','21'),)
 
 def MailSbLi(icon, title, cnt): 
-    return Li(A(
-            Div(UkIcon(icon),Span(title),cls='space-x-2 flex items-center'),
-            P(cnt,cls=TextFont.muted_sm),
-            cls='flex justify-between items-center w-full'))
+    return Li(A(LAlignedDiv(
+        UkIcon(icon),Span(title),P(cnt,cls=TextFont.muted_sm),cls='space-x-2'),
+            ))
 
 sidebar = Container(NavContainer(
     NavHeaderLi(H3("Email")),
@@ -97,7 +96,7 @@ def MailContent():
             Div(cls='flex-1 overflow-y-auto max-h-[600px]')(MailList(mail_data))))
 
 # %% ../08_mail.ipynb
-def IconNavItem(*d): return [Li(A(UkIcon(o[0]),uk_tooltip=o[1])) for o in d]  
+def IconNavItem(*d): return [Li(A(UkIcon(o[0],uk_tooltip=o[1]))) for o in d]  
 def IconNav(*c,cls=''): return Ul(cls=f'uk-iconnav {cls}')(*c)
 
 # %% ../08_mail.ipynb
@@ -108,9 +107,9 @@ def MailDetailView(mail):
                 Div(cls='flex gap-x-2 divide-x divide-border')(
                     IconNav(*IconNavItem(('folder','Archive'),('ban','Move to junk'),('trash','Move to trash'))),
                     IconNav(Li(A(UkIcon('clock'), uk_tooltip='Snooze')), cls='pl-2')),
-                Div(cls='flex gap-x-2 divide-x divide-border')(
+                Div(cls='flex')(# divide-x divide-border gap-x-2
                     IconNav(*IconNavItem(('reply','Reply'),('reply','Reply all'),('forward','Forward'))),
-                        Button(UkIcon('more-vertical')),
+                        UkIcon('more-vertical',button=True),
                         DropDownNavContainer(
                             Li(A("Mark as unread")),
                             Li(A("Star read")),
@@ -131,7 +130,7 @@ def MailDetailView(mail):
         Div(cls='flex-none space-y-4 border-t border-border p-4')(
             TextArea(id='message', placeholder=f"Reply {mail['name']}"),
             Div(cls='flex justify-between')(
-                    LabelToggle_switch('Mute this thread',id='mute'), # cls='inline-flex items-center gap-x-2 text-xs'
+                    LabelSwitch('Mute this thread',id='mute'), # cls='inline-flex items-center gap-x-2 text-xs'
                 Button('Send', cls=ButtonT.primary))))
 
 # %% ../08_mail.ipynb

@@ -33,7 +33,7 @@ def playground_navbar():
         H3("Share preset"),
         P("Anyone who has this link and an OpenAI account will be able to view this.", cls=TextFont.muted_sm),
         Div(Input(value="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003", readonly=True, cls="flex-1"),
-            Button(UkIcon('copy'), cls=(ButtonT.primary, "uk-drop-close"))))
+            Button(UkIcon('copy'), cls=(ButtonT.primary, "uk-drop-close",'mt-4'))))
 
     rnav = NavBarNav(
         Li(Select(*Options(*preset_options), name='preset', optgroup_label="Examples",
@@ -41,10 +41,11 @@ def playground_navbar():
         Li(Button("Save",         cls=ButtonT.secondary, uk_toggle="#save"),save_modal),
         Li(Button("View Code",    cls=ButtonT.secondary)),
         Li(Button("Share",        cls=ButtonT.secondary),DropDownNavContainer(share_dd)),
-        Li(Button(UkIcon("more"), cls=ButtonT.secondary),DropDownNavContainer(
+        Li(Button(UkIcon(icon="ellipsis"), cls=ButtonT.secondary),DropDownNavContainer(
             Li(A("Content filter preferences")),
             NavDividerLi(),
-            Li(A("Delete preset", cls="text-destructive")))))
+            Li(A("Delete preset", cls="text-destructive")),
+        uk_dropdown="mode: click")))
     
     return NavBarContainer(
                 NavBarLSide(NavBarNav(Li(H4('Playground')))),

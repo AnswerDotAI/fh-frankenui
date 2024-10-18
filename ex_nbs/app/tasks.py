@@ -26,7 +26,6 @@ rows_per_page_dd = [10,20,30,40,50]
 
 status_dd = [{'status': "backlog", 'count': 21 },{'status': "todo", 'count': 21 },{'status': "progress", 'count': 20 },{'status': "done",'count': 19 },{'status': "cancelled", 'count': 19 }]
 
-
 # %% ../01_tasks.ipynb
 def create_hotkey_li(hotkey): return NavCloseLi(A(cls='justify-between')(hotkey[0], Span(hotkey[1], cls=TextFont.muted_sm)))
 
@@ -77,7 +76,7 @@ table_controls =(Input(cls='w-[250px]',placeholder='Filter task'),
 
 # %% ../01_tasks.ipynb
 def task_dropdown():
-    return Div(Button(UkIcon('more')),
+    return Div(Button(UkIcon('ellipsis')),
                DropDownNavContainer(
                    map(NavCloseLi,[
                            A('Edit',),
@@ -112,32 +111,26 @@ tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(T
     body_data=data,
     body_cell_render=cell_render,
     header_cell_render=header_render,
-    sortable=True
-))
+    sortable=True))
 
 
 # %% ../01_tasks.ipynb
 def footer():
     hw_cls = 'h-4 w-4'
-    return SpaceBetweenDiv(cls='mt-4 px-2 py-2')(
+    return FullySpacedDiv(cls='mt-4 px-2 py-2')(
         Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
         Div(cls='flex flex-none items-center space-x-8')(
             CenteredDiv('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
             LAlignedDiv(
-                UkIconButton(cls='hidden lg:inline-flex')(Span('Go to last page', cls='sr-only'),
-                    Span(uk_icon='chevron-double-left', cls=hw_cls)),
-                UkIconButton(Span('Go to previous page', cls='sr-only'),
-                    Span(uk_icon='chevron-left', cls=hw_cls)),
-                UkIconButton(Span('Go to next page', cls='sr-only'),
-                    Span(uk_icon='chevron-right', cls=hw_cls)),
-                UkIconButton(cls='hidden lg:inline-flex')(
-                    Span('Go to last page', cls='sr-only'),
-                    Span(uk_icon='chevron-double-right', cls=hw_cls)),
+                UkIcon(icon='chevrons-left', button=True),
+                UkIcon(icon='chevron-left', button=True),
+                UkIcon(icon='chevron-right', button=True),
+                UkIcon(icon='chevrons-right', button=True),
             gap=2)))
 
 # %% ../01_tasks.ipynb
 tasks_ui = Div(
-    SpaceBetweenDiv(cls='mt-8')(
+    FullySpacedDiv(cls='mt-8')(
         Div(cls='flex flex-1 gap-4')(table_controls)),
     tasks_table,
     footer(),)
