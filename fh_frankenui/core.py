@@ -490,7 +490,6 @@ def Placeholder(*c, cls=(), **kwargs):
 # %% ../lib_nbs/01_core.ipynb
 def Progress(*c, cls=(), value="", max="", **kwargs):
     return fh.Progress(*c, value=value, max=max, cls=('uk-progress',stringify(cls)), **kwargs)
-show(Progress(value=20, max=100))
 
 # %% ../lib_nbs/01_core.ipynb
 def UkIcon(icon, 
