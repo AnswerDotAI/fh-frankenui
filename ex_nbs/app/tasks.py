@@ -122,11 +122,10 @@ def footer():
         Div(cls='flex flex-none items-center space-x-8')(
             CenteredDiv('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
             LAlignedDiv(
-                UkIcon(icon='chevrons-left', button=True),
-                UkIcon(icon='chevron-left', button=True),
-                UkIcon(icon='chevron-right', button=True),
-                UkIcon(icon='chevrons-right', button=True),
-            gap=2)))
+                UkIconLink(icon='chevrons-left', button=True),
+                UkIconLink(icon='chevron-left', button=True),
+                UkIconLink(icon='chevron-right', button=True),
+                UkIconLink(icon='chevrons-right', button=True))))
 
 # %% ../01_tasks.ipynb
 tasks_ui = Div(

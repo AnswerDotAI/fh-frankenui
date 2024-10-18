@@ -39,8 +39,7 @@ sidebar_group2 = (('globe','Social','972'),('info','Updates','342'),('messages-s
 
 def MailSbLi(icon, title, cnt): 
     return Li(A(LAlignedDiv(
-        UkIcon(icon),Span(title),P(cnt,cls=TextFont.muted_sm),cls='space-x-2'),
-            ))
+        Span(UkIcon(icon)),Span(title),P(cnt,cls=TextFont.muted_sm),cls='space-x-2')))
 
 sidebar = Container(NavContainer(
     NavHeaderLi(H3("Email")),
