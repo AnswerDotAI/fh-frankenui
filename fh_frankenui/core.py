@@ -789,12 +789,13 @@ def TableFromDicts(header_data:Sequence, body_data:Sequence[dict], footer_data=N
 def apply_classes(html,class_map=None, class_map_mods=None):
     if not class_map:
         class_map = {
-            'h1': 'uk-h1 my-4',
-            'h2': 'uk-h2 my-4',
-            'h3': 'uk-h3 my-4',
-            'h4': 'uk-h4 my-4',
+            'h1': 'uk-h1 my-4 mb-4',
+            'h2': 'uk-h2 my-8',
+            'h3': 'uk-h3 my-8',
+            'h4': 'uk-h4 my-8',
             'ul': "uk-list uk-list-disc mb-4",
             'a': "uk-link",
+            'p': 'my-1',
             'blockquote': "uk-blockquote mb-8",
             'hr':'uk-divider-icon my-4',
             'table':'uk-table-middle uk-table-divider uk-table-hover uk-table-small'}
