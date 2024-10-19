@@ -4,3 +4,5 @@ fastcore
 fh_matplotlib
 numpy
 matplotlib
+nbdev @ git+https://github.com/Isaac-Flath/nbdev.git@HTML-ShowDoc-Rendering
+
