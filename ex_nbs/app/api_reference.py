@@ -31,7 +31,7 @@ def create_doc_section(*content, title, md_content=None):
         elif isinstance(c, EnumType): res.append(enum_to_html_table(c))
         elif isinstance(c, FT):       res.append(c)
         elif isinstance(c, Callable): 
-            _html = str(show_doc(c, renderer=BasicHtmlRenderer))
+            _html = str(show_doc(c, renderer=AdvHtmlRenderer))
             res.append(NotStr(apply_classes(_html, class_map_mods={"table":'uk-table uk-table-hover uk-table-small'})))
         else: res.append(c)
     return Section(H1(title,cls='mb-10'), *res)
@@ -39,7 +39,7 @@ def create_doc_section(*content, title, md_content=None):
 # %% ../API Reference.ipynb
 docs_button = create_doc_section(Button, 
                        ButtonT, 
-                       Div(*[Button(f"{name.capitalize()} Class", cls=value) for name, value in ButtonT.__members__.items()],cls='mt-8 space-x-2'),
+                       enum_to_html_table(ButtonT),
                        title="Buttons")
 
 docs_heading = create_doc_section(H1, H2, H3, H4, 
