@@ -157,12 +157,12 @@ class ButtonT(VEnum):
     ghost = auto()
 
 # %% ../lib_nbs/01_core.ipynb
-def Button(*c:str|FT,                     # Components to go inside the Button
-           cls:str|Enum=ButtonT.default,  # cls for the Button (see ButtonT for style options)
-           **kwargs                       # any other kwargs will be passed to the button 
-          )-> FT:                         # Button w/ `type=button` and `uk-button` cls
+def Button(*c: Union[str, FT],
+           cls: Union[str, Enum]=ButtonT.default,
+           **kwargs
+          ) -> FT:
     "A Button with Uk Styling"
-    return fh.Button(*c, cls=('uk-button',stringify(cls)), type='button', **kwargs)
+    return fh.Button(*c, cls=('uk-button', stringify(cls)), type='button', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def H1(*c:FT|str,       # Components to go inside the Heading
@@ -265,7 +265,6 @@ def CheckboxX(*c, cls=(), **kwargs):           return fh.Input(*c, cls=('uk-chec
 def Range(*c, cls=(), **kwargs):               return fh.Input(*c, cls=('uk-range',stringify(cls)), type='range', **kwargs)
 def Toggle_switch(*c, cls=(), **kwargs):       return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
 def TextArea(*c, cls=(), **kwargs):            return fh.Textarea(*c, cls=('uk-textarea',stringify(cls)), **kwargs)
-def Button(*c, cls=ButtonT.default,  **kwargs):return fh.Button(*c, cls=('uk-button',stringify(cls)), type='button', **kwargs)
 def Switch(*c, cls='min-w-9', **kwargs):              return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
