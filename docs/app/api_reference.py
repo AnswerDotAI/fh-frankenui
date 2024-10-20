@@ -219,19 +219,25 @@ def ex_card():
         footer=LAlignedDiv(Button("Footer Submit Button")))
 
 # %% ../API Reference.ipynb
-def Tags(cats): return Div(cls='space-x-2')(map(Label, cats))
+def Tags(cats): return Div(cls='space-x-2 flex flex-wrap')(map(lambda c: Label(c, cls='mb-1'), cats))
 
 def ex_card2():
     return Card(
         LAlignedDiv(
-            A(Img(src="https://isaac-flath.github.io/website/posts/_TopicImages/FastHtml.jpg", style="width:200px"),href="#"),
+            Div(A(Img(src="https://isaac-flath.github.io/website/posts/_TopicImages/FastHTML.jpg", style="width:100%; max-width:200px"), href="#"), cls='mb-4 md:mb-0 md:mr-4'),
             Div(cls='space-y-3 uk-width-expand')(
-                H4("Creating Custom FastHTML Tags for Markdown Rendering"),
-                P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles"),
-                FullySpacedDiv(map(Span, ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
+                H4("Creating Custom FastHTML Tags for Markdown Rendering", cls='text-lg md:text-xl'),
+                P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles", cls='text-sm md:text-base'),
+                FullySpacedDiv(map(lambda s: Span(s, cls='text-xs md:text-sm'), ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
                 FullySpacedDiv(
                     Tags(["FastHTML", "HTMX", "Web Apps"]),
-                    Button("Read", cls=(ButtonT.primary,'h-6'))))))
+                    Button("Read", cls=(ButtonT.primary, 'h-6 text-xs md:text-sm')),
+                    cls='flex-col md:flex-row items-start md:items-center'
+                )
+            ),
+            cls='flex flex-col md:flex-row'
+        )
+    )
 
 # %% ../API Reference.ipynb
 docs_cards = create_doc_section(
