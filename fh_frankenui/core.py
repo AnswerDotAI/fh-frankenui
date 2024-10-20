@@ -258,14 +258,22 @@ def Legend(*c, cls=(), **kwargs):
     return fh.Legend(*c, cls=('uk-legend',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-def Input(*c, cls=(), **kwargs):               return fh.Input(*c, cls=('uk-input',stringify(cls)), **kwargs)
-def Select(*c, cls=(), **kwargs):              return fh.Select(*c, cls=('uk-select',stringify(cls)), **kwargs)
-def Radio(*c, cls=(), **kwargs):               return fh.Input(*c, cls=('uk-radio',stringify(cls)), type='radio', **kwargs)
-def CheckboxX(*c, cls=(), **kwargs):           return fh.Input(*c, cls=('uk-checkbox',stringify(cls)), type='checkbox', **kwargs)
-def Range(*c, cls=(), **kwargs):               return fh.Input(*c, cls=('uk-range',stringify(cls)), type='range', **kwargs)
-def Toggle_switch(*c, cls=(), **kwargs):       return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
-def TextArea(*c, cls=(), **kwargs):            return fh.Textarea(*c, cls=('uk-textarea',stringify(cls)), **kwargs)
-def Switch(*c, cls='min-w-9', **kwargs):              return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
+def Input(*c, cls=(), **kwargs):      
+    return fh.Input(*c, cls=('uk-input',stringify(cls)), **kwargs)
+def Select(*option, cls=(), **kwargs):
+    return fh.Select(*option, cls=('uk-select',stringify(cls)), **kwargs)
+def Radio(*c, cls=(), **kwargs):      
+    return fh.Input(*c, cls=('uk-radio',stringify(cls)), type='radio', **kwargs)
+def CheckboxX(*c, cls=(), **kwargs):  
+    return fh.Input(*c, cls=('uk-checkbox',stringify(cls)), type='checkbox', **kwargs)
+def Range(*c, cls=(), **kwargs):      
+    return fh.Input(*c, cls=('uk-range',stringify(cls)), type='range', **kwargs)
+def Toggle_switch(*c, cls=(), **kwargs):
+    return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
+def TextArea(*c, cls=(), **kwargs):            
+    return fh.Textarea(*c, cls=('uk-textarea',stringify(cls)), **kwargs)
+def Switch(*c, cls='min-w-9', **kwargs):              
+    return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def FormLabel(*c, cls=(), **kwargs): return fh.Label(*c, cls=('uk-form-label',stringify(cls)), **kwargs)
@@ -313,9 +321,9 @@ def LabelInput(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args
 # %% ../lib_nbs/01_core.ipynb
 def LabelRadio(label:str|FT,
                lbl_cls='',
-               input_cls='flex items-center',
+               input_cls='',
                container=Div, 
-               cls='space-x-2',
+               cls='flex items-center space-x-2',
                id='',
                 **kwargs
                 ):
@@ -327,8 +335,24 @@ def LabelRadio(label:str|FT,
     return inp, label
 
 # %% ../lib_nbs/01_core.ipynb
-@delegates(GenericLabelInput, but=['input_fn','cls'])
-def LabelCheckboxX(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=CheckboxX, **kwargs)
+def LabelCheckboxX(label:str|FT,
+               lbl_cls='',
+               input_cls='',
+               container=Div, 
+               cls='flex items-center space-x-2',
+               id='',
+                **kwargs
+                ):
+    "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
+    if isinstance(label, str) or label.tag != 'label': 
+        label = FormLabel(cls=stringify(lbl_cls), fr=id)(label)
+    inp = CheckboxX(id=id, cls=stringify(input_cls), **kwargs)        
+    if container: return container(inp, label, cls=stringify(cls))
+    return inp, label
+
+# %% ../lib_nbs/01_core.ipynb
+# @delegates(GenericLabelInput, but=['input_fn','cls'])
+# def LabelCheckboxX(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=CheckboxX, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])

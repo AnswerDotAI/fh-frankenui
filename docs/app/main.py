@@ -26,9 +26,10 @@ def with_layout(func):
             Div(cls="flex flex-col md:flex-row w-full")(
                 Button(UkIcon("menu",50,50,cls='mt-4'), cls="md:hidden mb-4", uk_toggle="target: #mobile-sidebar"),
                 Div(sidebar, id='mobile-sidebar', hidden=True),
+                
                 Div(cls="md:flex w-full")(
-                    Div(sidebar, cls="hidden md:block"),
-                    Div(original_content, cls='w-full', id="mobile-sidebar")
+                    Div(sidebar, cls="hidden md:block w-1/5"),
+                    Div(original_content, cls='md:w-4/5 w-full', id="mobile-sidebar")
                 )
             ),
         )
@@ -99,13 +100,13 @@ def themeswitcher(): return Div(Uk_theme_switcher(),cls="p-12")
 sidebar = NavContainer(
      Li(A("Getting Started", href=getting_started)),
      NavParentLi(
-         A(FullySpacedDiv("API Reference",UkIcon('chevron-down'))),
+         A(FullySpacedDiv("API Reference")),
          NavContainer(
              *[Li(A(fnname2title(o), href=f"/{o}")) for o in reference_fns],
              parent=False),
          ),
      NavParentLi(
-        A(FullySpacedDiv('Examples',UkIcon('chevron-down'))),
+        A(FullySpacedDiv('Examples')),
         NavContainer(
             Li(A('Tasks',     href=tasks)),
             Li(A('Cards',     href=cards)),
@@ -119,7 +120,7 @@ sidebar = NavContainer(
          ),
       Li(A("Theme",href=themeswitcher)),
 
-    uk_nav=False, cls=(NavT.primary,"space-y-4 p-4 w-full md:w-1/5"))
+    uk_nav=False, cls=(NavT.primary,"space-y-4 p-4 w-full md:w-full"))
 
 # %% ../99_main.ipynb
 @rt
