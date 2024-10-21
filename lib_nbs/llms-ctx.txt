@@ -1,0 +1,3330 @@
+<project title="Fh_Frankenui" summary="Fh_Frankenui is a python library which brings FrankenUI styling to python for FastHTML apps.">Things to remembers when using Fh_Frankenui<docs><doc title="Tailwind"># Tailwind CSS Cheat Sheet
+
+## Spacing
+
+```
+px
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+5
+6
+7
+8
+9
+10
+11
+12
+14
+16
+20
+24
+28
+32
+36
+40
+44
+48
+52
+56
+60
+64
+72
+80
+96
+```
+
+## Breakpoints
+
+```
+<640px  -  flex
+640px  -  sm:flex
+768px  -  md:flex
+1024px -  lg:flex
+1280px -  xl:flex
+1536px -  2xl:flex
+```
+
+## Pseudo Class
+
+```
+hover
+focus
+focus-within
+focus-visible
+active
+visited
+target
+first
+last
+only
+odd
+even
+first-of-type
+last-of-type
+only-of-type
+empty
+disabled
+enabled
+checked
+indeterminate
+default
+required
+valid
+invalid
+in-range
+out-of-range
+placeholder-shown
+autofill
+read-only
+before
+after
+first-letter
+first-line
+marker
+selection
+file
+backdrop
+placeholder
+supports(-,_)
+data(-,_)
+ltr
+rtl
+```
+
+##  Pseudo Class
+
+- Media
+
+```
+sm
+md
+lg
+xl
+2xl
+min-[]
+max-sm
+max-md
+max-lg
+max-xl
+max-2xl
+[]-dark
+portrait
+landscape
+motion-safe
+motion-reduce
+contrast-more
+contrast-less
+print
+```
+
+## Functions & Directives
+
+```
+detailwind
+@apply
+eApply
+@config
+theme()
+screen()
+```
+
+## Opacity
+
+```
+0
+5
+10
+20
+25
+30
+38
+40
+50
+60
+70
+75
+80
+89
+90
+95
+100
+```
+
+## Colors
+
+```
+slate
+gray
+zinc
+neutral
+stone
+amber
+yellow
+lime
+green
+emerald
+teal
+cyan
+sky
+blue
+indigo
+violet
+purple
+fuchsia
+pink
+rose
+red
+orange
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+50
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+300
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+400
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+500
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+600
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+700
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+800
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+900
+```
+
+## Flex
+
+```
+flex
+flex-basis
+basis-auto
+basis-1/2
+basis-1/3
+basis-1/4
+basis-1/5
+basis-1/6
+basis-1/12
+basis-full
+flex-initial
+flex-none
+flex-auto
+grow
+grow-0
+grow-1
+shrink
+shrink-0
+shrink-1
+flex-dir
+flex-row
+flex-row-reverse
+flex-col
+flex-col-reverse
+flex-wrap
+wrap
+flex-wrap-reverse
+order-first
+order-last
+order-none
+order-1
+order-2
+```
+
+## Grid
+
+```
+grid-template-rows
+grid-rows-none
+grid-rows-1
+grid-rows-2
+grid-rows-3
+grid-rows-4
+grid-rows-5
+grid-rows-6
+grid-rows-auto
+grid-template-columns
+grid-cols-1
+grid-cols-2
+grid-cols-3
+grid-cols-4
+grid-cols-5
+grid-cols-6
+grid-cols-7
+grid-cols-8
+grid-cols-9
+grid-cols-10
+grid-cols-11
+grid-cols-12
+grid-cols-auto
+grid-auto-flow
+grid-flow-row
+grid-flow-col
+grid-flow-row-dense
+grid-flow-col-dense
+grid-auto-rows
+auto-rows-auto
+auto-rows-min
+auto-rows-max
+auto-rows-fr
+grid-auto-cols
+auto-cols-auto
+auto-cols-min
+auto-cols-max
+auto-cols-fr
+grid-row-start
+row-span-full
+row-span-1
+row-span-2
+row-start-auto
+row-end-auto
+row-start-1
+row-end-1
+```
+
+## Spacing
+
+```
+padding
+p-[spacing]
+p-t-[spacing]
+p-r-[spacing]
+p-b-[spacing]
+p-l-[spacing]
+margin
+m-auto
+m-[spacing]
+m-t-[spacing]
+m-r-[spacing]
+m-b-[spacing]
+m-l-[spacing]
+space-between
+space-x-[spacing]
+space-y-[spacing]
+space-x-reverse
+space-y-reverse
+```
+
+## FlexGrid
+
+```
+gap
+gap-[spacing]
+gap-x-[spacing]
+gap-y-[spacing]
+justify-content
+justify-start
+justify-end
+justify-center
+justify-between
+justify-around
+justify-evenly
+justify-items
+justify-items-start
+justify-items-end
+justify-items-center
+justify-items-stretch
+justify-items-baseline
+justify-items-auto
+justify-self
+justify-self-auto
+justify-self-start
+justify-self-end
+justify-self-center
+justify-self-stretch
+align-content
+content-start
+content-end
+content-center
+content-between
+content-around
+content-evenly
+content-baseline
+align-items
+items-start
+items-end
+items-center
+items-stretch
+items-baseline
+items-auto
+place-content
+place-content-start
+place-content-end
+place-content-center
+place-content-between
+place-content-around
+place-content-evenly
+place-content-baseline
+place-items
+place-items-auto
+place-items-start
+place-items-end
+place-items-center
+place-items-stretch
+place-items-baseline
+place-self
+place-self-auto
+place-self-start
+place-self-end
+place-self-center
+place-self-stretch
+```
+
+## Border
+
+```
+border-divide-outline-ring-offset-color
+border-divide-ring-offset-fast-1
+border-divide-ring-offset-others-current
+border-divide-ring-offset-white
+border-divide-ring-offset-black
+border-divide-ring-offset-[color]
+border-divide-outline-ring-style
+border-divide-outline
+border-divide-dotted
+border-divide-dashed
+border-divide-solid
+border-divide-double
+border-hidden
+outline
+border-width
+border
+border-[1|2|3|4]
+border-x-[1|2|3|4]
+border-y-[1|2|3|4]
+border-t-[1|2|3|4]
+border-r-[1|2|3|4]
+border-b-[1|2|3|4]
+border-l-[1|2|3|4]
+divide-width
+divide
+divide-x
+divide-y
+divide-reverse
+ring-width
+ring
+ring-inset
+ring-offset-width
+ring-offset-[1|2|3|4]
+outline-width
+outline
+outline-offset-width
+outline-offset-[1|2|3|4]
+border-radius
+rounded
+rounded-sm
+rounded-md
+rounded-lg
+rounded-xl
+rounded-2xl
+rounded-full
+rounded-[1|2|3|4]
+rounded-t-[1|2|3|4]
+rounded-r-[1|2|3|4]
+rounded-b-[1|2|3|4]
+rounded-l-[1|2|3|4]
+rounded-tr-[1|2|3|4]
+rounded-br-[1|2|3|4]
+rounded-bl-[1|2|3|4]
+rounded-tl-[1|2|3|4]
+```
+
+## Layout
+
+```
+container
+columns
+columns-1
+columns-2
+columns-3
+columns-4
+columns-5
+columns-6
+columns-7
+columns-auto
+columns-[...nums]
+box-sizing
+box-border
+box-content
+float
+float-left
+float-right
+float-none
+clear
+clear-left
+clear-right
+clear-both
+clear-none
+positions
+static
+relative
+absolute
+fixed
+sticky
+visible
+invisible
+collapse
+display
+block
+inline-block
+inline
+flex
+grid
+inline-flex
+table
+table-caption
+table-cell
+table-row
+table-row-group
+table-header-group
+table-footer-group
+table-col
+table-col-group
+hidden
+contents
+flow-root
+positions-t-b
+[top|right|bottom|left]
+[top|right|bottom|left]-[spacing]
+[top|right|bottom|left]-auto
+[top|right|bottom|left]-full
+inset
+inset-auto
+inset-[spacing]
+inset-0
+inset-x-[1|2|3|4]
+inset-y-[1|2|3|4]
+inset-t-[1|2|3|4]
+inset-r-[1|2|3|4]
+inset-b-[1|2|3|4]
+inset-l-[1|2|3|4]
+break-before
+break-before:auto
+break-before:column
+break-before:page
+break-before:avoid-page
+break-before:left
+break-before:right
+break-before:avoid-column
+break-inside
+break-inside:auto
+break-inside:avoid-page
+break-inside:avoid-column
+overflow
+overflow-auto
+overflow-hidden
+overflow-visible
+overflow-x-auto
+overflow-x-hidden
+overflow-x-visible
+overflow-y-auto
+overflow-y-hidden
+overflow-y-visible
+overflow-clip
+overflow-scroll
+overscroll-behavior
+overscroll-auto
+overscroll-none
+overscroll-contain
+overscroll-x-auto
+overscroll-x-none
+overscroll-x-contain
+overscroll-y-auto
+overscroll-y-none
+overscroll-y-contain
+aspect-ratio
+aspect-auto
+aspect-video
+aspect-square
+box-decoration-break
+box-decoration-clone
+box-decoration-slice
+isolation
+isolate
+isolation-auto
+object-fit
+object-contain
+object-cover
+object-fill
+object-none
+object-scale-down
+object-positions
+object-center
+object-left
+object-right
+object-top
+object-bottom
+object-[left|top|right|bottom]
+z-index
+z-0
+z-10
+z-20
+z-30
+z-40
+z-50
+z-auto
+```
+
+## Typography
+
+```
+family
+font-sans
+font-serif
+font-mono
+font-size
+text-xs
+text-sm
+text-base
+text-lg
+text-xl
+text-2xl
+text-3xl
+text-4xl
+text-5xl
+text-6xl
+text-7xl
+text-8xl
+text-9xl
+text-[]
+line-height
+leading-none
+leading-tight
+leading-snug
+leading-normal
+leading-relaxed
+leading-loose
+text-align
+text-left
+text-center
+text-right
+text-justify
+text-start
+text-end
+text-transform
+uppercase
+lowercase
+capitalize
+normal-case
+text-overflow
+truncate
+text-ellipsis
+text-clip
+style
+italic
+not-italic
+weight
+font-thin
+font-light
+font-medium
+font-semibold
+font-bold
+font-extrabold
+font-black
+variant-numeric
+ordinal
+slashed-zero
+lining-nums
+oldstyle-nums
+proportional-nums
+tabular-nums
+diagonal-fractions
+stacked-fractions
+letter-spacing
+tracking-tight
+tracking-tighter
+tracking-normal
+tracking-wide
+tracking-wider
+placeholder-color
+[placeholder-color]-[color]
+[placeholder-color]-[transparent]
+[placeholder-color]-[current]
+vertical-align
+align-baseline
+align-top
+align-middle
+align-bottom
+align-text-bottom
+align-text-top
+align-sub
+align-super
+text-indent
+indent-[spacing]
+text-opacity
+opacity-[opacity]
+text-decoration
+underline
+line-through
+overline
+no-underline
+text-decoration-color
+decoration-current
+decoration-transparent
+decoration-inherit
+decoration-white
+decoration-black
+decoration-[color]
+text-decoration-style
+decoration-solid
+decoration-dashed
+decoration-dotted
+decoration-wavy
+text-decoration-thickness
+decoration-from-font
+decoration-auto
+decoration-[1|2|3|4]
+text-decoration-offset
+underline-offset-auto
+underline-offset-[1|2|3|4]
+smoothing
+antialiased
+subpixel-antialiased
+list-style-type
+list-none
+list-disc
+list-decimal
+list-inside
+list-outside
+list-style-position
+list-inside
+list-outside
+white-space
+whitespace-normal
+whitespace-nowrap
+whitespace-pre
+whitespace-pre-wrap
+whitespace-pre-line
+word-break
+break-normal
+break-words
+break-all
+break-keep
+content
+content-none
+```
+
+## Background
+
+```
+bg-attachment
+bg-fixed
+bg-local
+bg-scroll
+bg-clip
+bg-clip-border
+bg-clip-padding
+bg-clip-content
+bg-clip-text
+bg-color
+[bg-color]-[color]
+[bg-color]-[transparent]
+[bg-color]-[current]
+[bg-color]-[inherit]
+[bg-color]-[black]
+[bg-color]-[white]
+[bg-color]-[color]
+bg-position
+bg-center
+bg-left
+bg-right
+bg-top
+bg-bottom
+bg-[left|right|top|bottom]
+bg-image
+bg-none
+bg-gradient-to-[direction]
+bg-gradient-to-[t|r|b|l]
+bg-gradient-to-t
+bg-gradient-to-r
+bg-gradient-to-b
+bg-gradient-to-l
+bg-repeat
+bg-no-repeat
+bg-repeat-x
+bg-repeat-y
+bg-repeat-round
+bg-repeat-space
+bg-size
+bg-auto
+bg-cover
+bg-contain
+bg-origin
+bg-border
+bg-padding
+bg-content
+bg-origin-border
+```
+
+## Interactivity
+
+```
+accent-color
+accent-transparent
+accent-current
+accent-white
+accent-black
+accent-[color]
+appearance
+appearance-none
+cursor
+cursor-auto
+cursor-default
+cursor-pointer
+cursor-grab
+cursor-grabbing
+cursor-crosshair
+cursor-move
+cursor-not-allowed
+cursor-context-menu
+cursor-help
+cursor-wait
+cursor-text
+cursor-resize
+cursor-ns-resize
+cursor-ew-resize
+cursor-ne-resize
+cursor-nw-resize
+cursor-se-resize
+cursor-sw-resize
+cursor-zoom-in
+cursor-zoom-out
+pointer-events
+pointer-events-none
+pointer-events-auto
+scroll-behavior
+scroll-auto
+scroll-smooth
+scroll-margin
+[scroll-margin]-[spacing]
+[scroll-margin]-[spacing]
+[scroll-margin]-[spacing]
+[scroll-margin]-[spacing]
+scroll-padding
+[scroll-padding]-[spacing]
+[scroll-padding]-[spacing]
+[scroll-padding]-[spacing]
+[scroll-padding]-[spacing]
+scroll-snap-align
+start
+end
+center
+snap-align-none
+scroll-snap-stop
+normal
+always
+scroll-snap-type
+snap-none
+snap-x
+snap-y
+snap-both
+snap-mandatory
+snap-proximity
+resize
+resize
+resize-none
+resize-x
+resize-y
+touch-action
+touch-auto
+touch-none
+touch-pan-x
+touch-pan-y
+touch-pan-left
+touch-pan-right
+touch-pan-down
+touch-pan-up
+touch-manipulation
+user-select
+user-select-none
+select-text
+select-all
+select-auto
+will-change
+will-change-auto
+will-change-scroll
+will-change-contents
+will-change-transform
+```
+
+## Filters
+
+```
+brightness
+brightness-[0|1|2|3|4|5|6|7|8|9]
+brightness-[100|150|200]
+backdrop-brightness-[0|1|2|3|4|5|6|7|8|9]
+backdrop-brightness-[100|150|200]
+contrast
+contrast-[0|1|2|3|4|5|6|7|8|9]
+contrast-[100|150|200]
+backdrop-contrast-[0|1|2|3|4|5|6|7|8|9]
+backdrop-contrast-[100|150|200]
+hue-rotate
+hue-rotate-[0|1|2|3|4|5|6|7|8|9]
+hue-rotate-[100|150|200]
+backdrop-hue-rotate-[0|1|2|3|4|5|6|7|8|9]
+backdrop-hue-rotate-[100|150|200]
+backdrop-opacity
+backdrop-opacity-[opacity]
+saturate
+saturate-[0|1|2|3|4|5|6|7|8|9]
+saturate-[100|150|200]
+backdrop-saturate-[0|1|2|3|4|5|6|7|8|9]
+backdrop-saturate-[100|150|200]
+blur
+blur-blur
+blur-blur-2xl
+blur-blur-xl
+blur-blur-lg
+blur-blur-md
+blur-blur-sm
+drop-shadow
+drop-shadow
+drop-shadow-[sm|md|lg|xl|2xl]
+grayscale
+grayscale
+grayscale-50
+grayscale-75
+grayscale-100
+grayscale-invert
+grayscale-invert
+grayscale-invert-50
+grayscale-invert-75
+grayscale-invert-100
+backdrop-grayscale-invert-[sepia]
+```
+
+## Table
+
+```
+border-collapse
+border-collapse
+border-separate
+border-spacing
+border-spacing-[spacing]
+border-spacing-[spacing]
+border-spacing-[spacing]
+border-spacing-[spacing]
+table-layout
+table-auto
+table-fixed
+```
+
+## Sizing
+
+```
+width|height
+w-[width|height]
+w-[spacing]
+w-auto
+w-full
+w-screen
+w-1/2
+w-1/3
+w-1/4
+w-1/5
+w-1/6
+w-1/12
+w-2/3
+w-2/4
+w-2/5
+w-2/6
+w-3/4
+w-3/5
+w-3/6
+w-4/5
+w-4/6
+w-5/6
+w-11/12
+w-full
+min-width|height
+min-w-[width|height]
+min-w-[spacing]
+min-w-0
+min-w-full
+min-w-screen
+min-w-[0|1|2|3|4|5|6]
+min-w-max
+max-width
+max-w-0
+max-w-none
+max-w-xs
+max-w-sm
+max-w-md
+max-w-lg
+max-w-xl
+max-w-2xl
+max-w-screen-sm
+max-w-screen-md
+max-w-screen-lg
+max-w-screen-xl
+max-w-full
+max-w-[spacing]
+max-height
+max-h-[height]
+max-h-[spacing]
+max-h-0
+max-h-full
+max-h-screen
+max-h-[spacing]
+max-h-max
+```
+
+## Transition & Animation
+
+```
+property
+transition-none
+transition-all
+transition-colors
+transition-opacity
+transition-shadow
+transition-transform
+duration|delay
+[duration|delay]-[75|100|150|200|300|500|700|1000]
+[duration|delay]-[75|100|150|200|300|500|700|1000]
+[duration|delay]-[75|100|150|200|300|500|700|1000]
+timing function
+ease-linear
+ease-in
+ease-out
+ease-in-out
+animation
+animate-none
+animate-spin
+animate-ping
+animate-pulse
+animate-bounce
+```
+
+## Transform
+
+```
+transform-origin
+origin-top
+origin-right
+origin-bottom
+origin-left
+origin-top-right
+origin-bottom-right
+origin-bottom-left
+origin-top-left
+origin-center
+scale
+scale-0
+scale-50
+scale-75
+scale-90
+scale-95
+scale-100
+scale-105
+scale-110
+scale-125
+scale-150
+scale-x-[0|1|2|3|4|5|6|7|8|9]
+scale-x-[100|150|200]
+scale-y-[0|1|2|3|4|5|6|7|8|9]
+scale-y-[100|150|200]
+rotate
+rotate-0
+rotate-1
+rotate-2
+rotate-3
+rotate-6
+rotate-12
+rotate-45
+rotate-90
+rotate-180
+rotate-[0|1|2|3|4|5|6|7|8|9]
+rotate-[100|150|200]
+translate
+translate-x-[spacing]
+translate-x-[spacing]
+translate-x-[spacing]
+translate-x-[spacing]
+translate-y-[spacing]
+translate-y-[spacing]
+translate-y-[spacing]
+translate-y-[spacing]
+skew
+skew-x-[0|1|2|3|4|5|6|7|8|9]
+skew-x-[100|150|200]
+skew-y-[0|1|2|3|4|5|6|7|8|9]
+skew-y-[100|150|200]
+```
+
+## Effect
+
+```
+mix-blend-mode
+mix-blend-normal
+mix-blend-multiply
+mix-blend-screen
+mix-blend-overlay
+mix-blend-darken
+mix-blend-lighten
+mix-blend-color-dodge
+mix-blend-color-burn
+mix-blend-hard-light
+mix-blend-soft-light
+mix-blend-difference
+mix-blend-exclusion
+mix-blend-hue
+mix-blend-saturation
+mix-blend-luminosity
+mix-blend-color
+mix-blend-plus-lighter
+box-shadow
+shadow
+shadow-[sm|md|lg|xl|2xl]
+shadow-none
+shadow-inner
+shadow-lg
+shadow-xl
+shadow-2xl
+box-shadow-color
+shadow-transparent
+shadow-inherit
+shadow-current
+shadow-white
+shadow-black
+shadow-[color]
+opacity
+opacity-[opacity]
+```
+
+## Svg
+
+```
+fill
+[fill|stroke]-none
+[fill|stroke]-transparent
+[fill|stroke]-current
+[fill|stroke]-inherit
+[fill|stroke]-black
+[fill|stroke]-white
+[fill|stroke]-[color]
+stroke-width
+stroke
+stroke-[0|1|2]
+```
+
+## Accessibility
+
+```
+screen-reader
+sr-only
+not-sr-only
+```</doc><doc title="Fh_Frankenui"># AUTOGENERATED! DO NOT EDIT! File to edit: ../lib_nbs/01_core.ipynb.
+
+# %% auto 0
+__all__ = ['enum_to_markdown_table', 'Theme', 'TextT', 'TextFont', 'Alert', 'ButtonT', 'Button', 'H1', 'H2', 'H3', 'H4',
+           'UkHSplit', 'UkHLine', 'Article', 'ArticleTitle', 'ArticleMeta', 'ContainerT', 'Container', 'SectionT',
+           'Section', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch',
+           'TextArea', 'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput',
+           'LabelRadio', 'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options',
+           'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader',
+           'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
+           'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'GridT', 'Grid',
+           'FullySpacedDiv', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'NavT',
+           'NavContainer', 'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer',
+           'NavBarLSide', 'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer',
+           'NavBarParentIcon', 'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle', 'CardHeader', 'CardBody',
+           'CardFooter', 'CardContainer', 'Card', 'TableT', 'Table', 'Td', 'Th', 'Tr', 'Thead', 'Tbody',
+           'TableFromLists', 'TableFromDicts', 'apply_classes', 'render_md']
+
+# %% ../lib_nbs/01_core.ipynb
+import fasthtml.common as fh
+from .foundations import *
+from fasthtml.common import is_listy, Div, P, Span, Script, FastHTML, FT, to_xml, show,fast_app
+from fasthtml.svg import Svg
+from fasthtml.components import Uk_theme_switcher
+
+from enum import Enum, auto
+from fasthtml.components import Uk_select,Uk_input_tag,Uk_icon
+from functools import partial
+from itertools import zip_longest
+from typing import Union, Tuple, Optional
+from fastcore.all import *
+import copy, re
+
+# %% ../lib_nbs/01_core.ipynb
+def enum_to_markdown_table(enum_class):
+    headers = ["Option", "Value"]
+    rows = [[name, value.value] for name, value in enum_class.__members__.items()]
+    
+    max_name_len = max(len(row[0]) for row in rows)
+    max_value_len = max(len(row[1]) for row in rows)
+    
+    header = f"| {'Option':<{max_name_len}} | {'Value':<{max_value_len}} |"
+    separator = f"|{'-'*(max_name_len+2)}|{'-'*(max_value_len+2)}|"
+    body = "\n".join(f"| {row[0]:<{max_name_len}} | {row[1]:<{max_value_len}} |" for row in rows)
+    
+    return f"{header}\n{separator}\n{body}"
+
+# %% ../lib_nbs/01_core.ipynb
+def _headers_theme(color):    
+    return fh.Script(f'''const htmlElement = document.documentElement;
+          if (
+            localStorage.getItem("mode") === "dark" ||
+            (!("mode" in localStorage) &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches)
+          ) {{
+            htmlElement.classList.add("dark");
+          }} else {{
+            htmlElement.classList.remove("dark");
+          }}
+
+          htmlElement.classList.add(localStorage.getItem("theme") || "uk-theme-{color}");
+          ''')
+
+# %% ../lib_nbs/01_core.ipynb
+## Find a better way
+# Iconnavfix = fh.Script('''
+# window.setEmptyATagSize = function() {
+#     const emptyATags = document.querySelectorAll('a:empty');
+#     emptyATags.forEach(tag => {
+#         tag.style.height = '0';
+#         tag.style.width = '0';
+#         tag.style.display = 'inline-block';
+#     });
+# }
+
+# // Run on load and after any dynamic content changes
+# window.addEventListener('load', setEmptyATagSize);
+# document.addEventListener('htmx:afterSettle', setEmptyATagSize);
+# ''')
+
+# %% ../lib_nbs/01_core.ipynb
+class Theme(Enum):
+    def _generate_next_value_(name, start, count, last_values): return name
+    slate = auto()
+    stone = auto()
+    gray = auto()
+    neutral = auto()
+    red = auto()
+    rose = auto()
+    orange = auto()
+    green = auto()
+    blue = auto()
+    yellow = auto()
+    violet = auto()
+    zinc = auto()
+    
+    def headers(self):
+        return (fh.Link(rel="stylesheet", href="https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css"),
+            fh.Script( type="module", src ="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js"),
+            fh.Script( type="module", src ="https://unpkg.com/franken-ui@1.1.0/dist/js/icon.iife.js"),
+            fh.Script(src="https://cdn.tailwindcss.com"),
+            _headers_theme(self.value),
+#             Iconnavfix
+           )
+
+# %% ../lib_nbs/01_core.ipynb
+class TextT(VEnum):
+    'Text Styles from https://franken-ui.dev/docs/text'
+    def _generate_next_value_(name, start, count, last_values):
+        return str2ukcls('text', name)
+    
+    # Text Style
+    lead,meta, italic = auto(), auto(), auto()
+    # Text Size
+    small, default, large = auto(), 'uk-text', auto()
+    # Text Weight
+    light, normal, bold, lighter, bolder = auto(),auto(),auto(),auto(),auto()
+    # Text Transform
+    capitalize,uppercase, lowercase = auto(),auto(),auto()
+    # Text Decoration
+    decoration_none = auto()
+    # Text Color
+    muted,primary,secondary, success,warning, danger = auto(),auto(),auto(),auto(),auto(),auto()
+    # Text Alignment
+    left, right,center,justify = auto(), auto(), auto(), auto()
+    # Vertical Alignment
+    top,middle,bottom, baseline = auto(),auto(),auto(),auto()
+    
+    # Text Wrapping
+    truncate,break_,nowrap = auto(),auto(),auto()
+
+# %% ../lib_nbs/01_core.ipynb
+class TextFont(Enum):
+    "Combinations of TextT that are particularly useful"
+    def __add__(self, other):   return stringify((self, other))
+    def __radd__(self, other):  return stringify((other, self)) 
+    def __str__(self): return self.value
+    muted_sm = stringify((TextT.muted, TextT.small))
+    muted_lg = stringify((TextT.muted, TextT.large))
+    bold_sm = stringify((TextT.bold, TextT.small))
+    
+
+# %% ../lib_nbs/01_core.ipynb
+def Alert(*c, cls=(), **kwargs):
+    return Div(*c, cls=('uk-alert', stringify(cls)), uk_alert=True, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+class ButtonT(VEnum):
+    "Options for styling Buttons"
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('button', name)
+    default = auto()
+    primary = auto()
+    secondary = auto()
+    danger = auto()
+    text = auto()
+    link = auto()
+    ghost = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def Button(*c: Union[str, FT],
+           cls: Union[str, Enum]=ButtonT.default,
+           **kwargs
+          ) -> FT:
+    "A Button with Uk Styling"
+    return fh.Button(*c, cls=('uk-button', stringify(cls)), type='button', **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def H1(*c:FT|str,       # Components to go inside the Heading
+       cls:Enum|str|tuple=(),   # cls for the Heading
+       **kwargs  # any other kwargs will be passed to the Heading
+      )->FT: # Heading with `class=uk-h1` cls
+    "A H1 with Uk Styling"
+    return fh.H1(*c, cls=('uk-h1',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def H2(*c:FT|str,       # Components to go inside the Heading
+       cls:Enum|str|tuple=(),   # cls for the Heading
+       **kwargs  # any other kwargs will be passed to the Heading
+      )->FT: # Heading with `class=uk-h2` cls
+    "A H2 with Uk Styling"
+    return fh.H2(*c, cls=('uk-h2',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def H3(*c:FT|str,       # Components to go inside the Heading
+       cls:Enum|str|tuple=(),   # cls for the Heading
+       **kwargs  # any other kwargs will be passed to the Heading
+      )->FT: # Heading with `class=uk-h3` cls
+    "A H3 with Uk Styling"
+    return fh.H3(*c, cls=('uk-h3',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def H4(*c:FT|str,       # Components to go inside the Heading
+       cls:Enum|str|tuple=(),   # cls for the Heading
+       **kwargs  # any other kwargs will be passed to the Heading
+      )->FT: # Heading with `class=uk-h4` cls
+    "A H4 with Uk Styling"
+    return fh.H4(*c, cls=('uk-h4',stringify(cls)), **kwargs)
+
+
+# %% ../lib_nbs/01_core.ipynb
+def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
+    # Divider FrankenUI stuff
+    cls, line_cls, text_cls = map(stringify,(cls, line_cls, text_cls))
+    return Div(cls='relative ' + cls)(
+        Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
+        Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
+
+# %% ../lib_nbs/01_core.ipynb
+def UkHLine(lwidth=2, y_space=4): return Div(cls=f"my-{y_space} h-[{lwidth}px] w-full bg-secondary")
+
+# %% ../lib_nbs/01_core.ipynb
+def Article(*c, cls=(), **kwargs):
+    return fh.Article(*c, cls=('uk-article',stringify(cls)), **kwargs)
+
+def ArticleTitle(*c, cls=(), **kwargs):
+    return H1(*c, cls=('uk-article-title',stringify(cls)), **kwargs)
+
+def ArticleMeta(*c, cls=(), **kwargs):
+    return P(*c, cls=('uk-article-meta',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+class ContainerT(VEnum):
+    'Max width container sizes from https://franken-ui.dev/docs/container'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('container', name)
+    xsmall = auto()
+    small = auto()
+    large = auto()
+    xlarge = auto()
+    expand = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def Container(*c, cls=(), **kwargs): 
+    return Div(*c, cls=('uk-container',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+class SectionT(VEnum):
+    'Section styles from UIkit'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('section', name)
+    default = auto()
+    muted = auto()
+    primary = auto()
+    secondary = auto()
+    xsmall = auto()
+    small = auto()
+    large = auto()
+    xlarge = auto()
+    remove_vertical = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def Section(*c, cls=(), **kwargs):
+    return fh.Div(*c, cls=('uk-section',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def Fieldset(*c, cls=(), **kwargs): 
+    return fh.Fieldset(*c, cls=('uk-fieldset',stringify(cls)), **kwargs)
+
+def Legend(*c, cls=(), **kwargs): 
+    return fh.Legend(*c, cls=('uk-legend',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def Input(*c, cls=(), **kwargs):      
+    return fh.Input(*c, cls=('uk-input',stringify(cls)), **kwargs)
+def Select(*option, cls=(), **kwargs):
+    return fh.Select(*option, cls=('uk-select',stringify(cls)), **kwargs)
+def Radio(*c, cls=(), **kwargs):      
+    return fh.Input(*c, cls=('uk-radio',stringify(cls)), type='radio', **kwargs)
+def CheckboxX(*c, cls=(), **kwargs):  
+    return fh.Input(*c, cls=('uk-checkbox',stringify(cls)), type='checkbox', **kwargs)
+def Range(*c, cls=(), **kwargs):      
+    return fh.Input(*c, cls=('uk-range',stringify(cls)), type='range', **kwargs)
+def Toggle_switch(*c, cls=(), **kwargs):
+    return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
+def TextArea(*c, cls=(), **kwargs):            
+    return fh.Textarea(*c, cls=('uk-textarea',stringify(cls)), **kwargs)
+def Switch(*c, cls='min-w-9', **kwargs):              
+    return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def FormLabel(*c, cls=(), **kwargs): return fh.Label(*c, cls=('uk-form-label',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+class LabelT(VEnum):
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('label', name)
+    primary = auto()
+    secondary = auto()
+    danger = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def Label(*c, cls=(), **kwargs):
+    return fh.Label(*c, cls=('uk-label',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def UkFormSection(title, description, *c, button_txt='Update', outer_margin=6, inner_margin=6):
+    return Div(cls=f'space-y-{inner_margin} py-{outer_margin}')(
+        Div(H3(title), P(description, cls=TextFont.muted_sm)),
+        UkHSplit(), *c,
+        Div(Button(button_txt, cls=ButtonT.primary)) if button_txt else None)
+
+# %% ../lib_nbs/01_core.ipynb
+def GenericLabelInput(
+               label:str|FT,
+               lbl_cls='',
+               input_cls='',
+               container=Div, 
+               cls='',
+               id='',
+               input_fn=noop, 
+                **kwargs
+                ):
+    "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
+    if isinstance(label, str) or label.tag != 'label': 
+        label = FormLabel(cls=stringify(lbl_cls), fr=id)(label)
+    inp = input_fn(id=id, cls=stringify(input_cls), **kwargs)        
+    if container: return container(label, inp, cls=stringify(cls))
+    return label, inp
+
+# %% ../lib_nbs/01_core.ipynb
+@delegates(GenericLabelInput, but=['input_fn','cls'])
+def LabelInput(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls),input_fn=Input, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def LabelRadio(label:str|FT,
+               lbl_cls='',
+               input_cls='',
+               container=Div, 
+               cls='flex items-center space-x-2',
+               id='',
+                **kwargs
+                ):
+    "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
+    if isinstance(label, str) or label.tag != 'label': 
+        label = FormLabel(cls=stringify(lbl_cls), fr=id)(label)
+    inp = Radio(id=id, cls=stringify(input_cls), **kwargs)        
+    if container: return container(inp, label, cls=stringify(cls))
+    return inp, label
+
+# %% ../lib_nbs/01_core.ipynb
+def LabelCheckboxX(label:str|FT,
+               lbl_cls='',
+               input_cls='',
+               container=Div, 
+               cls='flex items-center space-x-2',
+               id='',
+                **kwargs
+                ):
+    "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
+    if isinstance(label, str) or label.tag != 'label': 
+        label = FormLabel(cls=stringify(lbl_cls), fr=id)(label)
+    inp = CheckboxX(id=id, cls=stringify(input_cls), **kwargs)        
+    if container: return container(inp, label, cls=stringify(cls))
+    return inp, label
+
+# %% ../lib_nbs/01_core.ipynb
+# @delegates(GenericLabelInput, but=['input_fn','cls'])
+# def LabelCheckboxX(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=CheckboxX, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+@delegates(GenericLabelInput, but=['input_fn','cls'])
+def LabelRange(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=Range, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+@delegates(GenericLabelInput, but=['input_fn','cls'])
+def LabelTextArea(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=TextArea, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+@delegates(GenericLabelInput, but=['input_fn','cls'])
+def LabelSwitch(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=Toggle_switch, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def LabelSelect(*option,
+               label:str|FT,
+               lbl_cls='',
+               input_cls='',
+               container=Div, 
+               cls='space-y-2',
+               id='',
+                **kwargs
+                ):
+    "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
+    if isinstance(label, str) or label.tag != 'label': 
+        label = FormLabel(lbl_cls=stringify(lbl_cls), fr=id)(label)
+    inp = Select(*option, id=id, cls=stringify(input_cls), **kwargs)        
+    if container: return container(label, inp, cls=stringify(cls))
+    return label, inp
+
+# %% ../lib_nbs/01_core.ipynb
+def Options(*c,                    # Content for an `Option`
+            selected_idx:int=None, # Index location of selected `Option`
+            disabled_idxs:set=None # Idex locations of disabled `Options`
+           ):
+    "Helper function to wrap things into `Option`s for use in `UkSelect`"
+    return [fh.Option(o,selected=i==selected_idx, disabled=disabled_idxs and i in disabled_idxs) for i,o in enumerate(c)]
+
+# %% ../lib_nbs/01_core.ipynb
+def UkSelect(*option,            # Options for the select dropdown (can use `Options` helper function to create)
+             inp_cls=(),         # Additional classes for the select input
+             cls=('space-y-2',), # Classes for the outer div
+             id="",              # ID for the select input
+             name="",            # Name attribute for the select input
+             placeholder="",     # Placeholder text for the select input
+             searchable=False,   # Whether the select should be searchable
+             **kwargs):          # Additional arguments passed to Uk_select
+    "Creates a select dropdown with uk styling"
+    inp_cls, cls = map(stringify, (inp_cls, cls))
+    select = Uk_select(*option, cls=inp_cls, uk_cloak=True, id=id, 
+                       name=name, placeholder=placeholder, searchable=searchable, **kwargs)
+    return Div(cls=cls)(select)
+
+# %% ../lib_nbs/01_core.ipynb
+def LabelUkSelect(*option,            # Options for the select dropdown (can use `Options` helper function to create)
+             label=(),           # String or FT component for the label
+             lbl_cls=(),         # Additional classes for the label
+             inp_cls=(),         # Additional classes for the select input
+             cls=('space-y-2',), # Classes for the outer div
+             id="",              # ID for the select input
+             name="",            # Name attribute for the select input
+             placeholder="",     # Placeholder text for the select input
+             searchable=False,   # Whether the select should be searchable
+             **kwargs):          # Additional arguments passed to Uk_select
+    "Creates a select dropdown with uk styling"
+    lbl_cls, inp_cls, cls = map(stringify, (lbl_cls, inp_cls, cls))
+    if label: 
+        lbl = FormLabel(cls=f'{lbl_cls}', fr=id)(label) 
+    select = Uk_select(*option, cls=inp_cls, uk_cloak=True, id=id, 
+                       name=name, placeholder=placeholder, searchable=searchable, **kwargs)
+    return Div(cls=cls)(lbl, select) if label else Div(cls=cls)(select)
+
+# %% ../lib_nbs/01_core.ipynb
+class AT(VEnum):
+    'Link styles from https://franken-ui.dev/docs/link'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('link', name)
+    muted = auto()
+    text = auto()
+    reset = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+# def Link(*c, cls=(), **kwargs):  
+#     return fh.A(*c, cls=('uk-link',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+class ListT(VEnum):
+    'List styles from https://franken-ui.dev/docs/list'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('list', name)
+    disc = auto()
+    circle = auto()
+    square = auto()
+    decimal = auto()
+    hyphen = auto()
+    muted = auto()
+    primary = auto()
+    secondary = auto()
+    bullet = auto()
+    divider = auto()
+    striped = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def List(*c, cls=(), **kwargs): return fh.Ul(*c, cls=('uk-list',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def ModalContainer(*c, cls=(), **kwargs):   return fh.Div(*c, cls=('uk-modal-container',stringify(cls)), uk_modal=True, **kwargs)
+def ModalDialog(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-dialog',   stringify(cls)),                **kwargs)
+def ModalHeader(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-header',   stringify(cls)),                **kwargs)
+def ModalBody(*c, cls=(), **kwargs):        return fh.Div(*c, cls=('uk-modal-body',     stringify(cls)),                **kwargs)
+def ModalFooter(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-footer',   stringify(cls)),                **kwargs)
+def ModalTitle(*c, cls=(), **kwargs):       return fh.H2(*c,  cls=('uk-modal-title',    stringify(cls)),                **kwargs)
+def ModalCloseButton(*c, cls=(), **kwargs): return Button(*c, cls=('uk-modal-close',    stringify(cls)),                **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def Modal(*c,
+        header=None,          # Components that go in the header
+        footer=None,          # Components that go in the footer
+        cls=(),               # class for outermost container
+        dialog_cls=(),        # classes for the dialog
+        header_cls='p-6',     # classes for the header
+        body_cls='space-y-6', # classes for the body
+        footer_cls=(),        # classes for the footer
+        id='',                # id for the outermost container
+        **kwargs              # classes for the outermost container
+        ): # Modal
+    "Create a Modal using the appropriate Modal* classes to put the boilerplate in the appropriate places for you"
+    cls, dialog_cls, header_cls, body_cls, footer_cls = map(stringify, (cls, dialog_cls, header_cls, body_cls, footer_cls))
+    res = []
+    if header: res.append(ModalHeader(cls=header_cls)(header))
+    res.append(ModalBody(cls=body_cls)(*c))
+    if footer: res.append(ModalFooter(cls=footer_cls)(footer))
+    return ModalContainer(ModalDialog(*res, cls=dialog_cls), cls=cls, id=id, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+class PaddingT(VEnum):
+    'Padding Modifiers from https://franken-ui.dev/docs/padding'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('padding', name)
+    xsmall = auto()
+    small = auto()
+    default = ''
+    medium = auto()
+    large = auto()
+    xlarge = auto()
+    remove = auto()
+    remove_top = auto()
+    remove_bottom = auto()
+    remove_left = auto()
+    remove_right = auto()
+    remove_vertical = auto()
+    remove_horizontal = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+class PositionT(VEnum):
+    'Position modifiers from https://franken-ui.dev/docs/position'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('position', name)
+    top = auto()
+    bottom = auto()
+    left = auto()
+    right = auto()
+    top_left = auto()
+    top_center = auto()
+    top_right = auto()
+    center = auto()
+    center_left = auto()
+    center_right = auto()
+    bottom_left = auto()
+    bottom_center = auto()
+    bottom_right = auto()
+    center_horizontal = auto()
+    center_vertical = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def Placeholder(*c, cls=(), **kwargs):
+    return fh.Div(*c, cls=('uk-placeholder',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def Progress(*c, cls=(), value="", max="", **kwargs):
+    return fh.Progress(*c, value=value, max=max, cls=('uk-progress',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def UkIcon(icon,height=None,width=None,stroke_width=None,cls=(), **kwargs):
+    return Uk_icon(icon=icon, height=height, width=width, stroke_width=stroke_width, cls=cls, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def UkIconLink(icon, 
+           height=None,
+           width=None,
+           stroke_width=None,
+           cls=(), 
+           button=False, 
+           **kwargs):
+    
+    fn = fh.Button if button else fh.A
+    return fh.A(cls=(f"uk-icon-{'button' if button else 'link'}", stringify(cls)), **kwargs)(UkIcon(icon=icon, height=height, width=width, stroke_width=stroke_width))
+
+# %% ../lib_nbs/01_core.ipynb
+def DiceBearAvatar(seed_name, # Seed name (ie 'Isaac Flath')
+                   h=20,         # Height 
+                   w=20,          # Width
+                  ):          # Span with Avatar
+    url = 'https://api.dicebear.com/8.x/lorelei/svg?seed='
+    return Span(cls=f"relative flex h-{h} w-{w} shrink-0 overflow-hidden rounded-full bg-accent")(
+            fh.Img(cls=f"aspect-square h-{h} w-{w}", alt="Avatar", src=f"{url}{seed_name}"))
+
+# %% ../lib_nbs/01_core.ipynb
+class FlexT(VEnum):
+    'Flexbox modifiers from UIkit'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('flex', name)
+    
+    # Display
+    block, inline = 'uk-flex', auto()
+    # Horizontal Alignment
+    left, center, right, between, around = auto(), auto(), auto(), auto(), auto()
+    # Vertical Alignment
+    stretch, top, middle, bottom = auto(), auto(), auto(), auto()
+    # Direction
+    row, row_reverse, column, column_reverse = auto(), auto(), auto(), auto()
+    # Wrap
+    nowrap, wrap, wrap_reverse = auto(), auto(), auto()
+
+# %% ../lib_nbs/01_core.ipynb
+class GridT(VEnum):
+    'Grid modifiers from UIkit'
+    def _generate_next_value_(name, start, count, last_values):
+        return str2ukcls('grid', name)
+    
+    small, medium, large, collapse = auto(), auto(), auto(), auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def Grid(*div,      # Divs/Containers that should be divided into a grid
+         cols=None,  # Number of columns (defaults to min(len(div),5))
+         cls=GridT.small,  # Additional classes for Grid Div
+         **kwargs # Additional args for Grid Div
+        ):
+    """Creates a grid with the given number of columns, often used for a grid of cards"""
+    cols = cols if cols else min(len(div),5)
+    cls = stringify(cls)
+    return Div(cls=(f'grid grid-cols-{cols}',cls), **kwargs)(*div)
+
+# %% ../lib_nbs/01_core.ipynb
+def FullySpacedDiv(*c,                # Components
+                   cls='uk-width-1-1',# Classes for outer div
+                   **kwargs           # Additional args for outer div
+                  ):                  # Div with spaced components via flex classes
+    "Creates a flex div with it's components having as much space between them as possible"
+    cls = stringify(cls)
+    return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*c)
+
+# %% ../lib_nbs/01_core.ipynb
+def CenteredDiv(*c,      # Components
+                cls='space-y-4',  # Classes for outer div
+                **kwargs # Additional args for outer div
+               ): # Div with components centered in it
+    "Creates a flex div with it's components centered in it"
+    cls=stringify(cls)
+    return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
+
+# %% ../lib_nbs/01_core.ipynb
+def LAlignedDiv(*c,      # Components
+                cls='space-x-4',  # Classes for outer div
+                **kwargs # Additional args for outer div
+               ): # Div with components aligned to the left
+    "Creates a flex div with it's components aligned to the left"
+    cls=stringify(cls)
+    return Div(cls=(FlexT.block,FlexT.left,FlexT.middle,cls), **kwargs)(*c)
+
+# %% ../lib_nbs/01_core.ipynb
+def RAlignedDiv(*c,      # Components
+                cls='space-x-4',  # Classes for outer div
+                **kwargs # Additional args for outer div
+               ): # Div with components aligned to the right
+    "Creates a flex div with it's components aligned to the right"
+    cls=stringify(cls)
+    return Div(cls=(FlexT.block,FlexT.right,FlexT.middle,cls), **kwargs)(*c)
+
+# %% ../lib_nbs/01_core.ipynb
+def VStackedDiv(*c, cls='space-y-4', **kwargs):
+    cls=stringify(cls)
+    return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,cls), **kwargs)(*c)
+
+# %% ../lib_nbs/01_core.ipynb
+def HStackedDiv(*c, cls='space-x-4', **kwargs):
+    cls=stringify(cls)
+    return Div(cls=(FlexT.block,FlexT.row,FlexT.middle,cls), **kwargs)(*c)
+
+# %% ../lib_nbs/01_core.ipynb
+class NavT(VEnum):
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('nav', name)
+    default = auto()
+    primary = auto()
+    secondary = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def NavContainer(*li, 
+                 cls=NavT.primary,
+                 parent=True, 
+                 uk_nav=False, #True for default collapsible behavior, see https://franken-ui.dev/docs/nav#component-options for more advanced options
+                 **kwargs):
+    return fh.Ul(*li, uk_nav=uk_nav, cls=(f"uk-nav{'' if parent else '-sub'}", stringify(cls)),**kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def NavParentLi(*nav_container, cls=(), **kwargs): return fh.Li(*nav_container,  cls=('uk-parent',  stringify(cls)),**kwargs)
+def NavDividerLi(*c,cls=(), **kwargs): return fh.Li(*c, cls=('uk-nav-divider', stringify(cls)),**kwargs)
+def NavHeaderLi(*c,cls=(), **kwargs): return fh.Li(*c, cls=('uk-nav-header', stringify(cls)),**kwargs)
+def NavSubtitle(*c,cls=TextFont.muted_sm, **kwargs): return fh.Div(*c, cls=('uk-nav-subtitle', stringify(cls)),**kwargs)
+def NavCloseLi(*c,cls=(), **kwargs): return fh.Li(*c, cls=('uk-drop-close', stringify(cls)),**kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def NavBarContainer(*c, 
+                    cls=(),
+                    container_cls=ContainerT.expand,
+                    uk_navbar=True,
+                    **kwargs): 
+    return fh.Div(Container(Div(*c, uk_navbar=uk_navbar),cls=stringify(container_cls)), cls=('',stringify(cls)), **kwargs) #uk-navbar-container
+def NavBarLSide(*c,  cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-left',  stringify(cls)), **kwargs)
+def NavBarRSide(*c,  cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-right', stringify(cls)), **kwargs)
+def NavBarCenter(*c, cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-center',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def NavBarNav(*li, cls=(), **kwargs): return fh.Nav(*li, cls=('uk-navbar-nav',      stringify(cls)),                 **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def NavBarSubtitle(title, subtitle, cls=(), subtitle_cls=TextFont.muted_sm, **kwargs): 
+    return fh.Div(title,fh.Div(subtitle, cls=('uk-navbar-subtitle', stringify(subtitle_cls))), cls=stringify(cls), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def NavBarNavContainer(*li, 
+                       cls=NavT.primary,
+                         parent=True, 
+                         uk_nav=False, #True for default collapsible behavior, see https://franken-ui.dev/docs/nav#component-options for more advanced options
+                         **kwargs):
+    return Div(cls="uk-navbar-dropdown")(NavContainer(*li, cls=('uk-navbar-dropdown-nav',stringify(cls)), uk_nav=uk_nav, parent=parent, **kwargs))
+
+# %% ../lib_nbs/01_core.ipynb
+def NavBarParentIcon(): return Span(uk_navbar_parent_icon=True)
+
+# %% ../lib_nbs/01_core.ipynb
+def DropDownNavContainer(*li, 
+                         cls=NavT.primary,
+                         parent=True, 
+                         uk_nav=False, #True for default collapsible behavior, see https://franken-ui.dev/docs/nav#component-options for more advanced options
+                         uk_dropdown=True,
+                         **kwargs):
+    return Div(cls = 'uk-drop uk-dropdown',uk_dropdown=uk_dropdown)(NavContainer(*li, cls=('uk-dropdown-nav',stringify(cls)), uk_nav=uk_nav, parent=parent, **kwargs))
+
+# %% ../lib_nbs/01_core.ipynb
+def TabContainer(*li,cls='', alt=False, **kwargs):
+    cls = stringify(cls)
+    return Ul(cls=(f"uk-tab{'-alt' if alt else ''}",stringify(cls)),**kwargs)(*li)
+
+# %% ../lib_nbs/01_core.ipynb
+class CardT(VEnum):
+    'Card styles from UIkit'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('card', name)
+    default = auto()
+    primary = auto()
+    secondary = auto()
+    danger = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def CardTitle(*c, cls=(), **kwargs):
+    return fh.Div(*c, cls=('uk-card-title',stringify(cls)), **kwargs)
+
+def CardTitle(*c, cls=(), **kwargs):
+    return fh.Div(*c, cls=('uk-card-title',stringify(cls)), **kwargs)
+
+def CardHeader(*c, cls=(), **kwargs):
+    return fh.Div(*c, cls=('uk-card-header',stringify(cls)), **kwargs)
+
+def CardBody(*c, cls=(), **kwargs):
+    return fh.Div(*c, cls=('uk-card-body',stringify(cls)), **kwargs)
+
+def CardFooter(*c, cls=(), **kwargs):
+    return fh.Div(*c, cls=('uk-card-footer',stringify(cls)), **kwargs)
+
+def CardContainer(*c, cls=CardT.default, **kwargs):
+    return fh.Div(*c, cls=('uk-card',stringify(cls)), **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def Card(*c, # Components that go in the body
+        header=None, # Components that go in the header
+        footer=None,  # Components that go in the footer
+        body_cls='space-y-6', # classes for the body
+        header_cls=(), # classes for the header
+        footer_cls=(), # classes for the footer
+        cls=(), #class for outermost component
+        **kwargs # classes that for the card itself
+        ):
+    header_cls, footer_cls, body_cls, cls = map(stringify, (header_cls, footer_cls, body_cls, cls))
+    res = []
+    if header: res.append(CardHeader(cls=header_cls)(header))
+    res.append(CardBody(cls=body_cls)(*c))
+    if footer: res.append(CardFooter(cls=footer_cls)(footer))
+    return CardContainer(cls=cls, **kwargs)(*res)
+
+# %% ../lib_nbs/01_core.ipynb
+class TableT(VEnum):
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('table', name)
+    divider = auto()
+    striped = auto()
+    hover = auto()
+    small = auto()
+    large = auto()
+    justify = auto()
+    middle = auto()
+    responsive = auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def Table(*args, cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), **kwargs): 
+    return fh.Table(cls=('uk-table', stringify(cls)), *args, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def _TableCell(Component, *args, cls=(), shrink=False, expand=False, small=False, **kwargs):
+    cls = stringify(cls)
+    if shrink: cls += ' uk-table-shrink'
+    if expand: cls += ' uk-table-expand'
+    if small: cls += ' uk-table-small'
+    return Component(*args,cls=cls, **kwargs)
+
+@delegates(_TableCell, but=['Component'])
+def Td(*args,**kwargs):  return _TableCell(fh.Td, *args, **kwargs)
+@delegates(_TableCell, but=['Component'])
+def Th(*args,**kwargs): return _TableCell(fh.Th, *args, **kwargs)
+
+def Tr(*cells, cls=(), **kwargs):  return fh.Tr(*cells, cls=stringify(cls), **kwargs)
+def Thead(*rows, cls=(), **kwargs): return fh.Thead(*rows, cls=stringify(cls), **kwargs)
+def Tbody(*rows, cls=(), sortable=False, **kwargs): return fh.Tbody(*rows, cls=stringify(cls), uk_sortable=sortable, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def TableFromLists(header_data, body_data, footer_data=None, 
+                   header_cell_render=Th,body_cell_render=Td, footer_cell_render=Td,
+                   cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), 
+                   sortable=False, **kwargs):
+    
+    return Table(
+                Thead(Tr(*map(header_cell_render, header_data))),
+                Tbody(*[Tr(*map(body_cell_render, r)) for r in body_data], sortable=sortable),
+                Tfoot(Tr(*map(footer_cell_render, footer_data))) if footer_data else '',
+                cls=stringify(cls),    
+                **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+def TableFromDicts(header_data:Sequence, body_data:Sequence[dict], footer_data=None, 
+                   header_cell_render=Th, body_cell_render=lambda k,v : Td(v), footer_cell_render=lambda k,v : Td(v),
+                   cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small),
+                   sortable=False,
+                   **kwargs):
+    
+    return Table(
+        Thead(Tr(*[header_cell_render(h) for h in header_data])),
+        Tbody(*[Tr(*[body_cell_render(k, r) for k in header_data]) for r in body_data], sortable=sortable),
+        Tfoot(Tr(*[footer_cell_render(k, footer_data.get(k.lower(), '')) for k in header_data])) if footer_data else '',
+        cls=stringify(cls),    
+        **kwargs
+    )
+
+# %% ../lib_nbs/01_core.ipynb
+def apply_classes(html,class_map=None, class_map_mods=None):
+    if not class_map:
+        class_map = {
+            'h1': 'uk-h1 my-4 mb-4',
+            'h2': 'uk-h2 my-8',
+            'h3': 'uk-h3 my-8',
+            'h4': 'uk-h4 my-8',
+            'ul': "uk-list uk-list-disc mb-4",
+            'a': "uk-link",
+            'p': 'my-1',
+            'blockquote': "uk-blockquote mb-8",
+            'hr':'uk-divider-icon my-4',
+            'table':'uk-table-middle uk-table-divider uk-table-hover uk-table-small'}
+
+    if class_map_mods:
+        class_map = {**class_map, **class_map_mods}
+    for tag, classes in class_map.items():
+        pattern = f'<{tag}(.*?)>'
+        replacement = f'<{tag}\\1 class="{classes}">'
+        html = re.sub(pattern, replacement, html)
+    return html
+
+# %% ../lib_nbs/01_core.ipynb
+def render_md(md_content):
+    import re, markdown2
+    html_content = markdown2.markdown(md_content)
+    styled_html = apply_classes(html_content)
+    return NotStr(styled_html)</doc></docs><api><doc title="API List" desc="A succint list of all functions and methods in fasthtml."># fh_frankenui Module Documentation
+
+## fh_frankenui.core
+
+- `class Theme`
+    - `def headers(self)`
+    - `@property def name(self)`
+
+- `class TextT`
+    Text Styles from https://franken-ui.dev/docs/text
+
+    - `@property def name(self)`
+
+- `class TextFont`
+    Combinations of TextT that are particularly useful
+
+    - `def __add__(self, other)`
+    - `def __radd__(self, other)`
+    - `def __str__(self)`
+    - `@property def name(self)`
+
+- `class ButtonT`
+    Options for styling Buttons
+
+    - `@property def name(self)`
+
+- `def Button(*c, **kwargs)`
+    A Button with Uk Styling
+
+- `def H1(*c, **kwargs)`
+    A H1 with Uk Styling
+
+- `def H2(*c, **kwargs)`
+    A H2 with Uk Styling
+
+- `def H3(*c, **kwargs)`
+    A H3 with Uk Styling
+
+- `def H4(*c, **kwargs)`
+    A H4 with Uk Styling
+
+- `class ContainerT`
+    Max width container sizes from https://franken-ui.dev/docs/container
+
+    - `@property def name(self)`
+
+- `class SectionT`
+    Section styles from UIkit
+
+    - `@property def name(self)`
+
+- `class LabelT`
+    - `@property def name(self)`
+
+- `def GenericLabelInput(label, lbl_cls, input_cls, container, cls, id, input_fn, **kwargs)`
+    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+
+- `def LabelRadio(label, lbl_cls, input_cls, container, cls, id, **kwargs)`
+    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+
+- `def LabelCheckboxX(label, lbl_cls, input_cls, container, cls, id, **kwargs)`
+    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+
+- `def LabelSelect(*option, **kwargs)`
+    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+
+- `def Options(*c)`
+    Helper function to wrap things into `Option`s for use in `UkSelect`
+
+- `def UkSelect(*option, **kwargs)`
+    Creates a select dropdown with uk styling
+
+- `def LabelUkSelect(*option, **kwargs)`
+    Creates a select dropdown with uk styling
+
+- `class AT`
+    Link styles from https://franken-ui.dev/docs/link
+
+    - `@property def name(self)`
+
+- `class ListT`
+    List styles from https://franken-ui.dev/docs/list
+
+    - `@property def name(self)`
+
+- `def Modal(*c, **kwargs)`
+    Create a Modal using the appropriate Modal* classes to put the boilerplate in the appropriate places for you
+
+- `class PaddingT`
+    Padding Modifiers from https://franken-ui.dev/docs/padding
+
+    - `@property def name(self)`
+
+- `class PositionT`
+    Position modifiers from https://franken-ui.dev/docs/position
+
+    - `@property def name(self)`
+
+- `class FlexT`
+    Flexbox modifiers from UIkit
+
+    - `@property def name(self)`
+
+- `class GridT`
+    Grid modifiers from UIkit
+
+    - `@property def name(self)`
+
+- `def Grid(*div, **kwargs)`
+    Creates a grid with the given number of columns, often used for a grid of cards
+
+- `def FullySpacedDiv(*c, **kwargs)`
+    Creates a flex div with it's components having as much space between them as possible
+
+- `def CenteredDiv(*c, **kwargs)`
+    Creates a flex div with it's components centered in it
+
+- `def LAlignedDiv(*c, **kwargs)`
+    Creates a flex div with it's components aligned to the left
+
+- `def RAlignedDiv(*c, **kwargs)`
+    Creates a flex div with it's components aligned to the right
+
+- `class NavT`
+    - `@property def name(self)`
+
+- `class CardT`
+    Card styles from UIkit
+
+    - `@property def name(self)`
+
+- `class TableT`
+    - `@property def name(self)`
+
+## fh_frankenui.foundations
+
+> Data Structures and Utilties
+
+- `def stringify(o)`
+    Converts input types into strings that can be passed to FT components
+
+- `class VEnum`
+    - `def __str__(self)`
+    - `def __add__(self, other)`
+    - `def __radd__(self, other)`
+    - `@property def name(self)`
+</doc></api><examples><doc title="Authentication"># AUTOGENERATED! DO NOT EDIT! File to edit: ../example_auth.ipynb.
+
+# %% auto 0
+__all__ = ['auth_homepage', 'page']
+
+# %% ../example_auth.ipynb
+from fasthtml.common import *
+import fasthtml.common as fh
+from fh_frankenui import *
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+
+from fasthtml.svg import *
+
+
+# %% ../example_auth.ipynb
+def page():    
+    left = Div(cls="col-span-1 hidden flex-col justify-between bg-zinc-900 p-8 text-white lg:flex")(
+        Div(cls=(TextT.bold,TextT.default))("Acme Inc"),
+        Blockquote(cls="space-y-2")(
+            P(cls=TextT.large)('"This library has saved me countless hours of work and helped me deliver stunning designs to my clients faster than ever before."'),
+            Footer(cls=TextT.small)("Sofia Davis")))
+
+    right = Div(cls="col-span-2 flex flex-col p-8 lg:col-span-1")(
+        RAlignedDiv(Button("Login", cls=ButtonT.ghost, uk_toggle="#demo")),
+        CenteredDiv(cls='flex-1')(
+            Div(cls=f"space-y-6 w-[350px]")(
+                Div(cls="flex flex-col space-y-2 text-center")(
+                    H3("Create an account"),
+                    P(cls=TextFont.muted_sm)("Enter your email below to create your account")),
+                Form(cls='space-y-6')(
+                        Input(placeholder="name@example.com"),
+                        Button(Span(cls="mr-2", uk_spinner="ratio: 0.54"), "Sign in with Email", cls=(ButtonT.primary, "w-full"), disabled=True),
+                        UkHSplit("Or continue with",cls=TextFont.muted_sm),
+                        Button(UkIcon('github',cls='mr-2'), "Github", cls=(ButtonT.default, "w-full"), uk_toggle="#demo")),
+                P(cls=(TextFont.muted_sm,"text-center"))(
+                "By clicking continue, you agree to our ",
+                A(cls="underline underline-offset-4 hover:text-primary", href="#demo", uk_toggle=True)("Terms of Service")," and ",
+                A(cls="underline underline-offset-4 hover:text-primary", href="#demo", uk_toggle=True)("Privacy Policy"),"."))))
+    
+    return Grid(left,right,cols=2, gap=0,cls='h-screen')
+
+# %% ../example_auth.ipynb
+auth_homepage = page()</doc><doc title="Cards">"""FrankenUI Cards Example"""
+
+# AUTOGENERATED! DO NOT EDIT! File to edit: ../example_cards.ipynb.
+
+# %% auto 0
+__all__ = ['CreateAccount', 'Card1Svg', 'Card2Svg', 'AppleSvg', 'PaymentMethod', 'area_opts', 'severity_opts', 'ReportIssue',
+           'FlexBlockCentered', 'franken_desc', 'FrankenUI', 'CookieSettings', 'team_members', 'body', 'TeamMembers',
+           'access_roles', 'ShareDocument', 'DateCard', 'section_content', 'Notifications', 'cards_homepage', 'page']
+
+# %% ../example_cards.ipynb
+from fasthtml.common import *
+import fasthtml.common as fh
+from fasthtml.components import Uk_input_tag
+from fasthtml.svg import *
+from fh_frankenui import *
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+import calendar
+
+# %% ../example_cards.ipynb
+CreateAccount = Card(Grid(Button(UkIcon('github',cls='uk-margin-small-right'),'Github'),
+                  Button(UkIcon('google',cls='uk-margin-small-right'),'Google'),
+                  cols=2,cls='gap-6'),
+            UkHSplit("OR CONTINUE WITH", text_cls = (TextT.small, TextT.muted)),
+            LabelInput('Email',    id='email',   placeholder='m@example.com'),
+            LabelInput('Password', id='password',placeholder='Password', type='Password'),
+            header=(H3('Create an account'),P(cls=TextFont.muted_sm)('Enter your email below to create your account')),
+            footer=Button(cls=(ButtonT.primary,'w-full'))('Create Account'),
+            body_cls='space-y-4 py-0')
+
+# %% ../example_cards.ipynb
+Card1Svg = Svg(viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke_linecap="round", stroke_linejoin="round", stroke_width="2", cls="h-6 w-6 mr-1")(Rect(width="20", height="14", x="2", y="5", rx="2"),Path(d="M2 10h20"))
+Card2Svg = Svg(role="img", viewBox="0 0 24 24", cls="h-6 w-6 mr-1")(Path(d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z", fill="currentColor")),
+AppleSvg = Svg(role="img", viewBox="0 0 24 24", cls="h-6 w-6 mr-1")(Path(d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701", fill="currentColor"))
+
+# %% ../example_cards.ipynb
+PaymentMethod = Card(
+    Grid(
+        Button(CenteredDiv(Card1Svg, "Card"),  cls='h-20 w-full border-2 border-primary'),
+        Button(CenteredDiv(Card2Svg, "Card"),  cls='h-20 w-full'),
+        Button(CenteredDiv(AppleSvg, "Apple"), cls='h-20 w-full'),
+        cols=3,cls='gap-6'),
+    Div(cls='space-y-4')(
+        LabelInput('Name',        id='name',        placeholder='John Doe'),
+        LabelInput('Card Number', id='card_number', placeholder='m@example.com'),
+        Grid(LabelUkSelect(*Options(*calendar.month_name[1:],selected_idx=0),label='Expires',id='expire_month'),
+             LabelUkSelect(*Options(*range(2024,2030),selected_idx=0),       label='Year',   id='expire_year'),
+             LabelInput('CVV', id='cvv',placeholder='CVV'),
+             cols=3,cls='gap-4')),
+    header=(H3('Payment Method'),P(cls=TextFont.muted_sm)('Add a new payment method to your account.')))
+
+# %% ../example_cards.ipynb
+area_opts = ('Team','Billing','Account','Deployment','Support')
+severity_opts = ('Severity 1 (Highest)', 'Severity 2', 'Severity 3', 'Severity 4 (Lowest)')
+ReportIssue = Card(
+    Grid(Div(LabelUkSelect(*Options(*area_opts),    label='Area',    id='area')),
+         Div(LabelUkSelect(*Options(*severity_opts),label='Severity',id='area')),
+         cls=GridT.small,
+         cols=2),
+    LabelInput(    label='Subject',    placeholder='I need help with', id='subject'),
+    LabelTextArea( label='Description',placeholder='Please include all information relevant to your issue', id='description'),
+    Div(FormLabel('Tags', fr='#tags'),
+        Uk_input_tag(name="Tags",state="danger", value="Spam,Invalid", uk_cloak=True, id='tags')),
+    header=(H3('Report an issue'),P(cls=TextFont.muted_sm)('What area are you having problems with')),
+    footer = FullySpacedDiv(Button(cls=ButtonT.ghost  )('Cancel'),
+                            Button(cls=ButtonT.primary)('Submit')))
+
+
+# %% ../example_cards.ipynb
+FlexBlockCentered = (FlexT.block,FlexT.center)
+
+# %% ../example_cards.ipynb
+franken_desc ="HTML-first, framework-agnostic, beautifully designed components that you can truly copy and paste into your site. Accessible. Customizable. Open Source."
+FrankenUI = Card(H4("franken/ui"),
+              P(cls=TextFont.muted_sm)(franken_desc),
+              Div(cls=('flex','gap-x-4',TextFont.muted_sm))(
+                Div(cls=FlexBlockCentered)("TypeScript"),
+                Div(cls=FlexBlockCentered)(UkIcon('star'),"20k"),"Updated April 2023"))
+
+# %% ../example_cards.ipynb
+CookieSettings = Card(
+    Div(H5('Strictly Necessary'),
+        P(cls=(TextFont.muted_sm,TextT.normal))('These cookies are essential in order to use the website and use its features.'),
+        Switch(),
+        cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
+    Div(H5('Functional Cookies'),
+        P(cls=(TextFont.muted_sm,TextT.normal))('These cookies allow the website to provide personalized functionality.'),
+        Switch(),
+        cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
+    Div(H5('Performance Cookies'),
+        P(cls=(TextFont.muted_sm,TextT.normal))('These cookies help to improve the performance of the website.'),
+        Switch(),
+        cls=(*FlexBlockCentered, FlexT.between, 'gap-2')),
+    header=(H4('Cookie Settings'),P(cls=(TextFont.muted_sm, 'mt-1.5'))('Manage your cookie settings here.')),
+    footer=Button(cls=(ButtonT.primary, 'w-full'))('Save Preferences'),)
+
+# %% ../example_cards.ipynb
+team_members = [("Sofia Davis", "m@example.com", "Owner"),("Jackson Lee", "p@example.com", "Member"),]
+
+body = [Div(cls=(*FlexBlockCentered, 'space-x-4'))(
+        DiceBearAvatar(n, 10,10),
+        Div(cls='flex-1')(
+            P(n, cls='text-sm font-medium leading-none'),
+            P(e, cls=TextFont.muted_sm)),
+        Button(r),
+        DropDownNavContainer(map(NavCloseLi, [
+            A(Div('Viewer',    NavSubtitle('Can view and comment.'))),
+            A(Div('Developer', NavSubtitle('Can view, comment and edit.'))),
+            A(Div('Billing',   NavSubtitle('Can view, comment and manage billing.'))),
+            A(Div('Owner',     NavSubtitle('Admin-level access to all resources.')))]
+                 )),
+    ) for n,e,r in team_members]
+
+TeamMembers = Card(*body,
+        header = (H4('Team Members'),Div('Invite your team members to collaborate.', cls=('mt-1.5', TextFont.muted_sm))),)
+
+# %% ../example_cards.ipynb
+access_roles = ("Read and write access", "Read-only access")
+team_members = [("Olivia Martin", "m@example.com", "Read and write access"),
+                ("Isabella Nguyen", "b@example.com", "Read-only access"),
+                ("Sofia Davis", "p@example.com", "Read-only access")]
+
+# %% ../example_cards.ipynb
+ShareDocument = Card(
+    Div(cls='flex gap-x-2')(
+        Input(value='http://example.com/link/to/document',cls='flex-1'),
+        Button('Copy link')),
+    Div(cls='uk-divider-icon my-4'),
+    H4(cls=TextFont.bold_sm)('People with access'),
+    *[LAlignedDiv(
+        DiceBearAvatar(n, 10,10),
+        Div(cls='flex-1')(
+            P(n, cls='text-sm font-medium leading-none'),
+            P(e, cls=TextFont.muted_sm)),
+        UkSelect(*Options(*access_roles, selected_idx=access_roles.index(r))), cls='gap-4') for n,e,r in team_members],
+    header = (H4('Share this document'),Div('Anyone with the link can view this document.', cls=('mt-1.5',TextFont.muted_sm))))
+
+# %% ../example_cards.ipynb
+DateCard = Card(Button('Jan 20, 2024 - Feb 09, 2024'))
+
+# %% ../example_cards.ipynb
+section_content =(('bell','Everything',"Email digest, mentions & all activity."),
+                  ('user',"Available","Only mentions and comments"),
+                  ('ban',"Ignoring","Turn of all notifications"))
+
+# %% ../example_cards.ipynb
+Notifications = Card(
+    NavContainer(
+    *[Li(cls='-mx-1')(A(Div(cls="flex gap-x-4")(UkIcon(icon),Div(cls='flex-1')(P(name),P(cls=TextFont.muted_sm)(desc)))))
+            for icon, name, desc in section_content],
+        cls=NavT.secondary),
+    header = (H4('Notification'),Div('Choose what you want to be notified about.', cls=('mt-1.5', TextFont.muted_sm))),
+    body_cls='pt-0')
+
+# %% ../example_cards.ipynb
+def page():
+    return Title("Custom"),Grid(
+            *map(lambda x: Div(x, cls='space-y-4'),(
+                      (PaymentMethod,CreateAccount),
+                      (TeamMembers, ShareDocument,DateCard,Notifications),
+                      (ReportIssue,FrankenUI,CookieSettings))),
+                     
+            cols=1, cls=(GridT.small,'md:grid-cols-3', 'sm:grid-cols-2'),
+       )
+
+# %% ../example_cards.ipynb
+cards_homepage = page()</doc><doc title="Dashboard">"""FrankenUI Dashboard Example"""
+
+# AUTOGENERATED! DO NOT EDIT! File to edit: ../example_dashboard.ipynb.
+
+# %% auto 0
+__all__ = ['rev', 'sub', 'sal', 'act', 'top_info_row', 'recent_sales', 'teams', 'opt_hdrs', 'team_dropdown', 'hotkeys',
+           'avatar_dropdown', 'top_nav', 'dashboard_homepage', 'InfoCard', 'AvatarItem', 'generate_chart',
+           'NavSpacedLi', 'page']
+
+# %% ../example_dashboard.ipynb
+from fasthtml.common import *
+from fh_frankenui import *
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+from fasthtml.svg import *
+from fh_matplotlib import matplotlib2fasthtml
+import numpy as np
+import matplotlib.pylab as plt
+
+# %% ../example_dashboard.ipynb
+def InfoCard(title, value, change):
+    return Div(Card(
+             Div(H3(value),
+                P(change, cls=TextFont.muted_sm)),
+             header = H4(title)))
+
+# %% ../example_dashboard.ipynb
+rev = InfoCard("Total Revenue", "$45,231.89", "+20.1% from last month")
+sub = InfoCard("Subscriptions", "+2350", "+180.1% from last month")
+sal = InfoCard("Sales", "+12,234", "+19% from last month")
+act = InfoCard("Active Now", "+573", "+201 since last hour")
+
+# %% ../example_dashboard.ipynb
+top_info_row = Grid(rev,sub,sal,act,cols=4, cls=GridT.small)
+
+# %% ../example_dashboard.ipynb
+def AvatarItem(name, email, amount):
+    return Div(cls="flex items-center")(
+        DiceBearAvatar(name, 9,9),
+        Div(cls="ml-4 space-y-1")(
+            P(name, cls=TextFont.bold_sm),
+            P(email, cls=TextFont.muted_sm)),
+        Div(amount, cls="ml-auto font-medium"))
+
+recent_sales = Card(
+    Div(cls="space-y-8")(
+        *[AvatarItem(n,e,d) for (n,e,d) in (
+            ("Olivia Martin",   "olivia.martin@email.com",   "+$1,999.00"),
+            ("Jackson Lee",     "jackson.lee@email.com",     "+$39.00"),
+            ("Isabella Nguyen", "isabella.nguyen@email.com", "+$299.00"),
+            ("William Kim",     "will@email.com",            "+$99.00"),
+            ("Sofia Davis",     "sofia.davis@email.com",     "+$39.00"))]),
+    header=Div(
+        H3("Recent Sales"),
+        P("You made 265 sales this month.", cls=TextFont.muted_sm)),
+
+cls='lg:col-span-3')
+
+# %% ../example_dashboard.ipynb
+@matplotlib2fasthtml
+def generate_chart(num_points):
+    plotdata = [np.random.exponential(1) for _ in range(num_points)]
+    plt.plot(range(len(plotdata)), plotdata)
+
+# %% ../example_dashboard.ipynb
+teams = [["Alicia Koch"],['Acme Inc', 'Monster Inc.'],['Create a Team']]
+
+opt_hdrs = ["Personal", "Team", ""]
+
+team_dropdown = UkSelect(
+    Optgroup(label="Personal Account")(
+        Option(A("Alicia Koch"))),
+    Optgroup(label="Teams")(
+        Option(A("Acme Inc")),
+        Option(A("Monster Inc."))),
+    Option(A("Create a Team")))
+
+# %% ../example_dashboard.ipynb
+hotkeys = [('Profile','⇧⌘P'),('Billing','⌘B'),('Settings','⌘S'),('New Team', ''), ('Logout', '')]
+
+def NavSpacedLi(t,s): return NavCloseLi(A(FullySpacedDiv(P(t),P(s,cls=TextFont.muted_sm))))
+
+avatar_dropdown = Div(
+      DiceBearAvatar('Alicia Koch',8,8),
+      DropDownNavContainer(
+          NavHeaderLi('sveltecult',NavSubtitle("leader@sveltecult.com")),
+          *[NavSpacedLi(*hk) for hk in hotkeys],))
+
+# %% ../example_dashboard.ipynb
+top_nav = NavBarContainer(
+            NavBarLSide(
+                NavBarNav(
+                   team_dropdown, 
+                   Li(A("Overview")), 
+                   Li(A("Customers")), 
+                   Li(A("Products")), 
+                   Li(A("Settings")),
+                cls='flex items-center'
+                )),
+            NavBarRSide(
+                NavBarNav(
+                   Input(placeholder='Search'), 
+                   avatar_dropdown,
+                   cls='flex items-center')))
+
+# %% ../example_dashboard.ipynb
+def page():
+    return Div(cls="space-y-4")(
+        Div(cls="border-b border-border px-4")(top_nav),
+        H2('Dashboard'),
+        TabContainer(
+            Li(A("Overview")),
+            Li(A("Analytics")),
+            Li(A("Reports")),
+            Li(A("Notifications")),
+            alt=True),
+
+        top_info_row,
+        Grid(Card(generate_chart(10),cls='lg:col-span-4'),
+            recent_sales,
+            gap=4,cls='lg:grid-cols-7'))
+
+# %% ../example_dashboard.ipynb
+dashboard_homepage = page()</doc><doc title="Forms">"""FrankenUI Forms Example"""
+
+# AUTOGENERATED! DO NOT EDIT! File to edit: ../example_forms.ipynb.
+
+# %% auto 0
+__all__ = ['sidebar_items', 'sidebar', 'forms_homepage', 'heading', 'profile_form', 'account_form', 'appearance_form',
+           'notifications_form', 'display_form', 'page']
+
+# %% ../example_forms.ipynb
+from fasthtml.common import *
+from fh_frankenui import *
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+
+from fasthtml.svg import *
+
+# %% ../example_forms.ipynb
+def heading():
+    return Div(cls="space-y-5")(
+            H2("Settings"),
+            P("Manage your account settings and set e-mail preferences.", cls=TextFont.muted_lg),
+            UkHSplit())
+
+# %% ../example_forms.ipynb
+sidebar_items = ["Profile", "Account", "Appearance", "Notifications", "Display"]
+
+# %% ../example_forms.ipynb
+sidebar = NavContainer(*map(lambda x: Li(A(x)),sidebar_items),
+                uk_switcher="connect: #component-nav; animation: uk-animation-fade",
+                cls=(NavT.secondary,"space-y-4 p-4 w-1/5"))
+
+# %% ../example_forms.ipynb
+def profile_form():
+    content = (Div(cls="space-y-2")(
+            LabelInput("Username", placeholder='sveltecult', id='username'),
+            HelpText("This is your public display name. It can be your real name or a pseudonym. You can only change this once every 30 days.")),
+        Div(cls="space-y-2")(
+            LabelUkSelect(Option("Select a verified email to display", value="", selected=True, disabled=True),
+                     *map(Option,('m@example.com', 'm@yahoo.com', 'm@cloud.com')),  
+                     label="Email", id="email"),
+            HelpText("You can manage verified email addresses in your email settings.")),
+        Div(cls="space-y-2")(
+            LabelTextArea("Bio", id="bio", placeholder="Tell us a little bit about yourself"),
+            HelpText("You can @mention other users and organizations to link to them."),
+            Div("String must contain at least 4 character(s)", cls="text-destructive")),
+        Div(cls="space-y-2")(
+            FormLabel("URLs"),
+            HelpText("Add links to your website, blog, or social media profiles."),
+            Input(value="https://www.franken-ui.dev"),
+            Input(value="https://github.com/sveltecult/franken-ui"),
+            Button("Add URL")))
+    
+    return UkFormSection('Profile', 'This is how others will see you on the site.', button_txt='Update profile', *content)
+
+# %% ../example_forms.ipynb
+def account_form():
+    content = (
+        Div(cls="space-y-2")(
+            LabelInput("Name", placeholder="Your name", id="name"),
+            HelpText("This is the name that will be displayed on your profile and in emails.")),
+        Div(cls="space-y-2")(
+            LabelInput("Date of Birth", type="date", placeholder="Pick a date", id="date_of_birth"),
+            HelpText("Your date of birth is used to calculate your age.")),
+        Div(cls="space-y-2")(
+            LabelUkSelect(*Options("Select a language", "English", "French", "German", "Spanish", "Portuguese", selected_idx=1, disabled_idxs={0}),
+                     label='Language',
+                     id="language"),
+            HelpText("This is the language that will be used in the dashboard.")))
+    
+    return UkFormSection('Account', 'Update your account settings. Set your preferred language and timezone.', button_txt='Update profile', *content)
+
+# %% ../example_forms.ipynb
+def appearance_form():
+    content = (
+        Div(cls="space-y-2")(
+            LabelUkSelect(*Options('Select a font family', 'Inter', 'Geist', 'Open Sans', selected_idx=2, disabled_idxs={0}),
+            label='Font Family',
+            id='font_family'), 
+        HelpText("Set the font you want to use in the dashboard.")),
+        Div(cls="space-y-2")(
+            FormLabel("Theme"),
+            HelpText("Select the theme for the dashboard."),
+            Grid(A(id="theme-toggle-light", cls="block cursor-pointer items-center rounded-md border-2 border-muted p-1 ring-ring")(
+                    Div(cls="space-y-2 rounded-sm bg-[#ecedef] p-2")(
+                        Div(cls="space-y-2 rounded-md bg-white p-2 shadow-sm")(
+                            Div(cls="h-2 w-[80px] rounded-lg bg-[#ecedef]"),
+                            Div(cls="h-2 w-[100px] rounded-lg bg-[#ecedef]")),
+                        Div(cls="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm")(
+                            Div(cls="h-4 w-4 rounded-full bg-[#ecedef]"),
+                            Div(cls="h-2 w-[100px] rounded-lg bg-[#ecedef]")),
+                        Div(cls="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm")(
+                            Div(cls="h-4 w-4 rounded-full bg-[#ecedef]"),
+                            Div(cls="h-2 w-[100px] rounded-lg bg-[#ecedef]")))),
+                A(id="theme-toggle-dark", cls="block cursor-pointer items-center rounded-md border-2 border-muted bg-popover p-1 ring-ring")(
+                    Div(cls="space-y-2 rounded-sm bg-slate-950 p-2")(
+                        Div(cls="space-y-2 rounded-md bg-slate-800 p-2 shadow-sm")(
+                            Div(cls="h-2 w-[80px] rounded-lg bg-slate-400"),
+                            Div(cls="h-2 w-[100px] rounded-lg bg-slate-400")),
+                        Div(cls="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm")(
+                            Div(cls="h-4 w-4 rounded-full bg-slate-400"),
+                            Div(cls="h-2 w-[100px] rounded-lg bg-slate-400")),
+                        Div(cls="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm")(
+                            Div(cls="h-4 w-4 rounded-full bg-slate-400"),
+                            Div(cls="h-2 w-[100px] rounded-lg bg-slate-400")))),
+            cols=2,cls=('max-w-md','gap-8'))))
+    
+    return UkFormSection('Appearance', 'Customize the appearance of the app. Automatically switch between day and night themes.', button_txt='Update preferences', *content)
+
+# %% ../example_forms.ipynb
+def notifications_form():
+    content = [
+        Div(cls="space-y-2")(
+            FormLabel("Notify me about"),
+            *[Div(cls='space-x-2')(Radio(id=f"notification_{i}", name="notification", checked=(label=="Nothing")), FormLabel(label))
+              for i, label in enumerate(["All new messages", "Direct messages and mentions", "Nothing"])]),
+        Div(
+            H3("Email Notifications", cls="mb-4 text-lg font-medium"),
+            Div(cls="space-y-4")(
+                *[Div(cls="flex items-center justify-between rounded-lg border border-border p-4")(
+                    Div(cls="space-y-0.5")(
+                        FormLabel(item['title'], cls="text-base font-medium", for_=f"email_notification_{i}"),
+                        HelpText(item['description'])),
+                    Toggle_switch(checked=item['checked'], disabled=item['disabled'])
+                ) for i, item in enumerate([
+                    {"title": "Communication emails", "description": "Receive emails about your account activity.", "checked": False, "disabled": False},
+                    {"title": "Marketing emails", "description": "Receive emails about new products, features, and more.", "checked": False, "disabled": False},
+                    {"title": "Social emails", "description": "Receive emails for friend requests, follows, and more.", "checked": True, "disabled": False},
+                    {"title": "Security emails", "description": "Receive emails about your account activity and security.", "checked": True, "disabled": True}
+                ])])),
+            Div(cls='space-x-2')(CheckboxX(id="notification_mobile",checked=True),FormLabel("Use different settings for my mobile devices", fr="notification_mobile")),
+                HelpText("You can manage your mobile notifications in the mobile settings page."),
+    ]
+    
+    return UkFormSection('Notifications', 'Configure how you receive notifications.', 
+                         *content, button_txt="Update notifications")
+
+# %% ../example_forms.ipynb
+def display_form():
+    content = (
+        Div(cls="space-y-2")(
+            Div(cls="mb-4")(
+                Span("Sidebar", cls="text-base font-medium"),
+                HelpText("Select the items you want to display in the sidebar.")),
+            *[Div(CheckboxX(id=f"display_{i}", checked=i in [0, 1, 2]),FormLabel(label))
+              for i, label in enumerate(["Recents", "Home", "Applications", "Desktop", "Downloads", "Documents"])]))
+    return UkFormSection('Display', 'Turn items on or off to control what\'s displayed in the app.', button_txt='Update display', *content)
+
+# %% ../example_forms.ipynb
+def page():
+    return Div(cls="p-6 lg:p-10")(
+        heading(),
+        Div(cls="flex gap-x-12")(
+            sidebar,
+            Div(cls="flex-1")(
+                Ul(id="component-nav", cls="uk-switcher max-w-2xl")(
+                    Li(cls="uk-active")(profile_form(),
+                    Li()(account_form()),
+                    Li()(appearance_form()),
+                    Li()(notifications_form()),
+                    Li()(display_form())
+                    )))))
+
+# %% ../example_forms.ipynb
+forms_homepage = page()</doc><doc title="Mail">"""FrankenUI Mail Example"""
+
+# AUTOGENERATED! DO NOT EDIT! File to edit: ../example_mail.ipynb.
+
+# %% auto 0
+__all__ = ['sidebar_group1', 'sidebar_group2', 'sidebar', 'mail_data', 'mail_homepage', 'NavItem', 'NavGroup', 'MailSbLi',
+           'format_date', 'MailItem', 'MailList', 'MailContent', 'IconNavItem', 'IconNav', 'MailDetailView']
+
+# %% ../example_mail.ipynb
+from fasthtml.common import *
+import fasthtml.common as fh
+from fh_frankenui import *
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+
+from fasthtml.svg import *
+import pathlib
+import json
+from datetime import datetime
+
+# %% ../example_mail.ipynb
+def NavItem(icon, text, quantity=None):
+    cls = 'flex items-center space-x-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground'
+    content = [UkIcon(icon), Span(text)]
+    if quantity:
+        content.append(Span(quantity, cls='ml-auto text-background bg-primary rounded-full px-2 py-0.5 text-xs'))
+    return Li(A(*content, href='#', cls=cls))
+
+# %% ../example_mail.ipynb
+def NavGroup(items):
+    return Nav(cls='uk-nav-default space-y-3')(*[NavItem(i, t, q) for i, t, q in items if q or t != 'Trash'])
+
+# %% ../example_mail.ipynb
+sidebar_group1 = (('home', 'Inbox', '128'), ('file-text', 'Drafts', '9'), (' arrow-up-right', 'Sent', ''),
+    ('ban', 'Junk', '23'), ('trash', 'Trash', ''), ('folder', 'Archive', ''))
+
+sidebar_group2 = (('globe','Social','972'),('info','Updates','342'),('messages-square','Forums','128'),
+    ('shopping-cart','Shopping','8'),('shopping-bag','Promotions','21'),)
+
+def MailSbLi(icon, title, cnt): 
+    return Li(A(LAlignedDiv(
+        Span(UkIcon(icon)),Span(title),P(cnt,cls=TextFont.muted_sm),cls='space-x-2')))
+
+sidebar = Container(NavContainer(
+    NavHeaderLi(H3("Email")),
+    Li(UkSelect(map(Option, ('alicia@example.com','alicia@gmail.com', 'alicia@yahoo.com')),cls='my-4')),
+    *[MailSbLi(i, t, c) for i, t, c in sidebar_group1],
+    NavDividerLi(),
+    *[MailSbLi(i, t, c) for i, t, c in sidebar_group2],
+    cls='space-y-6'))
+
+
+# %% ../example_mail.ipynb
+mail_data = json.load(open(pathlib.Path('data/mail.json')))
+
+# %% ../example_mail.ipynb
+def format_date(date_str):
+    date_obj = datetime.fromisoformat(date_str)
+    return date_obj.strftime("%Y-%m-%d %I:%M %p")
+
+# %% ../example_mail.ipynb
+def MailItem(mail):
+    cls_base = 'relative rounded-lg border border-border p-3 text-sm hover:bg-accent'
+    cls = f"{cls_base} {'bg-muted' if mail == mail_data[0] else ''} {'tag-unread' if not mail['read'] else 'tag-mail'}"
+    
+    return Li(cls=cls)(
+        Div(cls='flex w-full flex-col gap-1')(
+            Div(cls='flex items-center')(
+                Div(cls='flex items-center gap-2')(
+                    Div(mail['name'], cls='font-semibold'),
+                    Span(cls='flex h-2 w-2 rounded-full bg-blue-600') if not mail['read'] else ''),
+                Div(format_date(mail['date']), cls='ml-auto text-xs')),
+            A(mail['subject'], cls=TextFont.bold_sm, href=f"#mail-{mail['id']}"),
+            Div(mail['text'][:100] + '...', cls=TextFont.muted_sm),
+            Div(cls='flex items-center gap-2')(
+                *[A(label, cls=f"uk-label relative z-10 {'uk-label-primary' if label == 'work' else ''}", href='#')
+                  for label in mail['labels']])))
+
+# %% ../example_mail.ipynb
+def MailList(mails): return Ul(cls='js-filter space-y-2 p-4 pt-0')(*[MailItem(mail) for mail in mails])
+
+# %% ../example_mail.ipynb
+def MailContent():
+    return Div(cls='flex flex-col',uk_filter="target: .js-filter")(
+        Div(cls='flex px-4 py-2 ')(
+            H3('Inbox'),
+            TabContainer(Li(A("All Mail",href='#', role='button'),cls='uk-active', uk_filter_control="filter: .tag-mail"), 
+                         Li(A("Unread",href='#', role='button'),                   uk_filter_control="filter: .tag-unread"), 
+                         alt=True, cls='ml-auto max-w-40', )),
+        Div(cls='flex flex-1 flex-col')(
+            Div(cls='p-4')(
+                Div(cls='uk-inline w-full')(
+                    Span(cls='uk-form-icon text-muted-foreground')(UkIcon('search')),
+                    Input(placeholder='Search'))),
+            Div(cls='flex-1 overflow-y-auto max-h-[600px]')(MailList(mail_data))))
+
+# %% ../example_mail.ipynb
+def IconNavItem(*d): return [Li(A(UkIcon(o[0],uk_tooltip=o[1]))) for o in d]  
+def IconNav(*c,cls=''): return Ul(cls=f'uk-iconnav {cls}')(*c)
+
+# %% ../example_mail.ipynb
+def MailDetailView(mail):
+    return Div(cls='flex flex-col')(
+        Div(cls='flex h-14 flex-none items-center border-b border-border p-2')(
+            Div(cls='flex w-full justify-between')(
+                Div(cls='flex gap-x-2 divide-x divide-border')(
+                    IconNav(*IconNavItem(('folder','Archive'),('ban','Move to junk'),('trash','Move to trash'))),
+                    IconNav(Li(A(UkIcon('clock'), uk_tooltip='Snooze')), cls='pl-2')),
+                Div(cls='flex')(# divide-x divide-border gap-x-2
+                    IconNav(
+                        *IconNavItem(('reply','Reply'),('reply','Reply all'),('forward','Forward')),
+                        Li(A(UkIcon('ellipsis-vertical',button=True))),
+                        DropDownNavContainer(
+                            Li(A("Mark as unread")),
+                            Li(A("Star read")),
+                            Li(A("Add Label")),
+                            Li(A("Mute Thread"))))))),
+        Div(cls='flex-1')(
+            Div(cls='flex items-start p-4')(
+                Div(cls='flex items-start gap-4 text-sm')(
+                    Span(mail['name'][:2], cls='flex h-10 w-10 items-center justify-center rounded-full bg-muted'),
+                    Div(cls='grid gap-1')(
+                        Div(mail['name'], cls=TextT.bold),
+                        Div(mail['subject'], cls='text-xs'),
+                        Div(cls=TextT.small)(
+                            Span('Reply-To:', cls=TextT.normal),
+                            f" {mail['email']}"))),
+                Div(format_date(mail['date']), cls=(TextFont.muted_sm,'ml-auto'))),
+            Div(cls='flex-1 space-y-4 border-t border-border p-4 text-sm')(P(mail['text']))),
+        Div(cls='flex-none space-y-4 border-t border-border p-4')(
+            TextArea(id='message', placeholder=f"Reply {mail['name']}"),
+            Div(cls='flex justify-between')(
+                    LabelSwitch('Mute this thread',id='mute'), # cls='inline-flex items-center gap-x-2 text-xs'
+                Button('Send', cls=ButtonT.primary))))
+
+# %% ../example_mail.ipynb
+def mail_homepage():
+    return Div(cls='flex divide-x divide-border')(
+        sidebar,
+        Grid(MailContent(),
+             MailDetailView(mail_data[0]),
+             cols=2, gap=0, cls='flex-1 divide-x divide-border'))
+
+# %% ../example_mail.ipynb
+mail_homepage = mail_homepage()</doc><doc title="Music">"""FrankenUI Music Example"""
+
+# AUTOGENERATED! DO NOT EDIT! File to edit: ../example_music.ipynb.
+
+# %% auto 0
+__all__ = ['music_items', 'file_dd_items', 'edit_actions', 'view_dd_data', 'account_dd_data', 'music_headers',
+           'listen_now_albums', 'made_for_you_albums', 'music_content', 'tabs', 'discoved_data', 'library_data',
+           'playlists_data', 'sb', 'music_homepage', 'MusicLi', 'AlbumImg', 'AlbumFooter', 'Album', 'create_album_grid',
+           'podcast_tab', 'LAlignedIconTxts', 'MusicSidebarLi', 'page']
+
+# %% ../example_music.ipynb
+from fasthtml.common import *
+import fasthtml.common as fh
+from fh_frankenui import *
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+
+# %% ../example_music.ipynb
+def MusicLi(t,hk=''): return Li(A(FullySpacedDiv(t,P(hk,cls=TextFont.muted_sm))))
+
+music_items = [("About Music", ""),("Preferences", "⌘"),("Hide Music", "⌘H"),("Hide Others", "⇧⌘H"),("Quit Music", "⌘Q")]
+
+file_dd_items = [("New", ""),("Open Stream URL", "⌘U"),("Close Window", "⌘W"),("Library", ""),("Import", "⌘O"),
+    ("Burn Playlist to Disc", ""),("Show in Finder", "⇧⌘R"),("Convert", ""),("Page Setup", "Print")]
+
+edit_actions = [("Undo", "⌘Z"),("Redo", "⇧⌘Z"),("Cut", "⌘X"),("Copy", "⌘C"),
+    ("Paste", "⌘V"),("Select All", "⌘A"),("Deselect All", "⇧⌘A")]
+
+view_dd_data = ["Show Playing Next", "Show Lyrics", "Show Status Bar", "Hide Sidebar", "Enter Full Screen"]
+
+account_dd_data = [Span("Switch Account", cls="ml-6"), [SpacedPP("Andy"), LAlignedTxtIcon("Benoit", 'plus-circle', 0.5, icon_right=False), SpacedPP("Luis")],
+                   SpacedPPs("Manage Family"), SpacedPPs("Add Account")]
+
+# %% ../example_music.ipynb
+music_headers =NavBarContainer(
+    NavBarLSide(
+        NavBarNav(
+            Li(A("Music"),NavBarNavContainer(map(lambda x: MusicLi(*x), music_items))),
+            Li(A("File"),NavBarNavContainer(map(lambda x: MusicLi(*x), file_dd_items))),
+            Li(A("Edit")),
+                NavBarNavContainer(
+                    *map(lambda x: MusicLi(*x), edit_actions),
+                    Li(A(FullySpacedDiv("Smart Dictation",UkIcon("mic")))),
+                    Li(A(FullySpacedDiv("Emojis & Symbols",UkIcon("globe"))))),
+            Li(A("View"),
+               NavBarNavContainer(map(lambda x: MusicLi(x), view_dd_data))),
+            Li(A("Account"),
+                NavBarNavContainer(
+                    NavHeaderLi("Switch Account"),
+                    MusicLi("Andy"),
+                    MusicLi("Benoit"),
+                    MusicLi("Luis"),
+                    MusicLi("Manage Family"),
+                    MusicLi("Add Account"))),
+        cls='space-x-4')))
+
+# %% ../example_music.ipynb
+def AlbumImg(url):
+    return Div(cls="overflow-hidden rounded-md")(Img(cls="transition-transform duration-200 hover:scale-105", src=url))
+
+def AlbumFooter(title, artist):
+    return Div(cls='space-y-1')(P(title,cls=TextT.bold),P(artist,cls=TextT.muted))
+
+def Album(url,title,artist):
+    return Div(AlbumImg(url),AlbumFooter(title,artist))
+
+# %% ../example_music.ipynb
+listen_now_albums = (("Roar", "Catty Perry"), ("Feline on a Prayer", "Cat Jovi"),("Fur Elise", "Ludwig van Beethovpurr"),("Purrple Rain", "Prince's Cat"))
+
+made_for_you_albums = [("Like a Feline", "Catdonna"),("Livin' La Vida Purrda", "Ricky Catin"),("Meow Meow Rocket", "Elton Cat"),
+        ("Rolling in the Purr", "Catdelle",),("Purrs of Silence", "Cat Garfunkel"),("Meow Me Maybe", "Carly Rae Purrsen"),]
+    
+
+# %% ../example_music.ipynb
+def create_album_grid(albums, cols=4):  
+    return Grid(*[Div(cls="uk-grid-small")(
+                Div(cls="overflow-hidden rounded-md")(
+                    Img(cls="transition-transform duration-200 hover:scale-105", src=img_url, alt="")),
+                Div(cls="space-y-1 text-sm")(
+                    H3(album['title'], cls="font-medium leading-none"),
+                    P(album['artist'], cls="text-xs text-muted-foreground"))) for album in albums],
+                cols,gap=4)
+
+# %% ../example_music.ipynb
+_album = lambda t,a: Album('https://ucarecdn.com/e5607eaf-2b2a-43b9-ada9-330824b6afd7/music1.webp',t,a)
+
+music_content = (Div(H3("Listen Now"), cls="mt-6 space-y-1"),
+                    P("Top picks for you. Updated daily.",cls=TextFont.muted_sm),
+                    UkHLine(),
+                    Grid(*[_album(t,a) for t,a in listen_now_albums], cols=4, cls=GridT.medium),
+                    Div(H3("Made for You"), cls="mt-6 space-y-1"),
+                    P("Your personal playlists. Updated daily.", cls=TextFont.muted_sm),
+                    UkHLine(),
+                    Grid(*[_album(t,a) for t,a in made_for_you_albums], cols=6, cls=GridT.small))
+
+# %% ../example_music.ipynb
+tabs = TabContainer(
+    Li(A('Music', href='#'),cls='uk-active'),
+    Li(A('Podcasts', href='#')),
+    Li(A('Live', cls='opacity-50'), cls='uk-disabled'),
+    uk_switcher='connect: #component-nav; animation: uk-animation-fade',
+    alt=True)
+
+# %% ../example_music.ipynb
+def podcast_tab():
+    return Div(
+        Div(cls="space-y-3")(
+            H3("New Episodes"),
+            P("Your favorite podcasts. Updated daily.", cls=TextFont.muted_sm)),
+        Div(cls="my-4 h-[1px] w-full bg-border"),
+        Div(cls="uk-placeholder flex h-[450px] items-center justify-center rounded-md",uk_placeholder=True)(
+            Div(cls="text-center space-y-6")(
+                UkIcon("microphone", 3),
+                H4("No episodes added"),
+                P("You have not added any podcasts. Add one below.", cls=TextFont.muted_sm),
+                Button("Add Podcast", cls=ButtonT.primary))))
+
+# %% ../example_music.ipynb
+def LAlignedIconTxts(ns, icns): return [Li(A(LAlignedIconTxt(n,i))) for n,i in zip(ns,icns)]
+
+# %% ../example_music.ipynb
+discoved_data = [("play-circle","Listen Now"), ("binoculars", "Browse"), ("rss","Radio")]
+library_data = [("play-circle", "Playlists"), ("music", "Songs"), ("user", "Made for You"), ("users", "Artists"), ("bookmark", "Albums")]
+playlists_data = [("library","Recently Added"), ("library","Recently Played")]
+
+# %% ../example_music.ipynb
+def MusicSidebarLi(icon, text): return Li(A(LAlignedDiv(UkIcon(icon), P(text),cls='space-x-2')))
+sb = NavContainer(
+    NavHeaderLi(H3("Discover")),*[MusicSidebarLi(*o) for o in discoved_data],
+    NavHeaderLi(H3("Library")),*[MusicSidebarLi(*o) for o in library_data],
+    NavHeaderLi(H3("Playlists")),*[MusicSidebarLi(*o) for o in playlists_data],
+    cls=(NavT.primary,'space-y-3','pl-8'),
+)
+
+# %% ../example_music.ipynb
+def page():
+    return Div(Container(music_headers,cls='py-8'),UkHSplit(),
+        Grid(sb,
+            Div(cls="col-span-4 border-l border-border")(
+                Div(cls="px-8 py-6")(
+                    Div(cls="flex items-center justify-between")(
+                        Div(cls="max-w-80")(tabs),
+                        Button(cls=ButtonT.primary)(Span(cls="mr-2 size-4")(UkIcon('circle-plus')),"Add music")),
+                    Ul(id="component-nav", cls="uk-switcher")(
+                        Li(*music_content),
+                        Li(podcast_tab())))),
+            cols=5))
+
+# %% ../example_music.ipynb
+music_homepage = page()</doc><doc title="Playground">"""FrankenUI Playground Example"""
+
+# AUTOGENERATED! DO NOT EDIT! File to edit: ../example_playground.ipynb.
+
+# %% auto 0
+__all__ = ['preset_options', 'rsidebar', 'playground_homepage', 'playground_navbar', 'page']
+
+# %% ../example_playground.ipynb
+from fasthtml.common import *
+import fasthtml.common as fh
+from fh_frankenui import *
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+from fasthtml.svg import *
+
+
+# %% ../example_playground.ipynb
+preset_options = ["Grammatical Standard English", "Summarize for a 2nd grader",
+        "Text to command","Q&A","English to other languages","Parse unstructured data",
+        "Classification","Natural language to Python","Explain code","Chat","More examples"]
+
+# %% ../example_playground.ipynb
+def playground_navbar():
+    save_modal = Modal(
+        ModalTitle("Save preset"),
+        P("This will save the current playground state as a preset which you can access later or share with others.",cls=("mt-1.5", TextFont.muted_sm)),
+        LabelInput("Name",        id="name"), 
+        LabelInput("Description", id="description"),
+        ModalCloseButton("Save", cls=(ButtonT.primary)),
+        id="save")
+    
+    share_dd = Div(cls="space-y-6 p-4")(
+        H3("Share preset"),
+        P("Anyone who has this link and an OpenAI account will be able to view this.", cls=TextFont.muted_sm),
+        Div(Input(value="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003", readonly=True, cls="flex-1"),
+            Button(UkIcon('copy'), cls=(ButtonT.primary, "uk-drop-close",'mt-4'))))
+
+    rnav = NavBarNav(
+        Li(UkSelect(*Options(*preset_options), name='preset', optgroup_label="Examples",
+                 placeholder='Load a preset', searchable=True, cls='h-9 w-[200px] lg:w-[300px]')),
+        Li(Button("Save",         cls=ButtonT.secondary, uk_toggle="#save"),save_modal),
+        Li(Button("View Code",    cls=ButtonT.secondary)),
+        Li(Button("Share",        cls=ButtonT.secondary),DropDownNavContainer(share_dd)),
+        Li(Button(UkIcon(icon="ellipsis"), cls=ButtonT.secondary),DropDownNavContainer(
+            Li(A("Content filter preferences")),
+            NavDividerLi(),
+            Li(A("Delete preset", cls="text-destructive")),
+        uk_dropdown="mode: click")))
+    
+    return NavBarContainer(
+                NavBarLSide(NavBarNav(Li(H4('Playground')))),
+                NavBarRSide(rnav),
+                cls='mt-2')
+
+# %% ../example_playground.ipynb
+rsidebar = NavContainer(
+    UkSelect(
+        Optgroup(map(Option,("text-davinci-003", "text-curie-001", "text-babbage-001", "text-ada-001")),label='GPT-3'),
+        Optgroup(map(Option,("code-davinci-002", "code-cushman-001")),label='Codex'),
+        label="Model",
+        searchable=True),
+    LabelRange(label='Temperature'),
+    LabelRange(label='Maximum Length'),
+    LabelRange(label='Top P'),
+    cls='space-y-6 mt-8'
+)
+
+# %% ../example_playground.ipynb
+def page():
+    navbar = playground_navbar()
+    main_content = Div(
+        Div(cls="flex-1")(
+            Textarea(cls="uk-textarea h-full p-4", placeholder="Write a tagline for an ice cream shop")),
+            cls="flex h-[700px] p-8 w-4/5")
+    
+    bottom_buttons = Div(
+        Button("Submit", cls=ButtonT.primary),
+        Button(UkIcon(icon="history"), cls=ButtonT.secondary),
+        cls="flex gap-x-2")
+    
+    return Div(navbar, Div(cls="flex w-full")(main_content, rsidebar), bottom_buttons)
+
+# %% ../example_playground.ipynb
+playground_homepage = page()</doc><doc title="Tasks">"""FrankenUI Tasks Example"""
+
+# AUTOGENERATED! DO NOT EDIT! File to edit: ../example_tasks.ipynb.
+
+# %% auto 0
+__all__ = ['priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 'hotkeys_b', 'avatar_opts', 'page_heading',
+           'table_controls', 'task_columns', 'tasks_table', 'tasks_ui', 'tasks_homepage', 'create_hotkey_li',
+           'CreateTaskModal', 'task_dropdown', 'header_render', 'cell_render', 'footer']
+
+# %% ../example_tasks.ipynb
+from fasthtml.common import *
+import fasthtml.common as fh
+from fh_frankenui.core import *
+from fh_frankenui.components import *
+from fasthtml.svg import *
+import json
+
+# %% ../example_tasks.ipynb
+with open('data/status_list.json', 'r') as f: data     = json.load(f)
+with open('data/statuses.json',    'r') as f: statuses = json.load(f)
+
+# %% ../example_tasks.ipynb
+priority_dd = [{'priority': "low", 'count': 36 }, {'priority': "medium", 'count': 33 }, {'priority': "high", 'count': 31 }]
+
+rows_per_page_dd = [10,20,30,40,50]
+
+status_dd = [{'status': "backlog", 'count': 21 },{'status': "todo", 'count': 21 },{'status': "progress", 'count': 20 },{'status': "done",'count': 19 },{'status': "cancelled", 'count': 19 }]
+
+# %% ../example_tasks.ipynb
+def create_hotkey_li(hotkey): return NavCloseLi(A(cls='justify-between')(hotkey[0], Span(hotkey[1], cls=TextFont.muted_sm)))
+
+hotkeys_a = (('Profile','⇧⌘P'),('Billing','⌘B'),('Settings','⌘S'),('New Team',''))
+hotkeys_b = (('Logout',''), )
+
+# %% ../example_tasks.ipynb
+avatar_opts = DropDownNavContainer(
+    NavHeaderLi(P('sveltecult'),NavSubtitle('leader@sveltecult.com')),
+    NavDividerLi(),
+    *map(create_hotkey_li, hotkeys_a),
+    NavDividerLi(),
+    *map(create_hotkey_li, hotkeys_b),)
+
+# %% ../example_tasks.ipynb
+def CreateTaskModal():
+    return Modal(
+        Div(cls='p-6')(
+            ModalTitle('Create Task'),
+            P('Fill out the information below to create a new task', cls=TextFont.muted_sm),
+            Br(),
+            Form(cls='space-y-6')(
+                Grid(Div(Select(*map(Option,('Documentation', 'Bug', 'Feature')), label='Task Type', id='task_type')),
+                     Div(Select(*map(Option,('In Progress', 'Backlog', 'Todo', 'Cancelled', 'Done')), label='Status', id='task_status')),
+                     Div(Select(*map(Option, ('Low', 'Medium', 'High')), label='Priority', id='task_priority'))),
+                TextArea(label='Title', placeholder='Please describe the task that needs to be completed'),
+                RAlignedDiv(
+                    ModalCloseButton('Cancel', cls=ButtonT.ghost),
+                    ModalCloseButton('Submit', cls=ButtonT.primary),
+                    cls='space-x-5'))),
+        id='TaskForm')
+
+# %% ../example_tasks.ipynb
+page_heading = FullySpacedDiv(cls='space-y-2')(
+            Div(cls='space-y-2')(
+                H2('Welcome back!'),P("Here's a list of your tasks for this month!", cls=TextFont.muted_sm)),
+            Div(DiceBearAvatar("sveltcult",8,8),avatar_opts))
+
+# %% ../example_tasks.ipynb
+table_controls =(Input(cls='w-[250px]',placeholder='Filter task'),
+     Button("Status"),
+     DropDownNavContainer(map(NavCloseLi,[A(FullySpacedDiv(P(a['status']), P(a['count'])),cls=TextT.capitalize) for a in status_dd])), 
+     Button("Priority"),
+     DropDownNavContainer(map(NavCloseLi,[A(FullySpacedDiv(LAlignedIconTxt(a['priority'], icon="check"), a['count']),cls=TextT.capitalize) for a in priority_dd])),
+     Button("View"),
+     DropDownNavContainer(map(NavCloseLi,[A(LAlignedIconTxt(o, icon="check")) for o in ['Title','Status','Priority']])),
+     Button('Create Task',cls=(ButtonT.primary, TextFont.bold_sm), uk_toggle="target: #TaskForm"))
+
+# %% ../example_tasks.ipynb
+def task_dropdown():
+    return Div(Button(UkIcon('ellipsis')),
+               DropDownNavContainer(
+                   map(NavCloseLi,[
+                           A('Edit',),
+                           A('Make a copy'),
+                           A('Favorite',),
+                           A(SpacedPP('Delete', '⌘⌫'))])))
+
+# %% ../example_tasks.ipynb
+def header_render(col):
+    cls = 'p-2 ' + 'uk-table-shrink' if col in ('Done','Actions') else ''
+    match col:
+        case "Done":    return Th(CheckboxX(), cls=cls)
+        case 'Actions': return Th("",       cls=cls)
+        case _:         return Th(col, cls=cls)
+
+# %% ../example_tasks.ipynb
+def cell_render(col, row):
+    def _Td(*args,cls='', **kwargs): return Td(*args, cls=f'p-2 {cls}',**kwargs)
+    match col:
+        case "Done":  return _Td(shrink=True)(CheckboxX(selected=row['selected']))
+        case "Task":  return _Td(row["id"])
+        case "Title": return _Td(cls='max-w-[500px] truncate', expand=True)(row["title"], cls='font-medium')
+        case "Status" | "Priority": return _Td(cls='uk-text-nowrap uk-text-capitalize')(Span(row[col.lower()]))
+        case "Actions": return _Td(cls='uk-table-shrink')(task_dropdown())
+        case _: raise ValueError(f"Unknown column: {col}")
+
+# %% ../example_tasks.ipynb
+task_columns = ["Done", 'Task', 'Title', 'Status', 'Priority', 'Actions']
+
+tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(TableFromDicts(
+    header_data=task_columns,
+    body_data=data,
+    body_cell_render=cell_render,
+    header_cell_render=header_render,
+    sortable=True))
+
+
+# %% ../example_tasks.ipynb
+def footer():
+    hw_cls = 'h-4 w-4'
+    return FullySpacedDiv(cls='mt-4 px-2 py-2')(
+        Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
+        Div(cls='flex flex-none items-center space-x-8')(
+            CenteredDiv('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
+            LAlignedDiv(
+                UkIconLink(icon='chevrons-left', button=True),
+                UkIconLink(icon='chevron-left', button=True),
+                UkIconLink(icon='chevron-right', button=True),
+                UkIconLink(icon='chevrons-right', button=True))))
+
+# %% ../example_tasks.ipynb
+tasks_ui = Div(
+    FullySpacedDiv(cls='mt-8')(
+        Div(cls='flex flex-1 gap-4')(table_controls)),
+    tasks_table,
+    footer(),)
+
+# %% ../example_tasks.ipynb
+tasks_homepage = CreateTaskModal(), Div(cls='p-8')(page_heading, tasks_ui)</doc></examples></project>
