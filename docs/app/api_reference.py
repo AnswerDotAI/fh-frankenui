@@ -4,11 +4,13 @@
 
 # %% auto 0
 __all__ = ['docs_button_link', 'docs_heading', 'docs_headers', 'docs_text', 'docs_containers', 'docs_cards', 'docs_lists',
-           'docs_markdown', 'docs_forms', 'docs_modals', 'enum_to_html_table', 'render_content', 'create_doc_section',
-           'string2code_string', 'extract_function_body', 'fn2code_string', 'ex_buttons', 'ex_links', 'ex_headings',
-           'ex_textfont', 'ex_textt', 'ex_articles', 'ex_containers', 'ex_card', 'Tags', 'ex_card2_wide',
-           'ex_card2_tall', 'ex_lists', 'ex_md', 'ex_applyclasses', 'ex_formlabel', 'ex_input', 'ex_checkbox',
-           'ex_range', 'ex_switch', 'ex_textarea', 'ex_radio', 'ex_ukselect', 'ex_select', 'ex_form', 'ex_modal']
+           'docs_markdown', 'docs_forms', 'docs_modals', 'docs_layout', 'enum_to_html_table', 'render_content',
+           'create_doc_section', 'string2code_string', 'extract_function_body', 'fn2code_string', 'ex_buttons',
+           'ex_links', 'ex_headings', 'ex_textfont', 'ex_textt', 'ex_articles', 'ex_containers', 'ex_card', 'Tags',
+           'ex_card2_wide', 'ex_card2_tall', 'ex_lists', 'ex_md', 'ex_applyclasses', 'ex_formlabel', 'ex_input',
+           'ex_checkbox', 'ex_range', 'ex_switch', 'ex_textarea', 'ex_radio', 'ex_ukselect', 'ex_select', 'ex_form',
+           'ex_modal', 'ex_grid', 'ex_product_grid', 'ex_fully_spaced_div', 'ex_centered_div', 'ex_l_aligned_div',
+           'ex_r_aligned_div', 'ex_v_stacked_div', 'ex_h_stacked_div']
 
 # %% ../API Reference.ipynb
 from fasthtml.common import *
@@ -176,10 +178,11 @@ def ex_textt():
 # %% ../API Reference.ipynb
 docs_text = create_doc_section( 
    "Styling text is possibly the most common style thing to do, so we have a couple of helpers for discoverability inside python.  `TextFont` is intended to be combinations are are widely applicable and used often, where `TextT` is intended to be more flexible options for you to combine together yourself.",
-    TextFont,
     fn2code_string(ex_textfont),
-    TextT,
+    TextFont,
     fn2code_string(ex_textt),
+    TextT,
+
     title="Text Style")
 
 # %% ../API Reference.ipynb
@@ -226,7 +229,7 @@ def Tags(cats): return Div(cls='space-x-2')(map(Label, cats))
 def ex_card2_wide():
     return Card(
         LAlignedDiv(
-            A(Img(src="https://isaac-flath.github.io/website/posts/_TopicImages/FastHtml.jpg", style="width:200px"),href="#"),
+            A(Img(src="https://picsum.photos/200/200?random=12", style="width:200px"),href="#"),
             Div(cls='space-y-3 uk-width-expand')(
                 H4("Creating Custom FastHTML Tags for Markdown Rendering"),
                 P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles"),
@@ -239,7 +242,7 @@ def ex_card2_wide():
 def ex_card2_tall():
     return Card(
         Div(
-            A(Img(src="https://isaac-flath.github.io/website/posts/_TopicImages/FastHtml.jpg"),href="#"),
+            A(Img(src="https://picsum.photos/200/200?random=14"),href="#"),
             Div(cls='space-y-3 uk-width-expand')(
                 H4("Creating Custom FastHTML Tags for Markdown Rendering"),
                 P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles"),
@@ -409,3 +412,113 @@ docs_modals = create_doc_section(
     ModalDialog,
     ModalContainer,
     title="Modals")
+
+# %% ../API Reference.ipynb
+def ex_grid():
+    return Grid(
+        Div(
+            P("Column 1 Item 1"), 
+            P("Column 1 Item 2"), 
+            P("Column 1 Item 3")),
+        Div(
+            P("Column 2 Item 1"), 
+            P("Column 2 Item 2"), 
+            P("Column 2 Item 3")),
+        Div(
+            P("Column 3 Item 1"), 
+            P("Column 3 Item 2"), 
+            P("Column 3 Item 3")))
+
+# %% ../API Reference.ipynb
+def ex_product_grid():
+    products = [
+        {"name": "Laptop", "price": "$999", "img": "https://picsum.photos/200/100?random=1"},
+        {"name": "Smartphone", "price": "$599", "img": "https://picsum.photos/200/100?random=2"},
+        {"name": "Headphones", "price": "$199", "img": "https://picsum.photos/200/100?random=3"},
+        {"name": "Smartwatch", "price": "$299", "img": "https://picsum.photos/200/100?random=4"},
+        {"name": "Tablet", "price": "$449", "img": "https://picsum.photos/200/100?random=5"},
+        {"name": "Camera", "price": "$799", "img": "https://picsum.photos/200/100?random=6"},
+    ]
+    
+    product_cards = [
+        Card(
+            Img(src=p["img"], alt=p["name"], style="width:100%; height:100px; object-fit:cover;"),
+            H4(p["name"], cls="mt-2"),
+            P(p["price"], cls=TextFont.bold_sm),
+            Button("Add to Cart", cls=(ButtonT.primary, "mt-2"))
+        ) for p in products
+    ]
+    
+    return Grid(*product_cards, cols=1, cls=(GridT.small, "gap-4 sm:grid-cols-2 md:grid-cols-3"))
+
+
+# %% ../API Reference.ipynb
+def ex_fully_spaced_div():
+    return FullySpacedDiv(
+        Button("Left", cls=ButtonT.primary),
+        Button("Center", cls=ButtonT.secondary),
+        Button("Right", cls=ButtonT.danger)
+    )
+
+def ex_centered_div():
+    return CenteredDiv(
+        H3("Centered Title"),
+        P("This content is centered both horizontally and vertically.")
+    )
+
+def ex_l_aligned_div():
+    return LAlignedDiv(
+        Img(src="https://picsum.photos/100/100?random=1", style="max-width: 100px;"),
+        H4("Left Aligned Title"),
+        P("Some text that's left-aligned with the title and image.")
+    )
+
+def ex_r_aligned_div():
+    return RAlignedDiv(
+        Button("Action", cls=ButtonT.primary),
+        P("Right-aligned text"),
+        Img(src="https://picsum.photos/100/100?random=3", style="max-width: 100px;")
+    )
+
+def ex_v_stacked_div():
+    return VStackedDiv(
+        H2("Vertical Stack"),
+        P("First paragraph in the stack"),
+        P("Second paragraph in the stack"),
+        Button("Action Button", cls=ButtonT.secondary)
+    )
+
+def ex_h_stacked_div():
+    return HStackedDiv(
+        Div(H4("Column 1"), P("Content for column 1")),
+        Div(H4("Column 2"), P("Content for column 2")),
+        Div(H4("Column 3"), P("Content for column 3"))
+    )
+
+# %% ../API Reference.ipynb
+docs_layout = create_doc_section(
+    H2("Grid"),
+    fn2code_string(ex_grid),
+    Grid,
+    GridT,
+    H4("Practical Grid Example"),
+    fn2code_string(ex_product_grid),
+    H2("Flex"),
+    P("Play ", 
+      A("Flex Box Froggy", href="https://flexboxfroggy.com/", cls=AT.muted), 
+      " to get an understanding of flex box.",
+      cls=TextFont.muted_sm),
+    FullySpacedDiv,
+    fn2code_string(ex_fully_spaced_div),
+    CenteredDiv,
+    fn2code_string(ex_centered_div),
+    LAlignedDiv,
+    fn2code_string(ex_l_aligned_div),
+    RAlignedDiv,
+    fn2code_string(ex_r_aligned_div),
+    VStackedDiv,
+    fn2code_string(ex_v_stacked_div),
+    HStackedDiv,
+    fn2code_string(ex_h_stacked_div),
+    FlexT,
+    title="Layout")
