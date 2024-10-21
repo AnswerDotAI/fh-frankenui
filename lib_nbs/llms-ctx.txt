@@ -1,4 +1,6 @@
-<project title="Fh_Frankenui" summary="Fh_Frankenui is a python library which brings FrankenUI styling to python for FastHTML apps.">Things to remembers when using Fh_Frankenui<docs><doc title="Tailwind"># Tailwind CSS Cheat Sheet
+<project title="Fh_Frankenui" summary="Fh_Frankenui is a python library which brings FrankenUI styling to python for FastHTML apps.">Things to remembers when using Fh_Frankenui:
+- While Pico CSS is commonly used in FastHTML apps, that is *completely incompatible* with Fh_Frankenui. 
+- Fh_Frankenui is *not* compatible with FastAPI syntax and is not targeted at creating API services.<docs><doc title="Tailwind"># Tailwind CSS Cheat Sheet
 
 ## Spacing
 

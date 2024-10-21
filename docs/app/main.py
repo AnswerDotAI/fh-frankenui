@@ -4,7 +4,7 @@
 
 # %% auto 0
 __all__ = ['app', 'rt', 'reference_fns', 'api_ref_rts', 'with_layout', 'tasks', 'cards', 'dashboard', 'forms', 'music', 'auth',
-           'playground', 'mail', 'getting_started', 'fnname2title', 'themeswitcher', 'sidebar', 'index']
+           'playground', 'mail', 'getting_started', 'fnname2title', 'themeswitcher', 'llms', 'sidebar', 'index']
 
 # %% ../99_main.ipynb
 from fasthtml.common import *
@@ -98,6 +98,12 @@ api_ref_rts = [(f"/{o}", rt(f"/{o}")(with_layout(fnname2title(o))(getattr(api_re
 def themeswitcher(): return Div(Uk_theme_switcher(),cls="p-12")
 
 # %% ../99_main.ipynb
+@rt
+@with_layout('llms')
+def llms():
+    return Container(render_md(open('LLM Contexts.md').read()))
+
+# %% ../99_main.ipynb
 def sidebar(active=''):
     def create_li(title, href):
         is_active = title.lower() == active.lower()
@@ -105,6 +111,7 @@ def sidebar(active=''):
 
     return NavContainer(
         create_li("Getting Started", getting_started),
+        create_li("LLMs", llms),
         NavParentLi(
             A(FullySpacedDiv("API Reference")),
             NavContainer(
