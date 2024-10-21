@@ -4,13 +4,14 @@
 
 # %% auto 0
 __all__ = ['docs_button_link', 'docs_heading', 'docs_headers', 'docs_text', 'docs_containers', 'docs_cards', 'docs_lists',
-           'docs_markdown', 'docs_forms', 'docs_modals', 'docs_layout', 'enum_to_html_table', 'render_content',
-           'create_doc_section', 'string2code_string', 'extract_function_body', 'fn2code_string', 'ex_buttons',
-           'ex_links', 'ex_headings', 'ex_textfont', 'ex_textt', 'ex_articles', 'ex_containers', 'ex_card', 'Tags',
-           'ex_card2_wide', 'ex_card2_tall', 'ex_lists', 'ex_md', 'ex_applyclasses', 'ex_formlabel', 'ex_input',
-           'ex_checkbox', 'ex_range', 'ex_switch', 'ex_textarea', 'ex_radio', 'ex_ukselect', 'ex_select', 'ex_form',
-           'ex_modal', 'ex_grid', 'ex_product_grid', 'ex_fully_spaced_div', 'ex_centered_div', 'ex_l_aligned_div',
-           'ex_r_aligned_div', 'ex_v_stacked_div', 'ex_h_stacked_div']
+           'docs_markdown', 'docs_forms', 'docs_modals', 'docs_layout', 'docs_navigation', 'enum_to_html_table',
+           'render_content', 'create_doc_section', 'string2code_string', 'extract_function_body', 'fn2code_string',
+           'ex_buttons', 'ex_links', 'ex_headings', 'ex_textfont', 'ex_textt', 'ex_articles', 'ex_containers',
+           'ex_card', 'Tags', 'ex_card2_wide', 'ex_card2_tall', 'ex_lists', 'ex_md', 'ex_applyclasses', 'ex_formlabel',
+           'ex_input', 'ex_checkbox', 'ex_range', 'ex_switch', 'ex_textarea', 'ex_radio', 'ex_ukselect', 'ex_select',
+           'ex_form', 'ex_modal', 'ex_grid', 'ex_product_grid', 'ex_fully_spaced_div', 'ex_centered_div',
+           'ex_l_aligned_div', 'ex_r_aligned_div', 'ex_v_stacked_div', 'ex_h_stacked_div', 'ex_nav1', 'ex_nav2',
+           'ex_navbar', 'ex_navdrop', 'ex_tabs1', 'ex_tabs2']
 
 # %% ../API Reference.ipynb
 from fasthtml.common import *
@@ -497,6 +498,7 @@ def ex_h_stacked_div():
 
 # %% ../API Reference.ipynb
 docs_layout = create_doc_section(
+    P("This page covers `Grid`s, which are often used for general structure, `Flex` which is often used for layout of components that are not grid based, and padding and positioning that can help you make your layout look good.", cls=TextFont.muted_sm),
     H2("Grid"),
     fn2code_string(ex_grid),
     Grid,
@@ -521,4 +523,125 @@ docs_layout = create_doc_section(
     HStackedDiv,
     fn2code_string(ex_h_stacked_div),
     FlexT,
+    H2("Padding and Positioning"),
+    PaddingT,
+    PositionT,
     title="Layout")
+
+# %% ../API Reference.ipynb
+def ex_nav1():
+    mbrs1 = [Li(A('Option 1'), cls='uk-active'), Li(A('Option 2')), Li(A('Option 3'))]
+    return NavContainer(*mbrs1)
+
+# %% ../API Reference.ipynb
+def ex_nav2():
+    mbrs1 = [Li(A('Option 1'), cls='uk-active'), Li(A('Option 2')), Li(A('Option 3'))]
+    mbrs2 = [Li(A('Child 1')), Li(A('Child 2')),Li(A('Child 3'))]
+
+    return NavContainer(
+        NavHeaderLi("NavHeaderLi"),
+        *mbrs1,
+        Li(A(href='')(Div("Subtitle Ex",NavSubtitle("NavSubtitle text to be shown")))),
+        NavDividerLi(),
+        NavParentLi(
+            A('Parent Name'),
+            NavContainer(*mbrs2,parent=False),
+             ),
+    )
+
+# %% ../API Reference.ipynb
+def ex_navbar():
+    mbrs1 = [Li(A('Option 1'), cls='uk-active'), Li(A('Option 2')), Li(A('Option 3'))]
+    mbrs2 = [Li(A('Child 1')), Li(A('Child 2')),Li(A('Child 3'))]
+
+    lnav = NavBarNav(Li(cls='uk-active')(A("Active",href='')),
+        Li(A("Parent",href=''),
+          NavBarNavContainer(
+              Li(cls='uk-active')(A("Active",href='')),
+              Li(A("Item",href='')),
+              Li(A("Item",href='')))),
+        Li(A("Item",href='')))
+
+    rnav = NavBarNav(
+        Li(cls='uk-active')(A(NavBarSubtitle("Title","Subtitle"),href='')),
+        Li(A("DropDown",NavBarParentIcon(),href=''),
+            NavBarNavContainer(
+                NavHeaderLi("NavHeaderLi"),
+                *mbrs1,
+                Li(A(href='')(Div("Subtitle Ex",NavSubtitle("NavSubtitle text to be shown")))),
+                NavDividerLi(),
+                NavParentLi(
+                    A('Parent Name'),
+                    NavContainer(*mbrs2,parent=False)))),
+        Li(A(NavBarSubtitle("Title","Subtitle"),href='')))
+    
+    return NavBarContainer(
+        NavBarLSide(lnav),
+        NavBarRSide(rnav))
+
+# %% ../API Reference.ipynb
+def ex_navdrop():
+    return Div(
+        Button("Open DropDown"),
+        DropDownNavContainer(Li(A("Item 1",href=''),Li(A("Item 2",href='')))))
+
+# %% ../API Reference.ipynb
+def ex_tabs1():
+    return Container(
+        TabContainer(
+            Li(A("Active",href='#', cls='uk-active')),
+            Li(A("Item",href='#')),
+            Li(A("Item",href='#')),
+            Li(A("Disabled",href='#', cls='uk-disabled')),
+            uk_switcher='connect: #component-nav; animation: uk-animation-fade',
+            alt=True),
+         Ul(id="component-nav", cls="uk-switcher")(
+            Li(H1("Tab 1")),
+            Li(H1("Tab 2")),
+            Li(H1("Tab 3"))))
+
+
+# %% ../API Reference.ipynb
+def ex_tabs2():
+    return Container(
+        TabContainer(
+            Li(A("Active",href='javascript:void(0);', cls='uk-active')),
+            Li(A("Item",href='javascript:void(0);')),
+            Li(A("Item",href='javascript:void(0);')),
+            Li(A("Disabled", cls='uk-disabled'))))
+
+# %% ../API Reference.ipynb
+docs_navigation = create_doc_section(
+    H1("Nav, NavBar, DowDownNav, and Tab examples"),
+    H2("Nav"),
+    fn2code_string(ex_nav1),
+    fn2code_string(ex_nav2),
+    H2("Navbars"),
+    fn2code_string(ex_navbar),
+    H2("Drop Down Navs"),
+    fn2code_string(ex_navdrop),
+    H2("Tabs"),
+    fn2code_string(ex_tabs2),
+    P("A tabs can use any method of navigation (htmx, or href).  However, often these are use in conjunction with switchers do to this client side", cls=TextFont.muted_sm),
+    fn2code_string(ex_tabs1),
+    H1("API Docs"),
+    Nav,
+    NavT,
+    NavContainer,
+    NavCloseLi,
+    NavSubtitle,
+    NavHeaderLi,
+    NavDividerLi,
+    NavParentLi,
+    NavBarCenter,
+    NavBarRSide,
+    NavBarLSide,
+    NavBarContainer,
+    NavBarNav,
+    NavBarSubtitle,
+    NavBarNavContainer,
+    NavBarParentIcon,
+    DropDownNavContainer,
+    TabContainer,
+    title="Navigation")
+
