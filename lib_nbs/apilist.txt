@@ -1,0 +1,147 @@
+# fh_frankenui Module Documentation
+
+## fh_frankenui.core
+
+- `class Theme`
+    - `def headers(self)`
+    - `@property def name(self)`
+
+- `class TextT`
+    Text Styles from https://franken-ui.dev/docs/text
+
+    - `@property def name(self)`
+
+- `class TextFont`
+    Combinations of TextT that are particularly useful
+
+    - `def __add__(self, other)`
+    - `def __radd__(self, other)`
+    - `def __str__(self)`
+    - `@property def name(self)`
+
+- `class ButtonT`
+    Options for styling Buttons
+
+    - `@property def name(self)`
+
+- `def Button(*c, **kwargs)`
+    A Button with Uk Styling
+
+- `def H1(*c, **kwargs)`
+    A H1 with Uk Styling
+
+- `def H2(*c, **kwargs)`
+    A H2 with Uk Styling
+
+- `def H3(*c, **kwargs)`
+    A H3 with Uk Styling
+
+- `def H4(*c, **kwargs)`
+    A H4 with Uk Styling
+
+- `class ContainerT`
+    Max width container sizes from https://franken-ui.dev/docs/container
+
+    - `@property def name(self)`
+
+- `class SectionT`
+    Section styles from UIkit
+
+    - `@property def name(self)`
+
+- `class LabelT`
+    - `@property def name(self)`
+
+- `def GenericLabelInput(label, lbl_cls, input_cls, container, cls, id, input_fn, **kwargs)`
+    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+
+- `def LabelRadio(label, lbl_cls, input_cls, container, cls, id, **kwargs)`
+    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+
+- `def LabelCheckboxX(label, lbl_cls, input_cls, container, cls, id, **kwargs)`
+    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+
+- `def LabelSelect(*option, **kwargs)`
+    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+
+- `def Options(*c)`
+    Helper function to wrap things into `Option`s for use in `UkSelect`
+
+- `def UkSelect(*option, **kwargs)`
+    Creates a select dropdown with uk styling
+
+- `def LabelUkSelect(*option, **kwargs)`
+    Creates a select dropdown with uk styling
+
+- `class AT`
+    Link styles from https://franken-ui.dev/docs/link
+
+    - `@property def name(self)`
+
+- `class ListT`
+    List styles from https://franken-ui.dev/docs/list
+
+    - `@property def name(self)`
+
+- `def Modal(*c, **kwargs)`
+    Create a Modal using the appropriate Modal* classes to put the boilerplate in the appropriate places for you
+
+- `class PaddingT`
+    Padding Modifiers from https://franken-ui.dev/docs/padding
+
+    - `@property def name(self)`
+
+- `class PositionT`
+    Position modifiers from https://franken-ui.dev/docs/position
+
+    - `@property def name(self)`
+
+- `class FlexT`
+    Flexbox modifiers from UIkit
+
+    - `@property def name(self)`
+
+- `class GridT`
+    Grid modifiers from UIkit
+
+    - `@property def name(self)`
+
+- `def Grid(*div, **kwargs)`
+    Creates a grid with the given number of columns, often used for a grid of cards
+
+- `def FullySpacedDiv(*c, **kwargs)`
+    Creates a flex div with it's components having as much space between them as possible
+
+- `def CenteredDiv(*c, **kwargs)`
+    Creates a flex div with it's components centered in it
+
+- `def LAlignedDiv(*c, **kwargs)`
+    Creates a flex div with it's components aligned to the left
+
+- `def RAlignedDiv(*c, **kwargs)`
+    Creates a flex div with it's components aligned to the right
+
+- `class NavT`
+    - `@property def name(self)`
+
+- `class CardT`
+    Card styles from UIkit
+
+    - `@property def name(self)`
+
+- `class TableT`
+    - `@property def name(self)`
+
+## fh_frankenui.foundations
+
+> Data Structures and Utilties
+
+- `def stringify(o)`
+    Converts input types into strings that can be passed to FT components
+
+- `class VEnum`
+    - `def __str__(self)`
+    - `def __add__(self, other)`
+    - `def __radd__(self, other)`
+    - `@property def name(self)`
+
