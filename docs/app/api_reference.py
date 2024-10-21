@@ -4,11 +4,11 @@
 
 # %% auto 0
 __all__ = ['docs_button_link', 'docs_heading', 'docs_headers', 'docs_text', 'docs_containers', 'docs_cards', 'docs_lists',
-           'docs_markdown', 'docs_forms', 'enum_to_html_table', 'render_content', 'create_doc_section',
+           'docs_markdown', 'docs_forms', 'docs_modals', 'enum_to_html_table', 'render_content', 'create_doc_section',
            'string2code_string', 'extract_function_body', 'fn2code_string', 'ex_buttons', 'ex_links', 'ex_headings',
-           'ex_textfont', 'ex_textt', 'ex_articles', 'ex_containers', 'ex_card', 'Tags', 'ex_card2', 'ex_lists',
-           'ex_md', 'ex_applyclasses', 'ex_formlabel', 'ex_input', 'ex_checkbox', 'ex_range', 'ex_switch',
-           'ex_textarea', 'ex_radio', 'ex_ukselect', 'ex_select', 'ex_form']
+           'ex_textfont', 'ex_textt', 'ex_articles', 'ex_containers', 'ex_card', 'Tags', 'ex_card2_wide',
+           'ex_card2_tall', 'ex_lists', 'ex_md', 'ex_applyclasses', 'ex_formlabel', 'ex_input', 'ex_checkbox',
+           'ex_range', 'ex_switch', 'ex_textarea', 'ex_radio', 'ex_ukselect', 'ex_select', 'ex_form', 'ex_modal']
 
 # %% ../API Reference.ipynb
 from fasthtml.common import *
@@ -36,9 +36,9 @@ def render_content(c):
     if isinstance(c, str):        return render_md(c)
     elif isinstance(c, EnumType): return enum_to_html_table(c)
     elif isinstance(c, FT):       return c
-    elif isinstance(c, tuple):    
+    elif isinstance(c, tuple):
         _id = 'f'+str(uuid4())
-        return Card(
+        _card = Card(
             Button(
                 FullySpacedDiv(UkIcon('corner-down-right', 20, 20, 3),"See Source"), 
                 uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary),
@@ -48,6 +48,8 @@ def render_content(c):
             Div(c[0], id=_id),
             Div(Pre(Code(c[1])), id=_id, hidden=True, cls="mockup-code"),
             cls='my-8')
+        if len(tuple(c)) == 3: return Div(_card, cls=c[2])
+        else: return _card        
     elif isinstance(c, Callable): 
         _html = show_doc(c, renderer=BasicHtmlRenderer)._repr_html_()
         return NotStr(apply_classes(_html, class_map_mods={"table":'uk-table uk-table-hover uk-table-small'}))
@@ -219,32 +221,42 @@ def ex_card():
         footer=LAlignedDiv(Button("Footer Submit Button")))
 
 # %% ../API Reference.ipynb
-def Tags(cats): return Div(cls='space-x-2 flex flex-wrap')(map(lambda c: Label(c, cls='mb-1'), cats))
+def Tags(cats): return Div(cls='space-x-2')(map(Label, cats))
 
-def ex_card2():
+def ex_card2_wide():
     return Card(
         LAlignedDiv(
-            Div(A(Img(src="https://isaac-flath.github.io/website/posts/_TopicImages/FastHTML.jpg", style="width:100%; max-width:200px"), href="#"), cls='mb-4 md:mb-0 md:mr-4'),
+            A(Img(src="https://isaac-flath.github.io/website/posts/_TopicImages/FastHtml.jpg", style="width:200px"),href="#"),
             Div(cls='space-y-3 uk-width-expand')(
-                H4("Creating Custom FastHTML Tags for Markdown Rendering", cls='text-lg md:text-xl'),
-                P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles", cls='text-sm md:text-base'),
-                FullySpacedDiv(map(lambda s: Span(s, cls='text-xs md:text-sm'), ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
+                H4("Creating Custom FastHTML Tags for Markdown Rendering"),
+                P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles"),
+                FullySpacedDiv(map(Span, ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
                 FullySpacedDiv(
                     Tags(["FastHTML", "HTMX", "Web Apps"]),
-                    Button("Read", cls=(ButtonT.primary, 'h-6 text-xs md:text-sm')),
-                    cls='flex-col md:flex-row items-start md:items-center'
-                )
-            ),
-            cls='flex flex-col md:flex-row'
-        )
-    )
+                    Button("Read", cls=(ButtonT.primary,'h-6'))))))
+
+
+def ex_card2_tall():
+    return Card(
+        Div(
+            A(Img(src="https://isaac-flath.github.io/website/posts/_TopicImages/FastHtml.jpg"),href="#"),
+            Div(cls='space-y-3 uk-width-expand')(
+                H4("Creating Custom FastHTML Tags for Markdown Rendering"),
+                P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles"),
+                FullySpacedDiv(map(Span, ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
+                FullySpacedDiv(
+                    Tags(["FastHTML", "HTMX", "Web Apps"]),
+                    Button("Read", cls=(ButtonT.primary,'h-6'))))))
+
+
 
 # %% ../API Reference.ipynb
 docs_cards = create_doc_section(
     Card,
     H3("Example Usage"),
     fn2code_string(ex_card),
-    fn2code_string(ex_card2),
+    (*fn2code_string(ex_card2_wide),'uk-visible@s'),
+    (*fn2code_string(ex_card2_tall),'uk-hidden@s'),
     CardTitle,
     CardT,
     "The remainder of these are only needed if you're doing something really special.  They are used in the `Card` function to generate the boilerplate for you.",
@@ -371,4 +383,29 @@ docs_forms = create_doc_section(
     fn2code_string(ex_select),
     UkSelect,
     fn2code_string(ex_ukselect),
+    Legend,
+    Fieldset,
     title="Forms")
+
+# %% ../API Reference.ipynb
+def ex_modal():
+    return Div(
+        Button("Open Modal",uk_toggle="target: #my-modal" ),
+        Modal(ModalTitle("Simple Test Modal"), 
+              P("With some somewhat brief content to show that it works!", cls=TextFont.muted_sm),
+              footer=ModalCloseButton("Close", cls=ButtonT.primary),id='my-modal'))
+
+# %% ../API Reference.ipynb
+docs_modals = create_doc_section(
+    H3("Example Modal"),
+    fn2code_string(ex_modal),
+    Modal,
+    ModalCloseButton,
+    P("The remainder of the Modal functions below are used internally by the `Modal` function for you.  You shouldn't need to use them unless you're doing something really special."),
+    ModalTitle,
+    ModalFooter,
+    ModalBody,
+    ModalHeader,
+    ModalDialog,
+    ModalContainer,
+    title="Modals")
