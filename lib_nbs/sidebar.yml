@@ -2,5 +2,6 @@ website:
   sidebar:
     contents:
       - index.ipynb
+      - 00_foundation.ipynb
       - 01_core.ipynb
       - 02_components.ipynb
