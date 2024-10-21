@@ -1,11 +1,14 @@
 project:
   type: website
+  resources:
+    - "*txt"
 
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
+    keep-md: true
   commonmark: default
 
 website:
