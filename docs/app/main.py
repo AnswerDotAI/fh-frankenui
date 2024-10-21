@@ -83,13 +83,12 @@ import api_reference
 
 # %% ../99_main.ipynb
 reference_fns = L([o for o in dir(api_reference) if o.startswith('docs_')])
-reference_fns
+
+# %% ../99_main.ipynb
+api_ref_rts = [(f"/{o}", rt(f"/{o}")(with_layout(getattr(api_reference, o)))) for o in reference_fns]
 
 # %% ../99_main.ipynb
 def fnname2title(ref_fn_name): return ref_fn_name[5:].replace('_',' | ').title() 
-
-# %% ../99_main.ipynb
-api_ref_rts = [(f"/{o}", app.add_route(f"/{o}", with_layout(getattr(api_reference, o)))) for o in reference_fns]
 
 # %% ../99_main.ipynb
 @rt
