@@ -1,0 +1,28 @@
+# Fh_Frankenui
+
+> Fh_Frankenui is a python library which brings FrankenUI styling to python for FastHTML apps.
+
+Things to remembers when using Fh_Frankenui:
+- While Pico CSS is commonly used in FastHTML apps, that is *completely incompatible* with Fh_Frankenui. 
+- Fh_Frankenui is *not* compatible with FastAPI syntax and is not targeted at creating API services.
+
+## Docs
+- [Tailwind](https://gist.githubusercontent.com/Isaac-Flath/7b978e1ae099074c838b66738c7bbee2/raw/90efebd4152f988a8d46eb865bd15b3902f1d288/Tailwind%2520Cheat%2520Sheet.md)
+- [Fh_Frankenui](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/fh_frankenui/core.py)
+
+## API
+- [API List](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/lib_nbs/apilist.txt): A succint list of all functions and methods in fasthtml.
+
+## Examples
+- [Authentication](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/docs/app/auth.py)
+- [Cards](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/docs/app/cards.py)
+- [Dashboard](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/docs/app/dashboard.py)
+- [Forms](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/docs/app/forms.py)
+- [Mail](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/docs/app/mail.py)
+- [Music](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/docs/app/music.py)
+- [Playground](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/docs/app/playground.py)
+- [Tasks](https://raw.githubusercontent.com/AnswerDotAI/fh-frankenui/refs/heads/main/docs/app/tasks.py)
+
+## Optional
+
+- [FastHTML Full Context](https://docs.fastht.ml/llms-ctx-full.txt)
