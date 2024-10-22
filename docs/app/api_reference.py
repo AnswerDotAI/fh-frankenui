@@ -113,6 +113,7 @@ docs_button_link = create_doc_section(
 # %% ../API Reference.ipynb
 def ex_headings():
     return Div(
+        Titled("Titled"),
         H1("Level 1 Heading (H1)"), 
         H2("Level 2 Heading (H2)"), 
         H3("Level 3 Heading (H3)"), 
@@ -122,7 +123,7 @@ def ex_headings():
 # %% ../API Reference.ipynb
 docs_heading = create_doc_section(
                        fn2code_string(ex_headings),
-                        H1, H2, H3, H4, 
+                        H1, H2, H3, H4, Titled,
                         title="Headings")
 
 # %% ../API Reference.ipynb
