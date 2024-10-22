@@ -856,7 +856,8 @@ def apply_classes(html_str:str,
 
 # %% ../lib_nbs/01_core.ipynb
 def render_md(md_content):
-    import re, markdown2
+    try: import markdown2
+    except ImportError: raise ImportError("Install 'markdown2' to use the 'render_md' function")
     html_content = markdown2.markdown(md_content)
     styled_html = apply_classes(html_content)
     return NotStr(styled_html)
