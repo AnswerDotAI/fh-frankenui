@@ -4,14 +4,15 @@
 
 # %% auto 0
 __all__ = ['docs_button_link', 'docs_heading', 'docs_headers', 'docs_text', 'docs_containers', 'docs_cards', 'docs_lists',
-           'docs_markdown', 'docs_forms', 'docs_modals', 'docs_layout', 'docs_navigation', 'enum_to_html_table',
-           'render_content', 'create_doc_section', 'string2code_string', 'extract_function_body', 'fn2code_string',
-           'ex_buttons', 'ex_links', 'ex_headings', 'ex_textfont', 'ex_textt', 'ex_articles', 'ex_containers',
-           'ex_card', 'Tags', 'ex_card2_wide', 'ex_card2_tall', 'ex_lists', 'ex_md', 'ex_applyclasses', 'ex_formlabel',
-           'ex_input', 'ex_checkbox', 'ex_range', 'ex_switch', 'ex_textarea', 'ex_radio', 'ex_ukselect', 'ex_select',
-           'ex_form', 'ex_modal', 'ex_grid', 'ex_product_grid', 'ex_fully_spaced_div', 'ex_centered_div',
-           'ex_l_aligned_div', 'ex_r_aligned_div', 'ex_v_stacked_div', 'ex_h_stacked_div', 'ex_nav1', 'ex_nav2',
-           'ex_navbar', 'ex_navdrop', 'ex_tabs1', 'ex_tabs2']
+           'docs_markdown', 'docs_forms', 'docs_modals', 'docs_layout', 'docs_navigation', 'docs_tables', 'docs_icons',
+           'enum_to_html_table', 'render_content', 'create_doc_section', 'string2code_string', 'extract_function_body',
+           'fn2code_string', 'ex_buttons', 'ex_links', 'ex_headings', 'ex_textfont', 'ex_textt', 'ex_articles',
+           'ex_containers', 'ex_card', 'Tags', 'ex_card2_wide', 'ex_card2_tall', 'ex_lists', 'ex_md', 'ex_applyclasses',
+           'ex_formlabel', 'ex_input', 'ex_checkbox', 'ex_range', 'ex_switch', 'ex_textarea', 'ex_radio', 'ex_ukselect',
+           'ex_select', 'ex_progress', 'ex_form', 'ex_modal', 'ex_grid', 'ex_product_grid', 'ex_fully_spaced_div',
+           'ex_centered_div', 'ex_l_aligned_div', 'ex_r_aligned_div', 'ex_v_stacked_div', 'ex_h_stacked_div',
+           'ex_dividers', 'ex_nav1', 'ex_nav2', 'ex_navbar', 'ex_navdrop', 'ex_tabs1', 'ex_tabs2', 'ex_tables0',
+           'ex_tables1', 'ex_tables2', 'ex_dicebear', 'ex_icon', 'ex_iconlink', 'ex_markdown']
 
 # %% ../API Reference.ipynb
 from fasthtml.common import *
@@ -344,6 +345,9 @@ def ex_select():
         Select(map(Option, ["Option 1", "Option 2", "Option 3"])),
         LabelSelect(map(Option, ["Option 1", "Option 2", "Option 3"]), label="Select", id='myid'))
 
+def ex_progress(): 
+    return Progress(value=20, max=100)
+
 # %% ../API Reference.ipynb
 def ex_form():
     relationship = ["Parent",'Sibling', "Friend", "Spouse", "Significant Other", "Relative", "Child", "Other"]
@@ -373,6 +377,8 @@ docs_forms = create_doc_section(
     fn2code_string(ex_formlabel),
     Input,
     fn2code_string(ex_input),
+    Progress,
+    fn2code_string(ex_progress),
     Radio,
     fn2code_string(ex_radio),
     CheckboxX,
@@ -497,8 +503,19 @@ def ex_h_stacked_div():
     )
 
 # %% ../API Reference.ipynb
+def ex_dividers():
+    return Div(
+        P("Small Divider"),
+        Divider(cls=DividerT.small),
+        CenteredDiv(
+            P("Vertical Divider"),
+            Divider(cls=DividerT.vertical)),
+        CenteredDiv("Icon Divider"),
+        Divider(cls=DividerT.icon))
+
+# %% ../API Reference.ipynb
 docs_layout = create_doc_section(
-    P("This page covers `Grid`s, which are often used for general structure, `Flex` which is often used for layout of components that are not grid based, and padding and positioning that can help you make your layout look good.", cls=TextFont.muted_sm),
+    P("This page covers `Grid`s, which are often used for general structure, `Flex` which is often used for layout of components that are not grid based, padding and positioning that can help you make your layout look good, and dividers that can help break up the page", cls=TextFont.muted_sm),
     H2("Grid"),
     fn2code_string(ex_grid),
     Grid,
@@ -523,6 +540,10 @@ docs_layout = create_doc_section(
     HStackedDiv,
     fn2code_string(ex_h_stacked_div),
     FlexT,
+    H2("Dividers"),
+    fn2code_string(ex_dividers),
+    Divider,
+    DividerT,
     H2("Padding and Positioning"),
     PaddingT,
     PositionT,
@@ -645,3 +666,107 @@ docs_navigation = create_doc_section(
     TabContainer,
     title="Navigation")
 
+
+# %% ../API Reference.ipynb
+def ex_tables0():
+    return Table(
+        Thead(Tr(Th('Name'),    Th('Age'), Th('City'))),
+        Tbody(Tr(Td('Alice'),   Td('25'),  Td('New York')),
+              Tr(Td('Bob'),     Td('30'),  Td('San Francisco')),
+              Tr(Td('Charlie'), Td('35'),  Td('London'))),
+        Tfoot(Tr(Td('Total'),   Td('90'))))
+
+# %% ../API Reference.ipynb
+def ex_tables1():
+    header =  ['Name',    'Age', 'City']
+    body   = [['Alice',   '25',  'New York'],
+              ['Bob',     '30',  'San Francisco'],
+              ['Charlie', '35',  'London']]
+    footer =  ['Total',   '90']
+    return TableFromLists(header, body, footer)
+
+# %% ../API Reference.ipynb
+def ex_tables2():
+    def body_render(k, v):
+        match k.lower():
+            case 'name': return Td(v['name'], cls='font-bold')
+            case 'age':  return Td(f"{v['age']} years")
+            case _:      return Td(v[k.lower()])
+
+    header_data = ['Name',          'Age',     'City']
+    body_data =  [{'name': 'Alice', 'age': 30, 'city': 'New York'},
+                  {'name': 'Bob',   'age': 25, 'city': 'London'}]
+
+    return TableFromDicts(header_data, body_data, 
+        header_cell_render=lambda v: Th(v.upper()), 
+        body_cell_render=body_render)
+
+# %% ../API Reference.ipynb
+docs_tables = create_doc_section(
+    fn2code_string(ex_tables0),
+    fn2code_string(ex_tables1),
+    fn2code_string(ex_tables2),
+    Table,
+    TableFromLists,
+    TableFromDicts,
+    TableT,
+    Tbody,
+    Th,
+    Td,
+    Tfoot,
+    Thead,
+    Tr,    
+    title="Tables")
+
+# %% ../API Reference.ipynb
+def ex_dicebear():
+    return LAlignedDiv(
+        DiceBearAvatar('Isaac Flath',10,10),
+        DiceBearAvatar('Aaliyah',10,10),
+        DiceBearAvatar('Alyssa',10,10))
+
+def ex_icon():
+    return Grid(
+        UkIcon('chevrons-right', height=15, width=15),
+        UkIcon('bug',            height=15, width=15),
+        UkIcon('phone-call',     height=15, width=15),
+        UkIcon('maximize-2',     height=15, width=15),
+        UkIcon('thumbs-up',      height=15, width=15),)        
+
+def ex_iconlink():
+    return LAlignedDiv(
+        UkIconLink('chevrons-right'),
+        UkIconLink('chevrons-right', button=True, cls=ButtonT.primary))
+
+# %% ../API Reference.ipynb
+docs_icons = create_doc_section(
+    H1("Avatars"),
+    fn2code_string(ex_dicebear),
+    DiceBearAvatar,
+    H1("Icons"),
+    P("Icons use Lucide icons - you can find a full list of icons in their docs.", cls=TextFont.muted_sm),
+    fn2code_string(ex_icon),
+    UkIcon,
+    fn2code_string(ex_iconlink),
+    UkIconLink,
+    title="Icons")
+
+# %% ../API Reference.ipynb
+def ex_markdown():
+    md = '''# Example Markdown
+
++ With **bold** and *italics*
++ With a [link](https://github.com)
+
+### And a subheading
+
+> This is a blockquote
+'''
+    return render_md(md)
+
+# %% ../API Reference.ipynb
+docs_markdown = create_doc_section(
+    fn2code_string(ex_markdown),
+    render_md,
+    apply_classes,
+    title="Markdown + HTML Frankification")

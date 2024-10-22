@@ -30,7 +30,7 @@ def with_layout(active):
                     
                     Div(cls="md:flex w-full")(
                         Div(sidebar(active), cls="hidden md:block w-1/5"),
-                        Div(original_content, cls='md:w-4/5 w-full', id="mobile-sidebar")
+                        Div(original_content, cls='md:w-4/5 w-full mr-5', id="mobile-sidebar")
                     )
                 ),
             )

@@ -2,13 +2,13 @@
 
 # %% auto 0
 __all__ = ['enum_to_markdown_table', 'Theme', 'TextT', 'TextFont', 'Alert', 'ButtonT', 'Button', 'H1', 'H2', 'H3', 'H4', 'Titled',
-           'UkHSplit', 'UkHLine', 'Article', 'ArticleTitle', 'ArticleMeta', 'ContainerT', 'Container', 'SectionT',
-           'Section', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch',
-           'TextArea', 'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput',
-           'LabelRadio', 'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options',
-           'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader',
-           'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
-           'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'GridT', 'Grid',
+           'DividerT', 'Divider', 'UkHSplit', 'UkHLine', 'Article', 'ArticleTitle', 'ArticleMeta', 'ContainerT',
+           'Container', 'SectionT', 'Section', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range',
+           'Toggle_switch', 'TextArea', 'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput',
+           'LabelInput', 'LabelRadio', 'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect',
+           'Options', 'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog',
+           'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT',
+           'PositionT', 'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'GridT', 'Grid',
            'FullySpacedDiv', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'NavT',
            'NavContainer', 'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer',
            'NavBarLSide', 'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer',
@@ -30,6 +30,7 @@ from itertools import zip_longest
 from typing import Union, Tuple, Optional
 from fastcore.all import *
 import copy, re
+
 
 # %% ../lib_nbs/01_core.ipynb
 def enum_to_markdown_table(enum_class):
@@ -200,6 +201,19 @@ def H4(*c:FT|str,       # Components to go inside the Heading
 # %% ../lib_nbs/01_core.ipynb
 def Titled(title:str="FastHTML app", *args, cls="container", **kwargs)->FT:
     return fh.Title(title), fh.Main(H1(title), *args, cls=cls, **kwargs)
+
+# %% ../lib_nbs/01_core.ipynb
+class DividerT(VEnum):
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('divider', name)
+    icon=auto()
+    small=auto()
+    vertical=auto()
+
+# %% ../lib_nbs/01_core.ipynb
+def Divider(*args, cls=DividerT.icon, **kwargs):
+    cls = stringify(cls)
+    container = Div if 'uk-divider-vertical' in cls else Hr
+    return container(*args, cls=cls, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
@@ -813,7 +827,10 @@ def TableFromDicts(header_data:Sequence, body_data:Sequence[dict], footer_data=N
     )
 
 # %% ../lib_nbs/01_core.ipynb
-def apply_classes(html,class_map=None, class_map_mods=None):
+def apply_classes(html_str:str, 
+                  class_map=None, 
+                  class_map_mods=None):
+    from lxml import html, etree
     if not class_map:
         class_map = {
             'h1': 'uk-h1 my-4 mb-4',
@@ -825,15 +842,17 @@ def apply_classes(html,class_map=None, class_map_mods=None):
             'p': 'my-1',
             'blockquote': "uk-blockquote mb-8",
             'hr':'uk-divider-icon my-4',
-            'table':'uk-table-middle uk-table-divider uk-table-hover uk-table-small'}
+            'table':'uk-table-middle uk-table-divider uk-table-hover uk-table-small'
+        }
 
-    if class_map_mods:
-        class_map = {**class_map, **class_map_mods}
+    if class_map_mods: class_map = {**class_map, **class_map_mods}
+    html_str = html.fromstring(html_str)
     for tag, classes in class_map.items():
-        pattern = f'<{tag}(.*?)>'
-        replacement = f'<{tag}\\1 class="{classes}">'
-        html = re.sub(pattern, replacement, html)
-    return html
+        for element in html_str.xpath(f'//{tag}'):
+            existing_class = element.get('class', '')
+            new_class = f"{existing_class} {classes}".strip()
+            element.set('class', new_class)
+    return etree.tostring(html_str, encoding='unicode', method='html')
 
 # %% ../lib_nbs/01_core.ipynb
 def render_md(md_content):
