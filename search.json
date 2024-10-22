@@ -1,0 +1,342 @@
+[
+  {
+    "objectID": "foundation.html#stringification",
+    "href": "foundation.html#stringification",
+    "title": "Foundation",
+    "section": "Stringification",
+    "text": "Stringification\n\nsource\n\nstringify\n\n stringify (o)\n\nConverts input types into strings that can be passed to FT components\n\n\n\n\nDetails\n\n\n\n\no\nString, Tuple, or Enum options we want stringified\n\n\n\n\nassert stringify('abc') == 'abc'\nassert stringify(('abc','def')) == 'abc def'\nassert 'uk-input ' + stringify(()) == 'uk-input '\nassert 'uk-input ' + stringify(\"\") == 'uk-input '",
+    "crumbs": [
+      "Foundation"
+    ]
+  },
+  {
+    "objectID": "foundation.html#enum-utilities",
+    "href": "foundation.html#enum-utilities",
+    "title": "Foundation",
+    "section": "Enum Utilities",
+    "text": "Enum Utilities\n\nsource\n\nstr2ukcls\n\n str2ukcls (base, txt)\n\n\nsource\n\n\nVEnum\n\n VEnum (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\nclass TextT(VEnum):\n    def _generate_next_value_(name, start, count, last_values): return str2ukcls('text', name)\n    \n    foo = '1234'\n    red = auto()\n\n\nassert TextT.foo + TextT.red == '1234 uk-text-red'\nassert TextT.red + TextT.foo == 'uk-text-red 1234'\nassert 'uk-text-red' + TextT.foo == 'uk-text-red 1234'\nassert TextT.red + '1234' == 'uk-text-red 1234'\nassert stringify((TextT.red,TextT.foo)) == 'uk-text-red 1234'",
+    "crumbs": [
+      "Foundation"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Fh-FrankenUI",
+    "section": "",
+    "text": "Warning\n\n\n\nThis library is still in active development, however there are many great things you can do with it already. We’d really like you try to it and tell us how it works for you - but please be aware there will improvements to the API over time",
+    "crumbs": [
+      "Fh-FrankenUI"
+    ]
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "Fh-FrankenUI",
+    "section": "Installation",
+    "text": "Installation\nTo install this library, uses\npip install git+https://github.com/AnswerDotAI/fh-frankenui.git",
+    "crumbs": [
+      "Fh-FrankenUI"
+    ]
+  },
+  {
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
+    "title": "Fh-FrankenUI",
+    "section": "Getting Started",
+    "text": "Getting Started\nTo get started, check out:\n\nThe AnswerAI Dev Chat where Isaac & Jeremy explore the framework\nThis video where Isaac iteratively builds a form in 5 minutes with the framework\n\nMore resources and improvements to the documentation will be added here soon!",
+    "crumbs": [
+      "Fh-FrankenUI"
+    ]
+  },
+  {
+    "objectID": "01_core.html",
+    "href": "01_core.html",
+    "title": "Core",
+    "section": "",
+    "text": "The building blocks to the UI",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#imports",
+    "href": "01_core.html#imports",
+    "title": "Core",
+    "section": "Imports",
+    "text": "Imports\n\n&lt;script src=\"https://cdn.tailwindcss.com\"&gt;&lt;/script&gt;\n&lt;script src=\"https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js\"&gt;&lt;/script&gt;\n&lt;script src=\"https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js\"&gt;&lt;/script&gt;\n&lt;script type=\"module\" src=\"https://unpkg.com/franken-wc@0.0.6/dist/js/wc.iife.js\"&gt;&lt;/script&gt;\n&lt;link rel=\"stylesheet\" href=\"https://unpkg.com/franken-wc@0.0.6/dist/css/blue.min.css\"&gt;\n\n\n&lt;style&gt;\n#notebook-container { max-width: none; }\n.output_html * { list-style-type: none !important; }\n&lt;/style&gt;",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#theme-headers",
+    "href": "01_core.html#theme-headers",
+    "title": "Core",
+    "section": "Theme / Headers",
+    "text": "Theme / Headers\nYou can select a theme color to and get all the headers.\n\nsource\n\nTheme\n\n Theme (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\nhdrs = Theme.blue.headers()\napp = FastHTML(hdrs=hdrs)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#text-style",
+    "href": "01_core.html#text-style",
+    "title": "Core",
+    "section": "Text Style",
+    "text": "Text Style\n\nsource\n\nTextT\n\n TextT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nText Styles from https://franken-ui.dev/docs/text\n\n# print(enum_to_markdown_table(TextT))\n\n\nsource\n\n\nTextFont\n\n TextFont (value, names=None, module=None, qualname=None, type=None,\n           start=1)\n\nCombinations of TextT that are particularly useful",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#basic-components",
+    "href": "01_core.html#basic-components",
+    "title": "Core",
+    "section": "Basic Components",
+    "text": "Basic Components\n\nsource\n\nAlert\n\n Alert (*c, cls=(), **kwargs)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#button",
+    "href": "01_core.html#button",
+    "title": "Core",
+    "section": "Button",
+    "text": "Button\n\nsource\n\nButtonT\n\n ButtonT (value, names=None, module=None, qualname=None, type=None,\n          start=1)\n\nOptions for styling Buttons\n\n# Markdown(enum_to_markdown_table(ButtonT))\n\n\nsource\n\n\nButton\n\n Button (*c:Union[str,fastcore.xml.FT],\n         cls:Union[str,enum.Enum]=&lt;ButtonT.default: 'uk-button-default'&gt;,\n         **kwargs)\n\nA Button with Uk Styling\n\nshow(Div(Button(\"Default Class\"),\n        Button(\"Primary Class\", cls=ButtonT.primary),\n        Button(\"Secondary Class\", cls=ButtonT.secondary),\n        Button(\"Danger Class\", cls=ButtonT.danger),\n        Button(\"Ghost Class\", cls=ButtonT.ghost),\n        Button(\"Link Class\", cls=ButtonT.link),\n        Button(\"Text Class\", cls=ButtonT.text),))\n\n\nDefault ClassPrimary ClassSecondary ClassDanger ClassGhost ClassLink ClassText Class",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#headings",
+    "href": "01_core.html#headings",
+    "title": "Core",
+    "section": "Headings",
+    "text": "Headings\n\nsource\n\nH1\n\n H1 (*c:fastcore.xml.FT|str, cls:enum.Enum|str|tuple=(), **kwargs)\n\nA H1 with Uk Styling\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nc\nfastcore.xml.FT | str\n\n\n\n\ncls\nenum.Enum | str | tuple\n()\n\n\n\nkwargs\n\n\n\n\n\nReturns\nFT\n\nHeading with class=uk-h1 cls\n\n\n\n\nsource\n\n\nH2\n\n H2 (*c:fastcore.xml.FT|str, cls:enum.Enum|str|tuple=(), **kwargs)\n\nA H2 with Uk Styling\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nc\nfastcore.xml.FT | str\n\n\n\n\ncls\nenum.Enum | str | tuple\n()\n\n\n\nkwargs\n\n\n\n\n\nReturns\nFT\n\nHeading with class=uk-h2 cls\n\n\n\n\nsource\n\n\nH3\n\n H3 (*c:fastcore.xml.FT|str, cls:enum.Enum|str|tuple=(), **kwargs)\n\nA H3 with Uk Styling\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nc\nfastcore.xml.FT | str\n\n\n\n\ncls\nenum.Enum | str | tuple\n()\n\n\n\nkwargs\n\n\n\n\n\nReturns\nFT\n\nHeading with class=uk-h3 cls\n\n\n\n\nsource\n\n\nH4\n\n H4 (*c:fastcore.xml.FT|str, cls:enum.Enum|str|tuple=(), **kwargs)\n\nA H4 with Uk Styling\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nc\nfastcore.xml.FT | str\n\n\n\n\ncls\nenum.Enum | str | tuple\n()\n\n\n\nkwargs\n\n\n\n\n\nReturns\nFT\n\nHeading with class=uk-h4 cls\n\n\n\n\nsource\n\n\nTitled\n\n Titled (title:str='FastHTML app', *args, cls='container', **kwargs)\n\n\nshow(Div(\n    Titled(\"Titled\"),\n    H1(\"Heading 1 (H1)\"),\n    H2(\"Heading 2 (H2)\"),\n    H3(\"Heading 3 (H3)\"),\n    H4(\"Heading 4 (H4)\")))\n\n\n  Titled\n    Titled\n  Heading 1 (H1)\n  Heading 2 (H2)\n  Heading 3 (H3)\n  Heading 4 (H4)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#dividers",
+    "href": "01_core.html#dividers",
+    "title": "Core",
+    "section": "Dividers",
+    "text": "Dividers\n\nsource\n\nDividerT\n\n DividerT (value, names=None, module=None, qualname=None, type=None,\n           start=1)\n\nAn enumeration.\n\nsource\n\n\nDivider\n\n Divider (*args, cls=&lt;DividerT.icon: 'uk-divider-icon'&gt;, **kwargs)\n\n\nsource\n\n\nUkHSplit\n\n UkHSplit (*c, cls=(), line_cls=(), text_cls=())\n\n\nshow(UkHSplit())\n\n\n  \n  \n  \n  \n\n\n\n\nsource\n\n\nUkHLine\n\n UkHLine (lwidth=2, y_space=4)\n\n\nshow(UkHLine())",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#articles-containers-sections",
+    "href": "01_core.html#articles-containers-sections",
+    "title": "Core",
+    "section": "Articles & Containers & Sections",
+    "text": "Articles & Containers & Sections\n\nsource\n\nArticleMeta\n\n ArticleMeta (*c, cls=(), **kwargs)\n\n\nsource\n\n\nArticleTitle\n\n ArticleTitle (*c, cls=(), **kwargs)\n\n\nsource\n\n\nArticle\n\n Article (*c, cls=(), **kwargs)\n\n\nshow(Article(ArticleTitle(\"Article Title\"), ArticleMeta(\"By: John Doe\")))\n\n\n  Article Title\n  By: John Doe\n\n\n\n\nsource\n\n\nContainerT\n\n ContainerT (value, names=None, module=None, qualname=None, type=None,\n             start=1)\n\nMax width container sizes from https://franken-ui.dev/docs/container\n\nsource\n\n\nContainer\n\n Container (*c, cls=(), **kwargs)\n\n\nshow(Container(\n    \"This is a container with a custom background color.\",\n    cls=ContainerT.xsmall,\n    style=\"background-color: #e6f2ff; padding: 20px; border-radius: 5px;\"\n))\n\nThis is a container with a custom background color.\n\n\n\nsource\n\n\nSectionT\n\n SectionT (value, names=None, module=None, qualname=None, type=None,\n           start=1)\n\nSection styles from UIkit\n\n# Markdown(enum_to_markdown_table(SectionT))\n\n\nsource\n\n\nSection\n\n Section (*c, cls=(), **kwargs)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#forms-inputs",
+    "href": "01_core.html#forms-inputs",
+    "title": "Core",
+    "section": "Forms & Inputs",
+    "text": "Forms & Inputs\n\nsource\n\nLegend\n\n Legend (*c, cls=(), **kwargs)\n\n\nsource\n\n\nFieldset\n\n Fieldset (*c, cls=(), **kwargs)\n\n\nsource\n\n\nSwitch\n\n Switch (*c, cls='min-w-9', **kwargs)\n\n\nsource\n\n\nTextArea\n\n TextArea (*c, cls=(), **kwargs)\n\n\nsource\n\n\nToggle_switch\n\n Toggle_switch (*c, cls=(), **kwargs)\n\n\nsource\n\n\nRange\n\n Range (*c, cls=(), **kwargs)\n\n\nsource\n\n\nCheckboxX\n\n CheckboxX (*c, cls=(), **kwargs)\n\n\nsource\n\n\nRadio\n\n Radio (*c, cls=(), **kwargs)\n\n\nsource\n\n\nSelect\n\n Select (*option, cls=(), **kwargs)\n\n\nsource\n\n\nInput\n\n Input (*c, cls=(), **kwargs)\n\n\nsource\n\n\nFormLabel\n\n FormLabel (*c, cls=(), **kwargs)\n\n\nshow(Form(\n    Fieldset(\n        Legend(\"Fieldset Legend 1\"),\n        FormLabel(\"Input: \", Input()),    \n        FormLabel(\"Select: \", Select(fh.Option(\"Option 1\"), fh.Option(\"Option 2\"))),\n        FormLabel(\"Radio: \", Radio()),\n        FormLabel(\"Checkbox: \", CheckboxX()),\n        FormLabel(\"Button: \", Button(\"Click me\")),\n        cls='space-x-4'),   \n    Fieldset(\n        Legend(\"Fieldset Legend 2\"),        \n        FormLabel(\"Range: \", Range()),\n        FormLabel(\"Toggle switch: \", Toggle_switch()),\n        FormLabel(\"TextArea: \", TextArea()),\n        FormLabel(\"Switch: \", Switch()),\n        cls='space-x-4'),   \n    cls=\"space-y-6\"\n))\n\nFieldset Legend 1Input:       \nSelect: Option 1Option 2Radio:       \nCheckbox:       \nButton: Click meFieldset Legend 2Range:       \nToggle switch:       \nTextArea: Switch:       \n\n\n\n\nsource\n\n\nLabelT\n\n LabelT (value, names=None, module=None, qualname=None, type=None,\n         start=1)\n\nAn enumeration.\n\nsource\n\n\nLabel\n\n Label (*c, cls=(), **kwargs)\n\n\nshow(Div(\n    Label(\"Default\"),\n    Label(\"Primary\",cls=LabelT.primary),\n    Label(\"Secondary\",cls=LabelT.secondary),\n    Label(\"Default\",cls=LabelT.danger),\n))\n\n\nDefaultPrimarySecondaryDefault\n\n\n\nsource\n\n\nUkFormSection\n\n UkFormSection (title, description, *c, button_txt='Update',\n                outer_margin=6, inner_margin=6)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#labeled-inputs",
+    "href": "01_core.html#labeled-inputs",
+    "title": "Core",
+    "section": "Labeled Inputs",
+    "text": "Labeled Inputs\nInputs of various types often go with a label. Because of this we created functions to do this for you along with properly linking the for attribute from the lable to the input. We also have some nice defaults, such as putting a little spacing between the label and the input\n\nsource\n\nGenericLabelInput\n\n GenericLabelInput (label:str|fastcore.xml.FT, lbl_cls='', input_cls='',\n                    container=functools.partial(&lt;function ft at\n                    0x7f0a6c6657e0&gt;, 'div', void_=False), cls='', id='',\n                    input_fn=&lt;function noop&gt;, **kwargs)\n\nDiv(Label,Input) component with Uk styling injected appropriately. Generally you should higher level API, such as UkTextArea which is created for you in this library\n\nsource\n\n\nLabelInput\n\n LabelInput (*args, cls='space-y-2', lbl_cls='', input_cls='',\n             container=functools.partial(&lt;function ft at 0x7f0a6c6657e0&gt;,\n             'div', void_=False), id='')\n\n\nshow(LabelInput('My Label',id='myid'))\n\n\nMy Label  \n\n\n\n\nsource\n\n\nLabelRadio\n\n LabelRadio (label:str|fastcore.xml.FT, lbl_cls='', input_cls='',\n             container=functools.partial(&lt;function ft at 0x7f0a6c6657e0&gt;,\n             'div', void_=False), cls='flex items-center space-x-2',\n             id='', **kwargs)\n\nDiv(Label,Input) component with Uk styling injected appropriately. Generally you should higher level API, such as UkTextArea which is created for you in this library\n\nshow(LabelRadio('My Label',id='myid'))\n\n\n  \nMy Label\n\n\n\nsource\n\n\nLabelCheckboxX\n\n LabelCheckboxX (label:str|fastcore.xml.FT, lbl_cls='', input_cls='',\n                 container=functools.partial(&lt;function ft at\n                 0x7f0a6c6657e0&gt;, 'div', void_=False), cls='flex items-\n                 center space-x-2', id='', **kwargs)\n\nDiv(Label,Input) component with Uk styling injected appropriately. Generally you should higher level API, such as UkTextArea which is created for you in this library\n\nshow(LabelCheckboxX('My Label',id='myid'))\n\n\nMy Label  \n\n\n\n\nsource\n\n\nLabelRange\n\n LabelRange (*args, cls='space-y-2', lbl_cls='', input_cls='',\n             container=functools.partial(&lt;function ft at 0x7f0a6c6657e0&gt;,\n             'div', void_=False), id='')\n\n\nshow(LabelRange('My Label',id='myid'))\n\n\nMy Label  \n\n\n\n\nsource\n\n\nLabelTextArea\n\n LabelTextArea (*args, cls='space-y-2', lbl_cls='', input_cls='',\n                container=functools.partial(&lt;function ft at\n                0x7f0a6c6657e0&gt;, 'div', void_=False), id='')\n\n\nshow(LabelTextArea('mylabel',container=Form))\n\nmylabel\n\n\n\nsource\n\n\nLabelSwitch\n\n LabelSwitch (*args, cls='space-x-2', lbl_cls='', input_cls='',\n              container=functools.partial(&lt;function ft at 0x7f0a6c6657e0&gt;,\n              'div', void_=False), id='')\n\n\nshow(LabelSwitch('mylabel',id='myid'))\n\n\nmylabel  \n\n\n\n\nsource\n\n\nLabelSelect\n\n LabelSelect (*option, label:str|fastcore.xml.FT, lbl_cls='',\n              input_cls='', container=functools.partial(&lt;function ft at\n              0x7f0a6c6657e0&gt;, 'div', void_=False), cls='space-y-2',\n              id='', **kwargs)\n\nDiv(Label,Input) component with Uk styling injected appropriately. Generally you should higher level API, such as UkTextArea which is created for you in this library\n\nshow(LabelSelect(Option(1),Option(2),label='My Label', id='myid'))\n\n\nMy Label12\n\n\n\nsource\n\n\nOptions\n\n Options (*c, selected_idx:int=None, disabled_idxs:set=None)\n\nHelper function to wrap things into Options for use in UkSelect\n\n# list(map(to_xml,Options('option1','option2','option3', selected_idx=1, disabled_idxs={0,2})))\n\nUK Select is a custom select that has more functionality than the basic select. One particularly useful feature is the searchable, which allows the user to type to search for options in the Select.\n\nsource\n\n\nUkSelect\n\n UkSelect (*option, inp_cls=(), cls=('space-y-2',), id='', name='',\n           placeholder='', searchable=False, **kwargs)\n\nCreates a select dropdown with uk styling\n\nsource\n\n\nLabelUkSelect\n\n LabelUkSelect (*option, label=(), lbl_cls=(), inp_cls=(),\n                cls=('space-y-2',), id='', name='', placeholder='',\n                searchable=False, **kwargs)\n\nCreates a select dropdown with uk styling\n\nshow(UkSelect(Option(1),Option(2),label='My Label', id='myid', searchable=True))\n\n\n12",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#links",
+    "href": "01_core.html#links",
+    "title": "Core",
+    "section": "Links",
+    "text": "Links\n\nsource\n\nAT\n\n AT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nLink styles from https://franken-ui.dev/docs/link\n\nshow(Div(cls='space-x-4')(('Default Link'),\n                     A('Muted Link', cls=AT.muted),\n                     A('Text Link', cls=AT.text),\n                     A('Reset Link', cls=AT.reset)))\n\n\nDefault LinkMuted LinkText LinkReset Link",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#lists",
+    "href": "01_core.html#lists",
+    "title": "Core",
+    "section": "Lists",
+    "text": "Lists\n\nsource\n\nListT\n\n ListT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nList styles from https://franken-ui.dev/docs/list\n\nsource\n\n\nList\n\n List (*c, cls=(), **kwargs)\n\n\nlist_options = [(style,str(cls)) for style,cls in ListT.__members__.items()]\ndef create_list(style, cls): return List(fh.Li(\"Item 1\"), fh.Li(\"Item 2\"), cls=cls)\n\nlists = [Div(H4(f\"{style} List:\"), create_list(style, cls)) for style, cls in list_options]\nshow(Div(*lists, cls=\"grid grid-cols-4\"))\n\n\n  \n    disc List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    circle List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    square List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    decimal List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    hyphen List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    muted List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    primary List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    secondary List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    bullet List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    divider List:\n    \n      Item 1\n      Item 2\n    \n  \n  \n    striped List:\n    \n      Item 1\n      Item 2",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#modal",
+    "href": "01_core.html#modal",
+    "title": "Core",
+    "section": "Modal",
+    "text": "Modal\n\nsource\n\nModalCloseButton\n\n ModalCloseButton (*c, cls=(), **kwargs)\n\n\nsource\n\n\nModalTitle\n\n ModalTitle (*c, cls=(), **kwargs)\n\n\nsource\n\n\nModalFooter\n\n ModalFooter (*c, cls=(), **kwargs)\n\n\nsource\n\n\nModalBody\n\n ModalBody (*c, cls=(), **kwargs)\n\n\nsource\n\n\nModalHeader\n\n ModalHeader (*c, cls=(), **kwargs)\n\n\nsource\n\n\nModalDialog\n\n ModalDialog (*c, cls=(), **kwargs)\n\n\nsource\n\n\nModalContainer\n\n ModalContainer (*c, cls=(), **kwargs)\n\n\nshow(ModalCloseButton('Modal Close Button', cls=ButtonT.primary))\n\nModal Close Button\n\n\n\nsource\n\n\nModal\n\n Modal (*c, header=None, footer=None, cls=(), dialog_cls=(),\n        header_cls='p-6', body_cls='space-y-6', footer_cls=(), id='',\n        **kwargs)\n\nCreate a Modal using the appropriate Modal classes to put the boilerplate in the appropriate places for you*\n\nShow(Div(\n    Button(\"Open Modal\",uk_toggle=\"target: #my-modal\" ),\n    Modal(ModalTitle(\"Simple Test Modal\"), \n          P(\"With some somewhat brief content to show that it works!\", cls=TextFont.muted_sm),\n          footer=ModalCloseButton(\"Close\", cls=ButtonT.primary),id='my-modal')))\n\nOpen in new tab",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#padding-positioning",
+    "href": "01_core.html#padding-positioning",
+    "title": "Core",
+    "section": "Padding | Positioning",
+    "text": "Padding | Positioning\n\nsource\n\nPaddingT\n\n PaddingT (value, names=None, module=None, qualname=None, type=None,\n           start=1)\n\nPadding Modifiers from https://franken-ui.dev/docs/padding\n\nsource\n\n\nPositionT\n\n PositionT (value, names=None, module=None, qualname=None, type=None,\n            start=1)\n\nPosition modifiers from https://franken-ui.dev/docs/position",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#other",
+    "href": "01_core.html#other",
+    "title": "Core",
+    "section": "Other",
+    "text": "Other\n\nsource\n\nPlaceholder\n\n Placeholder (*c, cls=(), **kwargs)\n\n\nshow(Placeholder(\"Placeholder\"))\n\nPlaceholder\n\n\n\nsource\n\n\nProgress\n\n Progress (*c, cls=(), value='', max='', **kwargs)\n\n\nshow(Progress(value=20, max=100))",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#icons-and-avatars",
+    "href": "01_core.html#icons-and-avatars",
+    "title": "Core",
+    "section": "Icons and Avatars",
+    "text": "Icons and Avatars\n\nsource\n\nUkIcon\n\n UkIcon (icon, height=None, width=None, stroke_width=None, cls=(),\n         **kwargs)\n\n\nsource\n\n\nUkIconLink\n\n UkIconLink (icon, height=None, width=None, stroke_width=None, cls=(),\n             button=False, **kwargs)\n\n\nShow(UkIcon(\"rocket\",100,100,stroke_width=1))\n\nOpen in new tab\n\n\n \n\n\n\nclass IconButtonT(VEnum):\n    xsmall = 'uk-icon-button-xsmall'\n    small  = 'uk-icon-button-small'\n    outline= 'uk-icon-button-outline'\n\n\nsource\n\n\nDiceBearAvatar\n\n DiceBearAvatar (seed_name, h=20, w=20)\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nseed_name\n\n\nSeed name (ie ‘Isaac Flath’)\n\n\nh\nint\n20\nHeight\n\n\nw\nint\n20\nWidth\n\n\n\n\nshow(DiceBearAvatar('Isaac Flath', 20, 20))",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#flexbox-grid",
+    "href": "01_core.html#flexbox-grid",
+    "title": "Core",
+    "section": "Flexbox | Grid",
+    "text": "Flexbox | Grid\nThe most common pattern for spacing it to organize the general high level page layout with a Grid, and smaller components with Flex.\n\n\n\n\n\n\nTip\n\n\n\nPlay Flex Box Froggy to get an understanding of flex box.\n\n\n\nsource\n\nFlexT\n\n FlexT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nFlexbox modifiers from UIkit\n\nsource\n\n\nGridT\n\n GridT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nGrid modifiers from UIkit\n\nsource\n\n\nGrid\n\n Grid (*div, cols=None, cls=&lt;GridT.small: 'uk-grid-small'&gt;, **kwargs)\n\nCreates a grid with the given number of columns, often used for a grid of cards\n\nshow(Grid(*map(Button, \"abcdef\"),cols=3))\n\n\nabcdef\n\n\nWe can use the FlexT enum above to create Divs that arrange components in a flex box in different ways.\nFor example, FullySpacedDiv applies a very common pattern so we’ve made a function that helps to this for you. But if you look at the code, it’s really just using the enum to apply the right combonation of flex classes.\n\nsource\n\n\nFullySpacedDiv\n\n FullySpacedDiv (*c, cls='uk-width-1-1', **kwargs)\n\nCreates a flex div with it’s components having as much space between them as possible\n\n\nExported source\ndef FullySpacedDiv(*c,                # Components\n                   cls='uk-width-1-1',# Classes for outer div\n                   **kwargs           # Additional args for outer div\n                  ):                  # Div with spaced components via flex classes\n    \"Creates a flex div with it's components having as much space between them as possible\"\n    cls = stringify(cls)\n    return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*c)\n\n\n\nfrom functools import partial\n_button = partial(Button,cls=ButtonT.primary)\n\n\nshow(FullySpacedDiv(*map(_button, range(3))))\n\n\n012\n\n\n\nsource\n\n\nCenteredDiv\n\n CenteredDiv (*c, cls='space-y-4', **kwargs)\n\nCreates a flex div with it’s components centered in it\n\nshow(CenteredDiv(*map(_button, range(3))))\n\n\n012\n\n\n\nsource\n\n\nLAlignedDiv\n\n LAlignedDiv (*c, cls='space-x-4', **kwargs)\n\nCreates a flex div with it’s components aligned to the left\n\nshow(LAlignedDiv(*map(_button, range(3))))\n\n\n012\n\n\n\nsource\n\n\nRAlignedDiv\n\n RAlignedDiv (*c, cls='space-x-4', **kwargs)\n\nCreates a flex div with it’s components aligned to the right\n\nshow(RAlignedDiv(*map(_button, range(3))))\n\n\n012\n\n\n\nsource\n\n\nVStackedDiv\n\n VStackedDiv (*c, cls='space-y-4', **kwargs)\n\n\nshow(VStackedDiv(*map(_button, range(3))))\n\n\n012\n\n\n\nsource\n\n\nHStackedDiv\n\n HStackedDiv (*c, cls='space-x-4', **kwargs)\n\n\nshow(HStackedDiv(*map(_button, range(3))))\n\n\n012",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#nav",
+    "href": "01_core.html#nav",
+    "title": "Core",
+    "section": "Nav",
+    "text": "Nav\nA Nav is something highly versatile that is the foundation for many things. Three common places to use a Nav:\n+ On its own as a sidebar navigation\n+ In a button to give it a drop-down like behavior\n+ In a Navbar to give drop down options in the navbar\n\nsource\n\nNavT\n\n NavT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\nsource\n\n\nNavContainer\n\n NavContainer (*li, cls=&lt;NavT.primary: 'uk-nav-primary'&gt;, parent=True,\n               uk_nav=False, **kwargs)\n\n\nmbrs1 = [Li(A('Option 1'), cls='uk-active'), \n         Li(A('Option 2')),\n         Li(A('Option 3'))]\n\n\nshow(NavContainer(*mbrs1))\n\n\n  \nOption 1  \n  \nOption 2  \n  \nOption 3  \n\n\n\n\nsource\n\n\nNavCloseLi\n\n NavCloseLi (*c, cls=(), **kwargs)\n\n\nsource\n\n\nNavSubtitle\n\n NavSubtitle (*c, cls=&lt;TextFont.muted_sm: 'uk-text-muted uk-text-small'&gt;,\n              **kwargs)\n\n\nsource\n\n\nNavHeaderLi\n\n NavHeaderLi (*c, cls=(), **kwargs)\n\n\nsource\n\n\nNavDividerLi\n\n NavDividerLi (*c, cls=(), **kwargs)\n\n\nsource\n\n\nNavParentLi\n\n NavParentLi (*nav_container, cls=(), **kwargs)\n\n\nNavDividerLi()\n\n&lt;li class=\"uk-nav-divider \"&gt;&lt;/li&gt;\n\n\n\nmbrs2 = [Li(A('Child 1')), Li(A('Child 2')),Li(A('Child 3'))]\n\nShow(\n    NavContainer(\n        NavHeaderLi(\"NavHeaderLi\"),\n        *mbrs1,\n        Li(A(href='')(Div(\"Subtitle Ex\",NavSubtitle(\"NavSubtitle text to be shown\")))),\n        NavDividerLi(),\n        NavParentLi(\n            A('Parent Name'),\n            NavContainer(*mbrs2,parent=False),\n             ),\n    )\n)\n\nOpen in new tab\n\n\n \n\n\n\ndef NavParentIcon(): return Span(uk_nav_parent_icon=True)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#navbar",
+    "href": "01_core.html#navbar",
+    "title": "Core",
+    "section": "NavBar",
+    "text": "NavBar\n\nsource\n\nNavBarCenter\n\n NavBarCenter (*c, cls=(), **kwargs)\n\n\nsource\n\n\nNavBarRSide\n\n NavBarRSide (*c, cls=(), **kwargs)\n\n\nsource\n\n\nNavBarLSide\n\n NavBarLSide (*c, cls=(), **kwargs)\n\n\nsource\n\n\nNavBarContainer\n\n NavBarContainer (*c, cls=(), container_cls=&lt;ContainerT.expand: 'uk-\n                  container-expand'&gt;, uk_navbar=True, **kwargs)\n\n\nsource\n\n\nNavBarNav\n\n NavBarNav (*li, cls=(), **kwargs)\n\n\nsource\n\n\nNavBarSubtitle\n\n NavBarSubtitle (title, subtitle, cls=(), subtitle_cls=&lt;TextFont.muted_sm:\n                 'uk-text-muted uk-text-small'&gt;, **kwargs)\n\n\nsource\n\n\nNavBarNavContainer\n\n NavBarNavContainer (*li, cls=&lt;NavT.primary: 'uk-nav-primary'&gt;,\n                     parent=True, uk_nav=False, **kwargs)\n\n\nsource\n\n\nNavBarParentIcon\n\n NavBarParentIcon ()\n\n\nl = NavBarNav(Li(cls='uk-active')(A(\"Active\",href='')),\n              Li(A(\"Parent\",href=''),\n                  NavBarNavContainer(\n                      Li(cls='uk-active')(A(\"Active\",href='')),\n                      Li(A(\"Item\",href='')),\n                      Li(A(\"Item\",href='')))),\n              Li(A(\"Item\",href='')))\n\nr = NavBarNav(\n            Li(cls='uk-active')(A(NavBarSubtitle(\"Title\",\"Subtitle\"),href='')),\n            Li(A(\"DropDown\",NavBarParentIcon(),href=''),\n                NavBarNavContainer(\n                    NavHeaderLi(\"NavHeaderLi\"),\n                    *mbrs1,\n                    Li(A(href='')(Div(\"Subtitle Ex\",NavSubtitle(\"NavSubtitle text to be shown\")))),\n                    NavDividerLi(),\n                    NavParentLi(\n                        A('Parent Name'),\n                        NavContainer(*mbrs2,parent=False)))),\n            \n    Li(A(NavBarSubtitle(\"Title\",\"Subtitle\"),href='')))\n\n\nShow(\nNavBarContainer(\n    NavBarLSide(l),\n    NavBarRSide(r)\n)\n)\n\nOpen in new tab",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#dropdown",
+    "href": "01_core.html#dropdown",
+    "title": "Core",
+    "section": "DropDown",
+    "text": "DropDown\n\nsource\n\nDropDownNavContainer\n\n DropDownNavContainer (*li, cls=&lt;NavT.primary: 'uk-nav-primary'&gt;,\n                       parent=True, uk_nav=False, uk_dropdown=True,\n                       **kwargs)\n\n\nShow(Div(\n        Button(\"Open DropDown\"),\n        DropDownNavContainer(Li(A(\"Item 1\",href=''),Li(A(\"Item 2\",href=''))))))\n\nOpen in new tab",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#tabs",
+    "href": "01_core.html#tabs",
+    "title": "Core",
+    "section": "Tabs",
+    "text": "Tabs\n\nsource\n\nTabContainer\n\n TabContainer (*li, cls='', alt=False, **kwargs)\n\n\nshow(Container(TabContainer(\n    Li(A(\"Active\",href='#', cls='uk-active')),\n    Li(A(\"Item\",href='#')),\n    Li(A(\"Item\",href='#')),\n    Li(A(\"Disabled\",href='#', cls='uk-disabled')),\n    alt=True)))\n\n\n  \n    \nActive    \n    \nItem    \n    \nItem    \n    \nDisabled    \n  \n\n\n\n\nshow(Container(TabContainer(\n    Li(A(\"Active\",href='#', cls='uk-active')),\n    Li(A(\"Item\",href='#')),\n    Li(A(\"Item\",href='#')),\n    Li(A(\"Disabled\",href='#', cls='uk-disabled')),\n    )))\n\n\n  \n    \nActive    \n    \nItem    \n    \nItem    \n    \nDisabled",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#cards",
+    "href": "01_core.html#cards",
+    "title": "Core",
+    "section": "Cards",
+    "text": "Cards\n\nsource\n\nCardT\n\n CardT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nCard styles from UIkit\n\nsource\n\n\nCardContainer\n\n CardContainer (*c, cls=&lt;CardT.default: 'uk-card-default'&gt;, **kwargs)\n\n\nsource\n\n\nCardFooter\n\n CardFooter (*c, cls=(), **kwargs)\n\n\nsource\n\n\nCardBody\n\n CardBody (*c, cls=(), **kwargs)\n\n\nsource\n\n\nCardHeader\n\n CardHeader (*c, cls=(), **kwargs)\n\n\nsource\n\n\nCardTitle\n\n CardTitle (*c, cls=(), **kwargs)\n\n\nsource\n\n\nCardTitle\n\n CardTitle (*c, cls=(), **kwargs)\n\n\nsource\n\n\nCard\n\n Card (*c, header=None, footer=None, body_cls='space-y-6', header_cls=(),\n       footer_cls=(), cls=(), **kwargs)\n\n\nshow(\n    Card(\n        Form(LabelInput(\"Input\"),LabelRange(\"Range\")),\n        header=Div(CardTitle(\"Header\"),P(\"A card with header and footer\",cls=TextFont.muted_sm)),\n        footer=LAlignedDiv(Button(\"Footer Submit button\")),\n)\n)\n\n\n  \n    \n      Header\n      A card with header and footer\n    \n  \n  \n      \nInput        \n      \n      \nRange        \n      \n  \n  \n    \nFooter Submit button",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#tables",
+    "href": "01_core.html#tables",
+    "title": "Core",
+    "section": "Tables",
+    "text": "Tables\n\nsource\n\nTableT\n\n TableT (value, names=None, module=None, qualname=None, type=None,\n         start=1)\n\nAn enumeration.\n\nsource\n\n\nTable\n\n Table (*args, cls=(&lt;TableT.middle: 'uk-table-middle'&gt;, &lt;TableT.divider:\n        'uk-table-divider'&gt;, &lt;TableT.hover: 'uk-table-hover'&gt;,\n        &lt;TableT.small: 'uk-table-small'&gt;), **kwargs)\n\n\nsource\n\n\nTbody\n\n Tbody (*rows, cls=(), sortable=False, **kwargs)\n\n\nsource\n\n\nThead\n\n Thead (*rows, cls=(), **kwargs)\n\n\nsource\n\n\nTr\n\n Tr (*cells, cls=(), **kwargs)\n\n\nsource\n\n\nTh\n\n Th (*args, cls=(), shrink=False, expand=False, small=False)\n\n\nsource\n\n\nTd\n\n Td (*args, cls=(), shrink=False, expand=False, small=False)\n\n\nshow(\nTable(\n    Thead(Tr(Th('Name'), Th('Age'), Th('City'))),\n    Tbody(Tr(Td('Alice'), Td('25'), Td('New York')),\n          Tr(Td('Bob'), Td('30'), Td('San Francisco')),\n          Tr(Td('Charlie'), Td('35'), Td('London'))),\n    Tfoot(Tr(Td('Total'), Td('90'))))\n)\n\n\n\n\nName\nAge\nCity\n\n\n\n\nAlice\n25\nNew York\n\n\nBob\n30\nSan Francisco\n\n\nCharlie\n35\nLondon\n\n\n\nTotal\n90\n\n\n\n\n\n\n\n\nsource\n\n\nTableFromLists\n\n TableFromLists (header_data, body_data, footer_data=None,\n                 header_cell_render=&lt;function Th&gt;,\n                 body_cell_render=&lt;function Td&gt;,\n                 footer_cell_render=&lt;function Td&gt;, cls=(&lt;TableT.middle:\n                 'uk-table-middle'&gt;, &lt;TableT.divider: 'uk-table-divider'&gt;,\n                 &lt;TableT.hover: 'uk-table-hover'&gt;, &lt;TableT.small: 'uk-\n                 table-small'&gt;), sortable=False, **kwargs)\n\n\n# Test the function\nheader = ['Name', 'Age', 'City']\nbody = [['Alice', '25', 'New York'],\n        ['Bob', '30', 'San Francisco'],\n        ['Charlie', '35', 'London']]\nfooter = ['Total', '90']\n\nshow(TableFromLists(header, body, footer))\n\n\n\n\nName\nAge\nCity\n\n\n\n\nAlice\n25\nNew York\n\n\nBob\n30\nSan Francisco\n\n\nCharlie\n35\nLondon\n\n\n\nTotal\n90\n\n\n\n\n\n\n\n\nsource\n\n\nTableFromDicts\n\n TableFromDicts (header_data:Sequence, body_data:Sequence[dict],\n                 footer_data=None, header_cell_render=&lt;function Th&gt;,\n                 body_cell_render=&lt;function &lt;lambda&gt;&gt;,\n                 footer_cell_render=&lt;function &lt;lambda&gt;&gt;,\n                 cls=(&lt;TableT.middle: 'uk-table-middle'&gt;, &lt;TableT.divider:\n                 'uk-table-divider'&gt;, &lt;TableT.hover: 'uk-table-hover'&gt;,\n                 &lt;TableT.small: 'uk-table-small'&gt;), sortable=False,\n                 **kwargs)\n\n\n# Example usage:\ndef header_render(v): return Th(v.upper())\ndef body_render(k, v):\n    match k.lower():\n        case 'name': return Td(v['name'], cls='font-bold')\n        case 'age': return Td(f\"{v['age']} years\")\n        case _: return Td(v[k.lower()])\n\nheader_data = ['Name', 'Age', 'City']\nbody_data = [{'name': 'Alice', 'age': 30, 'city': 'New York'},\n             {'name': 'Bob', 'age': 25, 'city': 'London'}]\n\nshow(TableFromDicts(header_data, body_data, header_cell_render=header_render, body_cell_render=body_render))\n\n\n\n\nNAME\nAGE\nCITY\n\n\n\n\nAlice\n30 years\nNew York\n\n\nBob\n25 years\nLondon",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#markdown",
+    "href": "01_core.html#markdown",
+    "title": "Core",
+    "section": "Markdown",
+    "text": "Markdown\n\nsource\n\napply_classes\n\n apply_classes (html_str:str, class_map=None, class_map_mods=None)\n\n\n_test = apply_classes(\"&lt;div&gt;&lt;h1&gt;Hello, world!&lt;/h1&gt;&lt;/div&gt;\", class_map_mods={'h1': 'uk-h1 my-4 mb-4'})\nassert _test == '&lt;div&gt;&lt;h1 class=\"uk-h1 my-4 mb-4\"&gt;Hello, world!&lt;/h1&gt;&lt;/div&gt;'\n\n\nsource\n\n\nrender_md\n\n render_md (md_content)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "01_core.html#section-1",
+    "href": "01_core.html#section-1",
+    "title": "Core",
+    "section": "_",
+    "text": "_\n\n&lt;script&gt;\nwindow.addEventListener('load', function() {\n    for (let i = 1; i &lt;= 6; i++) {\n        document.querySelectorAll(`h${i}`).forEach(el =&gt; {\n            el.classList.add(`uk-h${i}`);\n        });\n    }\n});\n\ndocument.querySelectorAll('.sidebar-item-text').forEach(el =&gt; {\n  el.style.visibility = 'visible';\n})\n\n&lt;/script&gt;",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "components.html",
+    "href": "components.html",
+    "title": "Components",
+    "section": "",
+    "text": "from nbdev.showdoc import show_doc\nfrom IPython.display import HTML\n\n\nsource\n\n\n\n NavP (*c, cls=&lt;TextFont.muted_sm: 'uk-text-muted uk-text-small'&gt;)\n\n\nsource\n\n\n\n\n SpacedPP (left, right=None)\n\n\nsource\n\n\n\n\n SpacedPPs (*c)\n\n\nUkIcon?\n\n\nsource\n\n\n\n\n SpacedTxtIcon (txt, icon, width=None, height=None, stroke_width=None,\n                icon_right=True)\n\n\nsource\n\n\n\n\n LAlignedTxtIcon (txt, icon, width=None, height=None, stroke_width=None,\n                  cls='space-x-2', icon_right=True, txt_cls=None)\n\n\nsource\n\n\n\n\n LAlignedIconTxt (txt, icon, width=None, height=None, stroke_width=None,\n                  cls='space-x-2', txt_cls=None)",
+    "crumbs": [
+      "Components"
+    ]
+  },
+  {
+    "objectID": "components.html#imports",
+    "href": "components.html#imports",
+    "title": "Components",
+    "section": "",
+    "text": "from nbdev.showdoc import show_doc\nfrom IPython.display import HTML\n\n\nsource\n\n\n\n NavP (*c, cls=&lt;TextFont.muted_sm: 'uk-text-muted uk-text-small'&gt;)\n\n\nsource\n\n\n\n\n SpacedPP (left, right=None)\n\n\nsource\n\n\n\n\n SpacedPPs (*c)\n\n\nUkIcon?\n\n\nsource\n\n\n\n\n SpacedTxtIcon (txt, icon, width=None, height=None, stroke_width=None,\n                icon_right=True)\n\n\nsource\n\n\n\n\n LAlignedTxtIcon (txt, icon, width=None, height=None, stroke_width=None,\n                  cls='space-x-2', icon_right=True, txt_cls=None)\n\n\nsource\n\n\n\n\n LAlignedIconTxt (txt, icon, width=None, height=None, stroke_width=None,\n                  cls='space-x-2', txt_cls=None)",
+    "crumbs": [
+      "Components"
+    ]
+  },
+  {
+    "objectID": "components.html#fonts",
+    "href": "components.html#fonts",
+    "title": "Components",
+    "section": "Fonts",
+    "text": "Fonts\n\nsource\n\nHelpText\n\n HelpText (c)",
+    "crumbs": [
+      "Components"
+    ]
+  }
+]
