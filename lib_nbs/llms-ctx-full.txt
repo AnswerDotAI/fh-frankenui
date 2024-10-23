@@ -1348,7 +1348,7 @@ __all__ = ['enum_to_markdown_table', 'Theme', 'TextT', 'TextFont', 'Alert', 'But
            'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader',
            'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
            'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'GridT', 'Grid',
-           'DivFullySpaced', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'NavT',
+           'DivFullySpaced', 'DivCentered', 'DivLAligned', 'DivRAligned', 'DivVStacked', 'DivHStacked', 'NavT',
            'NavContainer', 'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer',
            'NavBarLSide', 'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer',
            'NavBarParentIcon', 'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle', 'CardHeader', 'CardBody',
@@ -1940,7 +1940,7 @@ def DivFullySpaced(*c,                # Components
     return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def CenteredDiv(*c,      # Components
+def DivCentered(*c,      # Components
                 cls='space-y-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
                ): # Div with components centered in it
@@ -1949,7 +1949,7 @@ def CenteredDiv(*c,      # Components
     return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def LAlignedDiv(*c,      # Components
+def DivLAligned(*c,      # Components
                 cls='space-x-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
                ): # Div with components aligned to the left
@@ -1958,7 +1958,7 @@ def LAlignedDiv(*c,      # Components
     return Div(cls=(FlexT.block,FlexT.left,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def RAlignedDiv(*c,      # Components
+def DivRAligned(*c,      # Components
                 cls='space-x-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
                ): # Div with components aligned to the right
@@ -1967,12 +1967,12 @@ def RAlignedDiv(*c,      # Components
     return Div(cls=(FlexT.block,FlexT.right,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def VStackedDiv(*c, cls='space-y-4', **kwargs):
+def DivVStacked(*c, cls='space-y-4', **kwargs):
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def HStackedDiv(*c, cls='space-x-4', **kwargs):
+def DivHStacked(*c, cls='space-x-4', **kwargs):
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.row,FlexT.middle,cls), **kwargs)(*c)
 
@@ -2289,13 +2289,13 @@ def render_md(md_content):
 - `def DivFullySpaced(*c, **kwargs)`
     Creates a flex div with it's components having as much space between them as possible
 
-- `def CenteredDiv(*c, **kwargs)`
+- `def DivCentered(*c, **kwargs)`
     Creates a flex div with it's components centered in it
 
-- `def LAlignedDiv(*c, **kwargs)`
+- `def DivLAligned(*c, **kwargs)`
     Creates a flex div with it's components aligned to the left
 
-- `def RAlignedDiv(*c, **kwargs)`
+- `def DivRAligned(*c, **kwargs)`
     Creates a flex div with it's components aligned to the right
 
 - `class NavT`
@@ -2345,8 +2345,8 @@ def page():
             Footer(cls=TextT.small)("Sofia Davis")))
 
     right = Div(cls="col-span-2 flex flex-col p-8 lg:col-span-1")(
-        RAlignedDiv(Button("Login", cls=ButtonT.ghost, uk_toggle="#demo")),
-        CenteredDiv(cls='flex-1')(
+        DivRAligned(Button("Login", cls=ButtonT.ghost, uk_toggle="#demo")),
+        DivCentered(cls='flex-1')(
             Div(cls=f"space-y-6 w-[350px]")(
                 Div(cls="flex flex-col space-y-2 text-center")(
                     H3("Create an account"),
@@ -2402,9 +2402,9 @@ AppleSvg = Svg(role="img", viewBox="0 0 24 24", cls="h-6 w-6 mr-1")(Path(d="M12.
 # %% ../example_cards.ipynb
 PaymentMethod = Card(
     Grid(
-        Button(CenteredDiv(Card1Svg, "Card"),  cls='h-20 w-full border-2 border-primary'),
-        Button(CenteredDiv(Card2Svg, "Card"),  cls='h-20 w-full'),
-        Button(CenteredDiv(AppleSvg, "Apple"), cls='h-20 w-full'),
+        Button(DivCentered(Card1Svg, "Card"),  cls='h-20 w-full border-2 border-primary'),
+        Button(DivCentered(Card2Svg, "Card"),  cls='h-20 w-full'),
+        Button(DivCentered(AppleSvg, "Apple"), cls='h-20 w-full'),
         cols=3,cls='gap-6'),
     Div(cls='space-y-4')(
         LabelInput('Name',        id='name',        placeholder='John Doe'),
@@ -2493,7 +2493,7 @@ ShareDocument = Card(
         Button('Copy link')),
     Div(cls='uk-divider-icon my-4'),
     H4(cls=TextFont.bold_sm)('People with access'),
-    *[LAlignedDiv(
+    *[DivLAligned(
         DiceBearAvatar(n, 10,10),
         Div(cls='flex-1')(
             P(n, cls='text-sm font-medium leading-none'),
@@ -2856,7 +2856,7 @@ sidebar_group2 = (('globe','Social','972'),('info','Updates','342'),('messages-s
     ('shopping-cart','Shopping','8'),('shopping-bag','Promotions','21'),)
 
 def MailSbLi(icon, title, cnt): 
-    return Li(A(LAlignedDiv(
+    return Li(A(DivLAligned(
         Span(UkIcon(icon)),Span(title),P(cnt,cls=TextFont.muted_sm),cls='space-x-2')))
 
 sidebar = Container(NavContainer(
@@ -3086,7 +3086,7 @@ library_data = [("play-circle", "Playlists"), ("music", "Songs"), ("user", "Made
 playlists_data = [("library","Recently Added"), ("library","Recently Played")]
 
 # %% ../example_music.ipynb
-def MusicSidebarLi(icon, text): return Li(A(LAlignedDiv(UkIcon(icon), P(text),cls='space-x-2')))
+def MusicSidebarLi(icon, text): return Li(A(DivLAligned(UkIcon(icon), P(text),cls='space-x-2')))
 sb = NavContainer(
     NavHeaderLi(H3("Discover")),*[MusicSidebarLi(*o) for o in discoved_data],
     NavHeaderLi(H3("Library")),*[MusicSidebarLi(*o) for o in library_data],
@@ -3246,7 +3246,7 @@ def CreateTaskModal():
                      Div(Select(*map(Option,('In Progress', 'Backlog', 'Todo', 'Cancelled', 'Done')), label='Status', id='task_status')),
                      Div(Select(*map(Option, ('Low', 'Medium', 'High')), label='Priority', id='task_priority'))),
                 TextArea(label='Title', placeholder='Please describe the task that needs to be completed'),
-                RAlignedDiv(
+                DivRAligned(
                     ModalCloseButton('Cancel', cls=ButtonT.ghost),
                     ModalCloseButton('Submit', cls=ButtonT.primary),
                     cls='space-x-5'))),
@@ -3314,8 +3314,8 @@ def footer():
     return DivFullySpaced(cls='mt-4 px-2 py-2')(
         Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
         Div(cls='flex flex-none items-center space-x-8')(
-            CenteredDiv('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
-            LAlignedDiv(
+            DivCentered('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
+            DivLAligned(
                 UkIconLink(icon='chevrons-left', button=True),
                 UkIconLink(icon='chevron-left', button=True),
                 UkIconLink(icon='chevron-right', button=True),

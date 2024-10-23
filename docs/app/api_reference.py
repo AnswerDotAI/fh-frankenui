@@ -224,14 +224,14 @@ def ex_card():
         header=Div(
             CardTitle("Header"),
             P("A card with header and footer",cls=TextFont.muted_sm)),
-        footer=LAlignedDiv(Button("Footer Submit Button")))
+        footer=DivLAligned(Button("Footer Submit Button")))
 
 # %% ../API Reference.ipynb
 def Tags(cats): return Div(cls='space-x-2')(map(Label, cats))
 
 def ex_card2_wide():
     return Card(
-        LAlignedDiv(
+        DivLAligned(
             A(Img(src="https://picsum.photos/200/200?random=12", style="width:200px"),href="#"),
             Div(cls='space-y-3 uk-width-expand')(
                 H4("Creating Custom FastHTML Tags for Markdown Rendering"),
@@ -353,7 +353,7 @@ def ex_progress():
 def ex_form():
     relationship = ["Parent",'Sibling', "Friend", "Spouse", "Significant Other", "Relative", "Child", "Other"]
     return Div(cls='space-y-4')(
-        CenteredDiv(
+        DivCentered(
             H3("Emergency Contact Form"),
             P("Please fill out the form completely", cls=TextFont.muted_sm)),
         Form(cls='space-y-4')(
@@ -365,7 +365,7 @@ def ex_form():
             LabelInput("Address Line 2", id='ad2'),
             Grid(LabelInput("City",      id='ct'), LabelInput("State",    id='st')),
             LabelInput("Zip",            id='zp'),
-            CenteredDiv(Button("Submit Form", cls=ButtonT.primary))))
+            DivCentered(Button("Submit Form", cls=ButtonT.primary))))
 
 # %% ../API Reference.ipynb
 docs_forms = create_doc_section(
@@ -470,27 +470,27 @@ def ex_fully_spaced_div():
     )
 
 def ex_centered_div():
-    return CenteredDiv(
+    return DivCentered(
         H3("Centered Title"),
         P("This content is centered both horizontally and vertically.")
     )
 
 def ex_l_aligned_div():
-    return LAlignedDiv(
+    return DivLAligned(
         Img(src="https://picsum.photos/100/100?random=1", style="max-width: 100px;"),
         H4("Left Aligned Title"),
         P("Some text that's left-aligned with the title and image.")
     )
 
 def ex_r_aligned_div():
-    return RAlignedDiv(
+    return DivRAligned(
         Button("Action", cls=ButtonT.primary),
         P("Right-aligned text"),
         Img(src="https://picsum.photos/100/100?random=3", style="max-width: 100px;")
     )
 
 def ex_v_stacked_div():
-    return VStackedDiv(
+    return DivVStacked(
         H2("Vertical Stack"),
         P("First paragraph in the stack"),
         P("Second paragraph in the stack"),
@@ -498,7 +498,7 @@ def ex_v_stacked_div():
     )
 
 def ex_h_stacked_div():
-    return HStackedDiv(
+    return DivHStacked(
         Div(H4("Column 1"), P("Content for column 1")),
         Div(H4("Column 2"), P("Content for column 2")),
         Div(H4("Column 3"), P("Content for column 3"))
@@ -509,10 +509,10 @@ def ex_dividers():
     return Div(
         P("Small Divider"),
         Divider(cls=DividerT.small),
-        CenteredDiv(
+        DivCentered(
             P("Vertical Divider"),
             Divider(cls=DividerT.vertical)),
-        CenteredDiv("Icon Divider"),
+        DivCentered("Icon Divider"),
         Divider(cls=DividerT.icon))
 
 # %% ../API Reference.ipynb
@@ -531,15 +531,15 @@ docs_layout = create_doc_section(
       cls=TextFont.muted_sm),
     DivFullySpaced,
     fn2code_string(ex_fully_spaced_div),
-    CenteredDiv,
+    DivCentered,
     fn2code_string(ex_centered_div),
-    LAlignedDiv,
+    DivLAligned,
     fn2code_string(ex_l_aligned_div),
-    RAlignedDiv,
+    DivRAligned,
     fn2code_string(ex_r_aligned_div),
-    VStackedDiv,
+    DivVStacked,
     fn2code_string(ex_v_stacked_div),
-    HStackedDiv,
+    DivHStacked,
     fn2code_string(ex_h_stacked_div),
     FlexT,
     H2("Dividers"),
@@ -722,7 +722,7 @@ docs_tables = create_doc_section(
 
 # %% ../API Reference.ipynb
 def ex_dicebear():
-    return LAlignedDiv(
+    return DivLAligned(
         DiceBearAvatar('Isaac Flath',10,10),
         DiceBearAvatar('Aaliyah',10,10),
         DiceBearAvatar('Alyssa',10,10))
@@ -736,7 +736,7 @@ def ex_icon():
         UkIcon('thumbs-up',      height=15, width=15),)        
 
 def ex_iconlink():
-    return LAlignedDiv(
+    return DivLAligned(
         UkIconLink('chevrons-right'),
         UkIconLink('chevrons-right', button=True, cls=ButtonT.primary))
 

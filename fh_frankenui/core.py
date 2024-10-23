@@ -9,7 +9,7 @@ __all__ = ['enum_to_markdown_table', 'Theme', 'TextT', 'TextFont', 'Alert', 'But
            'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List',
            'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton',
            'Modal', 'PaddingT', 'PositionT', 'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar',
-           'FlexT', 'Grid', 'DivFullySpaced', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv',
+           'FlexT', 'Grid', 'DivFullySpaced', 'DivCentered', 'DivLAligned', 'DivRAligned', 'DivVStacked', 'DivHStacked',
            'NavT', 'NavContainer', 'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi',
            'NavBarContainer', 'NavBarLSide', 'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle',
            'NavBarNavContainer', 'NavBarParentIcon', 'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle',
@@ -626,7 +626,7 @@ def DivFullySpaced(*c,                # Components
     return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def CenteredDiv(*c,      # Components
+def DivCentered(*c,      # Components
                 cls='space-y-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
                ): # Div with components centered in it
@@ -635,7 +635,7 @@ def CenteredDiv(*c,      # Components
     return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def LAlignedDiv(*c,      # Components
+def DivLAligned(*c,      # Components
                 cls='space-x-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
                ): # Div with components aligned to the left
@@ -644,7 +644,7 @@ def LAlignedDiv(*c,      # Components
     return Div(cls=(FlexT.block,FlexT.left,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def RAlignedDiv(*c,      # Components
+def DivRAligned(*c,      # Components
                 cls='space-x-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
                ): # Div with components aligned to the right
@@ -653,12 +653,12 @@ def RAlignedDiv(*c,      # Components
     return Div(cls=(FlexT.block,FlexT.right,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def VStackedDiv(*c, cls='space-y-4', **kwargs):
+def DivVStacked(*c, cls='space-y-4', **kwargs):
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../lib_nbs/01_core.ipynb
-def HStackedDiv(*c, cls='space-x-4', **kwargs):
+def DivHStacked(*c, cls='space-x-4', **kwargs):
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.row,FlexT.middle,cls), **kwargs)(*c)
 

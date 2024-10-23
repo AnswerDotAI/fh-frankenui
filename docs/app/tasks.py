@@ -52,7 +52,7 @@ def CreateTaskModal():
                      Div(Select(*map(Option,('In Progress', 'Backlog', 'Todo', 'Cancelled', 'Done')), label='Status', id='task_status')),
                      Div(Select(*map(Option, ('Low', 'Medium', 'High')), label='Priority', id='task_priority'))),
                 TextArea(label='Title', placeholder='Please describe the task that needs to be completed'),
-                RAlignedDiv(
+                DivRAligned(
                     ModalCloseButton('Cancel', cls=ButtonT.ghost),
                     ModalCloseButton('Submit', cls=ButtonT.primary),
                     cls='space-x-5'))),
@@ -120,8 +120,8 @@ def footer():
     return DivFullySpaced(cls='mt-4 px-2 py-2')(
         Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
         Div(cls='flex flex-none items-center space-x-8')(
-            CenteredDiv('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
-            LAlignedDiv(
+            DivCentered('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
+            DivLAligned(
                 UkIconLink(icon='chevrons-left', button=True),
                 UkIconLink(icon='chevron-left', button=True),
                 UkIconLink(icon='chevron-right', button=True),

@@ -124,7 +124,7 @@ library_data = [("play-circle", "Playlists"), ("music", "Songs"), ("user", "Made
 playlists_data = [("library","Recently Added"), ("library","Recently Played")]
 
 # %% ../example_music.ipynb
-def MusicSidebarLi(icon, text): return Li(A(LAlignedDiv(UkIcon(icon), P(text),cls='space-x-2')))
+def MusicSidebarLi(icon, text): return Li(A(DivLAligned(UkIcon(icon), P(text),cls='space-x-2')))
 sb = NavContainer(
     NavHeaderLi(H3("Discover")),*[MusicSidebarLi(*o) for o in discoved_data],
     NavHeaderLi(H3("Library")),*[MusicSidebarLi(*o) for o in library_data],

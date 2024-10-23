@@ -112,13 +112,13 @@
 - `def DivFullySpaced(*c, **kwargs)`
     Creates a flex div with it's components having as much space between them as possible
 
-- `def CenteredDiv(*c, **kwargs)`
+- `def DivCentered(*c, **kwargs)`
     Creates a flex div with it's components centered in it
 
-- `def LAlignedDiv(*c, **kwargs)`
+- `def DivLAligned(*c, **kwargs)`
     Creates a flex div with it's components aligned to the left
 
-- `def RAlignedDiv(*c, **kwargs)`
+- `def DivRAligned(*c, **kwargs)`
     Creates a flex div with it's components aligned to the right
 
 - `class NavT`

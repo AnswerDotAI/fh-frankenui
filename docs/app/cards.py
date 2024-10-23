@@ -36,9 +36,9 @@ AppleSvg = Svg(role="img", viewBox="0 0 24 24", cls="h-6 w-6 mr-1")(Path(d="M12.
 # %% ../example_cards.ipynb
 PaymentMethod = Card(
     Grid(
-        Button(CenteredDiv(Card1Svg, "Card"),  cls='h-20 w-full border-2 border-primary'),
-        Button(CenteredDiv(Card2Svg, "Card"),  cls='h-20 w-full'),
-        Button(CenteredDiv(AppleSvg, "Apple"), cls='h-20 w-full'),
+        Button(DivCentered(Card1Svg, "Card"),  cls='h-20 w-full border-2 border-primary'),
+        Button(DivCentered(Card2Svg, "Card"),  cls='h-20 w-full'),
+        Button(DivCentered(AppleSvg, "Apple"), cls='h-20 w-full'),
         cols=3,cls='gap-6'),
     Div(cls='space-y-4')(
         LabelInput('Name',        id='name',        placeholder='John Doe'),
@@ -127,7 +127,7 @@ ShareDocument = Card(
         Button('Copy link')),
     Div(cls='uk-divider-icon my-4'),
     H4(cls=TextFont.bold_sm)('People with access'),
-    *[LAlignedDiv(
+    *[DivLAligned(
         DiceBearAvatar(n, 10,10),
         Div(cls='flex-1')(
             P(n, cls='text-sm font-medium leading-none'),

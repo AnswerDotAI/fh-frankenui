@@ -38,7 +38,7 @@ sidebar_group2 = (('globe','Social','972'),('info','Updates','342'),('messages-s
     ('shopping-cart','Shopping','8'),('shopping-bag','Promotions','21'),)
 
 def MailSbLi(icon, title, cnt): 
-    return Li(A(LAlignedDiv(
+    return Li(A(DivLAligned(
         Span(UkIcon(icon)),Span(title),P(cnt,cls=TextFont.muted_sm),cls='space-x-2')))
 
 sidebar = Container(NavContainer(

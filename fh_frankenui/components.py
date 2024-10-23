@@ -34,7 +34,7 @@ def LAlignedTxtIcon(txt, icon, width=None, height=None, stroke_width=None, cls='
     # Good for navbards
     c = (txt if isinstance(txt, FT) else NavP(txt,cls=ifnone(txt_cls,TextFont.muted_sm)),UkIcon(icon=icon, height=height, width=width, stroke_width=stroke_width))
     if not icon_right: c = reversed(c)
-    return LAlignedDiv(*c, cls=cls)
+    return DivLAligned(*c, cls=cls)
 
 # %% ../lib_nbs/02_components.ipynb
 def LAlignedIconTxt(txt, icon, width=None, height=None, stroke_width=None, cls='space-x-2', txt_cls=None):
