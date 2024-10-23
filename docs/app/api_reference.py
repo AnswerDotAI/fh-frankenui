@@ -61,7 +61,7 @@ def render_content(c):
 
 # %% ../API Reference.ipynb
 def create_doc_section(*content, title, md_content=None):
-    return lambda: Section(H1(title,cls='mb-10'), *map(render_content, content))
+    return lambda: Titled(H1(title,cls='mb-10'), *map(render_content, content))
 
 # %% ../API Reference.ipynb
 def string2code_string(code: str) -> tuple: return eval(code), code
@@ -644,6 +644,7 @@ def ex_tabs2():
 # %% ../API Reference.ipynb
 docs_navigation = create_doc_section(
     H1("Nav, NavBar, DowDownNav, and Tab examples"),
+    Divider(),
     H2("Nav"),
     fn2code_string(ex_nav1),
     fn2code_string(ex_nav2),
