@@ -10,7 +10,7 @@ __all__ = ['sidebar_items', 'sidebar', 'forms_homepage', 'heading', 'profile_for
 from fasthtml.common import *
 from fh_frankenui import *
 from fh_frankenui.core import *
-from fh_frankenui.components import *
+ 
 
 from fasthtml.svg import *
 

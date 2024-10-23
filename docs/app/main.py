@@ -9,7 +9,7 @@ __all__ = ['app', 'rt', 'reference_fns', 'api_ref_rts', 'with_layout', 'tasks', 
 # %% ../99_main.ipynb
 from fasthtml.common import *
 import fasthtml.common as fh
-from fh_frankenui.components import *
+ 
 from fh_frankenui.core import *
 import re
 from fasthtml.components import Uk_theme_switcher

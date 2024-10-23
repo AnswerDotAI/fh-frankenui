@@ -14,7 +14,7 @@ from fasthtml.components import Uk_input_tag
 from fasthtml.svg import *
 from fh_frankenui import *
 from fh_frankenui.core import *
-from fh_frankenui.components import *
+ 
 import calendar
 
 # %% ../example_cards.ipynb

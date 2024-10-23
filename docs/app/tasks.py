@@ -11,7 +11,7 @@ __all__ = ['data', 'priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 
 from fasthtml.common import *
 import fasthtml.common as fh
 from fh_frankenui.core import *
-from fh_frankenui.components import *
+ 
 from fasthtml.svg import *
 import json
 

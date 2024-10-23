@@ -11,7 +11,7 @@ __all__ = ['rev', 'sub', 'sal', 'act', 'top_info_row', 'recent_sales', 'teams', 
 from fasthtml.common import *
 from fh_frankenui import *
 from fh_frankenui.core import *
-from fh_frankenui.components import *
+ 
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml
 import numpy as np
