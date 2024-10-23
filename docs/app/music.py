@@ -5,8 +5,9 @@
 # %% auto 0
 __all__ = ['music_items', 'file_dd_items', 'edit_actions', 'view_dd_data', 'account_dd_data', 'music_headers',
            'listen_now_albums', 'made_for_you_albums', 'music_content', 'tabs', 'discoved_data', 'library_data',
-           'playlists_data', 'sb', 'music_homepage', 'MusicLi', 'AlbumImg', 'AlbumFooter', 'Album', 'create_album_grid',
-           'podcast_tab', 'LAlignedIconTxts', 'MusicSidebarLi', 'page']
+           'playlists_data', 'sb', 'music_homepage', 'SpacedPP', 'SpacedPPs', 'NavP', 'LAlignedTxtIcon', 'MusicLi',
+           'AlbumImg', 'AlbumFooter', 'Album', 'create_album_grid', 'podcast_tab', 'LAlignedIconTxts', 'MusicSidebarLi',
+           'page']
 
 # %% ../example_music.ipynb
 from fasthtml.common import *
@@ -14,6 +15,19 @@ import fasthtml.common as fh
 from fh_frankenui import *
 from fh_frankenui.core import *
  
+
+# %% ../example_music.ipynb
+def SpacedPP(left, right=None): return DivFullySpaced(NavP(left),NavP(right) if right else '')
+
+def SpacedPPs(*c): return [SpacedPP(*tuplify(o)) for o in c]
+
+def NavP(*c, cls=TextFont.muted_sm): return P(cls=cls)(*c)
+
+def LAlignedTxtIcon(txt, icon, width=None, height=None, stroke_width=None, cls='space-x-2', icon_right=True, txt_cls=None):
+    # Good for navbards
+    c = (txt if isinstance(txt, FT) else NavP(txt,cls=ifnone(txt_cls,TextFont.muted_sm)),UkIcon(icon=icon, height=height, width=width, stroke_width=stroke_width))
+    if not icon_right: c = reversed(c)
+    return DivLAligned(*c, cls=cls)
 
 # %% ../example_music.ipynb
 def MusicLi(t,hk=''): return Li(A(DivFullySpaced(t,P(hk,cls=TextFont.muted_sm))))

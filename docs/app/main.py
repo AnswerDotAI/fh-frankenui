@@ -19,16 +19,16 @@ from utils import hjs
 app,rt = fast_app(pico=False, hdrs=(*Theme.blue.headers(),*hjs))
 
 # %% ../99_main.ipynb
-def with_layout(active):
+def with_layout(active, open_section):
     def decorator(func):
         def wrapper():
             original_content = func()
             return Body(cls="bg-background text-foreground")(
                 Div(cls="flex flex-col md:flex-row w-full")(
                     Button(UkIcon("menu",50,50,cls='mt-4'), cls="md:hidden mb-4", uk_toggle="target: #mobile-sidebar"),
-                    Div(sidebar(active), id='mobile-sidebar', hidden=True),
+                    Div(sidebar(active,open_section), id='mobile-sidebar', hidden=True),
                     Div(cls="md:flex w-full")(
-                        Div(sidebar(active), cls="hidden md:block w-1/5"),
+                        Div(sidebar(active,open_section), cls="hidden md:block w-1/5"),
                         Div(original_content, cls='md:w-4/5 w-full mr-5', id="mobile-sidebar"))))
         wrapper.__name__ = func.__name__
         return wrapper
@@ -46,33 +46,33 @@ from mail import mail_homepage
 
 # %% ../99_main.ipynb
 @rt
-@with_layout('task')
+@with_layout('task','Examples')
 def tasks():      return tasks_homepage
 @rt
-@with_layout('card')
+@with_layout('card','Examples')
 def cards():      return cards_homepage
 @rt
-@with_layout('dashboard')
+@with_layout('dashboard','Examples')
 def dashboard():  return dashboard_homepage
 @rt 
-@with_layout('form')
+@with_layout('form','Examples')
 def forms():      return forms_homepage
 @rt
-@with_layout('music')
+@with_layout('music','Examples')
 def music():      return music_homepage
 @rt
-@with_layout('auth')
+@with_layout('auth','Examples')
 def auth():       return auth_homepage
 @rt
-@with_layout('playground')
+@with_layout('playground','Examples')
 def playground(): return playground_homepage
 @rt
-@with_layout('mail')
+@with_layout('mail','Examples')
 def mail():       return mail_homepage
 
 # %% ../99_main.ipynb
 @rt
-@with_layout('getting_started')
+@with_layout('getting_started',None)
 def getting_started():
     return Container(render_md(open('GettingStarted.md').read()))
 
@@ -86,21 +86,21 @@ reference_fns = L([o for o in dir(api_reference) if o.startswith('docs_')])
 def fnname2title(ref_fn_name): return ref_fn_name[5:].replace('_',' | ').title() 
 
 # %% ../99_main.ipynb
-api_ref_rts = [(f"/{o}", rt(f"/{o}")(with_layout(fnname2title(o))(getattr(api_reference, o)))) for o in reference_fns]
+api_ref_rts = [(f"/{o}", rt(f"/{o}")(with_layout(fnname2title(o),'API Reference')(getattr(api_reference, o)))) for o in reference_fns]
 
 # %% ../99_main.ipynb
 @rt
-@with_layout('theme')
+@with_layout('theme','')
 def themeswitcher(): return Div(Uk_theme_switcher(),cls="p-12")
 
 # %% ../99_main.ipynb
 @rt
-@with_layout('llms')
+@with_layout('llms','')
 def llms():
     return Container(render_md(open('LLM Contexts.md').read()))
 
 # %% ../99_main.ipynb
-def sidebar(active=''):
+def sidebar(active,open_section):
     def create_li(title, href):
         is_active = title.lower() == active.lower()
         return Li(A(title, href=href), cls="uk-active" if is_active else "")
@@ -112,8 +112,9 @@ def sidebar(active=''):
             A(DivFullySpaced("API Reference")),
             NavContainer(
                 *[create_li(fnname2title(o), f"/{o}") for o in reference_fns],
-                parent=False
+                parent=False,  
             ),
+            cls='uk-open' if open_section=='API Reference' else ''
         ),
         NavParentLi(
             A(DivFullySpaced('Examples')),
@@ -130,9 +131,10 @@ def sidebar(active=''):
                 ]],
                 parent=False
             ),
+            cls='uk-open' if open_section=='Examples' else ''
         ),
         create_li("Theme", themeswitcher),
-        uk_nav=False,
+        uk_nav=True,
         cls=(NavT.primary, "space-y-4 p-4 w-full md:w-full")
     )
 

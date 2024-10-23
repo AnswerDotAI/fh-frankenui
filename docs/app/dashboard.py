@@ -54,7 +54,7 @@ recent_sales = Card(
         H3("Recent Sales"),
         P("You made 265 sales this month.", cls=TextFont.muted_sm)),
 
-cls='lg:col-span-3')
+cls='col-span-3')
 
 # %% ../example_dashboard.ipynb
 @matplotlib2fasthtml
@@ -116,9 +116,9 @@ def page():
             alt=True),
 
         top_info_row,
-        Grid(Card(generate_chart(10),cls='lg:col-span-4'),
+        Grid(Card(generate_chart(10),cls='col-span-4'),
             recent_sales,
-            gap=4,cls='lg:grid-cols-7'))
+            gap=4,cols=7))
 
 # %% ../example_dashboard.ipynb
 dashboard_homepage = page()

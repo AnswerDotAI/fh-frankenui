@@ -4,8 +4,9 @@
 
 # %% auto 0
 __all__ = ['data', 'priority_dd', 'rows_per_page_dd', 'status_dd', 'hotkeys_a', 'hotkeys_b', 'avatar_opts', 'page_heading',
-           'table_controls', 'task_columns', 'tasks_table', 'tasks_ui', 'tasks_homepage', 'create_hotkey_li',
-           'CreateTaskModal', 'task_dropdown', 'header_render', 'cell_render', 'footer']
+           'table_controls', 'task_columns', 'tasks_table', 'tasks_ui', 'tasks_homepage', 'NavP', 'LAlignedTxtIcon',
+           'LAlignedIconTxt', 'SpacedPP', 'SpacedPPs', 'create_hotkey_li', 'CreateTaskModal', 'task_dropdown',
+           'header_render', 'cell_render', 'footer']
 
 # %% ../example_tasks.ipynb
 from fasthtml.common import *
@@ -14,6 +15,24 @@ from fh_frankenui.core import *
  
 from fasthtml.svg import *
 import json
+
+# %% ../example_tasks.ipynb
+def NavP(*c, cls=TextFont.muted_sm): return P(cls=cls)(*c)
+
+def LAlignedTxtIcon(txt, icon, width=None, height=None, stroke_width=None, cls='space-x-2', icon_right=True, txt_cls=None):
+    c = (txt if isinstance(txt, FT) else NavP(txt,cls=ifnone(txt_cls,TextFont.muted_sm)),UkIcon(icon=icon, height=height, width=width, stroke_width=stroke_width))
+    if not icon_right: c = reversed(c)
+    return DivLAligned(*c, cls=cls)
+
+def LAlignedIconTxt(txt, icon, width=None, height=None, stroke_width=None, cls='space-x-2', txt_cls=None):
+    # Good for navbars
+    return LAlignedTxtIcon(txt=txt, icon=icon,  width=width, stroke_width=stroke_width, cls=cls, icon_right=False, txt_cls=txt_cls)
+
+
+def SpacedPP(left, right=None): return DivFullySpaced(NavP(left),NavP(right) if right else '')
+
+# %% ../lib_nbs/02_components.ipynb
+def SpacedPPs(*c): return [SpacedPP(*tuplify(o)) for o in c]
 
 # %% ../example_tasks.ipynb
 with open('data/status_list.json', 'r') as f: data     = json.load(f)
