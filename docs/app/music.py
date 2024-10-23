@@ -16,7 +16,7 @@ from fh_frankenui.core import *
 from fh_frankenui.components import *
 
 # %% ../example_music.ipynb
-def MusicLi(t,hk=''): return Li(A(FullySpacedDiv(t,P(hk,cls=TextFont.muted_sm))))
+def MusicLi(t,hk=''): return Li(A(DivFullySpaced(t,P(hk,cls=TextFont.muted_sm))))
 
 music_items = [("About Music", ""),("Preferences", "⌘"),("Hide Music", "⌘H"),("Hide Others", "⇧⌘H"),("Quit Music", "⌘Q")]
 
@@ -40,8 +40,8 @@ music_headers =NavBarContainer(
             Li(A("Edit")),
                 NavBarNavContainer(
                     *map(lambda x: MusicLi(*x), edit_actions),
-                    Li(A(FullySpacedDiv("Smart Dictation",UkIcon("mic")))),
-                    Li(A(FullySpacedDiv("Emojis & Symbols",UkIcon("globe"))))),
+                    Li(A(DivFullySpaced("Smart Dictation",UkIcon("mic")))),
+                    Li(A(DivFullySpaced("Emojis & Symbols",UkIcon("globe"))))),
             Li(A("View"),
                NavBarNavContainer(map(lambda x: MusicLi(x), view_dd_data))),
             Li(A("Account"),

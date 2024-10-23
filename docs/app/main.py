@@ -113,14 +113,14 @@ def sidebar(active=''):
         create_li("Getting Started", getting_started),
         create_li("LLMs", llms),
         NavParentLi(
-            A(FullySpacedDiv("API Reference")),
+            A(DivFullySpaced("API Reference")),
             NavContainer(
                 *[create_li(fnname2title(o), f"/{o}") for o in reference_fns],
                 parent=False
             ),
         ),
         NavParentLi(
-            A(FullySpacedDiv('Examples')),
+            A(DivFullySpaced('Examples')),
             NavContainer(
                 *[create_li(title, href) for title, href in [
                     ('Task', tasks),

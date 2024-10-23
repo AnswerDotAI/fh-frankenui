@@ -9,7 +9,7 @@ __all__ = ['enum_to_markdown_table', 'Theme', 'TextT', 'TextFont', 'Alert', 'But
            'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List',
            'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton',
            'Modal', 'PaddingT', 'PositionT', 'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar',
-           'FlexT', 'Grid', 'FullySpacedDiv', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv',
+           'FlexT', 'Grid', 'DivFullySpaced', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv',
            'NavT', 'NavContainer', 'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi',
            'NavBarContainer', 'NavBarLSide', 'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle',
            'NavBarNavContainer', 'NavBarParentIcon', 'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle',
@@ -617,7 +617,7 @@ def Grid(*div,         # Divs/Containers that should be divided into a grid
     return Div(cls=(f'grid grid-cols-{cols}',cls), **kwargs)(*div)
 
 # %% ../lib_nbs/01_core.ipynb
-def FullySpacedDiv(*c,                # Components
+def DivFullySpaced(*c,                # Components
                    cls='uk-width-1-1',# Classes for outer div
                    **kwargs           # Additional args for outer div
                   ):                  # Div with spaced components via flex classes

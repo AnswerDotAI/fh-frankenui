@@ -59,7 +59,7 @@ def CreateTaskModal():
         id='TaskForm')
 
 # %% ../example_tasks.ipynb
-page_heading = FullySpacedDiv(cls='space-y-2')(
+page_heading = DivFullySpaced(cls='space-y-2')(
             Div(cls='space-y-2')(
                 H2('Welcome back!'),P("Here's a list of your tasks for this month!", cls=TextFont.muted_sm)),
             Div(DiceBearAvatar("sveltcult",8,8),avatar_opts))
@@ -67,9 +67,9 @@ page_heading = FullySpacedDiv(cls='space-y-2')(
 # %% ../example_tasks.ipynb
 table_controls =(Input(cls='w-[250px]',placeholder='Filter task'),
      Button("Status"),
-     DropDownNavContainer(map(NavCloseLi,[A(FullySpacedDiv(P(a['status']), P(a['count'])),cls=TextT.capitalize) for a in status_dd])), 
+     DropDownNavContainer(map(NavCloseLi,[A(DivFullySpaced(P(a['status']), P(a['count'])),cls=TextT.capitalize) for a in status_dd])), 
      Button("Priority"),
-     DropDownNavContainer(map(NavCloseLi,[A(FullySpacedDiv(LAlignedIconTxt(a['priority'], icon="check"), a['count']),cls=TextT.capitalize) for a in priority_dd])),
+     DropDownNavContainer(map(NavCloseLi,[A(DivFullySpaced(LAlignedIconTxt(a['priority'], icon="check"), a['count']),cls=TextT.capitalize) for a in priority_dd])),
      Button("View"),
      DropDownNavContainer(map(NavCloseLi,[A(LAlignedIconTxt(o, icon="check")) for o in ['Title','Status','Priority']])),
      Button('Create Task',cls=(ButtonT.primary, TextFont.bold_sm), uk_toggle="target: #TaskForm"))
@@ -117,7 +117,7 @@ tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(T
 # %% ../example_tasks.ipynb
 def footer():
     hw_cls = 'h-4 w-4'
-    return FullySpacedDiv(cls='mt-4 px-2 py-2')(
+    return DivFullySpaced(cls='mt-4 px-2 py-2')(
         Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
         Div(cls='flex flex-none items-center space-x-8')(
             CenteredDiv('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
@@ -129,7 +129,7 @@ def footer():
 
 # %% ../example_tasks.ipynb
 tasks_ui = Div(
-    FullySpacedDiv(cls='mt-8')(
+    DivFullySpaced(cls='mt-8')(
         Div(cls='flex flex-1 gap-4')(table_controls)),
     tasks_table,
     footer(),)

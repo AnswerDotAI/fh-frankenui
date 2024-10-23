@@ -18,7 +18,7 @@ from .core import *
 def NavP(*c, cls=TextFont.muted_sm): return P(cls=cls)(*c)
 
 # %% ../lib_nbs/02_components.ipynb
-def SpacedPP(left, right=None): return FullySpacedDiv(NavP(left),NavP(right) if right else '')
+def SpacedPP(left, right=None): return DivFullySpaced(NavP(left),NavP(right) if right else '')
 
 # %% ../lib_nbs/02_components.ipynb
 def SpacedPPs(*c): return [SpacedPP(*tuplify(o)) for o in c]
@@ -27,7 +27,7 @@ def SpacedPPs(*c): return [SpacedPP(*tuplify(o)) for o in c]
 def SpacedTxtIcon(txt, icon, width=None, height=None, stroke_width=None, icon_right=True):
     c = (NavP(txt),UkIcon(icon=icon, height=height, width=width, stroke_width=stroke_width))
     if not icon_right: c = reversed(c)
-    return FullySpacedDiv(*c)  
+    return DivFullySpaced(*c)  
 
 # %% ../lib_nbs/02_components.ipynb
 def LAlignedTxtIcon(txt, icon, width=None, height=None, stroke_width=None, cls='space-x-2', icon_right=True, txt_cls=None):

@@ -78,7 +78,7 @@ team_dropdown = UkSelect(
 # %% ../example_dashboard.ipynb
 hotkeys = [('Profile','⇧⌘P'),('Billing','⌘B'),('Settings','⌘S'),('New Team', ''), ('Logout', '')]
 
-def NavSpacedLi(t,s): return NavCloseLi(A(FullySpacedDiv(P(t),P(s,cls=TextFont.muted_sm))))
+def NavSpacedLi(t,s): return NavCloseLi(A(DivFullySpaced(P(t),P(s,cls=TextFont.muted_sm))))
 
 avatar_dropdown = Div(
       DiceBearAvatar('Alicia Koch',8,8),

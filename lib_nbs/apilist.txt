@@ -109,7 +109,7 @@
 - `def Grid(*div, **kwargs)`
     Creates a grid with the given number of columns, often used for a grid of cards
 
-- `def FullySpacedDiv(*c, **kwargs)`
+- `def DivFullySpaced(*c, **kwargs)`
     Creates a flex div with it's components having as much space between them as possible
 
 - `def CenteredDiv(*c, **kwargs)`

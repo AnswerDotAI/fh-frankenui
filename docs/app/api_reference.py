@@ -44,10 +44,10 @@ def render_content(c):
         _id = 'f'+str(uuid4())
         _card = Card(
             Button(
-                FullySpacedDiv(UkIcon('corner-down-right', 20, 20, 3),"See Source"), 
+                DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Source"), 
                 uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary),
             Button(
-                FullySpacedDiv(UkIcon('corner-down-right', 20, 20, 3),"See Output"), 
+                DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Output"), 
                 uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary, hidden=True),
             Div(c[0], id=_id),
             Div(Pre(Code(c[1])), id=_id, hidden=True, cls="mockup-code"),
@@ -236,8 +236,8 @@ def ex_card2_wide():
             Div(cls='space-y-3 uk-width-expand')(
                 H4("Creating Custom FastHTML Tags for Markdown Rendering"),
                 P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles"),
-                FullySpacedDiv(map(Span, ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
-                FullySpacedDiv(
+                DivFullySpaced(map(Span, ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
+                DivFullySpaced(
                     Tags(["FastHTML", "HTMX", "Web Apps"]),
                     Button("Read", cls=(ButtonT.primary,'h-6'))))))
 
@@ -249,8 +249,8 @@ def ex_card2_tall():
             Div(cls='space-y-3 uk-width-expand')(
                 H4("Creating Custom FastHTML Tags for Markdown Rendering"),
                 P("A step by step tutorial to rendering markdown in FastHTML using zero-md inside of DaisyUI chat bubbles"),
-                FullySpacedDiv(map(Span, ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
-                FullySpacedDiv(
+                DivFullySpaced(map(Span, ["Isaac Flath", "20-October-2024"]), cls=TextFont.muted_sm),
+                DivFullySpaced(
                     Tags(["FastHTML", "HTMX", "Web Apps"]),
                     Button("Read", cls=(ButtonT.primary,'h-6'))))))
 
@@ -463,7 +463,7 @@ def ex_product_grid():
 
 # %% ../API Reference.ipynb
 def ex_fully_spaced_div():
-    return FullySpacedDiv(
+    return DivFullySpaced(
         Button("Left", cls=ButtonT.primary),
         Button("Center", cls=ButtonT.secondary),
         Button("Right", cls=ButtonT.danger)
@@ -529,7 +529,7 @@ docs_layout = create_doc_section(
       A("Flex Box Froggy", href="https://flexboxfroggy.com/", cls=AT.muted), 
       " to get an understanding of flex box.",
       cls=TextFont.muted_sm),
-    FullySpacedDiv,
+    DivFullySpaced,
     fn2code_string(ex_fully_spaced_div),
     CenteredDiv,
     fn2code_string(ex_centered_div),

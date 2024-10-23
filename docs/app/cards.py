@@ -62,7 +62,7 @@ ReportIssue = Card(
     Div(FormLabel('Tags', fr='#tags'),
         Uk_input_tag(name="Tags",state="danger", value="Spam,Invalid", uk_cloak=True, id='tags')),
     header=(H3('Report an issue'),P(cls=TextFont.muted_sm)('What area are you having problems with')),
-    footer = FullySpacedDiv(Button(cls=ButtonT.ghost  )('Cancel'),
+    footer = DivFullySpaced(Button(cls=ButtonT.ghost  )('Cancel'),
                             Button(cls=ButtonT.primary)('Submit')))
 
 

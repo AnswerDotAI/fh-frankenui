@@ -1348,7 +1348,7 @@ __all__ = ['enum_to_markdown_table', 'Theme', 'TextT', 'TextFont', 'Alert', 'But
            'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader',
            'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
            'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'GridT', 'Grid',
-           'FullySpacedDiv', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'NavT',
+           'DivFullySpaced', 'CenteredDiv', 'LAlignedDiv', 'RAlignedDiv', 'VStackedDiv', 'HStackedDiv', 'NavT',
            'NavContainer', 'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer',
            'NavBarLSide', 'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer',
            'NavBarParentIcon', 'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle', 'CardHeader', 'CardBody',
@@ -1931,7 +1931,7 @@ def Grid(*div,      # Divs/Containers that should be divided into a grid
     return Div(cls=(f'grid grid-cols-{cols}',cls), **kwargs)(*div)
 
 # %% ../lib_nbs/01_core.ipynb
-def FullySpacedDiv(*c,                # Components
+def DivFullySpaced(*c,                # Components
                    cls='uk-width-1-1',# Classes for outer div
                    **kwargs           # Additional args for outer div
                   ):                  # Div with spaced components via flex classes
@@ -2286,7 +2286,7 @@ def render_md(md_content):
 - `def Grid(*div, **kwargs)`
     Creates a grid with the given number of columns, often used for a grid of cards
 
-- `def FullySpacedDiv(*c, **kwargs)`
+- `def DivFullySpaced(*c, **kwargs)`
     Creates a flex div with it's components having as much space between them as possible
 
 - `def CenteredDiv(*c, **kwargs)`
@@ -2428,7 +2428,7 @@ ReportIssue = Card(
     Div(FormLabel('Tags', fr='#tags'),
         Uk_input_tag(name="Tags",state="danger", value="Spam,Invalid", uk_cloak=True, id='tags')),
     header=(H3('Report an issue'),P(cls=TextFont.muted_sm)('What area are you having problems with')),
-    footer = FullySpacedDiv(Button(cls=ButtonT.ghost  )('Cancel'),
+    footer = DivFullySpaced(Button(cls=ButtonT.ghost  )('Cancel'),
                             Button(cls=ButtonT.primary)('Submit')))
 
 
@@ -2610,7 +2610,7 @@ team_dropdown = UkSelect(
 # %% ../example_dashboard.ipynb
 hotkeys = [('Profile','⇧⌘P'),('Billing','⌘B'),('Settings','⌘S'),('New Team', ''), ('Logout', '')]
 
-def NavSpacedLi(t,s): return NavCloseLi(A(FullySpacedDiv(P(t),P(s,cls=TextFont.muted_sm))))
+def NavSpacedLi(t,s): return NavCloseLi(A(DivFullySpaced(P(t),P(s,cls=TextFont.muted_sm))))
 
 avatar_dropdown = Div(
       DiceBearAvatar('Alicia Koch',8,8),
@@ -2978,7 +2978,7 @@ from fh_frankenui.core import *
 from fh_frankenui.components import *
 
 # %% ../example_music.ipynb
-def MusicLi(t,hk=''): return Li(A(FullySpacedDiv(t,P(hk,cls=TextFont.muted_sm))))
+def MusicLi(t,hk=''): return Li(A(DivFullySpaced(t,P(hk,cls=TextFont.muted_sm))))
 
 music_items = [("About Music", ""),("Preferences", "⌘"),("Hide Music", "⌘H"),("Hide Others", "⇧⌘H"),("Quit Music", "⌘Q")]
 
@@ -3002,8 +3002,8 @@ music_headers =NavBarContainer(
             Li(A("Edit")),
                 NavBarNavContainer(
                     *map(lambda x: MusicLi(*x), edit_actions),
-                    Li(A(FullySpacedDiv("Smart Dictation",UkIcon("mic")))),
-                    Li(A(FullySpacedDiv("Emojis & Symbols",UkIcon("globe"))))),
+                    Li(A(DivFullySpaced("Smart Dictation",UkIcon("mic")))),
+                    Li(A(DivFullySpaced("Emojis & Symbols",UkIcon("globe"))))),
             Li(A("View"),
                NavBarNavContainer(map(lambda x: MusicLi(x), view_dd_data))),
             Li(A("Account"),
@@ -3253,7 +3253,7 @@ def CreateTaskModal():
         id='TaskForm')
 
 # %% ../example_tasks.ipynb
-page_heading = FullySpacedDiv(cls='space-y-2')(
+page_heading = DivFullySpaced(cls='space-y-2')(
             Div(cls='space-y-2')(
                 H2('Welcome back!'),P("Here's a list of your tasks for this month!", cls=TextFont.muted_sm)),
             Div(DiceBearAvatar("sveltcult",8,8),avatar_opts))
@@ -3261,9 +3261,9 @@ page_heading = FullySpacedDiv(cls='space-y-2')(
 # %% ../example_tasks.ipynb
 table_controls =(Input(cls='w-[250px]',placeholder='Filter task'),
      Button("Status"),
-     DropDownNavContainer(map(NavCloseLi,[A(FullySpacedDiv(P(a['status']), P(a['count'])),cls=TextT.capitalize) for a in status_dd])), 
+     DropDownNavContainer(map(NavCloseLi,[A(DivFullySpaced(P(a['status']), P(a['count'])),cls=TextT.capitalize) for a in status_dd])), 
      Button("Priority"),
-     DropDownNavContainer(map(NavCloseLi,[A(FullySpacedDiv(LAlignedIconTxt(a['priority'], icon="check"), a['count']),cls=TextT.capitalize) for a in priority_dd])),
+     DropDownNavContainer(map(NavCloseLi,[A(DivFullySpaced(LAlignedIconTxt(a['priority'], icon="check"), a['count']),cls=TextT.capitalize) for a in priority_dd])),
      Button("View"),
      DropDownNavContainer(map(NavCloseLi,[A(LAlignedIconTxt(o, icon="check")) for o in ['Title','Status','Priority']])),
      Button('Create Task',cls=(ButtonT.primary, TextFont.bold_sm), uk_toggle="target: #TaskForm"))
@@ -3311,7 +3311,7 @@ tasks_table = Div(cls='uk-overflow-auto mt-4 rounded-md border border-border')(T
 # %% ../example_tasks.ipynb
 def footer():
     hw_cls = 'h-4 w-4'
-    return FullySpacedDiv(cls='mt-4 px-2 py-2')(
+    return DivFullySpaced(cls='mt-4 px-2 py-2')(
         Div('1 of 100 row(s) selected.', cls='flex-1 text-sm text-muted-foreground'),
         Div(cls='flex flex-none items-center space-x-8')(
             CenteredDiv('Page 1 of 10', cls='w-[100px] text-sm font-medium'),
@@ -3323,7 +3323,7 @@ def footer():
 
 # %% ../example_tasks.ipynb
 tasks_ui = Div(
-    FullySpacedDiv(cls='mt-8')(
+    DivFullySpaced(cls='mt-8')(
         Div(cls='flex flex-1 gap-4')(table_controls)),
     tasks_table,
     footer(),)
