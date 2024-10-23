@@ -457,8 +457,7 @@ def ex_product_grid():
         ) for p in products
     ]
     
-    return Grid(*product_cards, cols=1,
-                cls=(GridT.small, "gap-4 sm:grid-cols-2 md:grid-cols-3"))
+    return Grid(*product_cards, cols_lg=3)
 
 
 # %% ../API Reference.ipynb
@@ -521,7 +520,6 @@ docs_layout = create_doc_section(
     H2("Grid"),
     fn2code_string(ex_grid),
     Grid,
-    GridT,
     H4("Practical Grid Example"),
     fn2code_string(ex_product_grid),
     H2("Flex"),
@@ -691,13 +689,13 @@ def ex_tables1():
 def ex_tables2():
     def body_render(k, v):
         match k.lower():
-            case 'name': return Td(v['name'], cls='font-bold')
-            case 'age':  return Td(f"{v['age']} years")
-            case _:      return Td(v[k.lower()])
+            case 'name': return Td(v, cls='font-bold')
+            case 'age':  return Td(f"{v} years")
+            case _:      return Td(v)
 
     header_data = ['Name',          'Age',     'City']
-    body_data =  [{'name': 'Alice', 'age': 30, 'city': 'New York'},
-                  {'name': 'Bob',   'age': 25, 'city': 'London'}]
+    body_data   =[{'Name': 'Alice', 'Age': 30, 'City': 'New York'},
+                  {'Name': 'Bob',   'Age': 25, 'City': 'London'}]
 
     return TableFromDicts(header_data, body_data, 
         header_cell_render=lambda v: Th(v.upper()), 

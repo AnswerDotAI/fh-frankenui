@@ -31,7 +31,7 @@ sal = InfoCard("Sales", "+12,234", "+19% from last month")
 act = InfoCard("Active Now", "+573", "+201 since last hour")
 
 # %% ../example_dashboard.ipynb
-top_info_row = Grid(rev,sub,sal,act,cols=4, cls=GridT.small)
+top_info_row = Grid(rev,sub,sal,act,cols=4)
 
 # %% ../example_dashboard.ipynb
 def AvatarItem(name, email, amount):

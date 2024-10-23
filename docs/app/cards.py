@@ -55,7 +55,6 @@ severity_opts = ('Severity 1 (Highest)', 'Severity 2', 'Severity 3', 'Severity 4
 ReportIssue = Card(
     Grid(Div(LabelUkSelect(*Options(*area_opts),    label='Area',    id='area')),
          Div(LabelUkSelect(*Options(*severity_opts),label='Severity',id='area')),
-         cls=GridT.small,
          cols=2),
     LabelInput(    label='Subject',    placeholder='I need help with', id='subject'),
     LabelTextArea( label='Description',placeholder='Please include all information relevant to your issue', id='description'),
@@ -159,8 +158,7 @@ def page():
                       (PaymentMethod,CreateAccount),
                       (TeamMembers, ShareDocument,DateCard,Notifications),
                       (ReportIssue,FrankenUI,CookieSettings))),
-                     
-            cols=1, cls=(GridT.small,'md:grid-cols-3', 'sm:grid-cols-2'),
+         cols_lg=3,
        )
 
 # %% ../example_cards.ipynb

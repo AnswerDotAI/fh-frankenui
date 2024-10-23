@@ -93,13 +93,14 @@ def header_render(col):
         case _:         return Th(col, cls=cls)
 
 # %% ../example_tasks.ipynb
-def cell_render(col, row):
+def cell_render(col, val):
     def _Td(*args,cls='', **kwargs): return Td(*args, cls=f'p-2 {cls}',**kwargs)
     match col:
-        case "Done":  return _Td(shrink=True)(CheckboxX(selected=row['selected']))
-        case "Task":  return _Td(row["id"])
-        case "Title": return _Td(cls='max-w-[500px] truncate', expand=True)(row["title"], cls='font-medium')
-        case "Status" | "Priority": return _Td(cls='uk-text-nowrap uk-text-capitalize')(Span(row[col.lower()]))
+        case "Done":  
+            return _Td(shrink=True)(CheckboxX(selected=val))
+        case "Task":  return _Td(val)
+        case "Title": return _Td(cls='max-w-[500px] truncate', expand=True)(val, cls='font-medium')
+        case "Status" | "Priority": return _Td(cls='uk-text-nowrap uk-text-capitalize')(Span(val))
         case "Actions": return _Td(cls='uk-table-shrink')(task_dropdown())
         case _: raise ValueError(f"Unknown column: {col}")
 

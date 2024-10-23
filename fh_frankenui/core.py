@@ -610,11 +610,11 @@ def Grid(*div,         # Divs/Containers that should be divided into a grid
         ):
     """Creates a grid with the given number of columns, often used for a grid of cards"""
     cols = 1
-    cols_sm = cols_sm if cols_sm else min(len(div), 2)
-    cols_md = cols_md if cols_md else min(len(div), 3)
-    cols_lg = cols_lg if cols_lg else min(len(div), 5)
+    cols_sm = max(cols_sm if cols_sm else min(len(div), 2),cols)
+    cols_md = max(cols_md if cols_md else min(len(div), 3),cols)
+    cols_lg = max(cols_lg if cols_lg else min(len(div), 5),cols)
     cls = stringify(cls)
-    return Div(cls=(f'grid grid-cols-{cols}',cls), **kwargs)(*div)
+    return Div(cls=(f'grid grid-cols-{cols} sm:grid-cols-{cols_sm} md:grid-cols-{cols_md} lg:grid-cols-{cols_lg}',cls), **kwargs)(*div)
 
 # %% ../lib_nbs/01_core.ipynb
 def DivFullySpaced(*c,                # Components
