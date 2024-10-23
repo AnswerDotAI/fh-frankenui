@@ -457,7 +457,8 @@ def ex_product_grid():
         ) for p in products
     ]
     
-    return Grid(*product_cards, cols=1, cls=(GridT.small, "gap-4 sm:grid-cols-2 md:grid-cols-3"))
+    return Grid(*product_cards, cols=1,
+                cls=(GridT.small, "gap-4 sm:grid-cols-2 md:grid-cols-3"))
 
 
 # %% ../API Reference.ipynb
