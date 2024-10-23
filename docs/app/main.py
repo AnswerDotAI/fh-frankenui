@@ -27,13 +27,9 @@ def with_layout(active):
                 Div(cls="flex flex-col md:flex-row w-full")(
                     Button(UkIcon("menu",50,50,cls='mt-4'), cls="md:hidden mb-4", uk_toggle="target: #mobile-sidebar"),
                     Div(sidebar(active), id='mobile-sidebar', hidden=True),
-                    
                     Div(cls="md:flex w-full")(
                         Div(sidebar(active), cls="hidden md:block w-1/5"),
-                        Div(original_content, cls='md:w-4/5 w-full mr-5', id="mobile-sidebar")
-                    )
-                ),
-            )
+                        Div(original_content, cls='md:w-4/5 w-full mr-5', id="mobile-sidebar"))))
         wrapper.__name__ = func.__name__
         return wrapper
     return decorator

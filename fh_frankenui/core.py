@@ -63,23 +63,6 @@ def _headers_theme(color):
           ''')
 
 # %% ../lib_nbs/01_core.ipynb
-## Find a better way
-# Iconnavfix = fh.Script('''
-# window.setEmptyATagSize = function() {
-#     const emptyATags = document.querySelectorAll('a:empty');
-#     emptyATags.forEach(tag => {
-#         tag.style.height = '0';
-#         tag.style.width = '0';
-#         tag.style.display = 'inline-block';
-#     });
-# }
-
-# // Run on load and after any dynamic content changes
-# window.addEventListener('load', setEmptyATagSize);
-# document.addEventListener('htmx:afterSettle', setEmptyATagSize);
-# ''')
-
-# %% ../lib_nbs/01_core.ipynb
 class Theme(Enum):
     def _generate_next_value_(name, start, count, last_values): return name
     slate = auto()
@@ -601,20 +584,21 @@ class FlexT(VEnum):
 
 # %% ../lib_nbs/01_core.ipynb
 def Grid(*div,         # Divs/Containers that should be divided into a grid
-         cols=None,    # smallest size (defaults to 1)
+         cols_min=None, # defaults to min(len(div),1)
          cols_sm=None, # defaults to min(len(div),2)
          cols_md=None, # defaults to min(len(div),3)
-         cols_lg=None, # defaults to min(len(div),5)
+         cols_lg=None, # defaults to min(len(div),4)
+         cols=None,    # Size at every breakpoint
          cls='gap-4',  # Additional classes for Grid Div
          **kwargs      # Additional args for Grid Div
         ):
     """Creates a grid with the given number of columns, often used for a grid of cards"""
-    cols = 1
-    cols_sm = max(cols_sm if cols_sm else min(len(div), 2),cols)
-    cols_md = max(cols_md if cols_md else min(len(div), 3),cols)
-    cols_lg = max(cols_lg if cols_lg else min(len(div), 5),cols)
+    cols_min = cols_min if cols_min else cols if cols else 1
+    cols_sm = cols_sm if cols_sm else cols if cols else max(min(len(div), 2), cols_min+1)
+    cols_md = cols_md if cols_md else cols if cols else max(min(len(div), 3), cols_min+2)
+    cols_lg = cols_lg if cols_lg else cols if cols else max(min(len(div), 3), cols_min+2)
     cls = stringify(cls)
-    return Div(cls=(f'grid grid-cols-{cols} sm:grid-cols-{cols_sm} md:grid-cols-{cols_md} lg:grid-cols-{cols_lg}',cls), **kwargs)(*div)
+    return Div(cls=(f'grid grid-cols-{cols_min} sm:grid-cols-{cols_sm} md:grid-cols-{cols_md} lg:grid-cols-{cols_lg}',cls), **kwargs)(*div)
 
 # %% ../lib_nbs/01_core.ipynb
 def DivFullySpaced(*c,                # Components
