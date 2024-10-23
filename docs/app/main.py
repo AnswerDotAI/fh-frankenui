@@ -17,7 +17,7 @@ from fasthtml.components import Uk_theme_switcher
 from utils import hjs
 
 # %% ../99_main.ipynb
-app,rt = fast_app(pico=False, hdrs=(*Theme.blue.headers(),*hjs), bodykw={'hx-history-restore':"true"})
+app,rt = fast_app(pico=False, hdrs=(*Theme.blue.headers(),*hjs)) #  bodykw={'hx-history-restore':"true"}
 
 # %% ../99_main.ipynb
 def is_htmx(request=None): return request and 'hx-request' in request.headers
