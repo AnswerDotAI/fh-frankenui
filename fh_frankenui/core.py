@@ -99,9 +99,7 @@ class Theme(Enum):
             fh.Script( type="module", src ="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js"),
             fh.Script( type="module", src ="https://unpkg.com/franken-ui@1.1.0/dist/js/icon.iife.js"),
             fh.Script(src="https://cdn.tailwindcss.com"),
-            _headers_theme(self.value),
-#             Iconnavfix
-           )
+            _headers_theme(self.value),)
 
 # %% ../lib_nbs/01_core.ipynb
 class TextT(VEnum):

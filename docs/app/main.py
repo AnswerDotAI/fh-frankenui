@@ -17,7 +17,7 @@ from fasthtml.components import Uk_theme_switcher
 from utils import hjs
 
 # %% ../99_main.ipynb
-app,rt = fast_app(pico=False, hdrs=(*Theme.blue.headers(),*hjs)) #  bodykw={'hx-history-restore':"true"}
+app,rt = fast_app(pico=False, hdrs=(*Theme.blue.headers(),*hjs))
 
 # %% ../99_main.ipynb
 def is_htmx(request=None): return request and 'hx-request' in request.headers
@@ -33,7 +33,7 @@ def with_layout(active, open_section, original_content):
             Div(sidebar(active,open_section), id='mobile-sidebar', hidden=True),
             Div(cls="md:flex w-full")(
                 Div(sidebar(active,open_section), cls="hidden md:block w-1/5"),
-                Div(original_content, cls='md:w-4/5 w-full mr-5', id="content", hx_history_elt=True)))
+                Div(original_content, cls='md:w-4/5 w-full mr-5', id="content", )))
 
 # %% ../99_main.ipynb
 from tasks import tasks_homepage
