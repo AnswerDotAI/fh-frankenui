@@ -138,7 +138,7 @@ ShareDocument = Card(
 DateCard = Card(Button('Jan 20, 2024 - Feb 09, 2024'))
 
 # %% ../example_cards.ipynb
-section_content =(('bell','Everything',"Email digest, mentions & all activity."),
+section_content =(('bell','Everything',"Email digest, mentions & all activity."), 
                   ('user',"Available","Only mentions and comments"),
                   ('ban',"Ignoring","Turn of all notifications"))
 

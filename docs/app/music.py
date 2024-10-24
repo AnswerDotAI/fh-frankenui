@@ -148,7 +148,7 @@ sb = NavContainer(
 
 # %% ../example_music.ipynb
 def page():
-    return Div(Container(music_headers,cls='py-8'),UkHSplit(),
+    return Div(DivContainer(music_headers,cls='py-8'),UkHSplit(),
         Grid(sb,
             Div(cls="col-span-4 border-l border-border")(
                 Div(cls="px-8 py-6")(

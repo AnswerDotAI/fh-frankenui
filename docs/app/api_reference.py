@@ -207,7 +207,7 @@ def ex_articles():
 
 # %% ../API Reference.ipynb
 def ex_containers():
-    return Container(
+    return DivContainer(
         "This is a sample container with custom styling.",
         cls=ContainerT.xsmall,
         style="background-color: #FFA500; color: #000000")
@@ -618,7 +618,7 @@ def ex_navdrop():
 
 # %% ../API Reference.ipynb
 def ex_tabs1():
-    return Container(
+    return DivContainer(
         TabContainer(
             Li(A("Active",href='#', cls='uk-active')),
             Li(A("Item",href='#')),
@@ -634,7 +634,7 @@ def ex_tabs1():
 
 # %% ../API Reference.ipynb
 def ex_tabs2():
-    return Container(
+    return DivContainer(
         TabContainer(
             Li(A("Active",href='javascript:void(0);', cls='uk-active')),
             Li(A("Item",href='javascript:void(0);')),
