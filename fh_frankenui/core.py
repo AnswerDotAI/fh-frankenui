@@ -159,7 +159,7 @@ def Button(*c: Union[str, FT],
            submit=True
            **kwargs
           ) -> FT:
-    "A Button with Styling"
+    "A Button with Styling (defaults to `type=submit` for form submission)"
     return fh.Button(*c, cls=('uk-button', stringify(cls)), type='submit' if submit else 'button', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
