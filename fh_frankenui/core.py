@@ -156,10 +156,11 @@ class ButtonT(VEnum):
 # %% ../lib_nbs/01_core.ipynb
 def Button(*c: Union[str, FT],
            cls: Union[str, Enum]=ButtonT.default,
+           submit=True
            **kwargs
           ) -> FT:
     "A Button with Styling"
-    return fh.Button(*c, cls=('uk-button', stringify(cls)), type='button', **kwargs)
+    return fh.Button(*c, cls=('uk-button', stringify(cls)), type='submit' if submit else 'button', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def ButtonSubmit(*c: Union[str, FT],
