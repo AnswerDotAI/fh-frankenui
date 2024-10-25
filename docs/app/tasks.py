@@ -162,4 +162,4 @@ tasks_ui = Div(
     footer(),)
 
 # %% ../example_tasks.ipynb
-tasks_homepage = CreateTaskModal(), Div(cls='p-8')(page_heading, tasks_ui)
+tasks_homepage = Div(cls='p-8')(page_heading, tasks_ui, CreateTaskModal())

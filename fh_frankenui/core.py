@@ -3,18 +3,19 @@
 # %% auto 0
 __all__ = ['enum_to_markdown_table', 'fast_app', 'FastHTML', 'Theme', 'TextT', 'TextFont', 'ButtonT', 'Button', 'ButtonSubmit',
            'H1', 'H2', 'H3', 'H4', 'Main', 'Titled', 'DividerT', 'Divider', 'UkHSplit', 'UkHLine', 'Article',
-           'ArticleTitle', 'ArticleMeta', 'ContainerT', 'DivContainer', 'SectionT', 'Section', 'Fieldset', 'Legend',
-           'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch', 'FormLabel',
-           'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio', 'LabelCheckboxX',
-           'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect', 'LabelUkSelect', 'AT',
-           'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle',
-           'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT', 'Placeholder', 'Progress', 'UkIcon', 'UkIconLink',
-           'DiceBearAvatar', 'FlexT', 'Grid', 'DivFullySpaced', 'DivCentered', 'DivLAligned', 'DivRAligned',
-           'DivVStacked', 'DivHStacked', 'NavT', 'NavContainer', 'NavParentLi', 'NavDividerLi', 'NavHeaderLi',
-           'NavSubtitle', 'NavCloseLi', 'NavBarContainer', 'NavBarLSide', 'NavBarRSide', 'NavBarCenter', 'NavBarNav',
-           'NavBarSubtitle', 'NavBarNavContainer', 'NavBarParentIcon', 'DropDownNavContainer', 'TabContainer', 'CardT',
-           'CardTitle', 'CardHeader', 'CardBody', 'CardFooter', 'CardContainer', 'Card', 'TableT', 'Table', 'Td', 'Th',
-           'Tr', 'Thead', 'Tbody', 'TableFromLists', 'TableFromDicts', 'apply_classes', 'render_md']
+           'ArticleTitle', 'ArticleMeta', 'ContainerT', 'DivContainer', 'Container', 'SectionT', 'Section', 'Fieldset',
+           'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch',
+           'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
+           'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect',
+           'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody',
+           'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT', 'Placeholder', 'Progress',
+           'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'Grid', 'DivFullySpaced', 'DivCentered', 'DivLAligned',
+           'DivRAligned', 'DivVStacked', 'DivHStacked', 'NavT', 'NavContainer', 'NavParentLi', 'NavDividerLi',
+           'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer', 'NavBarLSide', 'NavBarRSide', 'NavBarCenter',
+           'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer', 'NavBarParentIcon', 'DropDownNavContainer',
+           'TabContainer', 'CardT', 'CardTitle', 'CardHeader', 'CardBody', 'CardFooter', 'CardContainer', 'Card',
+           'TableT', 'Table', 'Td', 'Th', 'Tr', 'Thead', 'Tbody', 'TableFromLists', 'TableFromDicts', 'apply_classes',
+           'render_md']
 
 # %% ../lib_nbs/01_core.ipynb
 import fasthtml.common as fh
@@ -247,6 +248,9 @@ class ContainerT(VEnum):
 def DivContainer(*c, cls=(), **kwargs): 
     "A Div to be used as a container that often wraps large sections or a page of content"
     return Div(*c, cls=('uk-container',stringify(cls)), **kwargs)
+
+def Container(*c, **kwargs):
+    return DivContainer(*c, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 class SectionT(VEnum):
