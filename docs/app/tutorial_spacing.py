@@ -114,7 +114,7 @@ The second form with gap is identical to the first.  Because we're not in a flex
 
 
 # %% ../SpacingGuide.ipynb
-spacing_tutorial = DivContainer(
+spacing_tutorial = Container(
     render_md(intro_md),
     Grid(Card(H4("A Simple Card with ml-20",style='background-color: red'), 
               cls='ml-20'),

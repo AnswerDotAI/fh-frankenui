@@ -41,7 +41,7 @@ def MailSbLi(icon, title, cnt):
     return Li(A(DivLAligned(
         Span(UkIcon(icon)),Span(title),P(cnt,cls=TextFont.muted_sm),cls='space-x-2')))
 
-sidebar = DivContainer(NavContainer(
+sidebar = Container(NavContainer(
     NavHeaderLi(H3("Email")),
     Li(UkSelect(map(Option, ('alicia@example.com','alicia@gmail.com', 'alicia@yahoo.com')),cls='my-4')),
     *[MailSbLi(i, t, c) for i, t, c in sidebar_group1],
