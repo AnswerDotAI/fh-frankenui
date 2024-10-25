@@ -241,6 +241,8 @@ def ex_card():
 def Tags(cats): return Div(cls='space-x-2')(map(Label, cats))
 
 def ex_card2_wide():
+    def Tags(cats): return Div(cls='space-x-2')(map(Label, cats))
+
     return Card(
         DivLAligned(
             A(Img(src="https://picsum.photos/200/200?random=12", style="width:200px"),href="#"),
@@ -254,6 +256,8 @@ def ex_card2_wide():
 
 
 def ex_card2_tall():
+    def Tags(cats): return Div(cls='space-x-2')(map(Label, cats))
+
     return Card(
         Div(
             A(Img(src="https://picsum.photos/200/200?random=14"),href="#"),
