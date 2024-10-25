@@ -4,8 +4,8 @@
 
 # %% auto 0
 __all__ = ['app', 'rt', 'reference_fns', 'is_htmx', 'with_layout', 'tasks', 'cards', 'dashboard', 'forms', 'music', 'auth',
-           'playground', 'mail', 'fnname2title', 'api_route', 'themeswitcher', 'llms', 'getting_started', 'index',
-           'sidebar']
+           'playground', 'mail', 'fnname2title', 'api_route', 'tutorial_spacing', 'themeswitcher', 'llms',
+           'getting_started', 'index', 'sidebar']
 
 # %% ../99_main.ipynb
 from fasthtml.common import *
@@ -84,6 +84,14 @@ def api_route(request, o:str):
                         open_section='API Reference')
 
 # %% ../99_main.ipynb
+from tutorial_spacing import spacing_tutorial
+
+# %% ../99_main.ipynb
+_create_example_page = partial(_create_page, open_section='Tutorials')
+@rt
+def tutorial_spacing(request=None): return _create_example_page('spacing',      spacing_tutorial,     request)
+
+# %% ../99_main.ipynb
 @rt
 def themeswitcher(request): 
     return _create_page('theme', Div(Uk_theme_switcher(),cls="p-12"), request, None)
@@ -121,6 +129,17 @@ def sidebar(active,open_section):
             ),
             cls='uk-open' if open_section=='API Reference' else ''
         ),
+        NavParentLi(
+            A(DivFullySpaced('Guides', NavBarParentIcon())),
+            NavContainer(
+                *[create_li(title, href) for title, href in [
+                    ('Spacing', tutorial_spacing),
+                ]],
+                parent=False
+            ),
+            cls='uk-open' if open_section=='Guides' else ''
+        ),
+        
         NavParentLi(
             A(DivFullySpaced('Examples', NavBarParentIcon())),
             NavContainer(
