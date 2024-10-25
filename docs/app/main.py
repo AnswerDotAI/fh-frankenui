@@ -116,7 +116,7 @@ def sidebar(active,open_section):
     def create_li(title, href):
         is_active = title.lower() == active.lower()
         return Li(A(title, cls="uk-active" if is_active else "",
-                    hx_target="#content", hx_get=href, hx_push_url='true'))
+                    hx_target="#content", hx_get=href, hx_trigger='mousedown', hx_push_url='true'))
 
     return NavContainer(
         create_li("Getting Started", getting_started),
