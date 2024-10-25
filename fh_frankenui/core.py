@@ -2,7 +2,7 @@
 
 # %% auto 0
 __all__ = ['enum_to_markdown_table', 'fast_app', 'FastHTML', 'Theme', 'TextT', 'TextFont', 'ButtonT', 'Button', 'ButtonSubmit',
-           'H1', 'H2', 'H3', 'H4', 'Main', 'Titled', 'DividerT', 'Divider', 'UkHSplit', 'UkHLine', 'Article',
+           'H1', 'H2', 'H3', 'H4', 'Main', 'Titled', 'DividerT', 'Divider', 'DividerSplit', 'DividerLine', 'Article',
            'ArticleTitle', 'ArticleMeta', 'ContainerT', 'DivContainer', 'Container', 'SectionT', 'Section', 'Fieldset',
            'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch',
            'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
@@ -214,15 +214,14 @@ def Divider(*args, cls=('my-4', DividerT.icon), **kwargs):
     return container(*args, cls=cls, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-def UkHSplit(*c, cls=(), line_cls=(), text_cls=()):
-    # Divider FrankenUI stuff
+def DividerSplit(*c, cls=(), line_cls=(), text_cls=()):
     cls, line_cls, text_cls = map(stringify,(cls, line_cls, text_cls))
     return Div(cls='relative ' + cls)(
         Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
         Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
 
 # %% ../lib_nbs/01_core.ipynb
-def UkHLine(lwidth=2, y_space=4): return Div(cls=f"my-{y_space} h-[{lwidth}px] w-full bg-secondary")
+def DividerLine(lwidth=2, y_space=4): return Hr(cls=f"my-{y_space} h-[{lwidth}px] w-full bg-secondary")
 
 # %% ../lib_nbs/01_core.ipynb
 def Article(*c, cls=(), **kwargs):
@@ -314,7 +313,7 @@ def Label(*c, cls=(), **kwargs):
 def UkFormSection(title, description, *c, button_txt='Update', outer_margin=6, inner_margin=6):
     return Div(cls=f'space-y-{inner_margin} py-{outer_margin}')(
         Div(H3(title), P(description, cls=TextFont.muted_sm)),
-        UkHSplit(), *c,
+        DividerSplit(), *c,
         Div(Button(button_txt, cls=ButtonT.primary)) if button_txt else None)
 
 # %% ../lib_nbs/01_core.ipynb

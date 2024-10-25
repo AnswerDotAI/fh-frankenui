@@ -31,7 +31,7 @@ def page():
                 Form(cls='space-y-6')(
                         Input(placeholder="name@example.com"),
                         Button(Span(cls="mr-2", uk_spinner="ratio: 0.54"), "Sign in with Email", cls=(ButtonT.primary, "w-full"), disabled=True),
-                        UkHSplit("Or continue with",cls=TextFont.muted_sm),
+                        DividerSplit("Or continue with",cls=TextFont.muted_sm),
                         Button(UkIcon('github',cls='mr-2'), "Github", cls=(ButtonT.default, "w-full"), uk_toggle="#demo")),
                 P(cls=(TextFont.muted_sm,"text-center"))(
                 "By clicking continue, you agree to our ",

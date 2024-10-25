@@ -21,7 +21,7 @@ import calendar
 CreateAccount = Card(Grid(Button(UkIcon('github',cls='uk-margin-small-right'),'Github'),
                   Button(UkIcon('google',cls='uk-margin-small-right'),'Google'),
                   cols=2,cls='gap-6'),
-            UkHSplit("OR CONTINUE WITH", text_cls = (TextT.small, TextT.muted)),
+            DividerSplit("OR CONTINUE WITH", text_cls = (TextT.small, TextT.muted)),
             LabelInput('Email',    id='email',   placeholder='m@example.com'),
             LabelInput('Password', id='password',placeholder='Password', type='Password'),
             header=(H3('Create an account'),P(cls=TextFont.muted_sm)('Enter your email below to create your account')),

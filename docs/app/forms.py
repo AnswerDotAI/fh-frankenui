@@ -24,7 +24,7 @@ def heading():
     return Div(cls="space-y-5")(
             H2("Settings"),
             P("Manage your account settings and set e-mail preferences.", cls=TextFont.muted_lg),
-            UkHSplit())
+            DividerSplit())
 
 # %% ../example_forms.ipynb
 sidebar_items = ["Profile", "Account", "Appearance", "Notifications", "Display"]

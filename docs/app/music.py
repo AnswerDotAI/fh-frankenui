@@ -100,11 +100,11 @@ _album = lambda t,a: Album('https://ucarecdn.com/e5607eaf-2b2a-43b9-ada9-330824b
 
 music_content = (Div(H3("Listen Now"), cls="mt-6 space-y-1"),
                     P("Top picks for you. Updated daily.",cls=TextFont.muted_sm),
-                    UkHLine(),
+                    DividerLine(),
                     Grid(*[_album(t,a) for t,a in listen_now_albums], cols=4, cols_lg=4,cls='gap-8'),
                     Div(H3("Made for You"), cls="mt-6 space-y-1"),
                     P("Your personal playlists. Updated daily.", cls=TextFont.muted_sm),
-                    UkHLine(),
+                    DividerLine(),
                     Grid(*[_album(t,a) for t,a in made_for_you_albums], cols=6))
 
 # %% ../example_music.ipynb
@@ -148,7 +148,7 @@ sb = NavContainer(
 
 # %% ../example_music.ipynb
 def page():
-    return Div(DivContainer(music_headers,cls='py-8'),UkHSplit(),
+    return Div(DivContainer(music_headers,cls='py-8'), DividerSplit(),
         Grid(sb,
             Div(cls="col-span-4 border-l border-border")(
                 Div(cls="px-8 py-6")(
