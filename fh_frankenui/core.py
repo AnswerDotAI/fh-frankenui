@@ -156,7 +156,7 @@ class ButtonT(VEnum):
 # %% ../lib_nbs/01_core.ipynb
 def Button(*c: Union[str, FT],
            cls: Union[str, Enum]=ButtonT.default,
-           submit=True
+           submit=True,
            **kwargs
           ) -> FT:
     "A Button with Styling (defaults to `type=submit` for form submission)"
@@ -731,9 +731,6 @@ class CardT(VEnum):
     danger = auto()
 
 # %% ../lib_nbs/01_core.ipynb
-def CardTitle(*c, cls=(), **kwargs):
-    return fh.Div(*c, cls=('uk-card-title',stringify(cls)), **kwargs)
-
 def CardTitle(*c, cls=(), **kwargs):
     return fh.Div(*c, cls=('uk-card-title',stringify(cls)), **kwargs)
 
