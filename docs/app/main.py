@@ -79,7 +79,7 @@ def api_route(request, o:str):
     content = getattr(api_reference, o)()
     title = fnname2title(o)
     return _create_page('api_reference', 
-                        Container(content), 
+                        DivContainer(content), 
                         request=request, 
                         open_section='API Reference')
 
@@ -91,12 +91,12 @@ def themeswitcher(request):
 # %% ../99_main.ipynb
 @rt
 def llms(request=None):
-    return _create_page('llms', Container(render_md(open('LLM Contexts.md').read())), request, 'LLMs')
+    return _create_page('llms', DivContainer(render_md(open('LLM Contexts.md').read())), request, 'LLMs')
 
 # %% ../99_main.ipynb
 @rt
 def getting_started(request=None):
-    content = Container(render_md(open('GettingStarted.md').read()))
+    content = DivContainer(render_md(open('GettingStarted.md').read()))
     return _create_page('getting_started', content, request, None)
 
 # %% ../99_main.ipynb

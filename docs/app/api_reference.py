@@ -218,7 +218,7 @@ docs_containers = create_doc_section(
     ArticleTitle,
     Article,
     fn2code_string(ex_articles),
-    Container,
+    DivContainer,
     ContainerT,
     fn2code_string(ex_containers),
     Section,
