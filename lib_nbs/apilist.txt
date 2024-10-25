@@ -3,6 +3,8 @@
 ## fh_frankenui.core
 
 - `class Theme`
+    Selector to choose theme and get all headers needed for app.  Includes frankenui + tailwind
+
     - `def headers(self)`
     - `@property def name(self)`
 
@@ -25,38 +27,58 @@
     - `@property def name(self)`
 
 - `def Button(*c, **kwargs)`
-    A Button with Uk Styling
+    A Button with Styling (defaults to `type=submit` for form submission)
+
+- `def ButtonSubmit(*c, **kwargs)`
+    A Button with Styling to be used for submitting forms
 
 - `def H1(*c, **kwargs)`
-    A H1 with Uk Styling
+    A H1 with Styling
 
 - `def H2(*c, **kwargs)`
-    A H2 with Uk Styling
+    A H2 with Styling
 
 - `def H3(*c, **kwargs)`
-    A H3 with Uk Styling
+    A H3 with Styling
 
 - `def H4(*c, **kwargs)`
-    A H4 with Uk Styling
+    A H4 with Styling
+
+- `class DividerT`
+    Divider Styles from https://franken-ui.dev/docs/divider
+
+    - `@property def name(self)`
+
+- `def Divider(*args, **kwargs)`
+    Divider with default styling and margin
 
 - `class ContainerT`
     Max width container sizes from https://franken-ui.dev/docs/container
 
     - `@property def name(self)`
 
+- `def Container(*c, **kwargs)`
+    A Div to be used as a container that often wraps large sections or a page of content
+
 - `class SectionT`
-    Section styles from UIkit
+    Section styles from https://franken-ui.dev/docs/section
 
     - `@property def name(self)`
 
 - `class LabelT`
     - `@property def name(self)`
 
+- `def Label(*c, **kwargs)`
+    FrankenUI labels, which look like pills
+
 - `def GenericLabelInput(label, lbl_cls, input_cls, container, cls, id, input_fn, **kwargs)`
     `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
 
+- `@delegates(GenericLabelInput, but=['input_fn', 'cls']) def LabelInput(*args, **kwargs)`
+    A Label and Input pair that provides default spacing and links/names them based on id
+
 - `def LabelRadio(label, lbl_cls, input_cls, container, cls, id, **kwargs)`
-    `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
+    A Label and Radio pair that provides default spacing and links/names them based on id
 
 - `def LabelCheckboxX(label, lbl_cls, input_cls, container, cls, id, **kwargs)`
     `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
@@ -98,11 +120,6 @@
 
 - `class FlexT`
     Flexbox modifiers from UIkit
-
-    - `@property def name(self)`
-
-- `class GridT`
-    Grid modifiers from UIkit
 
     - `@property def name(self)`
 
