@@ -195,6 +195,7 @@ def Main(*args, **kwargs): return Main(*args, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def Titled(title:str="FastHTML app", *args, cls="container", **kwargs)->FT:
+    "A H1 with styling, whose title is also used in the page's title tag"
     return fh.Title(title), fh.Main(H1(title), *args, cls=cls, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
