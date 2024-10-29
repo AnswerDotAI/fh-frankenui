@@ -18,19 +18,19 @@ We'd really like you try to it and tell us how it works for you - but please be 
 
 ## Getting Started
 
-#### Start by importing the modules as follows:
+#### Start by importing the modules with one of these options:
 
->`from fasthtml.common import *`
-
->`from fh_frankenui.core import *`
+```python
+from fasthtml.common import *
+from fh_frankenui.core import *
+```
 
 #### Instantiate the app with the fh-frankenui headers
 
->`app = FastHTML(hdrs=Theme.slate.headers())`
-  
-*Alternatively, using the fast_app method*
-  
->`app, rt = fast_app(pico=False, hdrs=Theme.slate.headers())`
+```python
+app = FastHTML(hdrs=Theme.slate.headers())
+app, rt = fast_app(hdrs=Theme.slate.headers())
+```
 
 **The color option can be any of the theme options available out of the box**
 
