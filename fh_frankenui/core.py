@@ -191,7 +191,7 @@ def H4(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT:
     return fh.H4(*c, cls=('uk-h4',stringify(cls)), **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-def Main(*args, **kwargs): return Main(*args, **kwargs)
+def Main(*args, **kwargs): return fh.Main(*args, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def Titled(title:str="FastHTML app", *args, cls="container", **kwargs)->FT:
