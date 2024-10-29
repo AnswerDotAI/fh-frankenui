@@ -286,11 +286,11 @@ def CheckboxX(*c, cls=(), **kwargs):
 def Range(*c, cls=(), **kwargs):      
     return fh.Input(*c, cls=('uk-range',stringify(cls)), type='range', **kwargs)
 def Toggle_switch(*c, cls=(), **kwargs):
-    return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
+    return fh.Input(*c, cls=('uk-toggle-switch uk-toggle-switch-primary',stringify(cls)), type='checkbox', **kwargs)
 def TextArea(*c, cls=(), **kwargs):            
     return fh.Textarea(*c, cls=('uk-textarea',stringify(cls)), **kwargs)
 def Switch(*c, cls='min-w-9', **kwargs):              
-    return fh.Input(*c, cls=('uk-toggle-switch',stringify(cls)), type='checkbox', **kwargs)
+    return fh.Input(*c, cls=('uk-toggle-switch uk-toggle-switch-primary',stringify(cls)), type='checkbox', **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def FormLabel(*c, cls=(), **kwargs): return fh.Label(*c, cls=('uk-form-label',stringify(cls)), **kwargs)
@@ -360,10 +360,11 @@ def LabelCheckboxX(label:str|FT,
                input_cls='',
                container=Div, 
                cls='flex items-center space-x-2',
-               id='',
                 **kwargs
                 ):
     "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
+    
+    id = kwargs.pop('id', fh.unqid())
     if isinstance(label, str) or label.tag != 'label': 
         label = FormLabel(cls=stringify(lbl_cls), fr=id)(label)
     inp = CheckboxX(id=id, cls=stringify(input_cls), **kwargs)        
@@ -575,7 +576,7 @@ def DiceBearAvatar(seed_name, # Seed name (ie 'Isaac Flath')
                   ):          # Span with Avatar
     url = 'https://api.dicebear.com/8.x/lorelei/svg?seed='
     return Span(cls=f"relative flex h-{h} w-{w} shrink-0 overflow-hidden rounded-full bg-accent")(
-            fh.Img(cls=f"aspect-square h-{h} w-{w}", alt="Avatar", src=f"{url}{seed_name}"))
+            fh.Img(cls=f"aspect-square h-{h} w-{w}", alt="Avatar", loading="lazy", src=f"{url}{seed_name}"))
 
 # %% ../lib_nbs/01_core.ipynb
 class FlexT(VEnum):
