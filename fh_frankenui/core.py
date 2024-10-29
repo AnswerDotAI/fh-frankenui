@@ -47,22 +47,22 @@ def enum_to_markdown_table(enum_class):
     return f"{header}\n{separator}\n{body}"
 
 # %% ../lib_nbs/01_core.ipynb
-@delegates(fh.fast_app)
-def fast_app(*args, **kwargs):
+@delegates(fh.fast_app, but=['pico'])
+def fast_app(*args, pico=False, **kwargs):
     "Adds `bg-background text-foreground` to bodykw for frankenui themes"
     if 'bodykw' not in kwargs: kwargs['bodykw'] = {}
     if 'class' not in kwargs['bodykw']: kwargs['bodykw']['class'] = ''
     kwargs['bodykw']['class'] = stringify((kwargs['bodykw']['class'],'bg-background text-foreground'))
-    return fh.fast_app(*args, **kwargs)
+    return fh.fast_app(*args, pico=False, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
-@delegates(fh.FastHTML)
-def FastHTML(*args, **kwargs):
+@delegates(fh.FastHTML, but=['pico'])
+def FastHTML(*args, pico=False, **kwargs):
     "Adds `bg-background text-foreground` to bodykw for frankenui themes"
     if 'bodykw' not in kwargs: kwargs['bodykw'] = {}
-    if 'bodykw' not in kwargs['bodykw']: kwargs['bodykw']['class'] = ''
+    if 'class' not in kwargs['bodykw']: kwargs['bodykw']['class'] = ''
     kwargs['bodykw']['class'] = stringify((kwargs['bodykw']['class'],'bg-background text-foreground'))
-    return fh.FastHTML(*args, **kwargs)
+    return fh.FastHTML(*args, pico=False, **kwargs)
 
 # %% ../lib_nbs/01_core.ipynb
 def _headers_theme(color):    
