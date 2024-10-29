@@ -858,8 +858,8 @@ def apply_classes(html_str:str,
     return etree.tostring(html_str, encoding='unicode', method='html')
 
 # %% ../lib_nbs/01_core.ipynb
-def render_md(md_content):
+def render_md(md_content, class_map=None, class_map_mods=None):
     try: import markdown2
     except ImportError: raise ImportError("Install 'markdown2' to use the 'render_md' function")
     html_content = markdown2.markdown(md_content, extras={'fenced-code-blocks':None})#, 'html-classes': franken_class_map})
-    return NotStr(apply_classes(html_content))
+    return NotStr(apply_classes(html_content, class_map, class_map_mods))
