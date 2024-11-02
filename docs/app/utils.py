@@ -38,7 +38,6 @@ hjs = (Style('html.dark .hljs-copy-button {background-color: #e0e0e0; color: #2d
                 Style('.hljs-copy-button {background-color: #2d2b57;}'),
                 Script(src='https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/python.min.js'),
                 Script("hljs.addPlugin(new CopyButtonPlugin());\r\nhljs.configure({'cssSelector': 'pre code'});\r\nhtmx.onLoad(hljs.highlightAll);", type='module'),
-                Script('''htmx.on("htmx:beforeHistorySave", () => {document.querySelectorAll("uk-icon").forEach((elt) => {elt.innerHTML = '';});});'''),
                 Script('''const observer = new MutationObserver(mutations => {
                           mutations.forEach(mutation => {
                             if (mutation.target.tagName === 'HTML' && mutation.attributeName === 'class') {

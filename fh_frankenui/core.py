@@ -23,7 +23,6 @@ from .foundations import *
 from fasthtml.common import is_listy, Div, P, Span, Script, FastHTML, FT, to_xml, show,fast_app
 from fasthtml.svg import Svg
 from fasthtml.components import Uk_theme_switcher, Main
-
 from enum import Enum, auto
 from fasthtml.components import Uk_select,Uk_input_tag,Uk_icon
 from functools import partial
@@ -31,7 +30,6 @@ from itertools import zip_longest
 from typing import Union, Tuple, Optional
 from fastcore.all import *
 import copy, re
-
 
 # %% ../lib_nbs/01_core.ipynb
 def enum_to_markdown_table(enum_class):
@@ -101,7 +99,8 @@ class Theme(Enum):
     def headers(self):
         return (fh.Link(rel="stylesheet", href="https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css"),
             fh.Script( type="module", src ="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js"),
-            fh.Script( type="module", src ="https://unpkg.com/franken-ui@1.1.0/dist/js/icon.iife.js"),
+#             fh.Script( type="module", src ="https://unpkg.com/franken-ui@1.1.0/dist/js/icon.iife.js"),
+            fh.Script( type="module", src = "https://cdn.jsdelivr.net/gh/answerdotai/fh-frankenui@main/fh_frankenui/icon.iife.js"),
             fh.Script(src="https://cdn.tailwindcss.com"),
             _headers_theme(self.value),)
 
@@ -838,7 +837,9 @@ franken_class_map = {
     'p': 'my-1',
     'blockquote': "uk-blockquote mb-8",
     'hr':'uk-divider-icon my-4',
-    'table':'uk-table-middle uk-table-divider uk-table-hover uk-table-small'
+    'table':'uk-table-middle uk-table-divider uk-table-hover uk-table-small',
+    'ol': 'uk-list-decimal',
+    'li': 'uk-list-disc',
 }
 
 # %% ../lib_nbs/01_core.ipynb
