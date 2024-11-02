@@ -1,1 +1,10 @@
-app/requirements.txt
+python-fasthtml
+fh_frankenui @ git+https://github.com/answerDotAI/fh-frankenui
+fastcore
+fh_matplotlib
+numpy
+matplotlib
+nbdev @ git+https://github.com/Isaac-Flath/nbdev.git@HTML-ShowDoc-Rendering
+pysymbol_llm
+markdown2
+lxml
