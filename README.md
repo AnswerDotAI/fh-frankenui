@@ -20,6 +20,29 @@ To install this library, uses
 
 To get started, check out:
 
+1.  Start by importing the modules as follows:
+
+``` python
+from fasthtml.common import *
+from fh_frankenui.core import *
+```
+
+2.  Instantiate the app with the fh-frankenui headers
+
+``` python
+app = FastHTML(hdrs=Theme.slate.headers())
+
+# Alternatively, using the fast_app method
+app, rt = fast_app(pico=False, hdrs=Theme.slate.headers())
+```
+
+> *The color option can be any of the theme options available out of the
+> box*
+
+From here, you can explore the API Reference & examples to see how to
+implement the components. You can also check out these demo videos to as
+a quick start guide:
+
 - The [AnswerAI Dev Chat](https://www.youtube.com/watch?v=K5FFPHlWMiY)
   where Isaac & Jeremy explore the framework
 - This
