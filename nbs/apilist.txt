@@ -29,9 +29,6 @@
 - `def Button(*c, **kwargs)`
     A Button with Styling (defaults to `type=submit` for form submission)
 
-- `def ButtonSubmit(*c, **kwargs)`
-    A Button with Styling to be used for submitting forms
-
 - `def H1(*c, **kwargs)`
     A H1 with Styling
 
@@ -43,6 +40,9 @@
 
 - `def H4(*c, **kwargs)`
     A H4 with Styling
+
+- `def Titled(title, *args, **kwargs)`
+    A H1 with styling, whose title is also used in the page's title tag
 
 - `class DividerT`
     Divider Styles from https://franken-ui.dev/docs/divider
@@ -80,7 +80,7 @@
 - `def LabelRadio(label, lbl_cls, input_cls, container, cls, id, **kwargs)`
     A Label and Radio pair that provides default spacing and links/names them based on id
 
-- `def LabelCheckboxX(label, lbl_cls, input_cls, container, cls, id, **kwargs)`
+- `def LabelCheckboxX(label, lbl_cls, input_cls, container, cls, **kwargs)`
     `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
 
 - `def LabelSelect(*option, **kwargs)`

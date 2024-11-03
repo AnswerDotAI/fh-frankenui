@@ -16,22 +16,26 @@ from pathlib import Path
 # Setup the app
 app,rt = fast_app(pico=False, hdrs=(*Theme.blue.headers(),*hjs))
 
-def is_htmx(request=None): return request and 'hx-request' in request.headers
+def is_htmx(request=None): 
+    "Check if the request is an HTMX request"
+    return request and 'hx-request' in request.headers
 
-def _create_page(original_content, # The content to display (without the layout/sidebar)
+def _create_page(content, # The content to display (without the layout/sidebar)
                  request, # Request object to determine if HTMX request
-                 open_section # The open section
+                 sidebar_section # The open section on the sidebar
                  ):
-    if is_htmx(request): return original_content
-    else: return with_layout(open_section, original_content)
+    "Makes page load sitebar if direct request, otherwise loads content only via HTMX"
+    if is_htmx(request): return content
+    else: return with_layout(sidebar_section, content)
 
-def with_layout(open_section, original_content):
+def with_layout(sidebar_section, content):
+    "Puts the sidebar and content into a layout"
     return Div(cls="flex flex-col md:flex-row w-full")(
             Button(UkIcon("menu",50,50,cls='mt-4'), cls="md:hidden mb-4", uk_toggle="target: #mobile-sidebar"),
-            Div(sidebar(open_section), id='mobile-sidebar', hidden=True),
+            Div(sidebar(sidebar_section), id='mobile-sidebar', hidden=True),
             Div(cls="md:flex w-full")(
-                Div(sidebar(open_section), cls="hidden md:block w-1/5"),
-                Div(original_content, cls='md:w-4/5 w-full mr-5', id="content", )))
+                Div(sidebar(sidebar_section), cls="hidden md:block w-1/5"),
+                Div(content, cls='md:w-4/5 w-full mr-5', id="content", )))
 
 # Build the Example Pages
 from examples.tasks import tasks_homepage
@@ -76,12 +80,12 @@ def api_route(request, o:str):
     title = fnname2title(o)
     return _create_page(Container(content), 
                         request=request, 
-                        open_section='API Reference')
+                        sidebar_section='API Reference')
 
 from guides.tutorial_spacing import spacing_tutorial
 
 # Build the Guides Pages
-_create_example_page = partial(_create_page, open_section='Tutorials')
+_create_example_page = partial(_create_page, sidebar_section='Tutorials')
 @rt
 def tutorial_spacing(request=None): return _create_example_page(spacing_tutorial, request)
 

@@ -2,10 +2,10 @@
 
 # %% auto 0
 __all__ = ['franken_class_map', 'enum_to_markdown_table', 'fast_app', 'FastHTML', 'Theme', 'TextT', 'TextFont', 'ButtonT',
-           'Button', 'ButtonSubmit', 'H1', 'H2', 'H3', 'H4', 'Main', 'Titled', 'DividerT', 'Divider', 'DividerSplit',
-           'DividerLine', 'Article', 'ArticleTitle', 'ArticleMeta', 'ContainerT', 'Container', 'SectionT', 'Section',
-           'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea',
-           'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
+           'Button', 'H1', 'H2', 'H3', 'H4', 'Main', 'Titled', 'DividerT', 'Divider', 'DividerSplit', 'DividerLine',
+           'Article', 'ArticleTitle', 'ArticleMeta', 'ContainerT', 'Container', 'SectionT', 'Section', 'Fieldset',
+           'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch',
+           'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
            'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect',
            'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody',
            'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT', 'Placeholder', 'Progress',
@@ -161,14 +161,6 @@ def Button(*c: Union[str, FT],
           ) -> FT:
     "A Button with Styling (defaults to `type=submit` for form submission)"
     return fh.Button(*c, cls=('uk-button', stringify(cls)), type='submit' if submit else 'button', **kwargs)
-
-# %% ../nbs/01_core.ipynb
-def ButtonSubmit(*c: Union[str, FT],
-           cls: Union[str, Enum]=ButtonT.default,
-           **kwargs
-          ) -> FT:
-    "A Button with Styling to be used for submitting forms"
-    return fh.Button(*c, cls=('uk-button', stringify(cls)), type='submit', **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def H1(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT: 
@@ -832,14 +824,13 @@ franken_class_map = {
     'h2': 'uk-h2 my-8',
     'h3': 'uk-h3 my-8',
     'h4': 'uk-h4 my-8',
-    'ul': "uk-list uk-list-disc mb-4",
     'a': "uk-link",
     'p': 'my-1',
     'blockquote': "uk-blockquote mb-8",
     'hr':'uk-divider-icon my-4',
     'table':'uk-table-middle uk-table-divider uk-table-hover uk-table-small',
     'ol': 'uk-list-decimal',
-    'li': 'uk-list-disc',
+    'ul': 'uk-list-disc',
 }
 
 # %% ../nbs/01_core.ipynb
