@@ -3,9 +3,9 @@
 # %% auto 0
 __all__ = ['franken_class_map', 'enum_to_markdown_table', 'fast_app', 'FastHTML', 'Theme', 'TextT', 'TextFont', 'ButtonT',
            'Button', 'H1', 'H2', 'H3', 'H4', 'Main', 'Titled', 'DividerT', 'Divider', 'DividerSplit', 'DividerLine',
-           'Article', 'ArticleTitle', 'ArticleMeta', 'ContainerT', 'Container', 'SectionT', 'Section', 'Fieldset',
-           'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch',
-           'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
+           'Article', 'ArticleTitle', 'ArticleMeta', 'ContainerT', 'Container', 'SectionT', 'Section', 'Form',
+           'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea',
+           'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
            'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect',
            'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody',
            'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT', 'Placeholder', 'Progress',
@@ -188,7 +188,7 @@ def Main(*args, **kwargs): return fh.Main(*args, **kwargs)
 # %% ../nbs/01_core.ipynb
 def Titled(title:str="FastHTML app", *args, cls="container", **kwargs)->FT:
     "A H1 with styling, whose title is also used in the page's title tag"
-    return fh.Title(title), fh.Main(H1(title), *args, cls=cls, **kwargs)
+    return fh.Title(title), fh.Main(Container(H1(title), *args, cls=cls, **kwargs))
 
 # %% ../nbs/01_core.ipynb
 class DividerT(VEnum):
@@ -236,7 +236,7 @@ class ContainerT(VEnum):
     expand = auto()
 
 # %% ../nbs/01_core.ipynb
-def Container(*c, cls=(), **kwargs): 
+def Container(*c, cls=('mt-5', ContainerT.xlarge), **kwargs): 
     "A Div to be used as a container that often wraps large sections or a page of content"
     return Div(*c, cls=('uk-container',stringify(cls)), **kwargs)
 
@@ -258,6 +258,10 @@ class SectionT(VEnum):
 # %% ../nbs/01_core.ipynb
 def Section(*c, cls=(), **kwargs):
     return fh.Div(*c, cls=('uk-section',stringify(cls)), **kwargs)
+
+# %% ../nbs/01_core.ipynb
+def Form(*c, cls='space-y-3', **kwargs):
+    return fh.Form(*c, cls=stringify(cls), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def Fieldset(*c, cls=(), **kwargs): 

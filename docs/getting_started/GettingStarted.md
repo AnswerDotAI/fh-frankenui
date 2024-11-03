@@ -38,8 +38,9 @@ app, rt = fast_app(hdrs=Theme.slate.headers())
 
 From here, you can explore the API Reference & examples for a full reference.
 
-You can also check out these demo videos to as a quick start guide:
+You can also check out these resources:
 
++ View the [FrankenUI Demo App](./getting_started/app_product_Gallery.py)
 + The [AnswerAI Dev Chat](https://www.youtube.com/watch?v=K5FFPHlWMiY) where Isaac & Jeremy explore the framework
 + This [video](https://www.loom.com/share/0916e8a95d524c43a4d100ee85157624?sid=9be07e55-c962-4dbd-978c-aa6a0bcee7b3) where Isaac iteratively builds a form in 5 minutes with the framework
 
