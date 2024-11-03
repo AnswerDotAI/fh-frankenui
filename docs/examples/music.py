@@ -1,12 +1,8 @@
 """FrankenUI Music Example"""
 
-
 from fasthtml.common import *
-import fasthtml.common as fh
-from fh_frankenui import *
 from fh_frankenui.core import *
  
-
 def SpacedPP(left, right=None): return DivFullySpaced(NavP(left),NavP(right) if right else '')
 
 def SpacedPPs(*c): return [SpacedPP(*tuplify(o)) for o in c]

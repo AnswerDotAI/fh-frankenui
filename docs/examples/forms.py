@@ -1,14 +1,10 @@
 """FrankenUI Forms Example"""
 
 from fasthtml.common import *
-from fh_frankenui import *
 from fh_frankenui.core import *
- 
-
 from fasthtml.svg import *
 
 def HelpText(c):
-    # Rename to MinorInfoText, AuxiliaryText, SecondaryDetailText, SmallMutedText?
     return P(c,cls=TextFont.muted_sm)
 
 def heading():

@@ -1,13 +1,8 @@
 """FrankenUI Playground Example"""
 
-
 from fasthtml.common import *
-import fasthtml.common as fh
-from fh_frankenui import *
 from fh_frankenui.core import *
- 
 from fasthtml.svg import *
-
 
 preset_options = ["Grammatical Standard English", "Summarize for a 2nd grader",
         "Text to command","Q&A","English to other languages","Parse unstructured data",

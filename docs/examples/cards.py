@@ -1,12 +1,9 @@
 """FrankenUI Cards Example"""
 
 from fasthtml.common import *
-import fasthtml.common as fh
 from fasthtml.components import Uk_input_tag
 from fasthtml.svg import *
-from fh_frankenui import *
 from fh_frankenui.core import *
- 
 import calendar
 
 CreateAccount = Card(Grid(Button(UkIcon('github',cls='uk-margin-small-right'),'Github'),

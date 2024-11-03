@@ -1,6 +1,4 @@
 from fasthtml.common import *
-import fasthtml.common as fh
-from fh_frankenui import *
 from fh_frankenui.core import *
 from fasthtml.svg import *
 

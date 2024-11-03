@@ -1,9 +1,7 @@
 """FrankenUI Dashboard Example"""
 
 from fasthtml.common import *
-from fh_frankenui import *
 from fh_frankenui.core import *
- 
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml
 import numpy as np
