@@ -12,21 +12,25 @@ from fh_frankenui.core import *
 from fasthtml.components import Uk_theme_switcher
 from utils import hjs
 from pathlib import Path
+
 # Setup the app
 app,rt = fast_app(pico=False, hdrs=(*Theme.blue.headers(),*hjs))
 
 def is_htmx(request=None): return request and 'hx-request' in request.headers
 
-def _create_page(active, original_content, request, open_section):
+def _create_page(original_content, # The content to display (without the layout/sidebar)
+                 request, # Request object to determine if HTMX request
+                 open_section # The open section
+                 ):
     if is_htmx(request): return original_content
-    else: return with_layout(active, open_section, original_content)
+    else: return with_layout(open_section, original_content)
 
-def with_layout(active, open_section, original_content):
+def with_layout(open_section, original_content):
     return Div(cls="flex flex-col md:flex-row w-full")(
             Button(UkIcon("menu",50,50,cls='mt-4'), cls="md:hidden mb-4", uk_toggle="target: #mobile-sidebar"),
-            Div(sidebar(active,open_section), id='mobile-sidebar', hidden=True),
+            Div(sidebar(open_section), id='mobile-sidebar', hidden=True),
             Div(cls="md:flex w-full")(
-                Div(sidebar(active,open_section), cls="hidden md:block w-1/5"),
+                Div(sidebar(open_section), cls="hidden md:block w-1/5"),
                 Div(original_content, cls='md:w-4/5 w-full mr-5', id="content", )))
 
 # Build the Example Pages
@@ -41,21 +45,21 @@ from examples.mail import mail_homepage
 
 _create_example_page = partial(_create_page, open_section='Examples')
 @rt
-def tasks(request=None):      return _create_example_page('task',      tasks_homepage,     request)
+def tasks(request=None):      return _create_example_page(tasks_homepage,     request)
 @rt
-def cards(request=None):      return _create_example_page('card',      cards_homepage,     request)
+def cards(request=None):      return _create_example_page(cards_homepage,     request)
 @rt
-def dashboard(request=None):  return _create_example_page('dashboard', dashboard_homepage, request)
+def dashboard(request=None):  return _create_example_page(dashboard_homepage, request)
 @rt
-def forms(request=None):      return _create_example_page('form',      forms_homepage,     request)
+def forms(request=None):      return _create_example_page(forms_homepage,     request)
 @rt 
-def music(request=None):      return _create_example_page('music',     music_homepage,     request)
+def music(request=None):      return _create_example_page(music_homepage,     request)
 @rt
-def auth(request=None):       return _create_example_page('auth',      auth_homepage,      request)
+def auth(request=None):       return _create_example_page(auth_homepage,      request)
 @rt
-def playground(request=None): return _create_example_page('playground',playground_homepage,request)
+def playground(request=None): return _create_example_page(playground_homepage,request)
 @rt
-def mail(request=None):       return _create_example_page('mail',      mail_homepage,      request) 
+def mail(request=None):       return _create_example_page(mail_homepage,      request) 
 
 # Build the API Reference Pages
 
@@ -70,8 +74,7 @@ def api_route(request, o:str):
     if o not in reference_fns: raise HTTPException(404)
     content = getattr(api_reference, o)()
     title = fnname2title(o)
-    return _create_page('api_reference', 
-                        Container(content), 
+    return _create_page(Container(content), 
                         request=request, 
                         open_section='API Reference')
 
@@ -80,38 +83,39 @@ from guides.tutorial_spacing import spacing_tutorial
 # Build the Guides Pages
 _create_example_page = partial(_create_page, open_section='Tutorials')
 @rt
-def tutorial_spacing(request=None): return _create_example_page('spacing',      spacing_tutorial,     request)
+def tutorial_spacing(request=None): return _create_example_page(spacing_tutorial, request)
 
 # Build the Theme Switcher Page
 @rt
 def themeswitcher(request): 
-    return _create_page('theme', Div(Uk_theme_switcher(),cls="p-12"), request, None)
-
+    return _create_page(Div(Uk_theme_switcher(),cls="p-12"), request, None)
 
 # Build the Getting Started Pages
 gs_path = Path('getting_started')
 @rt
 def getting_started(request=None):
     content = Container(render_md(open(gs_path/'GettingStarted.md').read()))
-    return _create_page('getting_started', content, request, None)
+    return _create_page(content, request, 'Getting Started')
 
 @rt
 def llms(request=None):
-    return _create_page('llms', Container(render_md(open(gs_path/'LLM Contexts.md').read())), request, 'LLMs')
+    return _create_page(Container(render_md(open(gs_path/'LLM Contexts.md').read())), request, 'Getting Started')
 
 @rt
 def index():return getting_started()
 
 # Build the Sidebar
-def sidebar(active,open_section):
+def sidebar(open_section):
     def create_li(title, href):
-        is_active = title.lower() == active.lower()
-        return Li(A(title, cls="uk-active" if is_active else "",
-                    hx_target="#content", hx_get=href, hx_trigger='mousedown', hx_push_url='true', href=''))
+        return Li(A(title,hx_target="#content", hx_get=href, hx_trigger='mousedown', hx_push_url='true', href=''))
 
     return NavContainer(
-        create_li("Getting Started", getting_started),
-        create_li("LLMs", llms),
+        NavParentLi(
+            A(DivFullySpaced("Getting Started", NavBarParentIcon())),
+            NavContainer(create_li("Getting Started", getting_started),
+                         create_li("LLMs", llms), parent=False),
+            cls='uk-open' if open_section=='Getting Started' else ''
+        ),
         NavParentLi(
             A(DivFullySpaced("API Reference", NavBarParentIcon())),
             NavContainer(

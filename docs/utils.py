@@ -10,23 +10,7 @@ from IPython.display import display, HTML
 from fasthtml.common import *
 from fh_frankenui.core import *
 from fasthtml.jupyter import *
-from uuid import uuid4
 
-# %% ../Utils.ipynb
-def HShow(comp, iframe_height="auto", app=None, port=8000):
-    route = f'/{uuid4()}'
-    app.get(route)(lambda: comp)
-    display(HTML(f'<a href="http://localhost:{port}{route}" target="_blank">Open in new tab</a>'))
-    return HTMX(route,port=port,iframe_height=iframe_height)
-
-# %% ../Utils.ipynb
-def create_server(app, stop_server=True,server_varname='server'):
-    if stop_server and server_varname in globals(): globals()[server_varname].stop()
-    for port in range(8000,8030):                   
-        if is_port_free(port):
-            server = JupyUvi(app, port=port)
-            Show = partial(HShow, app=app, port=port)
-            return server, Show
 
 # %% ../Utils.ipynb
 hjs = (Style('html.dark .hljs-copy-button {background-color: #e0e0e0; color: #2d2b57;}'),
@@ -39,6 +23,10 @@ hjs = (Style('html.dark .hljs-copy-button {background-color: #e0e0e0; color: #2d
                 Script(src='https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/python.min.js'),
                 Script("hljs.addPlugin(new CopyButtonPlugin());\r\nhljs.configure({'cssSelector': 'pre code'});\r\nhtmx.onLoad(hljs.highlightAll);", type='module'),
                 Script('''htmx.on("htmx:beforeHistorySave", () => {document.querySelectorAll("uk-icon").forEach((elt) => {elt.innerHTML = '';});});'''),
+                
+                Script('''hljs.configure({
+                    ignoreUnescapedHTML: true
+                });'''),
                 Script('''const observer = new MutationObserver(mutations => {
                           mutations.forEach(mutation => {
                             if (mutation.target.tagName === 'HTML' && mutation.attributeName === 'class') {
