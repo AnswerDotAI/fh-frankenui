@@ -450,10 +450,6 @@ class AT(VEnum):
     reset = auto()
 
 # %% ../nbs/01_core.ipynb
-# def Link(*c, cls=(), **kwargs):  
-#     return fh.A(*c, cls=('uk-link',stringify(cls)), **kwargs)
-
-# %% ../nbs/01_core.ipynb
 class ListT(VEnum):
     'List styles from https://franken-ui.dev/docs/list'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('list', name)
