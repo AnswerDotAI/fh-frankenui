@@ -242,16 +242,6 @@ def ArticleMeta(*c, cls=(), **kwargs):
     return P(*c, cls=('uk-article-meta',stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
-class ContainerT(VEnum):
-    'Max width container sizes from https://franken-ui.dev/docs/container'
-    def _generate_next_value_(name, start, count, last_values): return str2ukcls('container', name)
-    xsmall = auto()
-    small = auto()
-    large = auto()
-    xlarge = auto()
-    expand = auto()
-
-# %% ../nbs/01_core.ipynb
 class SectionT(VEnum):
     'Section styles from https://franken-ui.dev/docs/section'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('section', name)
