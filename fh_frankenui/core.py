@@ -2,8 +2,8 @@
 
 # %% auto 0
 __all__ = ['franken_class_map', 'enum_to_markdown_table', 'fast_app', 'FastHTML', 'Theme', 'TextT', 'TextFont', 'ButtonT',
-           'Button', 'H1', 'H2', 'H3', 'H4', 'Main', 'Titled', 'DividerT', 'Divider', 'DividerSplit', 'DividerLine',
-           'Article', 'ArticleTitle', 'ArticleMeta', 'ContainerT', 'Container', 'SectionT', 'Section', 'Form',
+           'Button', 'H1', 'H2', 'H3', 'H4', 'Main', 'ContainerT', 'Container', 'Titled', 'DividerT', 'Divider',
+           'DividerSplit', 'DividerLine', 'Article', 'ArticleTitle', 'ArticleMeta', 'SectionT', 'Section', 'Form',
            'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea',
            'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
            'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect',
@@ -186,6 +186,22 @@ def H4(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT:
 def Main(*args, **kwargs): return fh.Main(*args, **kwargs)
 
 # %% ../nbs/01_core.ipynb
+class ContainerT(VEnum):
+    'Max width container sizes from https://franken-ui.dev/docs/container'
+    def _generate_next_value_(name, start, count, last_values): return str2ukcls('container', name)
+    xsmall = auto()
+    small = auto()
+    large = auto()
+    xlarge = auto()
+    expand = auto()
+
+# %% ../nbs/01_core.ipynb
+def Container(*c, cls=('mt-5', ContainerT.xlarge), **kwargs): 
+    "A Div to be used as a container that often wraps large sections or a page of content"
+    return Div(*c, cls=('uk-container',stringify(cls)), **kwargs)
+
+
+# %% ../nbs/01_core.ipynb
 def Titled(title:str="FastHTML app", *args, cls=ContainerT.xlarge, **kwargs)->FT:
     "A H1 with styling, whose title is also used in the page's title tag"
     return fh.Title(title), fh.Main(Container(H1(title), *args, cls=cls, **kwargs))
@@ -234,12 +250,6 @@ class ContainerT(VEnum):
     large = auto()
     xlarge = auto()
     expand = auto()
-
-# %% ../nbs/01_core.ipynb
-def Container(*c, cls=('mt-5', ContainerT.xlarge), **kwargs): 
-    "A Div to be used as a container that often wraps large sections or a page of content"
-    return Div(*c, cls=('uk-container',stringify(cls)), **kwargs)
-
 
 # %% ../nbs/01_core.ipynb
 class SectionT(VEnum):
