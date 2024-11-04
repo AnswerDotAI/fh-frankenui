@@ -186,7 +186,7 @@ def H4(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT:
 def Main(*args, **kwargs): return fh.Main(*args, **kwargs)
 
 # %% ../nbs/01_core.ipynb
-def Titled(title:str="FastHTML app", *args, cls="container", **kwargs)->FT:
+def Titled(title:str="FastHTML app", *args, cls=ContainerT.xlarge, **kwargs)->FT:
     "A H1 with styling, whose title is also used in the page's title tag"
     return fh.Title(title), fh.Main(Container(H1(title), *args, cls=cls, **kwargs))
 
