@@ -200,9 +200,8 @@ def Container(*c, cls=('mt-5', ContainerT.xlarge), **kwargs):
     "A Div to be used as a container that often wraps large sections or a page of content"
     return Div(*c, cls=('uk-container',stringify(cls)), **kwargs)
 
-
 # %% ../nbs/01_core.ipynb
-def Titled(title:str="FastHTML app", *args, cls=ContainerT.xlarge, **kwargs)->FT:
+def Titled(title:str="FastHTML app", *args, cls='uk-container-xlarge', **kwargs)->FT:
     "A H1 with styling, whose title is also used in the page's title tag"
     return fh.Title(title), fh.Main(Container(H1(title), *args, cls=cls, **kwargs))
 
