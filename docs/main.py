@@ -2,7 +2,7 @@ from fasthtml.common import *
 from functools import partial
 from fh_frankenui.core import *
 from fasthtml.components import Uk_theme_switcher
-from utils import hjs
+from utils import hjs, create_flippable_card, render_nb
 from pathlib import Path
 
 # Setup the app
@@ -29,6 +29,7 @@ def with_layout(sidebar_section, content):
                 Div(sidebar(sidebar_section), cls="hidden md:block w-1/5"),
                 Div(content, cls='md:w-4/5 w-full mr-5', id="content", )))
 
+
 ###
 # Build the Example Pages
 ###
@@ -42,7 +43,7 @@ from examples.auth import auth_homepage
 from examples.playground import playground_homepage
 from examples.mail import mail_homepage
 
-_create_example_page = partial(_create_page, open_section='Examples')
+_create_example_page = partial(_create_page, sidebar_section='Examples')
 @rt
 def tasks(request=None):      return _create_example_page(tasks_homepage,     request)
 @rt
@@ -66,7 +67,7 @@ def mail(request=None):       return _create_example_page(mail_homepage,      re
 
 import api_reference.api_reference as api_reference
 
-def fnname2title(ref_fn_name): return ref_fn_name[5:].replace('_',' | ').title() 
+def fname2title(ref_fn_name): return ref_fn_name[5:].replace('_',' | ').title() 
 
 reference_fns = L([o for o in dir(api_reference) if o.startswith('docs_')])
 
@@ -74,27 +75,25 @@ reference_fns = L([o for o in dir(api_reference) if o.startswith('docs_')])
 def api_route(request, o:str):
     if o not in reference_fns: raise HTTPException(404)
     content = getattr(api_reference, o)()
-    title = fnname2title(o)
+    title = fname2title(o)
     return _create_page(Container(content), 
                         request=request, 
                         sidebar_section='API Reference')
 
-from guides.tutorial_spacing import spacing_tutorial
 
 ###
 # Build the Guides Pages
 ###
 
-_create_example_page = partial(_create_page, sidebar_section='Tutorials')
 @rt
-def tutorial_spacing(request=None): return _create_example_page(spacing_tutorial, request)
+def tutorial_spacing(request=None): return _create_page(render_nb('guides/Spacing.ipynb'), request, 'Guides')
 
 ###
 # Build the Theme Switcher Page
 ###
 
 @rt
-def themeswitcher(request): 
+def theme_switcher(request): 
     return _create_page(Div(Uk_theme_switcher(),cls="p-12"), request, None)
 
 ###
@@ -105,6 +104,13 @@ gs_path = Path('getting_started')
 @rt
 def getting_started(request=None):
     content = Container(render_md(open(gs_path/'GettingStarted.md').read()))
+    return _create_page(content, request, 'Getting Started')
+
+from getting_started.StylingRulesOfThumb import page as StylingRulesOfThumb
+
+@rt
+def styling_rules_of_thumb(request=None): 
+    content = Container(StylingRulesOfThumb())
     return _create_page(content, request, 'Getting Started')
 
 @rt
@@ -133,6 +139,7 @@ For example, try replacing `H4` with `fh.H4` or `Button` with `fh.Button`."""),
     return _create_page(content, request, 'Getting Started')
 
 
+
 ###
 # Build the Sidebar
 ###
@@ -146,13 +153,14 @@ def sidebar(open_section):
             A(DivFullySpaced("Getting Started", NavBarParentIcon())),
             NavContainer(create_li("Getting Started", getting_started),
                          create_li("Tutorial App", tutorial_app),
+                        #  create_li("Styling", styling_rules_of_thumb),
                          parent=False),
             cls='uk-open' if open_section=='Getting Started' else ''
         ),
         NavParentLi(
             A(DivFullySpaced("API Reference", NavBarParentIcon())),
             NavContainer(
-                *[create_li(fnname2title(o), f"/api_ref/{o}") for o in reference_fns],
+                *[create_li(fname2title(o), f"/api_ref/{o}") for o in reference_fns],
                 parent=False,  
             ),
             cls='uk-open' if open_section=='API Reference' else ''
@@ -185,7 +193,7 @@ def sidebar(open_section):
             ),
             cls='uk-open' if open_section=='Examples' else ''
         ),
-        create_li("Theme", themeswitcher),
+        create_li("Theme", theme_switcher),
         uk_nav=True,
         cls=(NavT.primary, "space-y-4 p-4 w-full md:w-full")
     )

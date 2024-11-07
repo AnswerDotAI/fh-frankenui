@@ -4,7 +4,7 @@ from fasthtml.common import *
 from fh_frankenui.core import *
 from nbdev.showdoc import *
 import inspect
-
+from utils import create_flippable_card, fn2code_string
 from enum import EnumType
 from collections.abc import Callable
 
@@ -26,48 +26,41 @@ def enum_to_html_table(enum_class):
         P(I(enum_class.__doc__)),
         TableFromLists(headers, rows, cls=(TableT.hover, 'uk-table-small')),)
 
+def create_flippable_card(content, source_code, extra_cls=None):
+    "Creates a card that flips between content and source code"
+    _id = 'f'+str(unqid())
+    _card = Card(
+        Button(
+            DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Source"), 
+            uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary),
+        Button(
+            DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Output"), 
+            uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary, hidden=True),
+        Div(content, id=_id),
+        Div(Pre(Code(source_code)), id=_id, hidden=True, cls="mockup-code"),
+        cls='my-8')
+    return Div(_card, cls=extra_cls) if extra_cls else _card
+
 def render_content(c):
     "Renders content by type"
     if isinstance(c, str):        return render_md(c) # Strings are rendered as markdown
     elif isinstance(c, EnumType): return enum_to_html_table(c) # Enums are rendered as tables
     elif isinstance(c, FT):       return c # FastHTML tags are rendered as themselves
-    elif isinstance(c, tuple): # Tuples are rendered as cards with source and output that are flippable
-        _id = 'f'+str(unqid())
-        _card = Card(
-            Button(
-                DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Source"), 
-                uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary),
-            Button(
-                DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Output"), 
-                uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary, hidden=True),
-            Div(c[0], id=_id),
-            Div(Pre(Code(c[1])), id=_id, hidden=True, cls="mockup-code"),
-            cls='my-8')
-        if len(tuple(c)) == 3: return Div(_card, cls=c[2]) # If there is a third element, it is a class to apply to the card
-        else: return _card        
+    elif isinstance(c, tuple): # Tuples are rendered as cards with source and output that can be flipped
+        extra_cls = c[2] if len(tuple(c)) == 3 else None
+        return create_flippable_card(c[0], c[1], extra_cls)
     elif isinstance(c, Callable): # Callables are rendered as documentation via show_doc
         _html = show_doc(c, renderer=BasicHtmlRenderer)._repr_html_()
         return NotStr(apply_classes(_html, class_map_mods={"table":'uk-table uk-table-hover uk-table-small'}))
-    else: return c    
+    else: return c
 
 def create_doc_section(*content, title):
     return lambda: Titled(H1(title,cls='mb-10'), *map(render_content, content))
 
 def string2code_string(code: str) -> tuple: return eval(code), code
 
-def extract_function_body(func):
-    source = inspect.getsource(func)
-    body_start = source.index(':') + 1
-    body = source[body_start:]
-    lines = body.split('\n')
-    # Remove empty lines at the start
-    while lines and not lines[0].strip():
-        lines.pop(0)
-    # Remove first 4 spaces from each line
-    body = '\n'.join(line[4:] if line.startswith('    ') else line for line in lines)
-    return body.replace('return ', '', 1)
 
-def fn2code_string(fn: Callable) -> tuple: return fn(), extract_function_body(fn)
+
 
 def ex_buttons(): 
     return Div(
