@@ -235,6 +235,25 @@ def ex_card2_tall():
                     Tags(["FastHTML", "HTMX", "Web Apps"]),
                     Button("Read", cls=(ButtonT.primary,'h-6'))))))
 
+def ex_card3():
+    def team_member(name, role, location="Remote"):
+        return Card(
+            DivLAligned(
+                DiceBearAvatar(name, h=24, w=24),
+                Div(H3(name), P(role))),
+            footer=DivFullySpaced(
+                DivHStacked(UkIcon("map-pin", height=16), P(location)),
+                DivHStacked(*(UkIconLink(icon, height=16) for icon in ("mail", "linkedin", "github")))))
+    team = [
+        team_member("Sarah Chen", "Engineering Lead", "San Francisco"),
+        team_member("James Wilson", "Senior Developer", "New York"),
+        team_member("Maria Garcia", "UX Designer", "London"),
+        team_member("Alex Kumar", "Product Manager", "Singapore"),
+        team_member("Emma Brown", "DevOps Engineer", "Toronto"),
+        team_member("Marcus Johnson", "Frontend Developer", "Berlin")
+    ]
+
+    return Grid(*team)
 
 
 docs_cards = create_doc_section(
@@ -243,6 +262,7 @@ docs_cards = create_doc_section(
     fn2code_string(ex_card),
     (*fn2code_string(ex_card2_wide),'uk-visible@s'),
     (*fn2code_string(ex_card2_tall),'uk-hidden@s'),
+    fn2code_string(ex_card3),
     CardTitle,
     CardT,
     "The remainder of these are only needed if you're doing something really special.  They are used in the `Card` function to generate the boilerplate for you.",
