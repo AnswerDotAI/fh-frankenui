@@ -578,7 +578,7 @@ def UkIconLink(icon,
            **kwargs):
     
     fn = fh.Button if button else fh.A
-    return fh.A(cls=(f"uk-icon-{'button' if button else 'link'}", stringify(cls)), **kwargs)(
+    return fn(cls=(f"uk-icon-{'button' if button else 'link'}", stringify(cls)), **kwargs)(
         UkIcon(icon=icon, height=height, width=width, stroke_width=stroke_width))
 
 # %% ../nbs/01_core.ipynb
