@@ -88,6 +88,9 @@ def api_route(request, o:str):
 @rt
 def tutorial_spacing(request=None): return _create_page(render_nb('guides/Spacing.ipynb'), request, 'Guides')
 
+@rt
+def tutorial_layout(request=None): return _create_page(render_nb('guides/Layout.ipynb'), request, 'Guides')
+
 ###
 # Build the Theme Switcher Page
 ###
@@ -170,6 +173,7 @@ def sidebar(open_section):
             NavContainer(
                 *[create_li(title, href) for title, href in [
                     ('Spacing', tutorial_spacing),
+                    ('Layout', tutorial_layout),
                 ]],
                 parent=False
             ),

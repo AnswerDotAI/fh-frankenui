@@ -8,6 +8,10 @@ from fh_frankenui.core import *
 from fasthtml.jupyter import *
 from collections.abc import Callable
 import inspect
+import ast
+def get_last_statement(code): return ast.unparse(ast.parse(code).body[-1])
+import json
+from pathlib import Path
 
 
 hjs = (Style('html.dark .hljs-copy-button {background-color: #e0e0e0; color: #2d2b57;}'),
@@ -73,13 +77,9 @@ def extract_function_body(func):
     return body.replace('return ', '', 1)
 
 
-
-
 def render_nb(path):
     "Renders a Jupyter notebook with markdown cells and flippable code cards"
-    import json
-    from pathlib import Path
-    
+    namespace = globals().copy()
     # Read and parse the notebook
     nb_content = json.loads(Path(path).read_text())
     cells = nb_content['cells']
@@ -94,10 +94,12 @@ def render_nb(path):
         elif cell['cell_type'] == 'code':
             # Skip empty code cells
             if not ''.join(cell['source']).strip(): continue
-            
             # Create flippable card for code
             code_content = ''.join(cell['source'])
-            rendered_cells.append(create_flippable_card(eval(code_content), code_content))
+            exec(code_content, namespace)
+            result = eval(get_last_statement(code_content), namespace)
+            
+            rendered_cells.append(create_flippable_card(result, code_content))
 
     # Return all cells wrapped in a container with vertical spacing
     return Container(cls='space-y-4')(*rendered_cells)
