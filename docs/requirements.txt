@@ -6,5 +6,5 @@ numpy
 matplotlib
 nbdev @ git+https://github.com/Isaac-Flath/nbdev.git@HTML-ShowDoc-Rendering
 pysymbol_llm
-markdown2
+mistletoe
 lxml
