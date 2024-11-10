@@ -872,7 +872,8 @@ def apply_classes(html_str:str,
 
 # %% ../nbs/01_core.ipynb
 def render_md(md_content, class_map=None, class_map_mods=None):
-    try: import markdown2
-    except ImportError: raise ImportError("Install 'markdown2' to use the 'render_md' function")
-    html_content = markdown2.markdown(md_content, extras={'fenced-code-blocks':None})#, 'html-classes': franken_class_map})
+    try: import mistletoe #, mistletoe.contrib.pygments_renderer as mcp
+    except ImportError: raise ImportError("Install 'mistletoe' to use the 'render_md' function")
+#     html_content = mistletoe.markdown(md_content, extras={'fenced-code-blocks':None})#, 'html-classes': franken_class_map})
+    html_content = mistletoe.markdown(md_content) #, mcp.PygmentsRenderer)
     return NotStr(apply_classes(html_content, class_map, class_map_mods))
