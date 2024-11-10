@@ -490,7 +490,7 @@ class ListT(VEnum):
 def List(*c, cls=(), **kwargs): return fh.Ul(*c, cls=('uk-list',stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
-def ModalContainer(*c, cls=(), **kwargs):   return fh.Div(*c, cls=('uk-modal-container',stringify(cls)), uk_modal=True, **kwargs)
+def ModalContainer(*c, cls=(), **kwargs):   return fh.Div(*c, cls=('uk-modal uk-modal-container',stringify(cls)), uk_modal=True, **kwargs)
 def ModalDialog(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-dialog',   stringify(cls)),                **kwargs)
 def ModalHeader(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-header',   stringify(cls)),                **kwargs)
 def ModalBody(*c, cls=(), **kwargs):        return fh.Div(*c, cls=('uk-modal-body',     stringify(cls)),                **kwargs)
