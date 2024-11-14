@@ -3,19 +3,20 @@
 # %% auto 0
 __all__ = ['franken_class_map', 'enum_to_markdown_table', 'fast_app', 'FastHTML', 'Theme', 'TextT', 'TextFont', 'PParagraph',
            'PLarge', 'PLead', 'PSmall', 'PMuted', 'CodeSpan', 'blockquote', 'H1', 'H2', 'H3', 'H4', 'ButtonT', 'Button',
-           'Main', 'ContainerT', 'Container', 'Titled', 'DividerT', 'Divider', 'DividerSplit', 'DividerLine', 'Article',
-           'ArticleTitle', 'ArticleMeta', 'SectionT', 'Section', 'Form', 'Fieldset', 'Legend', 'Input', 'Select',
-           'Radio', 'CheckboxX', 'Range', 'Toggle_switch', 'TextArea', 'Switch', 'FormLabel', 'LabelT', 'Label',
-           'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio', 'LabelCheckboxX', 'LabelRange',
-           'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List',
-           'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton',
-           'Modal', 'PaddingT', 'PositionT', 'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar',
-           'FlexT', 'Grid', 'DivFullySpaced', 'DivCentered', 'DivLAligned', 'DivRAligned', 'DivVStacked', 'DivHStacked',
-           'NavT', 'NavContainer', 'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi',
-           'NavBarContainer', 'NavBarLSide', 'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle',
-           'NavBarNavContainer', 'NavBarParentIcon', 'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle',
-           'CardHeader', 'CardBody', 'CardFooter', 'CardContainer', 'Card', 'TableT', 'Table', 'Td', 'Th', 'Tr',
-           'Thead', 'Tbody', 'TableFromLists', 'TableFromDicts', 'apply_classes', 'render_md']
+           'Main', 'ContainerT', 'Container', 'Titled', 'DividerT', 'Divider', 'DividerSplit', 'DividerLine', 'Alert',
+           'AlertCloseButton', 'AlertTitle', 'AlertDescription', 'Article', 'ArticleTitle', 'ArticleMeta', 'SectionT',
+           'Section', 'Form', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch',
+           'TextArea', 'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput',
+           'LabelRadio', 'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options',
+           'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader',
+           'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
+           'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'Grid', 'DivFullySpaced',
+           'DivCentered', 'DivLAligned', 'DivRAligned', 'DivVStacked', 'DivHStacked', 'NavT', 'NavContainer',
+           'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer', 'NavBarLSide',
+           'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer', 'NavBarParentIcon',
+           'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle', 'CardHeader', 'CardBody', 'CardFooter',
+           'CardContainer', 'Card', 'TableT', 'Table', 'Td', 'Th', 'Tr', 'Thead', 'Tbody', 'TableFromLists',
+           'TableFromDicts', 'apply_classes', 'render_md']
 
 # %% ../nbs/01_core.ipynb
 import fasthtml.common as fh
@@ -250,6 +251,19 @@ def DividerSplit(*c, cls=(), line_cls=(), text_cls=()):
 
 # %% ../nbs/01_core.ipynb
 def DividerLine(lwidth=2, y_space=4): return Hr(cls=f"my-{y_space} h-[{lwidth}px] w-full bg-secondary")
+
+# %% ../nbs/01_core.ipynb
+def Alert(*args, cls=(), **kwargs): 
+    return Div(*args, cls=('uk-alert', stringify(cls)), uk_alert=True, **kwargs)
+
+def AlertCloseButton(*args, cls=(), **kwargs): 
+    return A(*args, cls=('uk-alert-close', stringify(cls)), **kwargs)
+
+def AlertTitle(*args, cls='', **kwargs): 
+    return Div(*args, cls=('uk-alert-title', stringify(cls)), **kwargs)
+
+def AlertDescription(*args, cls='', **kwargs): 
+    return Div(*args, cls=('uk-alert-description', stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def Article(*c, cls=(), **kwargs):
