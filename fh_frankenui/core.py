@@ -473,7 +473,7 @@ def LabelUkSelect(*option,            # Options for the select dropdown (can use
     if label: 
         lbl = FormLabel(cls=f'{lbl_cls}', fr=id)(label) 
     select = Uk_select(*option, cls=inp_cls, uk_cloak=True, id=id, 
-                       name=name, placeholder=placeholder, searchable=searchable, **kwargs)
+                       name=name if name else id, placeholder=placeholder, searchable=searchable, **kwargs)
     return Div(cls=cls)(lbl, select) if label else Div(cls=cls)(select)
 
 # %% ../nbs/01_core.ipynb
