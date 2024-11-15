@@ -16,6 +16,7 @@ These are automatically added to the docs sidebar so you don't have to do anythi
 
 '''
 
+# Utilities
 
 def enum_to_html_table(enum_class):
     headers = ["Option", "Value"]
@@ -59,8 +60,7 @@ def create_doc_section(*content, title):
 
 def string2code_string(code: str) -> tuple: return eval(code), code
 
-
-
+# Buttons
 
 def ex_buttons(): 
     return Div(
@@ -89,19 +89,7 @@ docs_button_link = create_doc_section(
     fn2code_string(ex_links),
     title="Buttons & Links")
 
-def ex_headings():
-    return Div(
-        Titled("Titled"),
-        H1("Level 1 Heading (H1)"), 
-        H2("Level 2 Heading (H2)"), 
-        H3("Level 3 Heading (H3)"), 
-        H4("Level 4 Heading (H4)")
-        )
-
-docs_heading = create_doc_section(
-                       fn2code_string(ex_headings),
-                        H1, H2, H3, H4, Titled,
-                        title="Headings")
+# Theme
 
 def ex_theme_switcher():
     from fasthtml.components import Uk_theme_switcher
@@ -117,6 +105,17 @@ docs_theme_headers = create_doc_section(
     fast_app,
     FastHTML,
     title="Headers")
+
+# Typography
+
+def ex_headings():
+    return Div(
+        Titled("Titled"),
+        H1("Level 1 Heading (H1)"), 
+        H2("Level 2 Heading (H2)"), 
+        H3("Level 3 Heading (H3)"), 
+        H4("Level 4 Heading (H4)")
+        )
 
 def ex_textfont():
     return Div(
@@ -161,14 +160,19 @@ def ex_textt():
         P('nowrap',         cls=TextT.nowrap),
         )
 
-docs_text = create_doc_section( 
-   "Styling text is possibly the most common style thing to do, so we have a couple of helpers for discoverability inside python.  `TextFont` is intended to be combinations are are widely applicable and used often, where `TextT` is intended to be more flexible options for you to combine together yourself.",
+docs_typography = create_doc_section(
+    "Headings are a great way to organize a part and have easy large text to title things",
+    fn2code_string(ex_headings),
+    "Styling text is possibly the most common style thing to do, so we have a couple of helpers for discoverability inside python.  `TextFont` is intended to be combinations are are widely applicable and used often, where `TextT` is intended to be more flexible options for you to combine together yourself.",
     fn2code_string(ex_textfont),
     TextFont,
     fn2code_string(ex_textt),
     TextT,
+    H1, H2, H3, H4, Titled,
 
     title="Text Style")
+
+# Containers
 
 def ex_articles():
     return Article(
@@ -195,6 +199,8 @@ docs_containers = create_doc_section(
     title="Articles, Containers & Sections"
 )
 
+# Cards
+
 def ex_card():
     return Card(
         Form(LabelInput("Input"),
@@ -219,7 +225,6 @@ def ex_card2_wide():
                 DivFullySpaced(
                     Tags(["FastHTML", "HTMX", "Web Apps"]),
                     Button("Read", cls=(ButtonT.primary,'h-6'))))))
-
 
 def ex_card2_tall():
     def Tags(cats): return Div(cls='space-x-2')(map(Label, cats))
@@ -255,7 +260,6 @@ def ex_card3():
 
     return Grid(*team)
 
-
 docs_cards = create_doc_section(
     Card,
     H3("Example Usage"),
@@ -273,6 +277,8 @@ docs_cards = create_doc_section(
     title="Cards"
 )
 
+# Lists
+
 def ex_lists():
     list_options = [(style,str(cls)) for style,cls in ListT.__members__.items()]
     lists = [Div(H4(f"{style} List:"), List(Li("Item 1"), Li("Item 2"), cls=cls)) for style, cls in list_options]
@@ -284,22 +290,7 @@ docs_lists = create_doc_section(
     ListT,
     title="Lists")
 
-def ex_md(): 
-    return render_md('''# Test MD
-
-+ A list with **bold** and *italics*
-+ And a link to [answer.ai](https://answer.ai)''')
-
-def ex_applyclasses():
-    return apply_classes('<h1>Hello, World!</h1><p>This is a paragraph</p>')
-        
-        
-docs_markdown = create_doc_section(render_md, 
-                             fn2code_string(ex_md), 
-                             P("This uses the `apply_classes` function, which can be used to apply classes to html strings"),
-                             apply_classes,
-                             fn2code_string(ex_applyclasses),
-                             title="Markdown")
+# Forms
 
 def ex_formlabel(): 
     return FormLabel("Form Label")
@@ -313,10 +304,12 @@ def ex_checkbox():
     return Div(
         CheckboxX(), 
         LabelCheckboxX(label="Checkbox", id='checkbox1'))
+
 def ex_range(): 
     return Div(
         Range(), 
         LabelRange(label="Range", id='range1'))
+
 def ex_switch(): 
     return Div(
         Switch(id="switch"), 
@@ -392,6 +385,8 @@ docs_forms = create_doc_section(
     Fieldset,
     title="Forms")
 
+# Modals
+
 def ex_modal():
     return Div(
         Button("Open Modal",uk_toggle="target: #my-modal" ),
@@ -412,6 +407,8 @@ docs_modals = create_doc_section(
     ModalDialog,
     ModalContainer,
     title="Modals")
+
+# Layout
 
 def ex_grid():
     return Grid(
@@ -448,7 +445,6 @@ def ex_product_grid():
     ]
     
     return Grid(*product_cards, cols_lg=3)
-
 
 def ex_fully_spaced_div():
     return DivFullySpaced(
@@ -523,6 +519,8 @@ docs_layout = create_doc_section(
     PositionT,
     title="Layout")
 
+# Dividers
+
 def ex_dividers():
     return Div(
         P("Small Divider"),
@@ -535,7 +533,8 @@ def ex_dividers():
 
 def ex_dividersplit():
     return DividerSplit(P("Or continue with", cls=TextFont.muted_sm))
-def ex_dividerline():
+
+def ex_dividerline(): 
     return DividerLine()
 
 docs_dividers = create_doc_section(
@@ -547,6 +546,8 @@ docs_dividers = create_doc_section(
     DividerLine,
     fn2code_string(ex_dividerline),
     title="Dividers")
+
+# Navigation
 
 def ex_nav1():
     mbrs1 = [Li(A('Option 1'), cls='uk-active'), Li(A('Option 2')), Li(A('Option 3'))]
@@ -615,7 +616,6 @@ def ex_tabs1():
             Li(H1("Tab 2")),
             Li(H1("Tab 3"))))
 
-
 def ex_tabs2():
     return Container(
         TabContainer(
@@ -659,6 +659,7 @@ docs_navigation = create_doc_section(
     TabContainer,
     title="Navigation")
 
+# Tables
 
 def ex_tables0():
     return Table(
@@ -707,6 +708,8 @@ docs_tables = create_doc_section(
     Tr,    
     title="Tables")
 
+# Icons
+
 def ex_dicebear():
     return DivLAligned(
         DiceBearAvatar('Isaac Flath',10,10),
@@ -738,6 +741,8 @@ docs_icons = create_doc_section(
     UkIconLink,
     title="Icons")
 
+# Markdown
+
 def ex_markdown():
     md = '''# Example Markdown
 
@@ -750,8 +755,15 @@ def ex_markdown():
 '''
     return render_md(md)
 
+def ex_applyclasses():
+    return apply_classes('<h1>Hello, World!</h1><p>This is a paragraph</p>')
+
 docs_markdown = create_doc_section(
     fn2code_string(ex_markdown),
-    render_md,
+    P("This uses the `apply_classes` function, which can be used to apply classes to html strings"),
     apply_classes,
+    fn2code_string(ex_applyclasses),
     title="Markdown + HTML Frankification")
+
+                
+
