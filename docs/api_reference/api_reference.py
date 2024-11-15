@@ -160,16 +160,48 @@ def ex_textt():
         P('nowrap',         cls=TextT.nowrap),
         )
 
+def ex_ps():
+    return Div(
+        P("This is a plain P element"),
+        PParagraph("This is a PParagraph which adds space between paragraphs"),
+        PLarge("This is a PLarge element"),
+        PLead("This is a PLead element"),
+        PSmall("This is a PSmall element"),
+        PMuted("This is a PMuted element"))
+
+def ex_other():
+    return Div(
+        CodeSpan("This is a CodeSpan element"),
+        Blockquote("This is a blockquote element"))
+
+def ex_alerts1():
+    return Alert("This is a sample alert")
+
+def ex_alerts2():
+    return Alert(
+        AlertCloseButton(uk_close=True),
+        DivLAligned(UkIcon('triangle-alert'), AlertTitle("Sample alert")),
+        AlertDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit"),
+        cls='uk-alert-danger')
+
 docs_typography = create_doc_section(
-    "Headings are a great way to organize a part and have easy large text to title things",
+    PLarge("High Level Options"),
+    P("Ready to go typographic options that cover most of what you need",cls=TextFont.muted_sm),
     fn2code_string(ex_headings),
+    fn2code_string(ex_ps),
+    fn2code_string(ex_other),
+    fn2code_string(ex_alerts1),
+    fn2code_string(ex_alerts2), 
+    PLarge("Lower Level Options (enums)"),
     "Styling text is possibly the most common style thing to do, so we have a couple of helpers for discoverability inside python.  `TextFont` is intended to be combinations are are widely applicable and used often, where `TextT` is intended to be more flexible options for you to combine together yourself.",
     fn2code_string(ex_textfont),
-    TextFont,
     fn2code_string(ex_textt),
+    TextFont,
     TextT,
     H1, H2, H3, H4, Titled,
-
+    P, PParagraph, PLarge, PLead, PSmall, PMuted,
+    CodeSpan, Blockquote,
+    Alert, AlertCloseButton, AlertTitle, AlertDescription,
     title="Text Style")
 
 # Containers
@@ -185,6 +217,7 @@ def ex_containers():
         "This is a sample container with custom styling.",
         cls=ContainerT.xsmall,
         style="background-color: #FFA500; color: #000000")
+
 
 docs_containers = create_doc_section(
     ArticleMeta,

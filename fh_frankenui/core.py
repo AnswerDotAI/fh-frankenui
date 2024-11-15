@@ -2,7 +2,7 @@
 
 # %% auto 0
 __all__ = ['franken_class_map', 'enum_to_markdown_table', 'fast_app', 'FastHTML', 'Theme', 'TextT', 'TextFont', 'PParagraph',
-           'PLarge', 'PLead', 'PSmall', 'PMuted', 'CodeSpan', 'blockquote', 'H1', 'H2', 'H3', 'H4', 'ButtonT', 'Button',
+           'PLarge', 'PLead', 'PSmall', 'PMuted', 'CodeSpan', 'Blockquote', 'H1', 'H2', 'H3', 'H4', 'ButtonT', 'Button',
            'Main', 'ContainerT', 'Container', 'Titled', 'DividerT', 'Divider', 'DividerSplit', 'DividerLine', 'Alert',
            'AlertCloseButton', 'AlertTitle', 'AlertDescription', 'Article', 'ArticleTitle', 'ArticleMeta', 'SectionT',
            'Section', 'Form', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch',
@@ -159,7 +159,7 @@ def CodeSpan(*args, **kwargs):
     return fh.Code(*args, cls=('uk-codespan"'), **kwargs)
 
 # %% ../nbs/01_core.ipynb
-def blockquote(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT:
+def Blockquote(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT:
     "A Blockquote with Styling"
     return fh.Blockquote(*c, cls=('uk-blockquote',stringify(cls)), **kwargs)
 
