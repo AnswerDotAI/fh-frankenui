@@ -872,6 +872,7 @@ franken_class_map = {
 def apply_classes(html_str:str, 
                   class_map=None, 
                   class_map_mods=None):
+    if not html_str: return html_str
     from lxml import html, etree
     class_map = ifnone(class_map, franken_class_map)
 
