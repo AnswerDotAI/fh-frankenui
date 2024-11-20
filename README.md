@@ -16,6 +16,8 @@ To install this library, uses
 
 `pip install git+https://github.com/AnswerDotAI/fh-frankenui.git`
 
+Check out the docs [here](https://fh-frankenui.answer.ai/)
+
 ## Getting Started
 
 To get started, check out:
