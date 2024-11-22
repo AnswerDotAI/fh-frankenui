@@ -8,7 +8,7 @@ __all__ = ['franken_class_map', 'enum_to_markdown_table', 'fast_app', 'FastHTML'
            'Section', 'Form', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch',
            'TextArea', 'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput',
            'LabelRadio', 'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options',
-           'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'List', 'ModalContainer', 'ModalDialog', 'ModalHeader',
+           'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'UkList', 'ModalContainer', 'ModalDialog', 'ModalHeader',
            'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
            'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'Grid', 'DivFullySpaced',
            'DivCentered', 'DivLAligned', 'DivRAligned', 'DivVStacked', 'DivHStacked', 'NavT', 'NavContainer',
@@ -501,7 +501,7 @@ class ListT(VEnum):
     striped = auto()
 
 # %% ../nbs/01_core.ipynb
-def List(*c, cls=(), **kwargs): return fh.Ul(*c, cls=('uk-list',stringify(cls)), **kwargs)
+def UkList(*c, cls=(), **kwargs): return fh.Ul(*c, cls=('uk-list',stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def ModalContainer(*c, cls=(), **kwargs):   return fh.Div(*c, cls=('uk-modal uk-modal-container',stringify(cls)), uk_modal=True, **kwargs)
