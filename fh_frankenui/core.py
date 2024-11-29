@@ -18,7 +18,7 @@ __all__ = ['franken_class_map', 'enum_to_markdown_table', 'fast_app', 'FastHTML'
            'CardContainer', 'Card', 'TableT', 'Table', 'Td', 'Th', 'Tr', 'Thead', 'Tbody', 'TableFromLists',
            'TableFromDicts', 'apply_classes', 'render_md']
 
-# %% ../nbs/01_core.ipynb 4
+# %% ../nbs/01_core.ipynb
 import fasthtml.common as fh
 from .foundations import *
 from fasthtml.common import is_listy, Div, P, Span, Script, FastHTML, FT, to_xml, show,fast_app
@@ -32,7 +32,7 @@ from typing import Union, Tuple, Optional
 from fastcore.all import *
 import copy, re
 
-# %% ../nbs/01_core.ipynb 7
+# %% ../nbs/01_core.ipynb
 def enum_to_markdown_table(enum_class):
     headers = ["Option", "Value"]
     rows = [[name, value.value] for name, value in enum_class.__members__.items()]
@@ -46,7 +46,7 @@ def enum_to_markdown_table(enum_class):
     
     return f"{header}\n{separator}\n{body}"
 
-# %% ../nbs/01_core.ipynb 9
+# %% ../nbs/01_core.ipynb
 @delegates(fh.fast_app, but=['pico'])
 def fast_app(*args, pico=False, **kwargs):
     "Adds `bg-background text-foreground` to bodykw for frankenui themes"
@@ -55,7 +55,7 @@ def fast_app(*args, pico=False, **kwargs):
     kwargs['bodykw']['class'] = stringify((kwargs['bodykw']['class'],'bg-background text-foreground'))
     return fh.fast_app(*args, pico=False, **kwargs)
 
-# %% ../nbs/01_core.ipynb 11
+# %% ../nbs/01_core.ipynb
 @delegates(fh.FastHTML, but=['pico'])
 def FastHTML(*args, pico=False, **kwargs):
     "Adds `bg-background text-foreground` to bodykw for frankenui themes"
@@ -65,7 +65,7 @@ def FastHTML(*args, pico=False, **kwargs):
     bodykw = kwargs.pop('bodykw',{})
     return fh.FastHTML(*args, pico=False, **bodykw, **kwargs)
 
-# %% ../nbs/01_core.ipynb 15
+# %% ../nbs/01_core.ipynb
 def _headers_theme(color):    
     return fh.Script(f'''const htmlElement = document.documentElement;
           if (
@@ -81,7 +81,7 @@ def _headers_theme(color):
           htmlElement.classList.add(localStorage.getItem("theme") || "uk-theme-{color}");
           ''')
 
-# %% ../nbs/01_core.ipynb 16
+# %% ../nbs/01_core.ipynb
 class Theme(Enum):
     "Selector to choose theme and get all headers needed for app.  Includes frankenui + tailwind"
     def _generate_next_value_(name, start, count, last_values): return name
@@ -106,7 +106,7 @@ class Theme(Enum):
             fh.Script(src="https://cdn.tailwindcss.com"),
             _headers_theme(self.value),)
 
-# %% ../nbs/01_core.ipynb 20
+# %% ../nbs/01_core.ipynb
 class TextT(VEnum):
     'Text Styles from https://franken-ui.dev/docs/text'
     def _generate_next_value_(name, start, count, last_values):
@@ -132,7 +132,7 @@ class TextT(VEnum):
     # Text Wrapping
     truncate,break_,nowrap = auto(),auto(),auto()
 
-# %% ../nbs/01_core.ipynb 22
+# %% ../nbs/01_core.ipynb
 class TextFont(Enum):
     "Combinations of TextT that are particularly useful"
     def __add__(self, other):   return stringify((self, other))
@@ -142,7 +142,7 @@ class TextFont(Enum):
     muted_lg = stringify((TextT.muted, TextT.large))
     bold_sm = stringify((TextT.bold, TextT.small))
 
-# %% ../nbs/01_core.ipynb 23
+# %% ../nbs/01_core.ipynb
 def PParagraph(*args, cls='', **kwargs): 
     return fh.P(*args, cls=('uk-paragraph',stringify(cls)), **kwargs)
 def PLarge(*args, cls='', **kwargs):
@@ -154,36 +154,36 @@ def PSmall(*args, cls='', **kwargs):
 def PMuted(*args, cls='', **kwargs):
     return fh.P(*args, cls=('uk-text-muted', stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 24
+# %% ../nbs/01_core.ipynb
 def CodeSpan(*args, **kwargs):
     return fh.Code(*args, cls=('uk-codespan"'), **kwargs)
 
-# %% ../nbs/01_core.ipynb 25
+# %% ../nbs/01_core.ipynb
 def Blockquote(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT:
     "A Blockquote with Styling"
     return fh.Blockquote(*c, cls=('uk-blockquote',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 26
+# %% ../nbs/01_core.ipynb
 def H1(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT: 
     "A H1 with Styling"
     return fh.H1(*c, cls=('uk-h1',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 27
+# %% ../nbs/01_core.ipynb
 def H2(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT: 
     "A H2 with Styling"
     return fh.H2(*c, cls=('uk-h2',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 28
+# %% ../nbs/01_core.ipynb
 def H3(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT: 
     "A H3 with Styling"
     return fh.H3(*c, cls=('uk-h3',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 29
+# %% ../nbs/01_core.ipynb
 def H4(*c:FT|str, cls:Enum|str|tuple=(), **kwargs)->FT:
     "A H4 with Styling"
     return fh.H4(*c, cls=('uk-h4',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 31
+# %% ../nbs/01_core.ipynb
 class ButtonT(VEnum):
     "Options for styling Buttons"
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('button', name)
@@ -195,7 +195,7 @@ class ButtonT(VEnum):
     link = auto()
     ghost = auto()
 
-# %% ../nbs/01_core.ipynb 32
+# %% ../nbs/01_core.ipynb
 def Button(*c: Union[str, FT],
            cls: Union[str, Enum]=ButtonT.default,
            submit=True,
@@ -204,10 +204,10 @@ def Button(*c: Union[str, FT],
     "A Button with Styling (defaults to `type=submit` for form submission)"
     return fh.Button(*c, cls=('uk-button', stringify(cls)), type='submit' if submit else 'button', **kwargs)
 
-# %% ../nbs/01_core.ipynb 34
+# %% ../nbs/01_core.ipynb
 def Main(*args, **kwargs): return fh.Main(*args, **kwargs)
 
-# %% ../nbs/01_core.ipynb 35
+# %% ../nbs/01_core.ipynb
 class ContainerT(VEnum):
     'Max width container sizes from https://franken-ui.dev/docs/container'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('container', name)
@@ -217,17 +217,17 @@ class ContainerT(VEnum):
     xlarge = auto()
     expand = auto()
 
-# %% ../nbs/01_core.ipynb 36
+# %% ../nbs/01_core.ipynb
 def Container(*c, cls=('mt-5', ContainerT.xlarge), **kwargs): 
     "A Div to be used as a container that often wraps large sections or a page of content"
     return Div(*c, cls=('uk-container',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 37
+# %% ../nbs/01_core.ipynb
 def Titled(title:str="FastHTML app", *args, cls='uk-container-xlarge', **kwargs)->FT:
     "A H1 with styling, whose title is also used in the page's title tag"
     return fh.Title(title), fh.Main(Container(H1(title), *args, cls=cls, **kwargs))
 
-# %% ../nbs/01_core.ipynb 40
+# %% ../nbs/01_core.ipynb
 class DividerT(VEnum):
     " Divider Styles from https://franken-ui.dev/docs/divider"
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('divider', name)
@@ -235,24 +235,24 @@ class DividerT(VEnum):
     small=auto()
     vertical=auto()
 
-# %% ../nbs/01_core.ipynb 41
+# %% ../nbs/01_core.ipynb
 def Divider(*args, cls=('my-4', DividerT.icon), **kwargs):
     "Divider with default styling and margin"
     cls = stringify(cls)
     container = Div if 'uk-divider-vertical' in cls else Hr
     return container(*args, cls=cls, **kwargs)
 
-# %% ../nbs/01_core.ipynb 42
+# %% ../nbs/01_core.ipynb
 def DividerSplit(*c, cls=(), line_cls=(), text_cls=()):
     cls, line_cls, text_cls = map(stringify,(cls, line_cls, text_cls))
     return Div(cls='relative ' + cls)(
         Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
         Div(cls="relative flex justify-center " + text_cls)(Span(cls="bg-background px-2 ")(*c)))
 
-# %% ../nbs/01_core.ipynb 43
+# %% ../nbs/01_core.ipynb
 def DividerLine(lwidth=2, y_space=4): return Hr(cls=f"my-{y_space} h-[{lwidth}px] w-full bg-secondary")
 
-# %% ../nbs/01_core.ipynb 45
+# %% ../nbs/01_core.ipynb
 def Alert(*args, cls=(), **kwargs): 
     return Div(*args, cls=('uk-alert', stringify(cls)), uk_alert=True, **kwargs)
 
@@ -265,7 +265,7 @@ def AlertTitle(*args, cls='', **kwargs):
 def AlertDescription(*args, cls='', **kwargs): 
     return Div(*args, cls=('uk-alert-description', stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 46
+# %% ../nbs/01_core.ipynb
 def Article(*c, cls=(), **kwargs):
     return fh.Article(*c, cls=('uk-article',stringify(cls)), **kwargs)
 
@@ -275,7 +275,7 @@ def ArticleTitle(*c, cls=(), **kwargs):
 def ArticleMeta(*c, cls=(), **kwargs):
     return P(*c, cls=('uk-article-meta',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 49
+# %% ../nbs/01_core.ipynb
 class SectionT(VEnum):
     'Section styles from https://franken-ui.dev/docs/section'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('section', name)
@@ -289,22 +289,22 @@ class SectionT(VEnum):
     xlarge = auto()
     remove_vertical = auto()
 
-# %% ../nbs/01_core.ipynb 51
+# %% ../nbs/01_core.ipynb
 def Section(*c, cls=(), **kwargs):
     return fh.Div(*c, cls=('uk-section',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 53
+# %% ../nbs/01_core.ipynb
 def Form(*c, cls='space-y-3', **kwargs):
     return fh.Form(*c, cls=stringify(cls), **kwargs)
 
-# %% ../nbs/01_core.ipynb 54
+# %% ../nbs/01_core.ipynb
 def Fieldset(*c, cls=(), **kwargs): 
     return fh.Fieldset(*c, cls=('uk-fieldset',stringify(cls)), **kwargs)
 
 def Legend(*c, cls=(), **kwargs): 
     return fh.Legend(*c, cls=('uk-legend',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 55
+# %% ../nbs/01_core.ipynb
 def Input(*c, cls=(), **kwargs):      
     return fh.Input(*c, cls=('uk-input',stringify(cls)), **kwargs)
 def Select(*option, cls=(), **kwargs):
@@ -322,29 +322,29 @@ def TextArea(*c, cls=(), **kwargs):
 def Switch(*c, cls='min-w-9', **kwargs):              
     return fh.Input(*c, cls=('uk-toggle-switch uk-toggle-switch-primary',stringify(cls)), type='checkbox', **kwargs)
 
-# %% ../nbs/01_core.ipynb 56
+# %% ../nbs/01_core.ipynb
 def FormLabel(*c, cls=(), **kwargs): return fh.Label(*c, cls=('uk-form-label',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 57
+# %% ../nbs/01_core.ipynb
 class LabelT(VEnum):
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('label', name)
     primary = auto()
     secondary = auto()
     danger = auto()
 
-# %% ../nbs/01_core.ipynb 58
+# %% ../nbs/01_core.ipynb
 def Label(*c, cls=(), **kwargs):
     "FrankenUI labels, which look like pills"
     return fh.Label(*c, cls=('uk-label',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 59
+# %% ../nbs/01_core.ipynb
 def UkFormSection(title, description, *c, button_txt='Update', outer_margin=6, inner_margin=6):
     return Div(cls=f'space-y-{inner_margin} py-{outer_margin}')(
         Div(H3(title), P(description, cls=TextFont.muted_sm)),
         DividerSplit(), *c,
         Div(Button(button_txt, cls=ButtonT.primary)) if button_txt else None)
 
-# %% ../nbs/01_core.ipynb 62
+# %% ../nbs/01_core.ipynb
 def GenericLabelInput(
                label:str|FT,
                lbl_cls='',
@@ -362,13 +362,13 @@ def GenericLabelInput(
     if container: return container(label, inp, cls=stringify(cls))
     return label, inp
 
-# %% ../nbs/01_core.ipynb 63
+# %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
 def LabelInput(*args, cls='space-y-2', **kwargs): 
     "A Label and Input pair that provides default spacing and links/names them based on id"
     return GenericLabelInput(*args, cls=stringify(cls),input_fn=Input, **kwargs)
 
-# %% ../nbs/01_core.ipynb 64
+# %% ../nbs/01_core.ipynb
 def LabelRadio(label:str|FT,
                lbl_cls='',
                input_cls='',
@@ -384,7 +384,7 @@ def LabelRadio(label:str|FT,
     if container: return container(inp, label, cls=stringify(cls))
     return inp, label
 
-# %% ../nbs/01_core.ipynb 65
+# %% ../nbs/01_core.ipynb
 def LabelCheckboxX(label:str|FT,
                lbl_cls='',
                input_cls='',
@@ -401,23 +401,23 @@ def LabelCheckboxX(label:str|FT,
     if container: return container(inp, label, cls=stringify(cls))
     return inp, label
 
-# %% ../nbs/01_core.ipynb 66
+# %% ../nbs/01_core.ipynb
 # @delegates(GenericLabelInput, but=['input_fn','cls'])
 # def LabelCheckboxX(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=CheckboxX, **kwargs)
 
-# %% ../nbs/01_core.ipynb 67
+# %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
 def LabelRange(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=Range, **kwargs)
 
-# %% ../nbs/01_core.ipynb 68
+# %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
 def LabelTextArea(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=TextArea, **kwargs)
 
-# %% ../nbs/01_core.ipynb 69
+# %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
 def LabelSwitch(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=Toggle_switch, **kwargs)
 
-# %% ../nbs/01_core.ipynb 70
+# %% ../nbs/01_core.ipynb
 def LabelSelect(*option,
                label:str|FT,
                lbl_cls='',
@@ -434,7 +434,7 @@ def LabelSelect(*option,
     if container: return container(label, inp, cls=stringify(cls))
     return label, inp
 
-# %% ../nbs/01_core.ipynb 71
+# %% ../nbs/01_core.ipynb
 def Options(*c,                    # Content for an `Option`
             selected_idx:int=None, # Index location of selected `Option`
             disabled_idxs:set=None # Idex locations of disabled `Options`
@@ -442,7 +442,7 @@ def Options(*c,                    # Content for an `Option`
     "Helper function to wrap things into `Option`s for use in `UkSelect`"
     return [fh.Option(o,selected=i==selected_idx, disabled=disabled_idxs and i in disabled_idxs) for i,o in enumerate(c)]
 
-# %% ../nbs/01_core.ipynb 72
+# %% ../nbs/01_core.ipynb
 def UkSelect(*option,            # Options for the select dropdown (can use `Options` helper function to create)
              inp_cls=(),         # Additional classes for the select input
              cls=('space-y-2',), # Classes for the outer div
@@ -457,7 +457,7 @@ def UkSelect(*option,            # Options for the select dropdown (can use `Opt
                        name=name, placeholder=placeholder, searchable=searchable, **kwargs)
     return Div(cls=cls)(select)
 
-# %% ../nbs/01_core.ipynb 73
+# %% ../nbs/01_core.ipynb
 def LabelUkSelect(*option,            # Options for the select dropdown (can use `Options` helper function to create)
              label=(),           # String or FT component for the label
              lbl_cls=(),         # Additional classes for the label
@@ -476,7 +476,7 @@ def LabelUkSelect(*option,            # Options for the select dropdown (can use
                        name=name if name else id, placeholder=placeholder, searchable=searchable, **kwargs)
     return Div(cls=cls)(lbl, select) if label else Div(cls=cls)(select)
 
-# %% ../nbs/01_core.ipynb 75
+# %% ../nbs/01_core.ipynb
 class AT(VEnum):
     'Link styles from https://franken-ui.dev/docs/link'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('link', name)
@@ -484,7 +484,7 @@ class AT(VEnum):
     text = auto()
     reset = auto()
 
-# %% ../nbs/01_core.ipynb 77
+# %% ../nbs/01_core.ipynb
 class ListT(VEnum):
     'List styles from https://franken-ui.dev/docs/list'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('list', name)
@@ -500,10 +500,10 @@ class ListT(VEnum):
     divider = auto()
     striped = auto()
 
-# %% ../nbs/01_core.ipynb 78
+# %% ../nbs/01_core.ipynb
 def UkList(*c, cls=(), **kwargs): return fh.Ul(*c, cls=('uk-list',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 80
+# %% ../nbs/01_core.ipynb
 def ModalContainer(*c, cls=(), **kwargs):   return fh.Div(*c, cls=('uk-modal uk-modal-container',stringify(cls)), uk_modal=True, **kwargs)
 def ModalDialog(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-dialog',   stringify(cls)),                **kwargs)
 def ModalHeader(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-header',   stringify(cls)),                **kwargs)
@@ -512,7 +512,7 @@ def ModalFooter(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-foo
 def ModalTitle(*c, cls=(), **kwargs):       return fh.H2(*c,  cls=('uk-modal-title',    stringify(cls)),                **kwargs)
 def ModalCloseButton(*c, cls=(), **kwargs): return Button(*c, cls=('uk-modal-close',    stringify(cls)),                **kwargs)
 
-# %% ../nbs/01_core.ipynb 81
+# %% ../nbs/01_core.ipynb
 def Modal(*c,
         header=None,          # Components that go in the header
         footer=None,          # Components that go in the footer
@@ -532,7 +532,7 @@ def Modal(*c,
     if footer: res.append(ModalFooter(cls=footer_cls)(footer))
     return ModalContainer(ModalDialog(*res, cls=dialog_cls), cls=cls, id=id, **kwargs)
 
-# %% ../nbs/01_core.ipynb 83
+# %% ../nbs/01_core.ipynb
 class PaddingT(VEnum):
     'Padding Modifiers from https://franken-ui.dev/docs/padding'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('padding', name)
@@ -550,7 +550,7 @@ class PaddingT(VEnum):
     remove_vertical = auto()
     remove_horizontal = auto()
 
-# %% ../nbs/01_core.ipynb 84
+# %% ../nbs/01_core.ipynb
 class PositionT(VEnum):
     'Position modifiers from https://franken-ui.dev/docs/position'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('position', name)
@@ -570,19 +570,19 @@ class PositionT(VEnum):
     center_horizontal = auto()
     center_vertical = auto()
 
-# %% ../nbs/01_core.ipynb 86
+# %% ../nbs/01_core.ipynb
 def Placeholder(*c, cls=(), **kwargs):
     return fh.Div(*c, cls=('uk-placeholder',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 87
+# %% ../nbs/01_core.ipynb
 def Progress(*c, cls=(), value="", max="", **kwargs):
     return fh.Progress(*c, value=value, max=max, cls=('uk-progress',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 89
+# %% ../nbs/01_core.ipynb
 def UkIcon(icon,height=None,width=None,stroke_width=None,cls=(), **kwargs):
     return Uk_icon(icon=icon, height=height, width=width, stroke_width=stroke_width, cls=cls, **kwargs)
 
-# %% ../nbs/01_core.ipynb 90
+# %% ../nbs/01_core.ipynb
 def UkIconLink(icon, 
            height=None,
            width=None,
@@ -595,7 +595,7 @@ def UkIconLink(icon,
     return fn(cls=(f"uk-icon-{'button' if button else 'link'}", stringify(cls)), **kwargs)(
         UkIcon(icon=icon, height=height, width=width, stroke_width=stroke_width))
 
-# %% ../nbs/01_core.ipynb 92
+# %% ../nbs/01_core.ipynb
 def DiceBearAvatar(seed_name, # Seed name (ie 'Isaac Flath')
                    h=20,         # Height 
                    w=20,          # Width
@@ -604,7 +604,7 @@ def DiceBearAvatar(seed_name, # Seed name (ie 'Isaac Flath')
     return Span(cls=f"relative flex h-{h} w-{w} shrink-0 overflow-hidden rounded-full bg-accent")(
             fh.Img(cls=f"aspect-square h-{h} w-{w}", alt="Avatar", loading="lazy", src=f"{url}{seed_name}"))
 
-# %% ../nbs/01_core.ipynb 95
+# %% ../nbs/01_core.ipynb
 class FlexT(VEnum):
     'Flexbox modifiers from UIkit'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('flex', name)
@@ -620,7 +620,7 @@ class FlexT(VEnum):
     # Wrap
     nowrap, wrap, wrap_reverse = auto(), auto(), auto()
 
-# %% ../nbs/01_core.ipynb 96
+# %% ../nbs/01_core.ipynb
 def Grid(*div,         # Divs/Containers that should be divided into a grid
          cols_min=None, # defaults to min(len(div),1)
          cols_sm=None, # defaults to min(len(div),2)
@@ -638,7 +638,7 @@ def Grid(*div,         # Divs/Containers that should be divided into a grid
     cls = stringify(cls)
     return Div(cls=(f'grid grid-cols-{cols_min} sm:grid-cols-{cols_sm} md:grid-cols-{cols_md} lg:grid-cols-{cols_lg}',cls), **kwargs)(*div)
 
-# %% ../nbs/01_core.ipynb 98
+# %% ../nbs/01_core.ipynb
 def DivFullySpaced(*c,                # Components
                    cls='uk-width-1-1',# Classes for outer div
                    **kwargs           # Additional args for outer div
@@ -647,7 +647,7 @@ def DivFullySpaced(*c,                # Components
     cls = stringify(cls)
     return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*c)
 
-# %% ../nbs/01_core.ipynb 99
+# %% ../nbs/01_core.ipynb
 def DivCentered(*c,      # Components
                 cls='space-y-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
@@ -656,7 +656,7 @@ def DivCentered(*c,      # Components
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,FlexT.center,cls),**kwargs)(*c)
 
-# %% ../nbs/01_core.ipynb 100
+# %% ../nbs/01_core.ipynb
 def DivLAligned(*c,      # Components
                 cls='space-x-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
@@ -665,7 +665,7 @@ def DivLAligned(*c,      # Components
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.left,FlexT.middle,cls), **kwargs)(*c)
 
-# %% ../nbs/01_core.ipynb 101
+# %% ../nbs/01_core.ipynb
 def DivRAligned(*c,      # Components
                 cls='space-x-4',  # Classes for outer div
                 **kwargs # Additional args for outer div
@@ -674,24 +674,24 @@ def DivRAligned(*c,      # Components
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.right,FlexT.middle,cls), **kwargs)(*c)
 
-# %% ../nbs/01_core.ipynb 102
+# %% ../nbs/01_core.ipynb
 def DivVStacked(*c, cls='space-y-4', **kwargs):
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,cls), **kwargs)(*c)
 
-# %% ../nbs/01_core.ipynb 103
+# %% ../nbs/01_core.ipynb
 def DivHStacked(*c, cls='space-x-4', **kwargs):
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.row,FlexT.middle,cls), **kwargs)(*c)
 
-# %% ../nbs/01_core.ipynb 106
+# %% ../nbs/01_core.ipynb
 class NavT(VEnum):
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('nav', name)
     default = auto()
     primary = auto()
     secondary = auto()
 
-# %% ../nbs/01_core.ipynb 107
+# %% ../nbs/01_core.ipynb
 def NavContainer(*li, 
                  cls=NavT.primary,
                  parent=True, 
@@ -699,14 +699,14 @@ def NavContainer(*li,
                  **kwargs):
     return fh.Ul(*li, uk_nav=uk_nav, cls=(f"uk-nav{'' if parent else '-sub'}", stringify(cls)),**kwargs)
 
-# %% ../nbs/01_core.ipynb 108
+# %% ../nbs/01_core.ipynb
 def NavParentLi(*nav_container, cls=(), **kwargs): return fh.Li(*nav_container,  cls=('uk-parent',  stringify(cls)),**kwargs)
 def NavDividerLi(*c,cls=(), **kwargs): return fh.Li(*c, cls=('uk-nav-divider', stringify(cls)),**kwargs)
 def NavHeaderLi(*c,cls=(), **kwargs): return fh.Li(*c, cls=('uk-nav-header', stringify(cls)),**kwargs)
 def NavSubtitle(*c,cls=TextFont.muted_sm, **kwargs): return fh.Div(*c, cls=('uk-nav-subtitle', stringify(cls)),**kwargs)
 def NavCloseLi(*c,cls=(), **kwargs): return fh.Li(*c, cls=('uk-drop-close', stringify(cls)),**kwargs)
 
-# %% ../nbs/01_core.ipynb 111
+# %% ../nbs/01_core.ipynb
 def NavBarContainer(*c, 
                     cls=(),
                     container_cls=ContainerT.expand,
@@ -717,14 +717,14 @@ def NavBarLSide(*c,  cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-left',
 def NavBarRSide(*c,  cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-right', stringify(cls)), **kwargs)
 def NavBarCenter(*c, cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-center',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 112
+# %% ../nbs/01_core.ipynb
 def NavBarNav(*li, cls=(), **kwargs): return fh.Nav(*li, cls=('uk-navbar-nav',      stringify(cls)),                 **kwargs)
 
-# %% ../nbs/01_core.ipynb 113
+# %% ../nbs/01_core.ipynb
 def NavBarSubtitle(title, subtitle, cls=(), subtitle_cls=TextFont.muted_sm, **kwargs): 
     return fh.Div(title,fh.Div(subtitle, cls=('uk-navbar-subtitle', stringify(subtitle_cls))), cls=stringify(cls), **kwargs)
 
-# %% ../nbs/01_core.ipynb 114
+# %% ../nbs/01_core.ipynb
 def NavBarNavContainer(*li, 
                        cls=NavT.primary,
                          parent=True, 
@@ -732,10 +732,10 @@ def NavBarNavContainer(*li,
                          **kwargs):
     return Div(cls="uk-navbar-dropdown")(NavContainer(*li, cls=('uk-navbar-dropdown-nav',stringify(cls)), uk_nav=uk_nav, parent=parent, **kwargs))
 
-# %% ../nbs/01_core.ipynb 115
+# %% ../nbs/01_core.ipynb
 def NavBarParentIcon(): return Span(uk_navbar_parent_icon=True)
 
-# %% ../nbs/01_core.ipynb 117
+# %% ../nbs/01_core.ipynb
 def DropDownNavContainer(*li, 
                          cls=NavT.primary,
                          parent=True, 
@@ -744,12 +744,12 @@ def DropDownNavContainer(*li,
                          **kwargs):
     return Div(cls = 'uk-drop uk-dropdown',uk_dropdown=uk_dropdown)(NavContainer(*li, cls=('uk-dropdown-nav',stringify(cls)), uk_nav=uk_nav, parent=parent, **kwargs))
 
-# %% ../nbs/01_core.ipynb 119
+# %% ../nbs/01_core.ipynb
 def TabContainer(*li,cls='', alt=False, **kwargs):
     cls = stringify(cls)
     return Ul(cls=(f"uk-tab{'-alt' if alt else ''}",stringify(cls)),**kwargs)(*li)
 
-# %% ../nbs/01_core.ipynb 121
+# %% ../nbs/01_core.ipynb
 class CardT(VEnum):
     'Card styles from UIkit'
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('card', name)
@@ -758,7 +758,7 @@ class CardT(VEnum):
     secondary = auto()
     danger = auto()
 
-# %% ../nbs/01_core.ipynb 122
+# %% ../nbs/01_core.ipynb
 def CardTitle(*c, cls=(), **kwargs):
     return fh.Div(*c, cls=('uk-card-title',stringify(cls)), **kwargs)
 
@@ -774,7 +774,7 @@ def CardFooter(*c, cls=(), **kwargs):
 def CardContainer(*c, cls=CardT.default, **kwargs):
     return fh.Div(*c, cls=('uk-card',stringify(cls)), **kwargs)
 
-# %% ../nbs/01_core.ipynb 123
+# %% ../nbs/01_core.ipynb
 def Card(*c, # Components that go in the body
         header=None, # Components that go in the header
         footer=None,  # Components that go in the footer
@@ -791,7 +791,7 @@ def Card(*c, # Components that go in the body
     if footer: res.append(CardFooter(cls=footer_cls)(footer))
     return CardContainer(cls=cls, **kwargs)(*res)
 
-# %% ../nbs/01_core.ipynb 125
+# %% ../nbs/01_core.ipynb
 class TableT(VEnum):
     def _generate_next_value_(name, start, count, last_values): return str2ukcls('table', name)
     divider = auto()
@@ -803,11 +803,11 @@ class TableT(VEnum):
     middle = auto()
     responsive = auto()
 
-# %% ../nbs/01_core.ipynb 126
+# %% ../nbs/01_core.ipynb
 def Table(*args, cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), **kwargs): 
     return fh.Table(cls=('uk-table', stringify(cls)), *args, **kwargs)
 
-# %% ../nbs/01_core.ipynb 127
+# %% ../nbs/01_core.ipynb
 def _TableCell(Component, *args, cls=(), shrink=False, expand=False, small=False, **kwargs):
     cls = stringify(cls)
     if shrink: cls += ' uk-table-shrink'
@@ -824,7 +824,7 @@ def Tr(*cells, cls=(), **kwargs):  return fh.Tr(*cells, cls=stringify(cls), **kw
 def Thead(*rows, cls=(), **kwargs): return fh.Thead(*rows, cls=stringify(cls), **kwargs)
 def Tbody(*rows, cls=(), sortable=False, **kwargs): return fh.Tbody(*rows, cls=stringify(cls), uk_sortable=sortable, **kwargs)
 
-# %% ../nbs/01_core.ipynb 128
+# %% ../nbs/01_core.ipynb
 def TableFromLists(header_data, body_data, footer_data=None, 
                    header_cell_render=Th,body_cell_render=Td, footer_cell_render=Td,
                    cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), 
@@ -837,7 +837,7 @@ def TableFromLists(header_data, body_data, footer_data=None,
                 cls=stringify(cls),    
                 **kwargs)
 
-# %% ../nbs/01_core.ipynb 129
+# %% ../nbs/01_core.ipynb
 def TableFromDicts(header_data:Sequence, body_data:Sequence[dict], footer_data=None, 
                    header_cell_render=Th, body_cell_render=lambda k,v : Td(v), footer_cell_render=lambda k,v : Td(v),
                    cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small),
@@ -852,7 +852,7 @@ def TableFromDicts(header_data:Sequence, body_data:Sequence[dict], footer_data=N
         **kwargs
     )
 
-# %% ../nbs/01_core.ipynb 131
+# %% ../nbs/01_core.ipynb
 franken_class_map = {
     'h1': 'uk-h1 my-4 mb-4',
     'h2': 'uk-h2 my-8',
@@ -868,7 +868,7 @@ franken_class_map = {
     'code': 'uk-codespan'
 }
 
-# %% ../nbs/01_core.ipynb 132
+# %% ../nbs/01_core.ipynb
 def apply_classes(html_str:str, 
                   class_map=None, 
                   class_map_mods=None):
@@ -885,8 +885,8 @@ def apply_classes(html_str:str,
             element.set('class', new_class)
     return etree.tostring(html_str, encoding='unicode', method='html')
 
-# %% ../nbs/01_core.ipynb 135
-def render_md(md_content, class_map=None, class_map_mods=None):
+# %% ../nbs/01_core.ipynb
+def render_md(md_content:str, class_map=None, class_map_mods=None):
     if md_content=='': return md_content
     try: import mistletoe #, mistletoe.contrib.pygments_renderer as mcp
     except ImportError: raise ImportError("Install 'mistletoe' to use the 'render_md' function")
