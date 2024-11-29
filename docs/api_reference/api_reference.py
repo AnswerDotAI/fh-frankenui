@@ -3,7 +3,6 @@
 from fasthtml.common import *
 from fh_frankenui.core import *
 from nbdev.showdoc import *
-import inspect
 from utils import create_flippable_card, fn2code_string
 from enum import EnumType
 from collections.abc import Callable
@@ -12,8 +11,6 @@ from collections.abc import Callable
 Any variable starting with docs_ is a function that generates a section of the API reference.
 
 These are automatically added to the docs sidebar so you don't have to do anything other than add the function using create_doc_section.
-
-
 '''
 
 # Utilities
@@ -314,11 +311,11 @@ docs_cards = create_doc_section(
 
 def ex_lists():
     list_options = [(style,str(cls)) for style,cls in ListT.__members__.items()]
-    lists = [Div(H4(f"{style} List:"), List(Li("Item 1"), Li("Item 2"), cls=cls)) for style, cls in list_options]
+    lists = [Div(H4(f"{style} List:"), UkList(Li("Item 1"), Li("Item 2"), cls=cls)) for style, cls in list_options]
     return Grid(*lists)
 
 docs_lists = create_doc_section(
-    List,
+    UkList,
     fn2code_string(ex_lists),
     ListT,
     title="Lists")
