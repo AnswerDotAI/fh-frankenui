@@ -615,22 +615,17 @@ class FlexT(VEnum):
     nowrap, wrap, wrap_reverse = auto(), auto(), auto()
 
 # %% ../nbs/01_core.ipynb
-def Grid(*div,         # Divs/Containers that should be divided into a grid
-         cols_min=None, # defaults to min(len(div),1)
-         cols_sm=None, # defaults to min(len(div),2)
-         cols_md=None, # defaults to min(len(div),3)
-         cols_lg=None, # defaults to min(len(div),4)
-         cols=None,    # Size at every breakpoint
-         cls='gap-4',  # Additional classes for Grid Div
-         **kwargs      # Additional args for Grid Div
-        ):
-    """Creates a grid with the given number of columns, often used for a grid of cards"""
-    cols_min = cols_min if cols_min else cols if cols else 1
-    cols_sm = cols_sm if cols_sm else cols if cols else max(min(len(div), 2), cols_min+1)
-    cols_md = cols_md if cols_md else cols if cols else max(min(len(div), 3), cols_min+2)
-    cols_lg = cols_lg if cols_lg else cols if cols else max(min(len(div), 3), cols_min+2)
-    cls = stringify(cls)
-    return Div(cls=(f'grid grid-cols-{cols_min} sm:grid-cols-{cols_sm} md:grid-cols-{cols_md} lg:grid-cols-{cols_lg}',cls), **kwargs)(*div)
+def Grid(*div, cols_min=1, cols_max=None, cols_sm=None, cols_md=None, cols_lg=None, cols=None, cls='gap-4', **kwargs):
+    "Creates a responsive grid layout with smart defaults based on content"
+    if cols: cols_min = cols_sm = cols_md = cols_lg = cols
+    else:
+        n = len(div)
+        cols_max = min(n, cols_max or 4)
+        cols_sm = cols_sm or min(n, cols_min+1, cols_max)
+        cols_md = cols_md or min(n, cols_min+2, cols_max) 
+        cols_lg = cols_lg or cols_max
+    return Div(cls=(f'grid grid-cols-{cols_min} sm:grid-cols-{cols_sm} md:grid-cols-{cols_md} lg:grid-cols-{cols_lg}', 
+                    stringify(cls)), **kwargs)(*div)
 
 # %% ../nbs/01_core.ipynb
 def DivFullySpaced(*c,                # Components
