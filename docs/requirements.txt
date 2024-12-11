@@ -1,4 +1,6 @@
 python-fasthtml
+pandas
+plotly
 monsterui
 fastcore
 fh_matplotlib
