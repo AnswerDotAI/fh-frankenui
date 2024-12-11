@@ -1,5 +1,5 @@
 from fasthtml.common import *
-from fh_frankenui.core import *
+from monsterui.core import *
 from fasthtml.svg import *
 
 def page():    

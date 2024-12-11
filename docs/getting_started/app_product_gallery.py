@@ -1,12 +1,12 @@
 from fasthtml.common import *
-# fh_frankenui shadows fasthtml components with the same name
-from fh_frankenui.core import *
-# If you don't want shadowing behavior, you use import frankenui.core as ... style instead
+# MonsterUI shadows fasthtml components with the same name
+from monsterui.core import *
+# If you don't want shadowing behavior, you use import monsterui.core as ... style instead
 
 # Get frankenui and tailwind headers via CDN using Theme.blue.headers()
 hdrs = Theme.blue.headers()
 
-# fast_app is shadowed by fh_frankenui to make it default to no Pico, and add body classes
+# fast_app is shadowed by MonsterUI to make it default to no Pico, and add body classes
 # needed for frankenui theme styling
 app, rt = fast_app(hdrs=hdrs)
 

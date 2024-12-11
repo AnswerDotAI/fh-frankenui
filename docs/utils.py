@@ -4,7 +4,7 @@
 __all__ = ['hjs', 'HShow', 'create_server']
 
 from fasthtml.common import *
-from fh_frankenui.core import *
+from monsterui.core import *
 from fasthtml.jupyter import *
 from collections.abc import Callable
 import inspect
@@ -66,6 +66,7 @@ def fn2code_string(fn: Callable) -> tuple: return fn(), extract_function_body(fn
 
 def extract_function_body(func):
     source = inspect.getsource(func)
+    return source
     body_start = source.index(':') + 1
     body = source[body_start:]
     lines = body.split('\n')

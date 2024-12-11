@@ -1,7 +1,7 @@
 """Reference to all FrankenUI Components"""
 
 from fasthtml.common import *
-from fh_frankenui.core import *
+from monsterui.core import *
 from nbdev.showdoc import *
 from utils import create_flippable_card, fn2code_string
 from enum import EnumType
@@ -24,20 +24,20 @@ def enum_to_html_table(enum_class):
         P(I(enum_class.__doc__)),
         TableFromLists(headers, rows, cls=(TableT.hover, 'uk-table-small')),)
 
-def create_flippable_card(content, source_code, extra_cls=None):
-    "Creates a card that flips between content and source code"
-    _id = 'f'+str(unqid())
-    _card = Card(
-        Button(
-            DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Source"), 
-            uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary),
-        Button(
-            DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Output"), 
-            uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary, hidden=True),
-        Div(content, id=_id),
-        Div(Pre(Code(source_code)), id=_id, hidden=True, cls="mockup-code"),
-        cls='my-8')
-    return Div(_card, cls=extra_cls) if extra_cls else _card
+# def create_flippable_card(content, source_code, extra_cls=None):
+#     "Creates a card that flips between content and source code"
+#     _id = 'f'+str(unqid())
+#     _card = Card(
+#         Button(
+#             DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Source"), 
+#             uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary),
+#         Button(
+#             DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Output"), 
+#             uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary, hidden=True),
+#         Div(content, id=_id),
+#         Div(Pre(Code(source_code)), id=_id, hidden=True, cls="mockup-code"),
+#         cls='my-8')
+#     return Div(_card, cls=extra_cls) if extra_cls else _card
 
 def render_content(c):
     "Renders content by type"
@@ -60,8 +60,8 @@ def string2code_string(code: str) -> tuple: return eval(code), code
 # Buttons
 
 def ex_buttons(): 
-    return Div(
-        Button("Default",   cls=ButtonT.default),
+    return Grid(
+        Button("Default"),
         Button("Primary",   cls=ButtonT.primary),
         Button("Secondary", cls=ButtonT.secondary),
         Button("Danger",    cls=ButtonT.danger),

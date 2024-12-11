@@ -1,7 +1,7 @@
 """FrankenUI Playground Example"""
 
 from fasthtml.common import *
-from fh_frankenui.core import *
+from monsterui.core import *
 from fasthtml.svg import *
 
 preset_options = ["Grammatical Standard English", "Summarize for a 2nd grader",

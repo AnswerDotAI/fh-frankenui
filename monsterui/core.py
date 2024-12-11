@@ -405,7 +405,10 @@ def LabelRange(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args
 
 # %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
-def LabelTextArea(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=TextArea, **kwargs)
+def LabelTextArea(*args, cls='space-y-2', value='', **kwargs): 
+    "Creates a labeled textarea with optional initial value"
+    def text_area_with_value(**kw): return TextArea(value, **kw)
+    return GenericLabelInput(*args, cls=stringify(cls), input_fn=text_area_with_value, **kwargs)
 
 # %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
@@ -882,7 +885,15 @@ def apply_classes(html_str:str,
 # %% ../nbs/01_core.ipynb
 def render_md(md_content:str, class_map=None, class_map_mods=None):
     if md_content=='': return md_content
-    try: import mistletoe #, mistletoe.contrib.pygments_renderer as mcp
-    except ImportError: raise ImportError("Install 'mistletoe' to use the 'render_md' function")
+    # Check for required dependencies
+    missing = []
+    try: import mistletoe
+    except ImportError: missing.append('mistletoe')
+    try: import lxml
+    except ImportError: missing.append('lxml')
+    if missing:
+        pkgs = ' and '.join(missing)
+        raise ImportError(f"Please install {pkgs} to use the render_md function")
+        
     html_content = mistletoe.markdown(md_content) #, mcp.PygmentsRenderer)
     return NotStr(apply_classes(html_content, class_map, class_map_mods))

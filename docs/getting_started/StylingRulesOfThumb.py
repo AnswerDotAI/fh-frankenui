@@ -1,11 +1,11 @@
 from fasthtml.common import *
-from fh_frankenui.core import *
+from monsterui.core import *
 from utils import create_flippable_card, fn2code_string
 
 def prerequisites():
     return Section(
         H2("Prerequisites"),
-        P("""The fh-FrankenUI library automatically handles a lot of styling for you, but it assumes you structure your page with HTML.
+        P("""The MonsterUI library automatically handles a lot of styling for you, but it assumes you structure your page with HTML.
           If you aren't familiar with the basics of HTML, check out the """, 
           A("W3 Schools HTML references", href="https://www.w3schools.com/html", cls=AT.muted), 
           " to learn more about the basics of HTML."),

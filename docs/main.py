@@ -1,8 +1,8 @@
 from fasthtml.common import *
 from functools import partial
-from fh_frankenui.core import *
+from monsterui.core import *
 from fasthtml.components import Uk_theme_switcher
-from utils import hjs, create_flippable_card, render_nb
+from utils import hjs, render_nb
 from pathlib import Path
 
 # Setup the app
@@ -22,7 +22,7 @@ def _create_page(content, # The content to display (without the layout/sidebar)
 
 def with_layout(sidebar_section, content):
     "Puts the sidebar and content into a layout"
-    return Title(f"fh-FrankenUI {sidebar_section.removeprefix('docs_')}"), Div(cls="flex flex-col md:flex-row w-full")(
+    return Title(f"MonsterUI {sidebar_section.removeprefix('docs_')}"), Div(cls="flex flex-col md:flex-row w-full")(
             Button(UkIcon("menu",50,50,cls='mt-4'), cls="md:hidden mb-4", uk_toggle="target: #mobile-sidebar"),
             Div(sidebar(sidebar_section), id='mobile-sidebar', hidden=True),
             Div(cls="md:flex w-full")(
@@ -125,12 +125,12 @@ def tutorial_app(request=None):
     app_rendered = Div(Pre(Code(app_code)))
     content = Container(cls='space-y-4')(
         H1("Tutorial App"),
-        render_md("""This is a heavily commented example of a product gallery app built with fh-FrankenUI for those that like to learn by example.  \
-          This tutorial app assumes you have some familiarity with fasthtml apps already, so focuses on what fh-frankenui adds on top of fasthtml.
+        render_md("""This is a heavily commented example of a product gallery app built with MonsterUI for those that like to learn by example.  \
+          This tutorial app assumes you have some familiarity with fasthtml apps already, so focuses on what MonsterUI adds on top of fasthtml.
           To make the most out of this tutorial, you should follow these steps:"""),
         Ol(
             Li("Briefly read through this to get an overview of what is happening, without focusing on any details"),
-            Li("Install fasthtml and fh-frankenui"),
+            Li("Install fasthtml and MonsterUI"),
             Li("Copy the code into your own project locally and run it using `python app.py`"),
             Li("Go through the code in detail to understand how it works by experimenting with changing things"),
             cls=ListT.decimal
@@ -201,5 +201,26 @@ def sidebar(open_section):
         uk_nav=True,
         cls=(NavT.primary, "space-y-4 p-4 w-full md:w-full")
     )
+
+
+@rt
+def _default_button():
+    # Route used in release blog post
+    return Button("Click me")
+
+@rt
+def _primary_button():
+    # Routed used in release blog post
+    return Button("Click me", cls=ButtonT.primary)
+
+def _layout_ex():
+    # Route used in release blog post
+
+
+    return Div(
+        DivLAligned(
+            Button("Export"),
+            Button("New Entry", cls=ButtonT.primary)),
+            Grid(map(TeamCard, products), cols_lg=3))
 
 serve()

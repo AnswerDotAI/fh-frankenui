@@ -1,11 +1,34 @@
 """FrankenUI Dashboard Example"""
 
 from fasthtml.common import *
-from fh_frankenui.core import *
+from monsterui.core import *
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml
 import numpy as np
 import matplotlib.pylab as plt
+import plotly.express as px
+import pandas as pd
+import numpy as np
+
+def generate_chart(num_points):
+    dates = pd.date_range('2024-01-01', periods=num_points)
+    df = pd.DataFrame({
+        'Date': dates,
+        'Revenue': (np.random.exponential(1, num_points) + np.sin(np.linspace(0,4,num_points))*0.3).cumsum(),
+        'Users': (np.random.exponential(0.8, num_points) + np.cos(np.linspace(0,4,num_points))*0.2).cumsum(),
+        'Growth': (np.random.exponential(0.6, num_points) + np.sin(np.linspace(0,6,num_points))*0.4).cumsum()
+    })
+    fig = px.area(df, x='Date', y=df.columns[1:], template='plotly_white', line_shape='spline')
+    fig.update_layout(
+        margin=dict(l=20,r=20,t=20,b=20),
+        showlegend=True,
+        plot_bgcolor='rgba(0,0,0,0)',
+        legend_bgcolor='rgba(0,0,0,0)',
+        hovermode='x unified'
+    )
+    return fig.to_html(include_plotlyjs='cdn', full_html=False, config={'displayModeBar': False})
+
+
 
 def InfoCard(title, value, change):
     return Div(Card(
@@ -41,11 +64,6 @@ recent_sales = Card(
         P("You made 265 sales this month.", cls=TextFont.muted_sm)),
 
 cls='col-span-3')
-
-@matplotlib2fasthtml
-def generate_chart(num_points):
-    plotdata = [np.random.exponential(1) for _ in range(num_points)]
-    plt.plot(range(len(plotdata)), plotdata)
 
 teams = [["Alicia Koch"],['Acme Inc', 'Monster Inc.'],['Create a Team']]
 
@@ -90,14 +108,14 @@ def page():
         Div(cls="border-b border-border px-4")(top_nav),
         H2('Dashboard'),
         TabContainer(
-            Li(A("Overview")),
+            Li(A("Overview"),cls='uk-active'),
             Li(A("Analytics")),
             Li(A("Reports")),
             Li(A("Notifications")),
             alt=True),
 
         top_info_row,
-        Grid(Card(generate_chart(10),cls='col-span-4'),
+        Grid(Card(Safe(generate_chart(100)),cls='col-span-4'),
             recent_sales,
             gap=4,cols=7))
 
