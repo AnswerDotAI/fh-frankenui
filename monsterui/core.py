@@ -80,7 +80,7 @@ def _headers_theme(color, mode='auto'):
 HEADER_URLS = {
         'franken_css': "https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css",
         'franken_js': "https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js",
-        'icon_js': "https://cdn.jsdelivr.net/gh/answerdotai/fh-frankenui@main/fh_frankenui/icon.iife.js",
+        'icon_js': "https://cdn.jsdelivr.net/gh/answerdotai/monsterui@main/monsterui/icon.iife.js",
         'tailwind': "https://cdn.tailwindcss.com"
     }
 
