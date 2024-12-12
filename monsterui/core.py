@@ -88,7 +88,7 @@ def _download_resource(url, static_dir):
     "Download a single resource and return its local path"
     static = Path(static_dir)
     fname = static/f"{url[0]}.{'js' if 'js' in url[1] else 'css'}"
-    content = httpx.get(url[1], follow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'}).content
+    content = httpx.get(url[1], follow_redirects=True).content
     fname.write_bytes(content)
     return (url[0], f"/{static_dir}/{fname.name}")
 
