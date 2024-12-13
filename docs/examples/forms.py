@@ -106,7 +106,7 @@ def notifications_form():
                     Div(cls="space-y-0.5")(
                         FormLabel(item['title'], cls="text-base font-medium", for_=f"email_notification_{i}"),
                         HelpText(item['description'])),
-                    Toggle_switch(checked=item['checked'], disabled=item['disabled'])
+                    Switch(checked=item['checked'], disabled=item['disabled'])
                 ) for i, item in enumerate([
                     {"title": "Communication emails", "description": "Receive emails about your account activity.", "checked": False, "disabled": False},
                     {"title": "Marketing emails", "description": "Receive emails about new products, features, and more.", "checked": False, "disabled": False},

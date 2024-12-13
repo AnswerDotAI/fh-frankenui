@@ -24,21 +24,6 @@ def enum_to_html_table(enum_class):
         P(I(enum_class.__doc__)),
         TableFromLists(headers, rows, cls=(TableT.hover, 'uk-table-small')),)
 
-# def create_flippable_card(content, source_code, extra_cls=None):
-#     "Creates a card that flips between content and source code"
-#     _id = 'f'+str(unqid())
-#     _card = Card(
-#         Button(
-#             DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Source"), 
-#             uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary),
-#         Button(
-#             DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Output"), 
-#             uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary, hidden=True),
-#         Div(content, id=_id),
-#         Div(Pre(Code(source_code)), id=_id, hidden=True, cls="mockup-code"),
-#         cls='my-8')
-#     return Div(_card, cls=extra_cls) if extra_cls else _card
-
 def render_content(c):
     "Renders content by type"
     if isinstance(c, str):        return render_md(c) # Strings are rendered as markdown
@@ -427,6 +412,7 @@ def ex_modal():
 docs_modals = create_doc_section(
     H3("Example Modal"),
     fn2code_string(ex_modal),
+    fn2code_string(ex_htmx_modal),
     Modal,
     ModalCloseButton,
     P("The remainder of the Modal functions below are used internally by the `Modal` function for you.  You shouldn't need to use them unless you're doing something really special."),

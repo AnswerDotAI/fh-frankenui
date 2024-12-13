@@ -5,11 +5,11 @@ __all__ = ['HEADER_URLS', 'franken_class_map', 'fast_app', 'FastHTML', 'Theme', 
            'PLead', 'PSmall', 'PMuted', 'CodeSpan', 'Blockquote', 'H1', 'H2', 'H3', 'H4', 'ButtonT', 'Button', 'Main',
            'ContainerT', 'Container', 'Titled', 'DividerT', 'Divider', 'DividerSplit', 'DividerLine', 'Alert',
            'AlertCloseButton', 'AlertTitle', 'AlertDescription', 'Article', 'ArticleTitle', 'ArticleMeta', 'SectionT',
-           'Section', 'Form', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'Toggle_switch',
-           'TextArea', 'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput',
-           'LabelRadio', 'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options',
-           'UkSelect', 'LabelUkSelect', 'AT', 'ListT', 'UkList', 'ModalContainer', 'ModalDialog', 'ModalHeader',
-           'ModalBody', 'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
+           'Section', 'Form', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'TextArea',
+           'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
+           'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect',
+           'LabelUkSelect', 'AT', 'ListT', 'UkList', 'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody',
+           'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'HTMXModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
            'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'Grid', 'DivFullySpaced',
            'DivCentered', 'DivLAligned', 'DivRAligned', 'DivVStacked', 'DivHStacked', 'NavT', 'NavContainer',
            'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer', 'NavBarLSide',
@@ -80,9 +80,8 @@ def _headers_theme(color, mode='auto'):
 HEADER_URLS = {
         'franken_css': "https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css",
         'franken_js': "https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js",
-        'icon_js': "https://cdn.jsdelivr.net/gh/answerdotai/monsterui@main/fh_frankenui/icon.iife.js",
-        'tailwind': "https://cdn.tailwindcss.com"
-    }
+        'icon_js': "https://cdn.jsdelivr.net/gh/answerdotai/monsterui@main/monsterui/icon.iife.js",
+        'tailwind': "https://cdn.tailwindcss.com"}
 
 def _download_resource(url, static_dir):
     "Download a single resource and return its local path"
@@ -168,18 +167,24 @@ class TextFont(Enum):
 
 # %% ../nbs/01_core.ipynb
 def PParagraph(*args, cls='', **kwargs): 
+    "P Tag with uk-paragraph style applied"
     return fh.P(*args, cls=('uk-paragraph',stringify(cls)), **kwargs)
 def PLarge(*args, cls='', **kwargs):
+    "P Tag with uk-text-large style applied"
     return fh.P(*args, cls=('uk-text-large', stringify(cls)), **kwargs)
 def PLead(*args, cls='', **kwargs):
+    "P Tag with uk-text-lead style applied"
     return fh.P(*args, cls=('uk-text-lead',  stringify(cls)), **kwargs)
 def PSmall(*args, cls='', **kwargs):
+    "P Tag with uk-text-small style applied"
     return fh.P(*args, cls=('uk-text-small', stringify(cls)), **kwargs)
 def PMuted(*args, cls='', **kwargs):
+    "P Tag with uk-text-muted style applied"
     return fh.P(*args, cls=('uk-text-muted', stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def CodeSpan(*args, **kwargs):
+    "A CodeSpan with Styling"
     return fh.Code(*args, cls=('uk-codespan"'), **kwargs)
 
 # %% ../nbs/01_core.ipynb
@@ -226,7 +231,9 @@ def Button(*c: Union[str, FT],
            **kwargs
           ) -> FT:
     "A Button with Styling (defaults to `type=submit` for form submission)"
-    return fh.Button(*c, cls=('uk-button', stringify(cls)), type='submit' if submit else 'button', **kwargs)
+    if 'type' not in kwargs:
+        kwargs['type'] = 'submit' if submit else 'button'
+    return fh.Button(*c, cls=('uk-button', stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def Main(*args, **kwargs): return fh.Main(*args, **kwargs)
@@ -248,7 +255,7 @@ def Container(*c, cls=('mt-5', ContainerT.xlarge), **kwargs):
 
 # %% ../nbs/01_core.ipynb
 def Titled(title:str="FastHTML app", *args, cls='uk-container-xlarge', **kwargs)->FT:
-    "A H1 with styling, whose title is also used in the page's title tag"
+    "Creates a standard page structure for titled page.  Main(Container(title, content))"
     return fh.Title(title), fh.Main(Container(H1(title), *args, cls=cls, **kwargs))
 
 # %% ../nbs/01_core.ipynb
@@ -268,6 +275,7 @@ def Divider(*args, cls=('my-4', DividerT.icon), **kwargs):
 
 # %% ../nbs/01_core.ipynb
 def DividerSplit(*c, cls=(), line_cls=(), text_cls=()):
+    "Creates a simple horizontal line divider with configurable thickness and vertical spacing"
     cls, line_cls, text_cls = map(stringify,(cls, line_cls, text_cls))
     return Div(cls='relative ' + cls)(
         Div(cls="absolute inset-0 flex items-center " + line_cls)(Span(cls="w-full border-t border-border")),
@@ -278,25 +286,32 @@ def DividerLine(lwidth=2, y_space=4): return Hr(cls=f"my-{y_space} h-[{lwidth}px
 
 # %% ../nbs/01_core.ipynb
 def Alert(*args, cls=(), **kwargs): 
+    "A styled alert component that can contain a AlertTitle, AlertDescription and AlertCloseButton"
     return Div(*args, cls=('uk-alert', stringify(cls)), uk_alert=True, **kwargs)
 
 def AlertCloseButton(*args, cls=(), **kwargs): 
+    "A button component for closing an Alert"
     return A(*args, cls=('uk-alert-close', stringify(cls)), **kwargs)
 
 def AlertTitle(*args, cls='', **kwargs): 
+    "A title component for use within an Alert"
     return Div(*args, cls=('uk-alert-title', stringify(cls)), **kwargs)
 
 def AlertDescription(*args, cls='', **kwargs): 
+    "A description component for use within an Alert"
     return Div(*args, cls=('uk-alert-description', stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def Article(*c, cls=(), **kwargs):
+    "A styled article container for blog posts or similar content"
     return fh.Article(*c, cls=('uk-article',stringify(cls)), **kwargs)
 
 def ArticleTitle(*c, cls=(), **kwargs):
+    "A title component for use within an Article"
     return H1(*c, cls=('uk-article-title',stringify(cls)), **kwargs)
 
 def ArticleMeta(*c, cls=(), **kwargs):
+    "A metadata component for use within an Article showing things like date, author etc"
     return P(*c, cls=('uk-article-meta',stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
@@ -339,8 +354,6 @@ def CheckboxX(*c, cls=(), **kwargs):
     return fh.Input(*c, cls=('uk-checkbox',stringify(cls)), type='checkbox', **kwargs)
 def Range(*c, cls=(), **kwargs):      
     return fh.Input(*c, cls=('uk-range',stringify(cls)), type='range', **kwargs)
-def Toggle_switch(*c, cls=(), **kwargs):
-    return fh.Input(*c, cls=('uk-toggle-switch uk-toggle-switch-primary',stringify(cls)), type='checkbox', **kwargs)
 def TextArea(*c, cls=(), **kwargs):            
     return fh.Textarea(*c, cls=('uk-textarea',stringify(cls)), **kwargs)
 def Switch(*c, cls='min-w-9', **kwargs):              
@@ -442,7 +455,7 @@ def LabelTextArea(*args, cls='space-y-2', value='', **kwargs):
 
 # %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
-def LabelSwitch(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=Toggle_switch, **kwargs)
+def LabelSwitch(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=Switch, **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def LabelSelect(*option,
@@ -540,6 +553,18 @@ def ModalTitle(*c, cls=(), **kwargs):       return fh.H2(*c,  cls=('uk-modal-tit
 def ModalCloseButton(*c, cls=(), **kwargs): return Button(*c, cls=('uk-modal-close',    stringify(cls)),                **kwargs)
 
 # %% ../nbs/01_core.ipynb
+def HTMXModalCloseButton(*c, cls=(), target=None, **kwargs):
+    "Creates a button that closes a modal using HTMX"
+    return Button(
+        *c, 
+        cls=('uk-modal-close', stringify(cls)),
+        hx_target='closest .uk-modal', 
+        hx_swap='delete',
+        type='button',
+        **kwargs
+    )
+
+# %% ../nbs/01_core.ipynb
 def Modal(*c,
         header=None,          # Components that go in the header
         footer=None,          # Components that go in the footer
@@ -549,9 +574,13 @@ def Modal(*c,
         body_cls='space-y-6', # classes for the body
         footer_cls=(),        # classes for the footer
         id='',                # id for the outermost container
+        open=False,
         **kwargs              # classes for the outermost container
         ): # Modal
     "Create a Modal using the appropriate Modal* classes to put the boilerplate in the appropriate places for you"
+    if open:
+        cls = stringify((cls, 'uk-open'))
+        kwargs['style'] = stringify((kwargs.get('style',''), 'display: block;'))
     cls, dialog_cls, header_cls, body_cls, footer_cls = map(stringify, (cls, dialog_cls, header_cls, body_cls, footer_cls))
     res = []
     if header: res.append(ModalHeader(cls=header_cls)(header))

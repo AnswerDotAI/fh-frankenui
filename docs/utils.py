@@ -46,7 +46,6 @@ hjs = (Style('html.dark .hljs-copy-button {background-color: #e0e0e0; color: #2d
                         document.querySelector('link[href*="atom-one-light.css"]').disabled = isDark;
                         '''))
 
-
 def create_flippable_card(content, source_code, extra_cls=None):
     "Creates a card that flips between content and source code"
     _id = 'f'+str(unqid())
@@ -58,7 +57,7 @@ def create_flippable_card(content, source_code, extra_cls=None):
             DivFullySpaced(UkIcon('corner-down-right', 20, 20, 3),"See Output"), 
             uk_toggle=f"target: #{_id}", id=_id, cls=ButtonT.primary, hidden=True),
         Div(content, id=_id),
-        Div(Pre(Code(source_code)), id=_id, hidden=True, cls="mockup-code"),
+        Div(Pre(Code(source_code, cls="hljs language-python")), id=_id, hidden=True, cls="mockup-code"),
         cls='my-8')
     return Div(_card, cls=extra_cls) if extra_cls else _card
 
