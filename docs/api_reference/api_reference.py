@@ -412,7 +412,6 @@ def ex_modal():
 docs_modals = create_doc_section(
     H3("Example Modal"),
     fn2code_string(ex_modal),
-    fn2code_string(ex_htmx_modal),
     Modal,
     ModalCloseButton,
     P("The remainder of the Modal functions below are used internally by the `Modal` function for you.  You shouldn't need to use them unless you're doing something really special."),
