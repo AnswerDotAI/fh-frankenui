@@ -32,6 +32,7 @@ from typing import Union, Tuple, Optional
 from fastcore.all import *
 import copy, re, httpx
 from pathlib import Path
+from .themes import THEME_MAPPINGS
 
 # %% ../nbs/01_core.ipynb
 @delegates(fh.fast_app, but=['pico'])
@@ -54,6 +55,7 @@ def FastHTML(*args, pico=False, **kwargs):
 
 # %% ../nbs/01_core.ipynb
 def _headers_theme(color, mode='auto'):
+    "Create theme switching script with DaisyUI support"
     mode_script = {
         'auto': '''
             if (
@@ -62,26 +64,66 @@ def _headers_theme(color, mode='auto'):
                 window.matchMedia("(prefers-color-scheme: dark)").matches)
             ) {
                 htmlElement.classList.add("dark");
+                htmlElement.setAttribute("data-theme", daisyTheme + "-dark");
             } else {
                 htmlElement.classList.remove("dark");
+                htmlElement.setAttribute("data-theme", daisyTheme);
             }
         ''',
-        'light': 'htmlElement.classList.remove("dark");',
-        'dark': 'htmlElement.classList.add("dark");'
+        'light': '''
+            htmlElement.classList.remove("dark");
+            htmlElement.setAttribute("data-theme", daisyTheme);
+        ''',
+        'dark': '''
+            htmlElement.classList.add("dark");
+            htmlElement.setAttribute("data-theme", daisyTheme + "-dark");
+        '''
     }
-    
+
     return fh.Script(f'''
-        const htmlElement = document.documentElement;
-        {mode_script[mode]}
-        htmlElement.classList.add(localStorage.getItem("theme") || "uk-theme-{color}");
+        (function() {{
+            const htmlElement = document.documentElement;
+            const storedMode = localStorage.getItem("mode") || "{mode}";
+            const storedTheme = localStorage.getItem("theme") || "uk-theme-{color}";
+            const daisyTheme = "{THEME_MAPPINGS.get(color, 'light')}";
+
+            {mode_script[mode]}
+
+            // Add FrankenUI theme class
+            htmlElement.classList.add(storedTheme);
+
+            // Initialize highlight.js if present
+            if (window.hljs) {{
+                document.addEventListener('DOMContentLoaded', () => {{
+                    hljs.highlightAll();
+                }});
+            }}
+
+            // Add theme switching event listener
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {{
+                if (storedMode === 'auto') {{
+                    if (e.matches) {{
+                        htmlElement.classList.add("dark");
+                        htmlElement.setAttribute("data-theme", daisyTheme + "-dark");
+                    }} else {{
+                        htmlElement.classList.remove("dark");
+                        htmlElement.setAttribute("data-theme", daisyTheme);
+                    }}
+                }}
+            }});
+        }})();
     ''')
 
 # %% ../nbs/01_core.ipynb
 HEADER_URLS = {
-        'franken_css': "https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css",
-        'franken_js': "https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js",
-        'icon_js': "https://cdn.jsdelivr.net/gh/answerdotai/monsterui@main/monsterui/icon.iife.js",
-        'tailwind': "https://cdn.tailwindcss.com"}
+    'franken_css': "https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css",
+    'franken_js': "https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js",
+    'icon_js': "https://cdn.jsdelivr.net/gh/answerdotai/monsterui@main/monsterui/icon.iife.js",
+    'tailwind': "https://cdn.tailwindcss.com",
+    'daisyui': "https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css",
+    'highlight_css': "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css",
+    'highlight_js': "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+}
 
 def _download_resource(url, static_dir):
     "Download a single resource and return its local path"
@@ -109,25 +151,36 @@ class Theme(Enum):
     zinc = auto()
 
 
-    def _create_headers(self, urls, mode='auto'):
+    def _create_headers(self, urls, mode='auto', tw=True, hjs=True, frankenui=True, daisyui=True):
         "Create header elements with given URLs"
-        return (
-            fh.Link(rel="stylesheet", href=urls['franken_css']),
-            fh.Script(type="module", src=urls['franken_js']),
-            fh.Script(type="module", src=urls['icon_js']),
-            fh.Script(src=urls['tailwind']),
-            _headers_theme(self.value, mode=mode),
-        )
+        headers = []
+        if frankenui:
+            headers.extend([
+                fh.Link(rel="stylesheet", href=urls['franken_css']),
+                fh.Script(type="module", src=urls['franken_js']),
+                fh.Script(type="module", src=urls['icon_js']),
+            ])
+        if tw:
+            headers.append(fh.Script(src=urls['tailwind']))
+        if daisyui:
+            headers.append(fh.Link(rel="stylesheet", href=urls['daisyui']))
+        if hjs:
+            headers.extend([
+                fh.Link(rel="stylesheet", href=urls['highlight_css']),
+                fh.Script(src=urls['highlight_js'])
+            ])
+        headers.append(_headers_theme(self.value, mode=mode))
+        return tuple(headers)
 
-    def headers(self, mode='auto'):
-        "Create frankenui and tailwind cdns"
-        return self._create_headers(HEADER_URLS, mode=mode)
-    
-    def local_headers(self, mode='auto', static_dir='static'):
+    def headers(self, mode='auto', tw=True, hjs=True, frankenui=True, daisyui=True):
+        "Create headers with configurable components"
+        return self._create_headers(HEADER_URLS, mode=mode, tw=tw, hjs=hjs, frankenui=frankenui, daisyui=daisyui)
+
+    def local_headers(self, mode='auto', tw=True, hjs=True, frankenui=True, daisyui=True, static_dir='static'):
         "Create headers using local files downloaded from CDNs"
         Path(static_dir).mkdir(exist_ok=True)
         local_urls = dict([_download_resource(url, static_dir) for url in HEADER_URLS.items()])
-        return self._create_headers(local_urls, mode=mode)
+        return self._create_headers(local_urls, mode=mode, tw=tw, hjs=hjs, frankenui=frankenui, daisyui=daisyui)
 
 # %% ../nbs/01_core.ipynb
 class TextT(VEnum):
