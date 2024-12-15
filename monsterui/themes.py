@@ -53,16 +53,16 @@ DAISYUI_THEMES = {
 
 # Map FrankenUI themes to their closest DaisyUI equivalents
 THEME_MAPPINGS = {
-    'blue': 'corporate',    # Professional blue theme
-    'slate': 'business',    # Clean, modern look
-    'stone': 'lofi',        # Minimalist design
-    'gray': 'business',     # Professional grayscale
-    'neutral': 'wireframe', # Clean, minimal design
-    'red': 'valentine',     # Warm, red-based theme
+    'slate': 'business',      # Professional, slate theme
+    'stone': 'lofi',         # Minimalist stone theme
+    'gray': 'dim',          # Neutral gray theme
+    'neutral': 'wireframe',  # Clean, neutral theme
+    'red': 'business',      # Professional red theme
     'rose': 'valentine',    # Pink/rose variation
     'orange': 'halloween',  # Orange-based theme
     'green': 'forest',      # Nature-inspired theme
-    'yellow': 'retro',      # Warm, vintage feel
-    'violet': 'dracula',    # Dark, purple-based theme
-    'zinc': 'luxury'        # Modern, metallic theme
+    'blue': 'corporate',    # Professional blue theme
+    'yellow': 'autumn',     # Warm autumn theme
+    'violet': 'luxury',     # Rich purple theme
+    'zinc': 'dim'          # Modern, metallic theme
 }
