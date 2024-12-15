@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MonsterUI Theme Test - FrankenUI Only</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css">
+    <script type="module" src="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js"></script>
+    <script>
+        const THEME_MAPPINGS = {
+            'blue': 'corporate',
+            'slate': 'business',
+            'stone': 'lofi',
+            'gray': 'business',
+            'neutral': 'wireframe',
+            'red': 'valentine',
+            'rose': 'valentine',
+            'orange': 'halloween',
+            'green': 'forest',
+            'yellow': 'retro',
+            'violet': 'dracula',
+            'zinc': 'luxury'
+        };
+
+        function createThemeButtons() {
+            const themes = Object.keys(THEME_MAPPINGS);
+            const container = document.getElementById('theme-buttons');
+            themes.forEach(theme => {
+                const btn = document.createElement('button');
+                btn.textContent = theme;
+                btn.className = 'uk-button uk-button-primary uk-margin-small';
+                btn.onclick = () => switchTheme(theme);
+                container.appendChild(btn);
+            });
+        }
+
+        function switchTheme(theme) {
+            const isDark = document.documentElement.classList.contains('dark');
+            document.documentElement.className = isDark ? 'dark' : '';
+            document.documentElement.classList.add(`uk-theme-${theme}`);
+            localStorage.setItem('theme-color', theme);
+            localStorage.setItem('theme-mode', isDark ? 'dark' : 'light');
+        }
+
+        function toggleDarkMode() {
+            const isDark = !document.documentElement.classList.contains('dark');
+            document.documentElement.classList.toggle('dark');
+            const currentTheme = localStorage.getItem('theme-color') || 'blue';
+            switchTheme(currentTheme);
+        }
+
+        window.onload = () => {
+            createThemeButtons();
+            const savedTheme = localStorage.getItem('theme-color') || 'blue';
+            const savedMode = localStorage.getItem('theme-mode') || 'light';
+            if (savedMode === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+            switchTheme(savedTheme);
+        };
+    </script>
+</head>
+<body class="p-8">
+    <div class="container mx-auto">
+        <h1 class="text-4xl mb-8">MonsterUI Theme Test - FrankenUI Only</h1>
+
+        <!-- Theme Controls -->
+        <div class="mb-8">
+            <h2 class="text-2xl mb-4">Theme Selection</h2>
+            <div id="theme-buttons" class="mb-4"></div>
+            <button onclick="toggleDarkMode()" class="btn btn-secondary">Toggle Dark Mode</button>
+        </div>
+
+        <!-- FrankenUI Components -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">FrankenUI Components</h2>
+                <div class="uk-button-group">
+                    <button class="uk-button uk-button-primary">Primary</button>
+                    <button class="uk-button uk-button-secondary">Secondary</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
