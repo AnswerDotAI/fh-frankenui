@@ -54,18 +54,21 @@ def FastHTML(*args, pico=False, **kwargs):
     return fh.FastHTML(*args, pico=False, **bodykw, **kwargs)
 
 # %% ../nbs/01_core.ipynb
-def _headers_theme(color, mode='auto'):
+def _headers_theme(color, mode='auto', hjs=True, frankenui=True):
     "Generate theme switching script with support for all modes and component synchronization"
     theme_name = THEME_MAPPINGS.get(color, 'corporate')
-    return Script(f'''
+    theme_script = f'''
         (function() {{
             function setTheme(isDark) {{
                 const htmlElement = document.documentElement;
-                const daisyTheme = "{theme_name}" + (isDark ? "-dark" : "");
+                // Store theme preference first to ensure it's always set
+                localStorage.setItem('theme-mode', isDark ? 'dark' : 'light');
 
                 // Set DaisyUI theme
+                const daisyTheme = "{theme_name}" + (isDark ? "-dark" : "");
                 htmlElement.setAttribute('data-theme', daisyTheme);
 
+                {f"""
                 // Set FrankenUI theme
                 if (isDark) {{
                     htmlElement.classList.add('dark');
@@ -73,7 +76,9 @@ def _headers_theme(color, mode='auto'):
                     htmlElement.classList.remove('dark');
                 }}
                 htmlElement.classList.add('uk-theme-{color}');
+                """ if frankenui else ""}
 
+                {f"""
                 // Sync highlight.js theme
                 if (window.hljs) {{
                     const darkTheme = document.querySelector('link[href*="highlight"][href*="dark"]');
@@ -82,9 +87,7 @@ def _headers_theme(color, mode='auto'):
                     if (lightTheme) lightTheme.disabled = isDark;
                     hljs.highlightAll();
                 }}
-
-                // Store theme preference
-                localStorage.setItem('theme-mode', isDark ? 'dark' : 'light');
+                """ if hjs else ""}
             }}
 
             function updateTheme() {{
@@ -112,7 +115,8 @@ def _headers_theme(color, mode='auto'):
                 }});
             }}
         }})();
-    ''')
+    '''
+    return Script(theme_script)
 
 # %% ../nbs/01_core.ipynb
 HEADER_URLS = {
@@ -154,6 +158,17 @@ class Theme(Enum):
     def _create_headers(self, urls, mode='auto', tw=True, hjs=True, frankenui=True, daisyui=True):
         "Create header elements with given URLs"
         headers = []
+
+        # Set initial theme based on mode
+        theme_name = THEME_MAPPINGS.get(self.value, 'corporate')
+        initial_theme = theme_name + ('-dark' if mode == 'dark' else '')
+
+        # Add HTML attributes for initial theme state
+        if daisyui:
+            headers.append(Script(f'''
+                document.documentElement.setAttribute('data-theme', '{initial_theme}');
+            '''))
+
         if frankenui:
             headers.extend([
                 fh.Link(rel="stylesheet", href=urls['franken_css']),
@@ -169,7 +184,9 @@ class Theme(Enum):
                 fh.Link(rel="stylesheet", href=urls['highlight_css']),
                 fh.Script(src=urls['highlight_js'])
             ])
-        headers.append(_headers_theme(self.value, mode=mode))
+            headers.append(_headers_theme(self.value, mode=mode, hjs=True, frankenui=frankenui))
+        else:
+            headers.append(_headers_theme(self.value, mode=mode, hjs=False, frankenui=frankenui))
         return tuple(headers)
 
     def headers(self, mode='auto', tw=True, hjs=True, frankenui=True, daisyui=True):
