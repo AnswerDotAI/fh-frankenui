@@ -58,11 +58,11 @@ def _headers_theme(color, mode='auto'):
     "Create theme switching script with DaisyUI support"
     mode_script = {
         'auto': '''
-            if (
-                localStorage.getItem("mode") === "dark" ||
-                (!("mode" in localStorage) &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches)
-            ) {
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const shouldBeDark = localStorage.getItem("mode") === "dark" ||
+                               (!("mode" in localStorage) && prefersDark);
+
+            if (shouldBeDark) {
                 htmlElement.classList.add("dark");
                 htmlElement.setAttribute("data-theme", daisyTheme + "-dark");
             } else {
@@ -99,7 +99,7 @@ def _headers_theme(color, mode='auto'):
                 }});
             }}
 
-            // Add theme switching event listener
+            // Add theme switching event listener for auto mode
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {{
                 if (storedMode === 'auto') {{
                     if (e.matches) {{

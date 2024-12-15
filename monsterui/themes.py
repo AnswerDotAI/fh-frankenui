@@ -63,5 +63,6 @@ THEME_MAPPINGS = {
     'orange': 'halloween',  # Orange-based theme
     'green': 'forest',      # Nature-inspired theme
     'yellow': 'retro',      # Warm, vintage feel
-    'violet': 'dracula'     # Dark, purple-based theme
+    'violet': 'dracula',    # Dark, purple-based theme
+    'zinc': 'luxury'        # Modern, metallic theme
 }
