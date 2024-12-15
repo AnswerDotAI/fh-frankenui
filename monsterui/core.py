@@ -55,62 +55,62 @@ def FastHTML(*args, pico=False, **kwargs):
 
 # %% ../nbs/01_core.ipynb
 def _headers_theme(color, mode='auto'):
-    "Create theme switching script with DaisyUI support"
-    mode_script = {
-        'auto': '''
-            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-            const shouldBeDark = localStorage.getItem("mode") === "dark" ||
-                               (!("mode" in localStorage) && prefersDark);
-
-            if (shouldBeDark) {
-                htmlElement.classList.add("dark");
-                htmlElement.setAttribute("data-theme", daisyTheme + "-dark");
-            } else {
-                htmlElement.classList.remove("dark");
-                htmlElement.setAttribute("data-theme", daisyTheme);
-            }
-        ''',
-        'light': '''
-            htmlElement.classList.remove("dark");
-            htmlElement.setAttribute("data-theme", daisyTheme);
-        ''',
-        'dark': '''
-            htmlElement.classList.add("dark");
-            htmlElement.setAttribute("data-theme", daisyTheme + "-dark");
-        '''
-    }
-
-    return fh.Script(f'''
+    "Generate theme switching script with support for all modes and component synchronization"
+    theme_name = THEME_MAPPINGS.get(color, 'corporate')
+    return Script(f'''
         (function() {{
-            const htmlElement = document.documentElement;
-            const storedMode = localStorage.getItem("mode") || "{mode}";
-            const storedTheme = localStorage.getItem("theme") || "uk-theme-{color}";
-            const daisyTheme = "{THEME_MAPPINGS.get(color, 'light')}";
+            function setTheme(isDark) {{
+                const htmlElement = document.documentElement;
+                const daisyTheme = "{theme_name}" + (isDark ? "-dark" : "");
 
-            {mode_script[mode]}
+                // Set DaisyUI theme
+                htmlElement.setAttribute('data-theme', daisyTheme);
 
-            // Add FrankenUI theme class
-            htmlElement.classList.add(storedTheme);
+                // Set FrankenUI theme
+                if (isDark) {{
+                    htmlElement.classList.add('dark');
+                }} else {{
+                    htmlElement.classList.remove('dark');
+                }}
+                htmlElement.classList.add('uk-theme-{color}');
 
-            // Initialize highlight.js if present
-            if (window.hljs) {{
-                document.addEventListener('DOMContentLoaded', () => {{
+                // Sync highlight.js theme
+                if (window.hljs) {{
+                    const darkTheme = document.querySelector('link[href*="highlight"][href*="dark"]');
+                    const lightTheme = document.querySelector('link[href*="highlight"]:not([href*="dark"])');
+                    if (darkTheme) darkTheme.disabled = !isDark;
+                    if (lightTheme) lightTheme.disabled = isDark;
                     hljs.highlightAll();
-                }});
+                }}
+
+                // Store theme preference
+                localStorage.setItem('theme-mode', isDark ? 'dark' : 'light');
             }}
 
-            // Add theme switching event listener for auto mode
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {{
-                if (storedMode === 'auto') {{
-                    if (e.matches) {{
-                        htmlElement.classList.add("dark");
-                        htmlElement.setAttribute("data-theme", daisyTheme + "-dark");
-                    }} else {{
-                        htmlElement.classList.remove("dark");
-                        htmlElement.setAttribute("data-theme", daisyTheme);
+            function updateTheme() {{
+                const savedMode = localStorage.getItem('theme-mode');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                let isDark;
+                if ('{mode}' === 'dark') isDark = true;
+                else if ('{mode}' === 'light') isDark = false;
+                else if (savedMode) isDark = savedMode === 'dark';
+                else isDark = prefersDark;
+
+                setTheme(isDark);
+            }}
+
+            // Initial theme setup
+            updateTheme();
+
+            // Listen for system theme changes in auto mode
+            if ('{mode}' === 'auto') {{
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {{
+                    if (!localStorage.getItem('theme-mode')) {{
+                        setTheme(e.matches);
                     }}
-                }}
-            }});
+                }});
+            }}
         }})();
     ''')
 
