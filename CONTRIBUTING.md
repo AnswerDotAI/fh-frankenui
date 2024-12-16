@@ -8,13 +8,11 @@ This is an [nbdev](https://nbdev.fast.ai/) library. The notebooks are located in
 
 ### Exporting the Modules
 
-You can use `nbdev_export` to export the notebooks to the library directory, `fh_frankenui`.  
-
-Another option is to run run `watch_export` from the repo root, which will the nbs export to .py files automatically on modification.It's nice to have this constantly running in a terminal tab.
+You can use `nbdev_export` to export the notebooks to the library directory, `monsterui`.  
 
 ### Cleaning NB metadad
 
-You can use `nbdev_clean` to clean the nb metadata from the .py files.  For convenience, I recommend using `nbdev_install_hooks` when in this repository to automatically do the clean for you so you don't have to remember to do it.
+You can use `nbdev_clean` to clean the nb metadata from the .py files.  
 
 ## Docs Contributions
 
@@ -26,4 +24,4 @@ pip install -r requirements.txt
 python main.py
 ```
 
-This will start up the fh-frankenui documentation site, which is a FastHTML app.  Then you can see the site locally at http://localhost:5001/
+This will start up the MonsterUI documentation site, which is a FastHTML app.  Then you can see the site locally at http://localhost:5001/
