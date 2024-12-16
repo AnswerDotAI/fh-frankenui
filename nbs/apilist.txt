@@ -1,11 +1,16 @@
-# fh_frankenui Module Documentation
+# monsterui Module Documentation
 
-## fh_frankenui.core
+## monsterui.core
 
 - `class Theme`
     Selector to choose theme and get all headers needed for app.  Includes frankenui + tailwind
 
-    - `def headers(self)`
+    - `def headers(self, mode)`
+        Create frankenui and tailwind cdns
+
+    - `def local_headers(self, mode, static_dir)`
+        Create headers using local files downloaded from CDNs
+
     - `@property def name(self)`
 
 - `class TextT`
@@ -21,13 +26,26 @@
     - `def __str__(self)`
     - `@property def name(self)`
 
-- `class ButtonT`
-    Options for styling Buttons
+- `def PParagraph(*args, **kwargs)`
+    P Tag with uk-paragraph style applied
 
-    - `@property def name(self)`
+- `def PLarge(*args, **kwargs)`
+    P Tag with uk-text-large style applied
 
-- `def Button(*c, **kwargs)`
-    A Button with Styling (defaults to `type=submit` for form submission)
+- `def PLead(*args, **kwargs)`
+    P Tag with uk-text-lead style applied
+
+- `def PSmall(*args, **kwargs)`
+    P Tag with uk-text-small style applied
+
+- `def PMuted(*args, **kwargs)`
+    P Tag with uk-text-muted style applied
+
+- `def CodeSpan(*args, **kwargs)`
+    A CodeSpan with Styling
+
+- `def Blockquote(*c, **kwargs)`
+    A Blockquote with Styling
 
 - `def H1(*c, **kwargs)`
     A H1 with Styling
@@ -41,8 +59,24 @@
 - `def H4(*c, **kwargs)`
     A H4 with Styling
 
+- `class ButtonT`
+    Options for styling Buttons
+
+    - `@property def name(self)`
+
+- `def Button(*c, **kwargs)`
+    A Button with Styling (defaults to `type=submit` for form submission)
+
+- `class ContainerT`
+    Max width container sizes from https://franken-ui.dev/docs/container
+
+    - `@property def name(self)`
+
+- `def Container(*c, **kwargs)`
+    A Div to be used as a container that often wraps large sections or a page of content
+
 - `def Titled(title, *args, **kwargs)`
-    A H1 with styling, whose title is also used in the page's title tag
+    Creates a standard page structure for titled page.  Main(Container(title, content))
 
 - `class DividerT`
     Divider Styles from https://franken-ui.dev/docs/divider
@@ -52,13 +86,29 @@
 - `def Divider(*args, **kwargs)`
     Divider with default styling and margin
 
-- `class ContainerT`
-    Max width container sizes from https://franken-ui.dev/docs/container
+- `def DividerSplit(*c)`
+    Creates a simple horizontal line divider with configurable thickness and vertical spacing
 
-    - `@property def name(self)`
+- `def Alert(*args, **kwargs)`
+    A styled alert component that can contain a AlertTitle, AlertDescription and AlertCloseButton
 
-- `def Container(*c, **kwargs)`
-    A Div to be used as a container that often wraps large sections or a page of content
+- `def AlertCloseButton(*args, **kwargs)`
+    A button component for closing an Alert
+
+- `def AlertTitle(*args, **kwargs)`
+    A title component for use within an Alert
+
+- `def AlertDescription(*args, **kwargs)`
+    A description component for use within an Alert
+
+- `def Article(*c, **kwargs)`
+    A styled article container for blog posts or similar content
+
+- `def ArticleTitle(*c, **kwargs)`
+    A title component for use within an Article
+
+- `def ArticleMeta(*c, **kwargs)`
+    A metadata component for use within an Article showing things like date, author etc
 
 - `class SectionT`
     Section styles from https://franken-ui.dev/docs/section
@@ -83,6 +133,9 @@
 - `def LabelCheckboxX(label, lbl_cls, input_cls, container, cls, **kwargs)`
     `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
 
+- `@delegates(GenericLabelInput, but=['input_fn', 'cls']) def LabelTextArea(*args, **kwargs)`
+    Creates a labeled textarea with optional initial value
+
 - `def LabelSelect(*option, **kwargs)`
     `Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library
 
@@ -105,6 +158,9 @@
 
     - `@property def name(self)`
 
+- `def HTMXModalCloseButton(*c, **kwargs)`
+    Creates a button that closes a modal using HTMX
+
 - `def Modal(*c, **kwargs)`
     Create a Modal using the appropriate Modal* classes to put the boilerplate in the appropriate places for you
 
@@ -124,7 +180,7 @@
     - `@property def name(self)`
 
 - `def Grid(*div, **kwargs)`
-    Creates a grid with the given number of columns, often used for a grid of cards
+    Creates a responsive grid layout with smart defaults based on content
 
 - `def DivFullySpaced(*c, **kwargs)`
     Creates a flex div with it's components having as much space between them as possible
@@ -149,7 +205,7 @@
 - `class TableT`
     - `@property def name(self)`
 
-## fh_frankenui.foundations
+## monsterui.foundations
 
 > Data Structures and Utilties
 
