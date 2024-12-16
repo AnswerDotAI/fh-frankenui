@@ -2,7 +2,7 @@
 
 d = { 'settings': { 'branch': 'main',
                 'doc_baseurl': '/MonsterUI',
-                'doc_host': 'https://Isaac-Flath.github.io',
+                'doc_host': 'https://monsterui.answer.ai',
                 'git_url': 'https://github.com/Isaac-Flath/MonsterUI',
                 'lib_path': 'monsterui'},
   'syms': { 'monsterui.core': { 'monsterui.core.AT': ('core.html#at', 'monsterui/core.py'),

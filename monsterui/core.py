@@ -230,7 +230,7 @@ def Button(*c: Union[str, FT],
            submit=True,
            **kwargs
           ) -> FT:
-    "A Button with Styling (defaults to `type=submit` for form submission)"
+    "A Button with Styling (defaults to `submit` for form submission)"
     if 'type' not in kwargs:
         kwargs['type'] = 'submit' if submit else 'button'
     return fh.Button(*c, cls=('uk-button', stringify(cls)), **kwargs)
@@ -334,33 +334,45 @@ def Section(*c, cls=(), **kwargs):
 
 # %% ../nbs/01_core.ipynb
 def Form(*c, cls='space-y-3', **kwargs):
+    "A Form with default spacing between form elements"
     return fh.Form(*c, cls=stringify(cls), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def Fieldset(*c, cls=(), **kwargs): 
+    "A Fieldset with default styling"
     return fh.Fieldset(*c, cls=('uk-fieldset',stringify(cls)), **kwargs)
 
 def Legend(*c, cls=(), **kwargs): 
+    "A Legend with default styling"
     return fh.Legend(*c, cls=('uk-legend',stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def Input(*c, cls=(), **kwargs):      
+    "An Input with default styling"
     return fh.Input(*c, cls=('uk-input',stringify(cls)), **kwargs)
 def Select(*option, cls=(), **kwargs):
+    "A Select with default styling"
     return fh.Select(*option, cls=('uk-select',stringify(cls)), **kwargs)
-def Radio(*c, cls=(), **kwargs):      
+def Radio(*c, cls=(), **kwargs):   
+    "A Radio with default styling"
     return fh.Input(*c, cls=('uk-radio',stringify(cls)), type='radio', **kwargs)
-def CheckboxX(*c, cls=(), **kwargs):  
+def CheckboxX(*c, cls=(), **kwargs): 
+    "A Checkbox with default styling"
     return fh.Input(*c, cls=('uk-checkbox',stringify(cls)), type='checkbox', **kwargs)
 def Range(*c, cls=(), **kwargs):      
+    "A Range with default styling"
     return fh.Input(*c, cls=('uk-range',stringify(cls)), type='range', **kwargs)
-def TextArea(*c, cls=(), **kwargs):            
+def TextArea(*c, cls=(), **kwargs):      
+    "A Textarea with default styling"
     return fh.Textarea(*c, cls=('uk-textarea',stringify(cls)), **kwargs)
-def Switch(*c, cls='min-w-9', **kwargs):              
-    return fh.Input(*c, cls=('uk-toggle-switch uk-toggle-switch-primary',stringify(cls)), type='checkbox', **kwargs)
+def Switch(*c, cls=(), **kwargs): 
+    "A Switch with default styling"
+    return fh.Input(*c, cls=('uk-toggle-switch uk-toggle-switch-primary min-w-9',stringify(cls)), type='checkbox', **kwargs)
 
 # %% ../nbs/01_core.ipynb
-def FormLabel(*c, cls=(), **kwargs): return fh.Label(*c, cls=('uk-form-label',stringify(cls)), **kwargs)
+def FormLabel(*c, cls=(), **kwargs): 
+    "A Label with default styling"
+    return fh.Label(*c, cls=('uk-form-label',stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
 class LabelT(VEnum):
@@ -376,6 +388,7 @@ def Label(*c, cls=(), **kwargs):
 
 # %% ../nbs/01_core.ipynb
 def UkFormSection(title, description, *c, button_txt='Update', outer_margin=6, inner_margin=6):
+    "A form section with a title, description and optional button"
     return Div(cls=f'space-y-{inner_margin} py-{outer_margin}')(
         Div(H3(title), P(description, cls=TextFont.muted_sm)),
         DividerSplit(), *c,
@@ -444,18 +457,22 @@ def LabelCheckboxX(label:str|FT,
 
 # %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
-def LabelRange(*args, cls='space-y-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=Range, **kwargs)
+def LabelRange(*args, cls='space-y-2', **kwargs): 
+    "Creates a labeled range input with nice default spacing and links/names them based on id"
+    return GenericLabelInput(*args, cls=stringify(cls), input_fn=Range, **kwargs)
 
 # %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
 def LabelTextArea(*args, cls='space-y-2', value='', **kwargs): 
-    "Creates a labeled textarea with optional initial value"
+    "Creates a labeled textarea with nice default spacing and links/names them based on id"
     def text_area_with_value(**kw): return TextArea(value, **kw)
     return GenericLabelInput(*args, cls=stringify(cls), input_fn=text_area_with_value, **kwargs)
 
 # %% ../nbs/01_core.ipynb
 @delegates(GenericLabelInput, but=['input_fn','cls'])
-def LabelSwitch(*args, cls='space-x-2', **kwargs): return GenericLabelInput(*args, cls=stringify(cls), input_fn=Switch, **kwargs)
+def LabelSwitch(*args, cls='space-x-2', **kwargs): 
+    "Creates a labeled switch with nice default spacing and links/names them based on id"
+    return GenericLabelInput(*args, cls=stringify(cls), input_fn=Switch, **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def LabelSelect(*option,
@@ -467,7 +484,7 @@ def LabelSelect(*option,
                id='',
                 **kwargs
                 ):
-    "`Div(Label,Input)` component with Uk styling injected appropriately. Generally you should higher level API, such as `UkTextArea` which is created for you in this library"
+    "Creates a Labeled Select - Generally you should use LabelUkSelect for a more full features and styled select"
     if isinstance(label, str) or label.tag != 'label': 
         label = FormLabel(lbl_cls=stringify(lbl_cls), fr=id)(label)
     inp = Select(*option, id=id, cls=stringify(input_cls), **kwargs)        
@@ -491,7 +508,7 @@ def UkSelect(*option,            # Options for the select dropdown (can use `Opt
              placeholder="",     # Placeholder text for the select input
              searchable=False,   # Whether the select should be searchable
              **kwargs):          # Additional arguments passed to Uk_select
-    "Creates a select dropdown with uk styling"
+    "Creates a select dropdown with uk styling and option for adding a search box"
     inp_cls, cls = map(stringify, (inp_cls, cls))
     select = Uk_select(*option, cls=inp_cls, uk_cloak=True, id=id, 
                        name=name, placeholder=placeholder, searchable=searchable, **kwargs)
@@ -508,7 +525,7 @@ def LabelUkSelect(*option,            # Options for the select dropdown (can use
              placeholder="",     # Placeholder text for the select input
              searchable=False,   # Whether the select should be searchable
              **kwargs):          # Additional arguments passed to Uk_select
-    "Creates a select dropdown with uk styling"
+    "Creates a select dropdown with uk styling and a label and provides option for adding a search box"
     lbl_cls, inp_cls, cls = map(stringify, (lbl_cls, inp_cls, cls))
     if label: 
         lbl = FormLabel(cls=f'{lbl_cls}', fr=id)(label) 
@@ -541,16 +558,32 @@ class ListT(VEnum):
     striped = auto()
 
 # %% ../nbs/01_core.ipynb
-def UkList(*c, cls=(), **kwargs): return fh.Ul(*c, cls=('uk-list',stringify(cls)), **kwargs)
+def UkList(*c, cls=(), **kwargs): 
+    "Creates a list with styling"
+    return fh.Ul(*c, cls=('uk-list',stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
-def ModalContainer(*c, cls=(), **kwargs):   return fh.Div(*c, cls=('uk-modal uk-modal-container',stringify(cls)), uk_modal=True, **kwargs)
-def ModalDialog(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-dialog',   stringify(cls)),                **kwargs)
-def ModalHeader(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-header',   stringify(cls)),                **kwargs)
-def ModalBody(*c, cls=(), **kwargs):        return fh.Div(*c, cls=('uk-modal-body',     stringify(cls)),                **kwargs)
-def ModalFooter(*c, cls=(), **kwargs):      return fh.Div(*c, cls=('uk-modal-footer',   stringify(cls)),                **kwargs)
-def ModalTitle(*c, cls=(), **kwargs):       return fh.H2(*c,  cls=('uk-modal-title',    stringify(cls)),                **kwargs)
-def ModalCloseButton(*c, cls=(), **kwargs): return Button(*c, cls=('uk-modal-close',    stringify(cls)),                **kwargs)
+def ModalContainer(*c, cls=(), **kwargs):   
+    "Creates a modal container that components go in"
+    return fh.Div(*c, cls=('uk-modal uk-modal-container',stringify(cls)), uk_modal=True, **kwargs)
+def ModalDialog(*c, cls=(), **kwargs):      
+    "Creates a modal dialog"
+    return fh.Div(*c, cls=('uk-modal-dialog',   stringify(cls)),                **kwargs)
+def ModalHeader(*c, cls=(), **kwargs):      
+    "Creates a modal header"
+    return fh.Div(*c, cls=('uk-modal-header',   stringify(cls)),                **kwargs)
+def ModalBody(*c, cls=(), **kwargs):        
+    "Creates a modal body"
+    return fh.Div(*c, cls=('uk-modal-body',     stringify(cls)),                **kwargs)
+def ModalFooter(*c, cls=(), **kwargs):      
+    "Creates a modal footer"
+    return fh.Div(*c, cls=('uk-modal-footer',   stringify(cls)),                **kwargs)
+def ModalTitle(*c, cls=(), **kwargs):       
+    "Creates a modal title"
+    return fh.H2(*c,  cls=('uk-modal-title',    stringify(cls)),                **kwargs)
+def ModalCloseButton(*c, cls=(), **kwargs): 
+    "Creates a button that closes a modal with js"
+    return Button(*c, cls=('uk-modal-close',    stringify(cls)),                **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def HTMXModalCloseButton(*c, cls=(), target=None, **kwargs):
@@ -577,7 +610,7 @@ def Modal(*c,
         open=False,
         **kwargs              # classes for the outermost container
         ): # Modal
-    "Create a Modal using the appropriate Modal* classes to put the boilerplate in the appropriate places for you"
+    "Create a Modal using the appropriate Modal classes to put the boilerplate in the appropriate places for you"
     if open:
         cls = stringify((cls, 'uk-open'))
         kwargs['style'] = stringify((kwargs.get('style',''), 'display: block;'))
@@ -636,6 +669,7 @@ def Progress(*c, cls=(), value="", max="", **kwargs):
 
 # %% ../nbs/01_core.ipynb
 def UkIcon(icon,height=None,width=None,stroke_width=None,cls=(), **kwargs):
+    "Creates an icon using lucide icons"
     return Uk_icon(icon=icon, height=height, width=width, stroke_width=stroke_width, cls=cls, **kwargs)
 
 # %% ../nbs/01_core.ipynb
@@ -646,7 +680,7 @@ def UkIconLink(icon,
            cls=(), 
            button=False, 
            **kwargs):
-    
+    "Creates an icon link using lucide icons"
     fn = fh.Button if button else fh.A
     return fn(cls=(f"uk-icon-{'button' if button else 'link'}", stringify(cls)), **kwargs)(
         UkIcon(icon=icon, height=height, width=width, stroke_width=stroke_width))
@@ -656,6 +690,7 @@ def DiceBearAvatar(seed_name, # Seed name (ie 'Isaac Flath')
                    h=20,         # Height 
                    w=20,          # Width
                   ):          # Span with Avatar
+    "Creates an Avatar using https://dicebear.com/"
     url = 'https://api.dicebear.com/8.x/lorelei/svg?seed='
     return Span(cls=f"relative flex h-{h} w-{w} shrink-0 overflow-hidden rounded-full bg-accent")(
             fh.Img(cls=f"aspect-square h-{h} w-{w}", alt="Avatar", loading="lazy", src=f"{url}{seed_name}"))
@@ -727,11 +762,13 @@ def DivRAligned(*c,      # Components
 
 # %% ../nbs/01_core.ipynb
 def DivVStacked(*c, cls='space-y-4', **kwargs):
+    "Creates a flex div with it's components stacked vertically"
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.column,FlexT.middle,cls), **kwargs)(*c)
 
 # %% ../nbs/01_core.ipynb
 def DivHStacked(*c, cls='space-x-4', **kwargs):
+    "Creates a flex div with it's components stacked horizontally"
     cls=stringify(cls)
     return Div(cls=(FlexT.block,FlexT.row,FlexT.middle,cls), **kwargs)(*c)
 
@@ -748,6 +785,7 @@ def NavContainer(*li,
                  parent=True, 
                  uk_nav=False, #True for default collapsible behavior, see https://franken-ui.dev/docs/nav#component-options for more advanced options
                  **kwargs):
+    "Creates a navigation container.  A Nav is a list (NavBar is something different)"
     return fh.Ul(*li, uk_nav=uk_nav, cls=(f"uk-nav{'' if parent else '-sub'}", stringify(cls)),**kwargs)
 
 # %% ../nbs/01_core.ipynb
@@ -763,13 +801,16 @@ def NavBarContainer(*c,
                     container_cls=ContainerT.expand,
                     uk_navbar=True,
                     **kwargs): 
+    "Create a NavBarContainer to put NavBar sides in"
     return fh.Div(Container(Div(*c, uk_navbar=uk_navbar),cls=stringify(container_cls)), cls=('',stringify(cls)), **kwargs) #uk-navbar-container
 def NavBarLSide(*c,  cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-left',  stringify(cls)), **kwargs)
 def NavBarRSide(*c,  cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-right', stringify(cls)), **kwargs)
 def NavBarCenter(*c, cls=(), **kwargs): return fh.Div(*c, cls=('uk-navbar-center',stringify(cls)), **kwargs)
 
 # %% ../nbs/01_core.ipynb
-def NavBarNav(*li, cls=(), **kwargs): return fh.Nav(*li, cls=('uk-navbar-nav',      stringify(cls)),                 **kwargs)
+def NavBarNav(*li, cls=(), **kwargs):
+    "A Nav that is part of a NavBar"
+    return fh.Nav(*li, cls=('uk-navbar-nav',      stringify(cls)),                 **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def NavBarSubtitle(title, subtitle, cls=(), subtitle_cls=TextFont.muted_sm, **kwargs): 
@@ -793,10 +834,12 @@ def DropDownNavContainer(*li,
                          uk_nav=False, #True for default collapsible behavior, see https://franken-ui.dev/docs/nav#component-options for more advanced options
                          uk_dropdown=True,
                          **kwargs):
+    "A Nav that is part of a DropDown"
     return Div(cls = 'uk-drop uk-dropdown',uk_dropdown=uk_dropdown)(NavContainer(*li, cls=('uk-dropdown-nav',stringify(cls)), uk_nav=uk_nav, parent=parent, **kwargs))
 
 # %% ../nbs/01_core.ipynb
 def TabContainer(*li,cls='', alt=False, **kwargs):
+    "A Tab that is part of a TabContainer"
     cls = stringify(cls)
     return Ul(cls=(f"uk-tab{'-alt' if alt else ''}",stringify(cls)),**kwargs)(*li)
 
@@ -835,6 +878,7 @@ def Card(*c, # Components that go in the body
         cls=(), #class for outermost component
         **kwargs # classes that for the card itself
         ):
+    "Creates a Card with a header, body, and footer"
     header_cls, footer_cls, body_cls, cls = map(stringify, (header_cls, footer_cls, body_cls, cls))
     res = []
     if header: res.append(CardHeader(cls=header_cls)(header))
@@ -856,10 +900,12 @@ class TableT(VEnum):
 
 # %% ../nbs/01_core.ipynb
 def Table(*args, cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), **kwargs): 
+    "Creates a table"
     return fh.Table(cls=('uk-table', stringify(cls)), *args, **kwargs)
 
 # %% ../nbs/01_core.ipynb
 def _TableCell(Component, *args, cls=(), shrink=False, expand=False, small=False, **kwargs):
+    "Creates a table cell"
     cls = stringify(cls)
     if shrink: cls += ' uk-table-shrink'
     if expand: cls += ' uk-table-expand'
@@ -880,7 +926,7 @@ def TableFromLists(header_data, body_data, footer_data=None,
                    header_cell_render=Th,body_cell_render=Td, footer_cell_render=Td,
                    cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small), 
                    sortable=False, **kwargs):
-    
+    "Creates a Table from a list of header data and a list of lists of body data"
     return Table(
                 Thead(Tr(*map(header_cell_render, header_data))),
                 Tbody(*[Tr(*map(body_cell_render, r)) for r in body_data], sortable=sortable),
@@ -894,7 +940,7 @@ def TableFromDicts(header_data:Sequence, body_data:Sequence[dict], footer_data=N
                    cls=(TableT.middle, TableT.divider, TableT.hover, TableT.small),
                    sortable=False,
                    **kwargs):
-    
+    "Creates a Table from a list of header data and a list of dicts of body data"
     return Table(
         Thead(Tr(*[header_cell_render(h) for h in header_data])),
         Tbody(*[Tr(*[body_cell_render(k, r.get(k, '')) for k in header_data]) for r in body_data], sortable=sortable),
@@ -915,7 +961,7 @@ franken_class_map = {
     'hr':'uk-divider-icon my-4',
     'table':'uk-table-middle uk-table-divider uk-table-hover uk-table-small',
     'ol': 'uk-list-decimal',
-    'ul': 'uk-list-disc',
+    'ul': 'uk-list-disc my-2 mb-4',
     'code': 'uk-codespan'
 }
 
@@ -923,6 +969,7 @@ franken_class_map = {
 def apply_classes(html_str:str, 
                   class_map=None, 
                   class_map_mods=None):
+    "Apply classes to html string"
     if not html_str: return html_str
     try:
         from lxml import html, etree
@@ -943,6 +990,7 @@ def apply_classes(html_str:str,
 
 # %% ../nbs/01_core.ipynb
 def render_md(md_content:str, class_map=None, class_map_mods=None):
+    "Renders markdown using mistletoe and lxml"
     if md_content=='': return md_content
     # Check for required dependencies
     missing = []

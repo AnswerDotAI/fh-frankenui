@@ -19,8 +19,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install -e .
           pip install llms-txt pysymbol_llm
-          
       - name: Run update script
         run: |
           chmod +x tools/update.sh
