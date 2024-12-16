@@ -1,0 +1,35 @@
+name: Update API Lists and Context Files
+
+on:
+  push:
+    branches:
+      - main  # or whatever your default branch is named
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install llms-txt2ctx pysym2md  # Add any other dependencies needed
+          
+      - name: Run update script
+        run: |
+          chmod +x tools/update.sh
+          ./tools/update.sh
+          
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add nbs/llms-ctx.txt nbs/apilist.txt
+          git commit -m "Auto-update API lists and context files" || echo "No changes to commit"
+          git push

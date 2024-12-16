@@ -22,7 +22,3 @@ Things to remembers when using MonsterUI:
 - [Music](https://raw.githubusercontent.com/AnswerDotAI/monsterui/refs/heads/main/docs/app/music.py)
 - [Playground](https://raw.githubusercontent.com/AnswerDotAI/monsterui/refs/heads/main/docs/app/playground.py)
 - [Tasks](https://raw.githubusercontent.com/AnswerDotAI/monsterui/refs/heads/main/docs/app/tasks.py)
-
-## Optional
-
-- [FastHTML Full Context](https://docs.fastht.ml/llms-ctx-full.txt)
