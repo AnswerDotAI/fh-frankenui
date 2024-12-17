@@ -272,8 +272,7 @@ def ex_card3():
         team_member("Emma Brown", "DevOps Engineer", "Toronto"),
         team_member("Marcus Johnson", "Frontend Developer", "Berlin")
     ]
-
-    return Grid(*team)
+    return Grid(*team, cols_sm=1, cols_md=1, cols_lg=2, cols_xl=3)
 
 docs_cards = create_doc_section(
     Card,
