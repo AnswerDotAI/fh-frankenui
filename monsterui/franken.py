@@ -3,20 +3,19 @@
 # %% auto 0
 __all__ = ['franken_class_map', 'TextT', 'TextFont', 'PParagraph', 'PLarge', 'PLead', 'PSmall', 'PMuted', 'CodeSpan',
            'Blockquote', 'H1', 'H2', 'H3', 'H4', 'ButtonT', 'Button', 'Main', 'ContainerT', 'Container', 'Titled',
-           'DividerT', 'Divider', 'DividerSplit', 'DividerLine', 'Alert', 'AlertCloseButton', 'AlertTitle',
-           'AlertDescription', 'Article', 'ArticleTitle', 'ArticleMeta', 'SectionT', 'Section', 'Form', 'Fieldset',
-           'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'TextArea', 'Switch', 'FormLabel', 'LabelT',
-           'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio', 'LabelCheckboxX', 'LabelRange',
-           'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect', 'LabelUkSelect', 'AT', 'ListT',
-           'UkList', 'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody', 'ModalFooter', 'ModalTitle',
-           'ModalCloseButton', 'HTMXModalCloseButton', 'Modal', 'PaddingT', 'PositionT', 'Placeholder', 'Progress',
-           'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'Grid', 'DivFullySpaced', 'DivCentered', 'DivLAligned',
-           'DivRAligned', 'DivVStacked', 'DivHStacked', 'NavT', 'NavContainer', 'NavParentLi', 'NavDividerLi',
-           'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer', 'NavBarLSide', 'NavBarRSide', 'NavBarCenter',
-           'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer', 'NavBarParentIcon', 'DropDownNavContainer',
-           'TabContainer', 'CardT', 'CardTitle', 'CardHeader', 'CardBody', 'CardFooter', 'CardContainer', 'Card',
-           'TableT', 'Table', 'Td', 'Th', 'Tr', 'Thead', 'Tbody', 'TableFromLists', 'TableFromDicts', 'apply_classes',
-           'render_md']
+           'DividerT', 'Divider', 'DividerSplit', 'DividerLine', 'Article', 'ArticleTitle', 'ArticleMeta', 'SectionT',
+           'Section', 'Form', 'Fieldset', 'Legend', 'Input', 'Select', 'Radio', 'CheckboxX', 'Range', 'TextArea',
+           'Switch', 'FormLabel', 'LabelT', 'Label', 'UkFormSection', 'GenericLabelInput', 'LabelInput', 'LabelRadio',
+           'LabelCheckboxX', 'LabelRange', 'LabelTextArea', 'LabelSwitch', 'LabelSelect', 'Options', 'UkSelect',
+           'LabelUkSelect', 'AT', 'ListT', 'UkList', 'ModalContainer', 'ModalDialog', 'ModalHeader', 'ModalBody',
+           'ModalFooter', 'ModalTitle', 'ModalCloseButton', 'HTMXModalCloseButton', 'Modal', 'PaddingT', 'PositionT',
+           'Placeholder', 'Progress', 'UkIcon', 'UkIconLink', 'DiceBearAvatar', 'FlexT', 'Grid', 'DivFullySpaced',
+           'DivCentered', 'DivLAligned', 'DivRAligned', 'DivVStacked', 'DivHStacked', 'NavT', 'NavContainer',
+           'NavParentLi', 'NavDividerLi', 'NavHeaderLi', 'NavSubtitle', 'NavCloseLi', 'NavBarContainer', 'NavBarLSide',
+           'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer', 'NavBarParentIcon',
+           'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle', 'CardHeader', 'CardBody', 'CardFooter',
+           'CardContainer', 'Card', 'TableT', 'Table', 'Td', 'Th', 'Tr', 'Thead', 'Tbody', 'TableFromLists',
+           'TableFromDicts', 'apply_classes', 'render_md']
 
 # %% ../nbs/02_franken.ipynb
 import fasthtml.common as fh
@@ -189,21 +188,21 @@ def DividerSplit(*c, cls=(), line_cls=(), text_cls=()):
 def DividerLine(lwidth=2, y_space=4): return Hr(cls=f"my-{y_space} h-[{lwidth}px] w-full bg-secondary")
 
 # %% ../nbs/02_franken.ipynb
-def Alert(*args, cls=(), **kwargs): 
-    "A styled alert component that can contain a AlertTitle, AlertDescription and AlertCloseButton"
-    return Div(*args, cls=('uk-alert', stringify(cls)), uk_alert=True, **kwargs)
+# def Alert(*args, cls=(), **kwargs): 
+#     "A styled alert component that can contain a AlertTitle, AlertDescription and AlertCloseButton"
+#     return Div(*args, cls=('uk-alert', stringify(cls)), uk_alert=True, **kwargs)
 
-def AlertCloseButton(*args, cls=(), **kwargs): 
-    "A button component for closing an Alert"
-    return A(*args, cls=('uk-alert-close', stringify(cls)), **kwargs)
+# def AlertCloseButton(*args, cls=(), **kwargs): 
+#     "A button component for closing an Alert"
+#     return A(*args, cls=('uk-alert-close', stringify(cls)), **kwargs)
 
-def AlertTitle(*args, cls='', **kwargs): 
-    "A title component for use within an Alert"
-    return Div(*args, cls=('uk-alert-title', stringify(cls)), **kwargs)
+# def AlertTitle(*args, cls='', **kwargs): 
+#     "A title component for use within an Alert"
+#     return Div(*args, cls=('uk-alert-title', stringify(cls)), **kwargs)
 
-def AlertDescription(*args, cls='', **kwargs): 
-    "A description component for use within an Alert"
-    return Div(*args, cls=('uk-alert-description', stringify(cls)), **kwargs)
+# def AlertDescription(*args, cls='', **kwargs): 
+#     "A description component for use within an Alert"
+#     return Div(*args, cls=('uk-alert-description', stringify(cls)), **kwargs)
 
 # %% ../nbs/02_franken.ipynb
 def Article(*c, cls=(), **kwargs):
