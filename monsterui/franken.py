@@ -615,17 +615,16 @@ class FlexT(VEnum):
     nowrap, wrap, wrap_reverse = auto(), auto(), auto()
 
 # %% ../nbs/02_franken.ipynb
-def Grid(*div, cols_min=1, cols_max=None, cols_sm=None, cols_md=None, cols_lg=None, cols_xl=None, cols=None, cls='gap-4', **kwargs):
+def Grid(*div, cols_min=1, cols_max=None, cols_sm=None, cols_md=None, cols_lg=None, cols=None, cls='gap-4', **kwargs):
     "Creates a responsive grid layout with smart defaults based on content"
-    if cols: cols_min = cols_sm = cols_md = cols_lg = cols_xl = cols
+    if cols: cols_min = cols_sm = cols_md = cols_lg = cols
     else:
         n = len(div)
         cols_max = min(n, cols_max or 4)
-        cols_sm = cols_sm or min(n, cols_min, cols_max)
-        cols_md = cols_md or min(n, cols_min+1, cols_max) 
-        cols_lg = cols_lg or min(n, cols_min+2, cols_max) 
-        cols_xl = cols_xl or cols_max
-    return Div(cls=(f'grid grid-cols-{cols_min} sm:grid-cols-{cols_sm} md:grid-cols-{cols_md} lg:grid-cols-{cols_lg} xl:grid-cols-{cols_xl}', 
+        cols_sm = cols_sm or min(n, cols_min+1, cols_max)
+        cols_md = cols_md or min(n, cols_min+2, cols_max) 
+        cols_lg = cols_lg or cols_max
+    return Div(cls=(f'grid grid-cols-{cols_min} sm:grid-cols-{cols_sm} md:grid-cols-{cols_md} lg:grid-cols-{cols_lg}', 
                     stringify(cls)), **kwargs)(*div)
 
 # %% ../nbs/02_franken.ipynb
