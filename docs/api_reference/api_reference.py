@@ -674,6 +674,33 @@ docs_navigation = create_doc_section(
     TabContainer,
     title="Navigation")
 
+# Steps
+
+
+def ex_steps2():
+    return Steps(
+        LiStep("Account Created", cls=StepT.primary),
+        LiStep("Profile Setup", cls=StepT.neutral),
+        LiStep("Verification", cls=StepT.neutral),
+        cls="w-full")
+def ex_steps3():
+    return Steps(
+    LiStep("Project Planning", cls=StepT.success, data_content="📝"),
+    LiStep("Design Phase", cls=StepT.success, data_content="💡"),
+    LiStep("Development", cls=StepT.primary, data_content="🛠️"),
+    LiStep("Testing", cls=StepT.neutral, data_content="🔎"),
+    LiStep("Deployment", cls=StepT.neutral, data_content="🚀"),
+    cls=(StepsT.vertical, "min-h-[400px]"))
+
+docs_steps = create_doc_section(
+    fn2code_string(ex_steps2),
+    fn2code_string(ex_steps3),
+    H1("API Docs"),
+    Steps,
+    StepsT,
+    LiStep,
+    StepT,
+    title="Steps")
 # Tables
 
 def ex_tables0():
@@ -769,6 +796,7 @@ def ex_markdown():
 > This is a blockquote
 '''
     return render_md(md)
+
 
 def ex_applyclasses():
     return apply_classes('<h1>Hello, World!</h1><p>This is a paragraph</p>')
