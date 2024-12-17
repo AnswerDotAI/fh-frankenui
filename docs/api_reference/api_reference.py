@@ -156,15 +156,8 @@ def ex_other():
         CodeSpan("This is a CodeSpan element"),
         Blockquote("This is a blockquote element"))
 
-def ex_alerts1():
-    return Alert("This is a sample alert")
 
-def ex_alerts2():
-    return Alert(
-        AlertCloseButton(uk_close=True),
-        DivLAligned(UkIcon('triangle-alert'), AlertTitle("Sample alert")),
-        AlertDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit"),
-        cls='uk-alert-danger')
+
 
 docs_typography = create_doc_section(
     PLarge("High Level Options"),
@@ -172,8 +165,6 @@ docs_typography = create_doc_section(
     fn2code_string(ex_headings),
     fn2code_string(ex_ps),
     fn2code_string(ex_other),
-    fn2code_string(ex_alerts1),
-    fn2code_string(ex_alerts2), 
     PLarge("Lower Level Options (enums)"),
     "Styling text is possibly the most common style thing to do, so we have a couple of helpers for discoverability inside python.  `TextFont` is intended to be combinations are are widely applicable and used often, where `TextT` is intended to be more flexible options for you to combine together yourself.",
     fn2code_string(ex_textfont),
@@ -183,8 +174,46 @@ docs_typography = create_doc_section(
     H1, H2, H3, H4, Titled,
     P, PParagraph, PLarge, PLead, PSmall, PMuted,
     CodeSpan, Blockquote,
-    Alert, AlertCloseButton, AlertTitle, AlertDescription,
     title="Text Style")
+
+
+# Notifications
+def ex_alerts1(): return Alert("This is a plain alert")
+
+def ex_alerts2():
+    return Alert("Your purchase has been confirmed!",
+                 cls=AlertT.success)
+
+def ex_alerts3():
+    return Alert(
+        DivLAligned(UkIcon('triangle-alert'), 
+                    P("Please enter a valid email.")),
+        cls=AlertT.error)
+
+
+def ex_toasts1():
+    return Toast("First Example Toast", cls=(ToastHT.start, ToastVT.bottom))
+
+def ex_toasts2():
+    return Toast("Second Example Toast", alert_cls=AlertT.info)
+
+docs_notifications = create_doc_section(
+    H3("Alerts"),
+    P("The simplest alert is a div wrapped with a span:"),
+    fn2code_string(ex_alerts1),
+    P("Alert colors are defined by the alert styles:"),
+    fn2code_string(ex_alerts2), 
+    P("It often looks nice to use icons in alerts: "),
+    fn2code_string(ex_alerts3),
+    Alert, AlertT, 
+    DividerLine(),
+    H3("Toasts"),
+    P("To define a toast with a particular location, add horizontal or vertical toast type classes:"),
+    fn2code_string(ex_toasts1), 
+    P("To define toast colors, set the class of the alert wrapped by the toast:"),
+    fn2code_string(ex_toasts2),
+    Toast, ToastHT, ToastVT,
+    title="Alerts & Toasts")
 
 # Containers
 
