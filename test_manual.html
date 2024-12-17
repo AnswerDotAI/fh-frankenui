@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MonsterUI Theme Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css">
+    <script type="module" src="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/answerdotai/monsterui@main/monsterui/icon.iife.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        // Helper function to create theme buttons
+        function createThemeButtons() {
+            const themes = ['blue', 'slate', 'stone', 'gray', 'neutral', 'red', 'rose', 'orange', 'green', 'yellow', 'violet', 'zinc'];
+            const container = document.getElementById('theme-buttons');
+            themes.forEach(theme => {
+                const btn = document.createElement('button');
+                btn.textContent = theme;
+                btn.className = 'btn btn-primary m-1';
+                btn.onclick = () => switchTheme(theme);
+                container.appendChild(btn);
+            });
+        }
+
+        const THEME_MAPPINGS = {
+            'blue': 'corporate',
+            'slate': 'business',
+            'stone': 'lofi',
+            'gray': 'business',
+            'neutral': 'wireframe',
+            'red': 'valentine',
+            'rose': 'valentine',
+            'orange': 'halloween',
+            'green': 'forest',
+            'yellow': 'retro',
+            'violet': 'dracula',
+            'zinc': 'luxury'
+        };
+
+        function switchTheme(theme) {
+            const isDark = document.documentElement.classList.contains('dark');
+            const daisyTheme = THEME_MAPPINGS[theme] + (isDark ? '-dark' : '');
+
+            // Set DaisyUI theme
+            document.documentElement.setAttribute('data-theme', daisyTheme);
+
+            // Set FrankenUI theme
+            document.documentElement.className = isDark ? 'dark' : '';
+            document.documentElement.classList.add(`uk-theme-${theme}`);
+
+            // Store in localStorage
+            localStorage.setItem('theme-color', theme);
+            localStorage.setItem('theme-mode', isDark ? 'dark' : 'light');
+
+            // Refresh highlight.js
+            if (window.hljs) {
+                hljs.highlightAll();
+            }
+        }
+
+        function toggleDarkMode() {
+            const isDark = !document.documentElement.classList.contains('dark');
+            document.documentElement.classList.toggle('dark');
+            const currentTheme = localStorage.getItem('theme-color') || 'blue';
+            switchTheme(currentTheme);
+        }
+
+        // Initialize after page load
+        window.onload = () => {
+            createThemeButtons();
+            hljs.highlightAll();
+
+            // Restore theme from localStorage
+            const savedTheme = localStorage.getItem('theme-color') || 'blue';
+            const savedMode = localStorage.getItem('theme-mode') || 'light';
+            if (savedMode === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+            switchTheme(savedTheme);
+        };
+    </script>
+</head>
+<body class="p-8">
+    <div class="container mx-auto">
+        <h1 class="text-4xl mb-8">MonsterUI Theme Test</h1>
+
+        <!-- Theme Controls -->
+        <div class="mb-8">
+            <h2 class="text-2xl mb-4">Theme Selection</h2>
+            <div id="theme-buttons" class="mb-4"></div>
+            <button onclick="toggleDarkMode()" class="btn btn-secondary">Toggle Dark Mode</button>
+        </div>
+
+        <!-- Component Tests -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- DaisyUI Components -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">DaisyUI Components</h2>
+                    <button class="btn btn-primary">Primary Button</button>
+                    <button class="btn btn-secondary">Secondary Button</button>
+                    <div class="alert alert-info mt-4">
+                        <span>DaisyUI Alert Component</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FrankenUI Components -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">FrankenUI Components</h2>
+                    <div class="uk-button-group">
+                        <button class="uk-button uk-button-primary">Primary</button>
+                        <button class="uk-button uk-button-secondary">Secondary</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highlight.js Test -->
+            <div class="card bg-base-100 shadow-xl col-span-1 md:col-span-2">
+                <div class="card-body">
+                    <h2 class="card-title">Highlight.js Test</h2>
+                    <pre><code class="language-python">
+def test_theme_sync():
+    """Test theme synchronization across components"""
+    theme = Theme.blue
+    headers = theme.headers(
+        mode='auto',
+        tw=True,
+        hjs=True,
+        frankenui=True,
+        daisyui=True
+    )
+    assert len(headers) > 0
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
