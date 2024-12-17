@@ -1,7 +1,7 @@
 """FrankenUI Music Example"""
 
 from fasthtml.common import *
-from monsterui.core import *
+from monsterui.all import *
  
 def SpacedPP(left, right=None): return DivFullySpaced(NavP(left),NavP(right) if right else '')
 

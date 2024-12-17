@@ -1,7 +1,7 @@
 """FrankenUI Mail Example"""
 
 from fasthtml.common import *
-from monsterui.core import *
+from monsterui.all import *
 from fasthtml.svg import *
 import pathlib, json
 from datetime import datetime

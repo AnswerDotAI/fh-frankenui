@@ -1,6 +1,6 @@
 from fasthtml.common import *
 # MonsterUI shadows fasthtml components with the same name
-from monsterui.core import *
+from monsterui.all import *
 # If you don't want shadowing behavior, you use import monsterui.core as ... style instead
 
 # Get frankenui and tailwind headers via CDN using Theme.blue.headers()

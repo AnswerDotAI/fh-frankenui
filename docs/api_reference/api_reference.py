@@ -1,7 +1,7 @@
 """Reference to all FrankenUI Components"""
 
 from fasthtml.common import *
-from monsterui.core import *
+from monsterui.all import *
 from nbdev.showdoc import *
 from utils import create_flippable_card, fn2code_string
 from enum import EnumType

@@ -1,5 +1,5 @@
 from fasthtml.common import *
-from monsterui.core import *
+from monsterui.all import *
 from utils import create_flippable_card, fn2code_string
 
 def prerequisites():

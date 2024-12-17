@@ -3,7 +3,7 @@
 from fasthtml.common import *
 from fasthtml.components import Uk_input_tag
 from fasthtml.svg import *
-from monsterui.core import *
+from monsterui.all import *
 import calendar
 
 CreateAccount = Card(Grid(Button(UkIcon('github',cls='uk-margin-small-right'),'Github'),

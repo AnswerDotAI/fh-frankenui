@@ -1,6 +1,6 @@
 from fasthtml.common import *
 from functools import partial
-from monsterui.core import *
+from monsterui.all import *
 from fasthtml.components import Uk_theme_switcher
 from utils import hjs, render_nb
 from pathlib import Path

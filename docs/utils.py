@@ -4,7 +4,7 @@
 __all__ = ['hjs', 'HShow', 'create_server']
 
 from fasthtml.common import *
-from monsterui.core import *
+from monsterui.all import *
 from fasthtml.jupyter import *
 from collections.abc import Callable
 import inspect

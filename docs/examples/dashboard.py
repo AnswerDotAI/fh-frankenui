@@ -1,7 +1,7 @@
 """FrankenUI Dashboard Example"""
 
 from fasthtml.common import *
-from monsterui.core import *
+from monsterui.all import *
 from fasthtml.svg import *
 from fh_matplotlib import matplotlib2fasthtml
 import numpy as np

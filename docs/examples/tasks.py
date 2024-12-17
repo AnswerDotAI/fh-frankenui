@@ -1,7 +1,7 @@
 """FrankenUI Tasks Example"""
 
 from fasthtml.common import *
-from monsterui.core import *
+from monsterui.all import *
 from fasthtml.svg import *
 import json
 

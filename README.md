@@ -17,7 +17,7 @@ To get started, check out:
 
 ``` python
 from fasthtml.common import *
-from monsterui.core import *
+from monsterui.all import *
 ```
 
 2.  Instantiate the app with the MonsterUI headers
