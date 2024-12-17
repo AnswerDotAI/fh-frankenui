@@ -16,7 +16,7 @@ __all__ = ['HEADER_URLS', 'franken_class_map', 'fast_app', 'FastHTML', 'Theme', 
            'NavBarRSide', 'NavBarCenter', 'NavBarNav', 'NavBarSubtitle', 'NavBarNavContainer', 'NavBarParentIcon',
            'DropDownNavContainer', 'TabContainer', 'CardT', 'CardTitle', 'CardHeader', 'CardBody', 'CardFooter',
            'CardContainer', 'Card', 'TableT', 'Table', 'Td', 'Th', 'Tr', 'Thead', 'Tbody', 'TableFromLists',
-           'TableFromDicts', 'apply_classes', 'render_md']
+           'TableFromDicts', 'apply_classes', 'render_md', 'StepsT', 'StepT', 'Steps', 'LiStep']
 
 # %% ../nbs/01_core.ipynb
 import fasthtml.common as fh
@@ -1004,3 +1004,33 @@ def render_md(md_content:str, class_map=None, class_map_mods=None):
         
     html_content = mistletoe.markdown(md_content) #, mcp.PygmentsRenderer)
     return NotStr(apply_classes(html_content, class_map, class_map_mods))
+
+# %% ../nbs/01_core.ipynb
+class StepsT(VEnum):
+    "Options for Steps"
+    def _generate_next_value_(name, start, count, last_values): return f'steps-{name}'
+    vertical = auto()
+    horizonal = auto()
+
+# %% ../nbs/01_core.ipynb
+class StepT(VEnum):
+    'Step styles for LiStep'
+    def _generate_next_value_(name, start, count, last_values): return f'step-{name}'
+    primary = auto()
+    secondary = auto()
+    accent = auto() 
+    info = auto()
+    success = auto()
+    warning = auto()
+    error = auto()
+    neutral = auto()
+
+# %% ../nbs/01_core.ipynb
+def Steps(*li, cls='', **kwargs):
+    "Creates a steps container with horizontal scrolling"
+    return Ul(*li, cls=('steps',stringify(cls)), **kwargs)
+
+def LiStep(*c, cls='', **kwargs):
+    "Creates a step list item with optional styling"
+    """<li data-content="?" class="step step-neutral">Step 1</li>"""
+    return Li(*c, cls=('step', stringify(cls)), **kwargs)
